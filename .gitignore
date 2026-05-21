@@ -9,3 +9,5 @@ dist
 .tmp
 
 .vercel
+
+.env*
