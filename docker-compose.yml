@@ -1,0 +1,16 @@
+services:
+  elgonedge-postgres:
+    image: postgres:16
+    container_name: elgonedge-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: elgonedge
+    ports:
+      - "5433:5432"
+    volumes:
+      - elgonedge_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  elgonedge_postgres_data:

@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "elgonedge.com"
+        }
+      ],
+      "destination": "https://www.elgonedge.com/:path*",
+      "permanent": true
+    }
+  ]
+}

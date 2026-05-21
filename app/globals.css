@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f6f8fb;
+  color: #111827;
+  font-size: 18px;
+  line-height: 1.72;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.hero-atmosphere {
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.96) 0%, rgba(248, 250, 252, 0.94) 46%, rgba(238, 242, 255, 0.82) 100%),
+    radial-gradient(circle at 82% 12%, rgba(20, 184, 166, 0.22), transparent 28%),
+    radial-gradient(circle at 72% 48%, rgba(11, 110, 231, 0.18), transparent 32%),
+    radial-gradient(circle at 92% 78%, rgba(124, 58, 237, 0.16), transparent 34%);
+}
+
+.executive-hero {
+  background:
+    radial-gradient(circle at 14% 12%, rgba(20, 184, 166, 0.25), transparent 29%),
+    radial-gradient(circle at 76% 14%, rgba(59, 130, 246, 0.32), transparent 32%),
+    radial-gradient(circle at 82% 74%, rgba(124, 58, 237, 0.22), transparent 35%),
+    linear-gradient(135deg, #020617 0%, #07172f 43%, #0b1531 72%, #111827 100%);
+}
+
+.section-kicker {
+  color: #0b6ee7;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.fine-grid {
+  background-image:
+    linear-gradient(rgba(15, 23, 42, 0.014) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.014) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.galaxy-panel {
+  background:
+    radial-gradient(circle at 20% 24%, rgba(45, 212, 191, 0.28), transparent 24%),
+    radial-gradient(circle at 78% 22%, rgba(59, 130, 246, 0.32), transparent 28%),
+    radial-gradient(circle at 62% 78%, rgba(124, 58, 237, 0.22), transparent 30%),
+    linear-gradient(135deg, #07172f, #0f1b3d 48%, #172554);
+}
+
+.galaxy-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+.premium-card-border {
+  position: relative;
+}
+
+.premium-card-border::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(135deg, rgba(11, 110, 231, 0.28), rgba(20, 184, 166, 0.18), rgba(124, 58, 237, 0.20));
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  padding: 1px;
+}
