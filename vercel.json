@@ -1,4 +1,5 @@
 {
+  "buildCommand": "npx prisma migrate deploy && next build",
   "redirects": [
     {
       "source": "/:path*",
