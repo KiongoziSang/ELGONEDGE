@@ -45,7 +45,9 @@ export function createPageMetadata({
   const pageTitle = title === siteName ? title : `${title} | ${siteName}`;
 
   return {
-    title,
+    title: {
+      absolute: pageTitle
+    },
     description,
     keywords: [...seoKeywords, ...keywords],
     alternates: {
