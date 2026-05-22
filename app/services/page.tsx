@@ -6,10 +6,11 @@ import { services } from "@/lib/site";
 import { createPageMetadata, JsonLd, siteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Services",
+  title: "Services | Data, AI, Automation and Digital Transformation Consulting",
   path: "/services",
   description:
-    "Explore Elgon Edge Consulting Limited services across digital transformation, data governance, business intelligence, AI consulting, automation, migration assurance, and SaaS platform delivery in Kenya.",
+    "Explore Elgon Edge Consulting services across digital transformation, data governance, business intelligence, responsible AI, automation, data migration assurance, and SaaS platforms.",
+  absoluteTitle: true,
   keywords: [
     "data governance consulting Kenya",
     "business intelligence consulting Kenya",
