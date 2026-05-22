@@ -3,15 +3,15 @@ import { ArrowUpRight, BarChart3, Building2, CheckCircle2, FileText, Receipt, Us
 import { ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { elgonOsUrl } from "@/lib/site";
+import { createPageMetadata, elgonOsSoftwareJsonLd, JsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "ElgonOS",
+export const metadata: Metadata = createPageMetadata({
+  title: "ElgonOS Property Management Software",
+  path: "/elgonos",
   description:
-    "ElgonOS is a digital property management platform for properties, units, tenants, leases, occupancy, billing, and documents.",
-  alternates: {
-    canonical: "/elgonos"
-  }
-};
+    "ElgonOS is a digital property management platform for landlords, property managers, and real estate teams to manage properties, units, tenants, leases, occupancy, billing, and documents.",
+  keywords: ["ElgonOS", "ElgonOS property management", "property management software Kenya"]
+});
 
 const features = [
   { title: "Properties and units", icon: Building2 },
@@ -23,6 +23,7 @@ const features = [
 export default function ElgonOsPage() {
   return (
     <main>
+      <JsonLd data={elgonOsSoftwareJsonLd} />
       <section className="executive-hero relative overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
         <div className="galaxy-grid absolute inset-0 opacity-30" aria-hidden="true" />
         <div className="absolute right-10 top-8 h-80 w-80 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden="true" />
@@ -69,7 +70,7 @@ export default function ElgonOsPage() {
                 return (
                   <article key={feature.title} className="rounded-2xl border border-white/10 bg-white/[0.07] p-5 text-white">
                     <Icon className="h-7 w-7 text-cyan-200" aria-hidden="true" />
-                    <h2 className="mt-5 text-lg font-bold">{feature.title}</h2>
+                    <h3 className="mt-5 text-lg font-bold">{feature.title}</h3>
                   </article>
                 );
               })}

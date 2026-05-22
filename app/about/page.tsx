@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import { CheckCircle2, Sparkles } from "lucide-react";
 import { CTASection } from "@/components/CTASection";
 import { differentiators } from "@/lib/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "About",
+  path: "/about",
   description:
-    "Learn about Elgon Edge Consulting Limited, a technology, data, AI, and digital transformation consulting company.",
-  alternates: {
-    canonical: "/about"
-  }
-};
+    "Learn about Elgon Edge Consulting Limited, a Kenya-based technology, data, AI, automation, governance, and digital transformation consulting company.",
+  keywords: ["Elgon Edge Consulting", "AI consulting Kenya", "data consulting Kenya"]
+});
 
 export default function AboutPage() {
   return (

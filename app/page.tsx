@@ -13,6 +13,13 @@ import { ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
 import { deliverySteps, differentiators, elgonOsUrl, services, workflowIcon } from "@/lib/site";
+import { createPageMetadata } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: "Data, AI and Digital Solutions for Smarter Businesses",
+  path: "/",
+  keywords: ["data consulting Kenya", "AI consulting Kenya", "digital transformation consulting Kenya"]
+});
 
 const WorkflowIcon = workflowIcon;
 

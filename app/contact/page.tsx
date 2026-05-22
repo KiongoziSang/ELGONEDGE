@@ -2,15 +2,20 @@ import type { Metadata } from "next";
 import { Mail, Send, Sparkles } from "lucide-react";
 import { createContactSubmission } from "./actions";
 import { serviceInterestOptions } from "@/lib/site";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Contact",
+  path: "/contact",
   description:
-    "Contact Elgon Edge Consulting Limited for data, AI, automation, governance, digital transformation, and ElgonOS enquiries.",
-  alternates: {
-    canonical: "/contact"
-  }
-};
+    "Contact Elgon Edge Consulting Limited for data consulting, AI consulting, automation, governance, digital transformation, SaaS development, and ElgonOS enquiries.",
+  keywords: [
+    "Elgon Edge Consulting Limited",
+    "data consulting Kenya",
+    "AI consulting Kenya",
+    "digital transformation consulting Kenya"
+  ]
+});
 
 type ContactPageProps = {
   searchParams?: {

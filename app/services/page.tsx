@@ -3,19 +3,41 @@ import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
 import { services } from "@/lib/site";
+import { createPageMetadata, JsonLd, siteUrl } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Services",
+  path: "/services",
   description:
-    "Explore Elgon Edge Consulting Limited services across digital transformation, data governance, analytics, AI, automation, migration assurance, and platforms.",
-  alternates: {
-    canonical: "/services"
-  }
-};
+    "Explore Elgon Edge Consulting Limited services across digital transformation, data governance, business intelligence, AI consulting, automation, migration assurance, and SaaS platform delivery in Kenya.",
+  keywords: [
+    "data governance consulting Kenya",
+    "business intelligence consulting Kenya",
+    "automation consulting Kenya",
+    "SaaS development Kenya"
+  ]
+});
+
+const servicesJsonLd = services.map((service) => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": `${siteUrl}/services#${service.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+  name: service.title,
+  description: service.description,
+  provider: {
+    "@id": `${siteUrl}/#organization`
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Kenya"
+  },
+  url: `${siteUrl}/services`
+}));
 
 export default function ServicesPage() {
   return (
     <main>
+      <JsonLd data={servicesJsonLd} />
       <section className="executive-hero relative overflow-hidden px-4 py-28 text-white sm:px-6 lg:px-10">
         <div className="galaxy-grid absolute inset-0 opacity-22" aria-hidden="true" />
         <div className="absolute right-10 top-8 h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden="true" />
