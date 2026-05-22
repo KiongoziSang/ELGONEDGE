@@ -3,8 +3,9 @@ import { createElement } from "react";
 
 export const siteUrl = "https://www.elgonedge.com";
 export const siteName = "Elgon Edge Consulting Limited";
+export const defaultSeoTitle = `${siteName} | Data, AI and Digital Transformation Consulting`;
 export const defaultSeoDescription =
-  "Elgon Edge Consulting Limited helps organizations modernize operations through data, AI, automation, governance, and digital platforms — from strategy to implementation.";
+  "Elgon Edge Consulting Limited helps organizations modernize operations through data, AI, automation, governance, business intelligence, and digital platforms.";
 
 export const seoKeywords = [
   "Elgon Edge Consulting Limited",
@@ -33,16 +34,18 @@ type PageMetadataInput = {
   description?: string;
   path?: string;
   keywords?: string[];
+  absoluteTitle?: boolean;
 };
 
 export function createPageMetadata({
   title,
   description = defaultSeoDescription,
   path = "/",
-  keywords = []
+  keywords = [],
+  absoluteTitle = false
 }: PageMetadataInput): Metadata {
   const url = `${siteUrl}${path === "/" ? "" : path}`;
-  const pageTitle = title === siteName ? title : `${title} | ${siteName}`;
+  const pageTitle = absoluteTitle || title === siteName ? title : `${title} | ${siteName}`;
 
   return {
     title: {

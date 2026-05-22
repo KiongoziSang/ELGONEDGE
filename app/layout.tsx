@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
-import { defaultSeoDescription, JsonLd, organizationJsonLd, seoKeywords, siteName, siteUrl, websiteJsonLd } from "@/lib/seo";
+import { defaultSeoDescription, defaultSeoTitle, JsonLd, organizationJsonLd, seoKeywords, siteName, siteUrl, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} | Data, AI and Digital Solutions`,
+    default: defaultSeoTitle,
     template: `%s | ${siteName}`
   },
   description: defaultSeoDescription,
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} | Data, AI and Digital Solutions`,
+    title: defaultSeoTitle,
     description: defaultSeoDescription,
     images: ["/elgon-edge-consulting-logo.png"]
   },
