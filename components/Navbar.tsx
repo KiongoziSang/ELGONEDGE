@@ -7,15 +7,19 @@ import { ButtonLink } from "./ButtonLink";
 export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-slate-200/60 bg-white/82 shadow-sm shadow-slate-900/[0.03] backdrop-blur-2xl">
-      <nav className="mx-auto flex max-w-[1520px] items-center justify-between gap-10 px-4 py-6 sm:px-6 lg:px-10">
-        <Link href="/" className="flex items-center" aria-label="Elgon Edge home">
+      <nav className="mx-auto flex max-w-[1520px] items-center justify-between gap-8 px-4 py-4 sm:px-6 lg:gap-10 lg:px-10 lg:py-5">
+        <Link
+          href="/"
+          className="flex items-center rounded-[1.35rem] border border-white/70 bg-white/95 px-4 py-2.5 shadow-[0_16px_38px_rgba(15,23,42,0.10)] ring-1 ring-slate-900/[0.04] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_20px_44px_rgba(15,23,42,0.13)] sm:px-5 sm:py-3"
+          aria-label="Elgon Edge home"
+        >
           <Image
             src="/elgon-edge-consulting-logo.png"
             alt="Elgon Edge Consulting Limited"
             width={420}
             height={92}
             priority
-            className="h-20 w-auto rounded-2xl object-contain sm:h-24 lg:h-28"
+            className="h-12 w-auto object-contain sm:h-14 lg:h-16"
           />
         </Link>
 
