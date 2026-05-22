@@ -25,14 +25,20 @@ export const navItems = [
 ];
 
 export type Service = {
+  slug: string;
   title: string;
   description: string;
   icon: LucideIcon;
   capabilities: string[];
+  seoTitle: string;
+  seoDescription: string;
+  overview: string;
+  outcomes: string[];
 };
 
 export const services: Service[] = [
   {
+    slug: "digital-transformation-advisory",
     title: "Digital Transformation Advisory",
     description: "Modernizing business processes, systems, and operating models.",
     icon: Network,
@@ -41,9 +47,20 @@ export const services: Service[] = [
       "Operating model redesign",
       "Transformation roadmaps",
       "Change and adoption planning"
+    ],
+    seoTitle: "Digital Transformation Advisory | Elgon Edge Consulting Limited",
+    seoDescription:
+      "Digital transformation advisory for organizations modernizing business processes, systems, operating models, governance, and digital platforms.",
+    overview:
+      "Elgon Edge Consulting Limited helps organizations define practical modernization roadmaps, align stakeholders, and move transformation priorities from strategy into structured implementation.",
+    outcomes: [
+      "Clear modernization roadmap aligned to business outcomes",
+      "Improved process visibility and operating model clarity",
+      "Better stakeholder alignment before implementation"
     ]
   },
   {
+    slug: "data-strategy-governance-quality",
     title: "Data Strategy, Governance & Quality",
     description: "Building trusted, governed, and high-quality data foundations.",
     icon: DatabaseZap,
@@ -52,9 +69,20 @@ export const services: Service[] = [
       "Data quality controls",
       "Master data management",
       "Data ownership and stewardship models"
+    ],
+    seoTitle: "Data Strategy, Governance and Quality Consulting | Elgon Edge Consulting Limited",
+    seoDescription:
+      "Data strategy, governance, and quality consulting for organizations building trusted data foundations, ownership models, controls, and reporting confidence.",
+    overview:
+      "We help organizations strengthen data foundations through governance frameworks, data quality controls, stewardship models, and practical standards that support analytics, automation, and AI adoption.",
+    outcomes: [
+      "Trusted data foundations for reporting and decision-making",
+      "Clear ownership, stewardship, and governance controls",
+      "Reduced reporting inconsistencies and data quality issues"
     ]
   },
   {
+    slug: "business-intelligence-executive-analytics",
     title: "Business Intelligence & Executive Analytics",
     description: "Creating dashboards, KPIs, board reports, and actionable insights.",
     icon: BarChart3,
@@ -63,9 +91,20 @@ export const services: Service[] = [
       "KPI definition and tracking",
       "Board and management reporting",
       "Self-service analytics enablement"
+    ],
+    seoTitle: "Business Intelligence and Executive Analytics Consulting | Elgon Edge Consulting Limited",
+    seoDescription:
+      "Business intelligence consulting for dashboards, KPIs, executive analytics, board reporting, and decision-ready management insights.",
+    overview:
+      "Elgon Edge Consulting Limited designs dashboards, KPI frameworks, board reports, and executive analytics that help leadership teams understand performance and act with confidence.",
+    outcomes: [
+      "Clear executive dashboards and performance indicators",
+      "Reduced manual reporting effort",
+      "Better decision support for leadership and operational teams"
     ]
   },
   {
+    slug: "ai-readiness-responsible-ai-governance",
     title: "AI Readiness & Responsible AI Governance",
     description: "Enabling safe, practical, and governed AI adoption.",
     icon: BrainCircuit,
@@ -74,9 +113,20 @@ export const services: Service[] = [
       "Responsible AI policies",
       "Use case prioritization",
       "Risk, privacy, and control frameworks"
+    ],
+    seoTitle: "AI Readiness and Responsible AI Governance Consulting | Elgon Edge Consulting Limited",
+    seoDescription:
+      "AI readiness and responsible AI governance consulting for organizations adopting practical, safe, governed, and business-aligned AI capabilities.",
+    overview:
+      "We help organizations assess AI readiness, identify practical use cases, define responsible AI controls, and build adoption roadmaps grounded in data readiness, governance, and risk management.",
+    outcomes: [
+      "Prioritized AI use cases linked to business value",
+      "Responsible AI policies, controls, and governance structures",
+      "Improved readiness for practical and safe AI adoption"
     ]
   },
   {
+    slug: "intelligent-automation-agentic-ai",
     title: "Intelligent Automation & Agentic AI",
     description: "Automating workflows using RPA, AI agents, and document intelligence.",
     icon: Bot,
@@ -85,9 +135,20 @@ export const services: Service[] = [
       "AI agent pilots",
       "Document intelligence",
       "Human-in-the-loop review models"
+    ],
+    seoTitle: "Intelligent Automation and Agentic AI Consulting | Elgon Edge Consulting Limited",
+    seoDescription:
+      "Automation consulting for workflows, RPA, AI agents, document intelligence, approvals, notifications, and human-in-the-loop operating models.",
+    overview:
+      "Elgon Edge Consulting Limited helps organizations reduce repetitive work and improve process consistency using workflow automation, AI-assisted processes, document intelligence, and agentic AI pilots.",
+    outcomes: [
+      "Reduced manual work across repeatable workflows",
+      "Improved turnaround time and process consistency",
+      "Automation controls that support review, exception handling, and accountability"
     ]
   },
   {
+    slug: "data-migration-assurance-reconciliation",
     title: "Data Migration Assurance & Reconciliation",
     description: "Validating migrated data and ensuring go-live readiness.",
     icon: FileCheck2,
@@ -96,9 +157,20 @@ export const services: Service[] = [
       "Source-to-target reconciliation",
       "Exception reporting",
       "Go-live readiness controls"
+    ],
+    seoTitle: "Data Migration Assurance and Reconciliation | Elgon Edge Consulting Limited",
+    seoDescription:
+      "Data migration assurance consulting for source-to-target reconciliation, validation, exception reporting, controls, and go-live readiness.",
+    overview:
+      "We support migration teams with validation plans, reconciliation checks, exception reporting, and readiness controls so organizations can move into new systems with stronger confidence in their data.",
+    outcomes: [
+      "Reduced data migration and go-live risk",
+      "Clear reconciliation evidence and exception tracking",
+      "Improved confidence in migrated data completeness and accuracy"
     ]
   },
   {
+    slug: "custom-software-saas-digital-platforms",
     title: "Custom Software, SaaS & Digital Platforms",
     description: "Building business apps, portals, SaaS products, and digital platforms.",
     icon: Layers3,
@@ -107,6 +179,16 @@ export const services: Service[] = [
       "SaaS product development",
       "Customer and staff portals",
       "Platform architecture and delivery"
+    ],
+    seoTitle: "Custom Software, SaaS and Digital Platform Development | Elgon Edge Consulting Limited",
+    seoDescription:
+      "SaaS development and custom software delivery for business applications, portals, workflow platforms, dashboards, and digital operating systems.",
+    overview:
+      "Elgon Edge Consulting Limited designs and builds custom software, SaaS products, portals, workflow platforms, and digital operating systems that support modern business operations.",
+    outcomes: [
+      "Digital platforms aligned to real operating workflows",
+      "Scalable applications with role-based access and data foundations",
+      "Better user experience, reporting, and operational control"
     ]
   }
 ];

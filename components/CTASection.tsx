@@ -5,11 +5,19 @@ import { ButtonLink } from "./ButtonLink";
 type CTASectionProps = {
   title?: string;
   text?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
 };
 
 export function CTASection({
   title = "Ready to modernize how your organization operates?",
-  text = "Talk to Elgon Edge Consulting Limited about data, AI, automation, governance, and digital platform delivery."
+  text = "Talk to Elgon Edge Consulting Limited about data, AI, automation, governance, and digital platform delivery.",
+  primaryHref = "/contact",
+  primaryLabel = "Contact Us",
+  secondaryHref = elgonOsUrl,
+  secondaryLabel = "Launch ElgonOS"
 }: CTASectionProps) {
   return (
     <section className="px-4 py-28 sm:px-6 lg:px-10">
@@ -22,12 +30,12 @@ export function CTASection({
           <p className="mt-6 max-w-3xl text-[1.2rem] leading-9 text-slate-200">{text}</p>
         </div>
         <div className="relative mt-8 flex flex-col gap-4 sm:flex-row md:mt-0 md:flex-col lg:flex-row">
-          <ButtonLink href="/contact" variant="primary" className="gap-2">
-            Contact Us
+          <ButtonLink href={primaryHref} variant="primary" className="gap-2">
+            {primaryLabel}
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </ButtonLink>
-          <ButtonLink href={elgonOsUrl} variant="glass">
-            Launch ElgonOS
+          <ButtonLink href={secondaryHref} variant="glass">
+            {secondaryLabel}
           </ButtonLink>
         </div>
       </div>

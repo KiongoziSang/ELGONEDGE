@@ -5,10 +5,11 @@ import { differentiators } from "@/lib/site";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "About",
+  title: "About Elgon Edge Consulting Limited",
   path: "/about",
   description:
-    "Learn about Elgon Edge Consulting Limited, a Kenya-based technology, data, AI, automation, governance, and digital transformation consulting company.",
+    "Elgon Edge Consulting Limited is a modern consulting and technology delivery company focused on data, AI, automation, governance, and digital platforms.",
+  absoluteTitle: true,
   keywords: ["Elgon Edge Consulting", "AI consulting Kenya", "data consulting Kenya"]
 });
 

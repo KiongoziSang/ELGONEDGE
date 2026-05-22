@@ -6,10 +6,11 @@ import { elgonOsUrl } from "@/lib/site";
 import { createPageMetadata, elgonOsSoftwareJsonLd, JsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "ElgonOS Property Management Software",
+  title: "ElgonOS | Property Management Software by Elgon Edge Consulting",
   path: "/elgonos",
   description:
-    "ElgonOS is a digital property management platform for landlords, property managers, and real estate teams to manage properties, units, tenants, leases, occupancy, billing, and documents.",
+    "ElgonOS is a digital property management platform for landlords, property managers, and real estate teams to manage properties, units, tenants, leases, billing, occupancy, and documents.",
+  absoluteTitle: true,
   keywords: ["ElgonOS", "ElgonOS property management", "property management software Kenya"]
 });
 

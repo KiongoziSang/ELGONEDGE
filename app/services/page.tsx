@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
@@ -93,7 +94,9 @@ export default function ServicesPage() {
         <div className="mx-auto grid max-w-[1520px] gap-9 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
             <div key={service.title} className={index === services.length - 1 ? "md:col-span-2 md:mx-auto md:w-[calc(50%-1.125rem)] lg:col-span-1 lg:col-start-2 lg:w-full" : ""}>
-              <ServiceCard service={service} detailed />
+              <Link href={`/services/${service.slug}`} className="block h-full">
+                <ServiceCard service={service} detailed />
+              </Link>
             </div>
           ))}
         </div>

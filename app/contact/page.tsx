@@ -5,10 +5,11 @@ import { serviceInterestOptions } from "@/lib/site";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Contact",
+  title: "Contact Elgon Edge Consulting Limited",
   path: "/contact",
   description:
-    "Contact Elgon Edge Consulting Limited for data consulting, AI consulting, automation, governance, digital transformation, SaaS development, and ElgonOS enquiries.",
+    "Contact Elgon Edge Consulting Limited for data, AI, automation, governance, digital transformation, business intelligence, and ElgonOS property management solutions.",
+  absoluteTitle: true,
   keywords: [
     "Elgon Edge Consulting Limited",
     "data consulting Kenya",
