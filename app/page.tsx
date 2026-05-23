@@ -54,7 +54,7 @@ export default function HomePage() {
               <Sparkles className="h-4 w-4" aria-hidden="true" />
               Enterprise modernization advisory
             </div>
-            <h1 className="mt-10 max-w-[1120px] text-5xl font-black leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-[3.3rem] xl:text-[4.1rem] 2xl:text-[5.1rem]">
+            <h1 className="mt-10 max-w-[1120px] text-5xl font-black leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-[4rem] xl:text-[4.75rem] 2xl:text-[5.35rem]">
               <span className="block">Data, AI and Digital Solutions</span>
               <span className="block">for Smarter Businesses</span>
             </h1>
