@@ -6,12 +6,17 @@ import {
   Building2,
   CheckCircle2,
   DatabaseZap,
+  Facebook,
   FileCheck2,
+  Instagram,
   Layers3,
+  Linkedin,
   LineChart,
   Network,
   ShieldCheck,
-  Workflow
+  Twitter,
+  Workflow,
+  Youtube
 } from "lucide-react";
 
 export const elgonOsUrl = "https://elgonos.elgonedge.com";
@@ -30,7 +35,33 @@ export type SocialLink = {
   icon: LucideIcon;
 };
 
-export const socialLinks: SocialLink[] = [];
+export const socialLinks: SocialLink[] = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/122783999/admin/dashboard/",
+    icon: Linkedin
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/elgonedge",
+    icon: Facebook
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/elgonedge",
+    icon: Instagram
+  },
+  {
+    label: "X",
+    href: "https://x.com/elgonedge",
+    icon: Twitter
+  },
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/channel/UCx35fgw50b0QoF6pPGZkA6g",
+    icon: Youtube
+  }
+];
 
 export type Service = {
   slug: string;
