@@ -48,14 +48,14 @@ export default function HomePage() {
         <div className="galaxy-grid absolute inset-0 opacity-20" aria-hidden="true" />
         <div className="absolute left-1/2 top-10 h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden="true" />
         <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/10 blur-3xl" aria-hidden="true" />
-        <div className="relative mx-auto grid max-w-[1520px] gap-16 lg:grid-cols-[1.28fr_0.72fr] lg:items-center xl:gap-24">
-          <div>
+        <div className="relative mx-auto grid max-w-[1520px] gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center xl:gap-20">
+          <div className="min-w-0">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-extrabold uppercase tracking-[0.18em] text-cyan-100 shadow-xl shadow-black/10 backdrop-blur">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
               Enterprise modernization advisory
             </div>
-            <h1 className="mt-10 max-w-[1120px] text-5xl font-black leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-[4.55rem] xl:text-[5.2rem] 2xl:text-[5.45rem]">
-              <span className="block lg:whitespace-nowrap">Data, AI and Digital Solutions</span>
+            <h1 className="mt-10 max-w-[1120px] text-5xl font-black leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-[4rem] xl:text-[4.75rem] 2xl:text-[5.35rem]">
+              <span className="block">Data, AI and Digital Solutions</span>
               <span className="block">for Smarter Businesses</span>
             </h1>
             <p className="mt-9 max-w-[900px] text-[1.38rem] leading-10 text-slate-100/90 lg:text-[1.5rem] lg:leading-[1.75]">
@@ -81,7 +81,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative rounded-[2.25rem] border border-white/15 bg-white/[0.08] p-5 shadow-2xl shadow-black/30 backdrop-blur">
+          <div className="relative min-w-0 rounded-[2.25rem] border border-white/15 bg-white/[0.08] p-5 shadow-2xl shadow-black/30 backdrop-blur">
             <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-blue-400/20 blur-3xl" aria-hidden="true" />
             <div className="relative rounded-[1.75rem] border border-white/10 bg-slate-950/55 p-7">
               <div className="flex items-start justify-between gap-6 border-b border-white/10 pb-7">
