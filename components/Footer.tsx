@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
-import { elgonOsUrl, services, socialLinks } from "@/lib/site";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
+import { contactInfo, elgonOsUrl, services, socialLinks } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -70,10 +70,20 @@ export function Footer() {
         </div>
 
         <div>
-          <p className="mb-5 text-xs font-extrabold uppercase tracking-[0.18em] text-cyan-200">Product</p>
+          <p className="mb-5 text-xs font-extrabold uppercase tracking-[0.18em] text-cyan-200">Contact</p>
+          <div className="grid gap-4 text-[1.02rem]">
+            <Link href={contactInfo.phoneHref} className="group flex items-center gap-3 text-slate-300 transition hover:text-white">
+              <Phone className="h-4 w-4 text-cyan-200 transition group-hover:text-white" aria-hidden="true" />
+              <span>{contactInfo.phone}</span>
+            </Link>
+            <Link href={contactInfo.emailHref} className="group flex items-center gap-3 text-slate-300 transition hover:text-white">
+              <Mail className="h-4 w-4 text-cyan-200 transition group-hover:text-white" aria-hidden="true" />
+              <span>{contactInfo.email}</span>
+            </Link>
+          </div>
           <Link
             href={elgonOsUrl}
-            className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-black text-white shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:bg-white/15"
+            className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-black text-white shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:bg-white/15"
           >
             Launch ElgonOS
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

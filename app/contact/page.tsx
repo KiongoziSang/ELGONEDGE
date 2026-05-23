@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Mail, Send, Sparkles } from "lucide-react";
+import Link from "next/link";
+import { Facebook, Mail, Phone, Send, Sparkles } from "lucide-react";
 import { createContactSubmission } from "./actions";
-import { serviceInterestOptions } from "@/lib/site";
+import { contactInfo, serviceInterestOptions, socialLinks } from "@/lib/site";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -26,6 +27,7 @@ type ContactPageProps = {
 
 export default function ContactPage({ searchParams }: ContactPageProps) {
   const submitted = searchParams?.submitted;
+  const facebookLink = socialLinks.find((link) => link.label === "Facebook");
 
   return (
     <main>
@@ -51,6 +53,54 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
               <p className="mt-2 leading-7 text-slate-300">
                 Use this form for consulting, platform, governance, analytics, automation, and ElgonOS conversations.
               </p>
+            </div>
+            <div className="mt-6 grid gap-4 rounded-[1.75rem] border border-white/15 bg-[#030717]/75 p-6 backdrop-blur">
+              <Link
+                href={contactInfo.phoneHref}
+                className="group flex items-center gap-4 text-white transition hover:text-cyan-100"
+              >
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 text-cyan-200 transition group-hover:border-cyan-200/60 group-hover:text-white">
+                  <Phone className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <span>
+                  <span className="block text-[0.68rem] font-extrabold uppercase tracking-[0.3em] text-slate-400">
+                    Call
+                  </span>
+                  <span className="mt-1 block text-lg font-black">{contactInfo.phone}</span>
+                </span>
+              </Link>
+              <Link
+                href={contactInfo.emailHref}
+                className="group flex items-center gap-4 text-white transition hover:text-cyan-100"
+              >
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 text-cyan-200 transition group-hover:border-cyan-200/60 group-hover:text-white">
+                  <Mail className="h-5 w-5" aria-hidden="true" />
+                </span>
+                <span>
+                  <span className="block text-[0.68rem] font-extrabold uppercase tracking-[0.3em] text-slate-400">
+                    Email
+                  </span>
+                  <span className="mt-1 block text-lg font-black">{contactInfo.email}</span>
+                </span>
+              </Link>
+              {facebookLink ? (
+                <Link
+                  href={facebookLink.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center gap-4 text-white transition hover:text-cyan-100"
+                >
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/10 text-cyan-200 transition group-hover:border-cyan-200/60 group-hover:text-white">
+                    <Facebook className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block text-[0.68rem] font-extrabold uppercase tracking-[0.3em] text-slate-400">
+                      Facebook
+                    </span>
+                    <span className="mt-1 block text-lg font-black">Elgon Edge Consulting</span>
+                  </span>
+                </Link>
+              ) : null}
             </div>
           </div>
 

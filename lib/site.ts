@@ -21,6 +21,13 @@ import {
 
 export const elgonOsUrl = "https://elgonos.elgonedge.com";
 
+export const contactInfo = {
+  phone: "+254 755 366 306",
+  phoneHref: "tel:+254755366306",
+  email: "info@elgonedge.com",
+  emailHref: "mailto:info@elgonedge.com"
+};
+
 export const navItems = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
