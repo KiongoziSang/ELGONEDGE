@@ -50,7 +50,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     label: "Facebook",
-    href: "https://www.facebook.com/people/Elgon-Edge-Consulting/61590052364157/",
+    href: "https://www.facebook.com/elgonedge",
     icon: Facebook
   },
   {
