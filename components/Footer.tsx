@@ -11,11 +11,11 @@ export function Footer() {
           <div className="flex items-center gap-3">
             <div className="rounded-[1.35rem] border border-white/10 bg-white px-5 py-4 shadow-xl shadow-black/20">
               <Image
-                src="/elgon-edge-consulting-logo.png"
+                src="/elgon-edge-consulting-logo-transparent.png"
                 alt="Elgon Edge Consulting Limited"
                 width={360}
                 height={98}
-                className="h-16 w-auto rounded-xl object-contain"
+                className="h-16 w-auto object-contain"
               />
             </div>
           </div>

@@ -14,7 +14,7 @@ export function Navbar() {
           aria-label="Elgon Edge home"
         >
           <Image
-            src="/elgon-edge-consulting-logo.png"
+            src="/elgon-edge-consulting-logo-transparent.png"
             alt="Elgon Edge Consulting Limited"
             width={420}
             height={92}
