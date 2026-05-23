@@ -6,11 +6,15 @@ import {
   Building2,
   CheckCircle2,
   DatabaseZap,
+  Facebook,
   FileCheck2,
+  Instagram,
   Layers3,
+  Linkedin,
   LineChart,
   Network,
   ShieldCheck,
+  Twitter,
   Workflow
 } from "lucide-react";
 
@@ -22,6 +26,29 @@ export const navItems = [
   { href: "/about", label: "About" },
   { href: "/elgonos", label: "ElgonOS" },
   { href: "/contact", label: "Contact" }
+];
+
+export const socialLinks = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/elgon-edge-consulting-limited/",
+    icon: Linkedin
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/elgonedgeconsulting",
+    icon: Facebook
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/elgonedgeconsulting/",
+    icon: Instagram
+  },
+  {
+    label: "X",
+    href: "https://x.com/elgonedge",
+    icon: Twitter
+  }
 ];
 
 export type Service = {

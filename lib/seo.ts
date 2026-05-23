@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { createElement } from "react";
+import { elgonOsUrl, socialLinks } from "@/lib/site";
 
 export const siteUrl = "https://www.elgonedge.com";
 export const siteName = "Elgon Edge Consulting Limited";
@@ -93,7 +94,7 @@ export const organizationJsonLd = {
   logo: `${siteUrl}/elgon-edge-consulting-logo.png`,
   email: "elgonedge@gmail.com",
   description: defaultSeoDescription,
-  sameAs: ["https://elgonos.elgonedge.com"],
+  sameAs: [elgonOsUrl, ...socialLinks.map((link) => link.href)],
   areaServed: {
     "@type": "Country",
     name: "Kenya"
