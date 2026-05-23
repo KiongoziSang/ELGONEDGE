@@ -43,7 +43,7 @@ export const socialLinks: SocialLink[] = [
   },
   {
     label: "Facebook",
-    href: "https://www.facebook.com/elgonedge",
+    href: "https://www.facebook.com/profile.php?id=61590052364157",
     icon: Facebook
   },
   {
