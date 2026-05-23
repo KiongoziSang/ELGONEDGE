@@ -22,20 +22,22 @@ export function Footer() {
           <p className="mt-7 max-w-md text-[1.18rem] leading-9 text-slate-300">
             Premium consulting for data, AI, automation, governance, and digital platforms.
           </p>
-          <div className="mt-7 flex flex-wrap items-center gap-3">
-            {socialLinks.map(({ href, icon: Icon, label }) => (
-              <Link
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Follow Elgon Edge Consulting on ${label}`}
-                className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-slate-200 shadow-lg shadow-black/15 transition hover:-translate-y-0.5 hover:border-cyan-200/60 hover:bg-white/15 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-brand-navy"
-              >
-                <Icon className="h-5 w-5" aria-hidden="true" />
-              </Link>
-            ))}
-          </div>
+          {socialLinks.length > 0 ? (
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              {socialLinks.map(({ href, icon: Icon, label }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Follow Elgon Edge Consulting on ${label}`}
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-slate-200 shadow-lg shadow-black/15 transition hover:-translate-y-0.5 hover:border-cyan-200/60 hover:bg-white/15 hover:text-white focus:outline-none focus:ring-2 focus:ring-cyan-200 focus:ring-offset-2 focus:ring-offset-brand-navy"
+                >
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </Link>
+              ))}
+            </div>
+          ) : null}
         </div>
 
         <div>
