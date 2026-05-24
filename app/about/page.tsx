@@ -90,9 +90,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="fine-grid bg-slate-50 px-4 py-20 sm:px-6 lg:px-8">
+      <section className="fine-grid bg-slate-50 px-4 py-24 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-end">
             <div>
               <p className="section-kicker">EDGE commitment</p>
               <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
@@ -103,16 +103,21 @@ export default function AboutPage() {
               EDGE represents our commitment to enabling data-driven, governed execution for modern organizations.
             </p>
           </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-14 grid auto-rows-fr gap-6 md:grid-cols-2 xl:grid-cols-4">
             {edgeCommitments.map((item) => {
               const Icon = item.icon;
               return (
                 <article
                   key={item.title}
-                  className="premium-card-border rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-soft"
+                  className="premium-card-border flex h-full flex-col rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-soft"
                 >
-                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15">
-                    <Icon className="h-7 w-7" aria-hidden="true" />
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15">
+                      <Icon className="h-7 w-7" aria-hidden="true" />
+                    </div>
+                    <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black tracking-[0.18em] text-brand-blue">
+                      EDGE
+                    </span>
                   </div>
                   <h3 className="mt-6 text-xl font-black text-brand-navy">{item.title}</h3>
                   <p className="mt-4 text-base leading-7 text-slate-600">{item.description}</p>

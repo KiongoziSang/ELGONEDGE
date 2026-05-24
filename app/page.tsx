@@ -247,38 +247,47 @@ export default function HomePage() {
       </section>
 
       <section className="fine-grid bg-slate-50 px-4 py-32 sm:px-6 lg:px-10">
-        <div className="mx-auto grid max-w-[1520px] gap-20 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
-          <div>
-            <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white text-brand-blue shadow-soft">
+        <div className="mx-auto grid max-w-[1520px] gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-start xl:gap-20">
+          <div className="lg:sticky lg:top-28">
+            <div className="inline-grid h-14 w-14 place-items-center rounded-2xl border border-slate-200 bg-white text-brand-blue shadow-soft">
               <WorkflowIcon className="h-8 w-8" aria-hidden="true" />
             </div>
-            <p className="section-kicker mt-5">EDGE Framework</p>
+            <p className="section-kicker mt-6">EDGE Framework</p>
             <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy">
               Our EDGE Delivery Framework
             </h2>
-            <p className="mt-4 text-2xl font-black tracking-tight text-brand-blue">
+            <p className="mt-5 text-2xl font-black tracking-tight text-brand-blue">
               Explore. Design. Govern. Execute.
             </p>
-            <p className="mt-6 text-[1.2rem] leading-9 text-slate-600">
-              The EDGE Framework is our structured approach to transformation: we explore the business context,
-              design practical data, AI and digital solutions, govern delivery and risk, and execute for
-              measurable outcomes.
+            <p className="mt-7 max-w-2xl text-[1.16rem] leading-9 text-slate-600">
+              The EDGE Framework is our structured approach to transformation. We explore the business context,
+              design practical data, AI and digital solutions, govern delivery and risk, and execute for measurable
+              outcomes.
             </p>
+            <div className="mt-9 inline-flex rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-extrabold tracking-[0.28em] text-brand-navy shadow-sm">
+              EDGE
+            </div>
           </div>
-          <div className="relative grid gap-5 md:grid-cols-2">
+          <div className="relative grid auto-rows-fr gap-5 md:grid-cols-2 lg:gap-6">
             {edgeFrameworkSteps.map((step, index) => {
               const Icon = step.icon;
               return (
-                <article key={step.title} className="premium-card-border rounded-[1.85rem] border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+                <article
+                  key={step.title}
+                  className="premium-card-border flex h-full flex-col rounded-[1.85rem] border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-soft"
+                >
                   <div className="flex items-start justify-between gap-5">
                     <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15">
                       <Icon className="h-7 w-7" aria-hidden="true" />
                     </span>
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-xs font-black text-brand-blue">
+                    <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-black tracking-[0.18em] text-brand-blue">
                       0{index + 1}
                     </span>
                   </div>
-                  <h3 className="mt-7 text-2xl font-black tracking-tight text-brand-navy">{step.title}</h3>
+                  <div className="mt-8 flex items-baseline gap-3">
+                    <span className="text-sm font-black uppercase tracking-[0.24em] text-cyan-600">EDGE</span>
+                    <h3 className="text-2xl font-black tracking-tight text-brand-navy">{step.title}</h3>
+                  </div>
                   <p className="mt-4 text-[1.05rem] leading-8 text-slate-600">{step.description}</p>
                 </article>
               );
