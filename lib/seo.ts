@@ -6,13 +6,17 @@ export const siteUrl = "https://www.elgonedge.com";
 export const siteName = "Elgon Edge Consulting Limited";
 export const defaultSeoTitle = `${siteName} | Data, AI and Digital Transformation Consulting`;
 export const defaultSeoDescription =
-  "Elgon Edge Consulting Limited helps organizations modernize operations through data, AI, automation, governance, business intelligence, and digital platforms.";
+  "Elgon Edge Consulting Limited helps organizations move from strategy to implementation through the EDGE Framework, data, AI, automation, governance, business intelligence, and digital platforms.";
 
 export const seoKeywords = [
   "Elgon Edge Consulting Limited",
   "Elgon Edge Consulting",
   "ElgonOS",
   "ElgonOS property management",
+  "EDGE Framework",
+  "Explore Design Govern Execute",
+  "data-driven governed execution",
+  "strategy to implementation",
   "data consulting Kenya",
   "AI consulting Kenya",
   "digital transformation consulting Kenya",
@@ -105,6 +109,9 @@ export const organizationJsonLd = {
     "Digital transformation",
     "Data governance",
     "Business intelligence",
+    "EDGE Framework",
+    "Explore Design Govern Execute",
+    "Data-driven governed execution",
     "Intelligent automation",
     "SaaS development",
     "Property management software"

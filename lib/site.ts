@@ -5,6 +5,7 @@ import {
   BrainCircuit,
   Building2,
   CheckCircle2,
+  Compass,
   DatabaseZap,
   Facebook,
   FileCheck2,
@@ -13,6 +14,8 @@ import {
   Linkedin,
   LineChart,
   Network,
+  PenTool,
+  Rocket,
   ShieldCheck,
   Twitter,
   Workflow,
@@ -259,6 +262,52 @@ export const differentiators = [
     title: "Platform Delivery",
     description: "Consulting insight is backed by implementation capability across web, SaaS, and workflow tools.",
     icon: Building2
+  }
+];
+
+export const edgeFrameworkSteps = [
+  {
+    title: "Explore",
+    description: "Understand business challenges, operating context, stakeholders, risks, and desired outcomes.",
+    icon: Compass
+  },
+  {
+    title: "Design",
+    description: "Design practical data, AI, automation, governance, and digital platform solutions.",
+    icon: PenTool
+  },
+  {
+    title: "Govern",
+    description: "Govern delivery, risk, adoption, documentation, controls, and accountability.",
+    icon: ShieldCheck
+  },
+  {
+    title: "Execute",
+    description: "Implement with structure, track outcomes, support adoption, and deliver measurable value.",
+    icon: Rocket
+  }
+];
+
+export const edgeCommitments = [
+  {
+    title: "Enable",
+    description: "Enable organizations to modernize operations and make better decisions.",
+    icon: CheckCircle2
+  },
+  {
+    title: "Data-driven",
+    description: "Use trusted data, analytics, and insight to guide transformation.",
+    icon: LineChart
+  },
+  {
+    title: "Governed",
+    description: "Build governance, controls, accountability, and responsible delivery into every engagement.",
+    icon: ShieldCheck
+  },
+  {
+    title: "Execution",
+    description: "Move beyond strategy into implementation, adoption, and measurable outcomes.",
+    icon: Rocket
   }
 ];
 

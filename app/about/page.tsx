@@ -1,16 +1,24 @@
 import type { Metadata } from "next";
 import { CheckCircle2, Sparkles } from "lucide-react";
 import { CTASection } from "@/components/CTASection";
-import { differentiators } from "@/lib/site";
+import { differentiators, edgeCommitments } from "@/lib/site";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "About Elgon Edge Consulting Limited",
   path: "/about",
   description:
-    "Elgon Edge Consulting Limited is a modern consulting and technology delivery company focused on data, AI, automation, governance, and digital platforms.",
+    "Elgon Edge Consulting Limited is a modern consulting and technology delivery company focused on the EDGE Framework, data-driven governed execution, data, AI, automation, governance, and digital platforms.",
   absoluteTitle: true,
-  keywords: ["Elgon Edge Consulting", "AI consulting Kenya", "data consulting Kenya"]
+  keywords: [
+    "Elgon Edge Consulting Limited",
+    "EDGE Framework",
+    "Explore Design Govern Execute",
+    "data-driven governed execution",
+    "strategy to implementation",
+    "AI consulting Kenya",
+    "data consulting Kenya"
+  ]
 });
 
 export default function AboutPage() {
@@ -70,6 +78,39 @@ export default function AboutPage() {
               const Icon = item.icon;
               return (
                 <article key={item.title} className="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15">
+                    <Icon className="h-7 w-7" aria-hidden="true" />
+                  </div>
+                  <h3 className="mt-6 text-xl font-black text-brand-navy">{item.title}</h3>
+                  <p className="mt-4 text-base leading-7 text-slate-600">{item.description}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="fine-grid bg-slate-50 px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="section-kicker">EDGE commitment</p>
+              <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
+                The EDGE Commitment
+              </h2>
+            </div>
+            <p className="max-w-3xl text-lg leading-8 text-slate-600 lg:justify-self-end">
+              EDGE represents our commitment to enabling data-driven, governed execution for modern organizations.
+            </p>
+          </div>
+          <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {edgeCommitments.map((item) => {
+              const Icon = item.icon;
+              return (
+                <article
+                  key={item.title}
+                  className="premium-card-border rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:shadow-soft"
+                >
                   <div className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15">
                     <Icon className="h-7 w-7" aria-hidden="true" />
                   </div>

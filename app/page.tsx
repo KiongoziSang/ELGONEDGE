@@ -12,7 +12,7 @@ import {
 import { ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
-import { deliverySteps, differentiators, elgonOsUrl, services, workflowIcon } from "@/lib/site";
+import { differentiators, edgeFrameworkSteps, elgonOsUrl, services, workflowIcon } from "@/lib/site";
 import { createPageMetadata, defaultSeoDescription, defaultSeoTitle } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
@@ -20,7 +20,15 @@ export const metadata = createPageMetadata({
   description: defaultSeoDescription,
   path: "/",
   absoluteTitle: true,
-  keywords: ["data consulting Kenya", "AI consulting Kenya", "digital transformation consulting Kenya"]
+  keywords: [
+    "EDGE Framework",
+    "Explore Design Govern Execute",
+    "data-driven governed execution",
+    "strategy to implementation",
+    "data consulting Kenya",
+    "AI consulting Kenya",
+    "digital transformation consulting Kenya"
+  ]
 });
 
 const WorkflowIcon = workflowIcon;
@@ -244,22 +252,37 @@ export default function HomePage() {
             <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white text-brand-blue shadow-soft">
               <WorkflowIcon className="h-8 w-8" aria-hidden="true" />
             </div>
-            <p className="section-kicker mt-5">Delivery model</p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy">From Strategy to Implementation</h2>
+            <p className="section-kicker mt-5">EDGE Framework</p>
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy">
+              Our EDGE Delivery Framework
+            </h2>
+            <p className="mt-4 text-2xl font-black tracking-tight text-brand-blue">
+              Explore. Design. Govern. Execute.
+            </p>
             <p className="mt-6 text-[1.2rem] leading-9 text-slate-600">
-              Every engagement is supported by structured project delivery, stakeholder coordination,
-              documentation, risk management, implementation tracking, and post-delivery support.
+              The EDGE Framework is our structured approach to transformation: we explore the business context,
+              design practical data, AI and digital solutions, govern delivery and risk, and execute for
+              measurable outcomes.
             </p>
           </div>
           <div className="relative grid gap-5 md:grid-cols-2">
-            {deliverySteps.map((step, index) => (
-              <article key={step} className="rounded-[1.85rem] border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
-                <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-navy text-sm font-black text-white shadow-lg shadow-slate-900/15">
-                  0{index + 1}
-                </span>
-                <p className="mt-6 text-lg font-bold leading-8 text-brand-navy">{step}</p>
-              </article>
-            ))}
+            {edgeFrameworkSteps.map((step, index) => {
+              const Icon = step.icon;
+              return (
+                <article key={step.title} className="premium-card-border rounded-[1.85rem] border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-soft">
+                  <div className="flex items-start justify-between gap-5">
+                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15">
+                      <Icon className="h-7 w-7" aria-hidden="true" />
+                    </span>
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-xs font-black text-brand-blue">
+                      0{index + 1}
+                    </span>
+                  </div>
+                  <h3 className="mt-7 text-2xl font-black tracking-tight text-brand-navy">{step.title}</h3>
+                  <p className="mt-4 text-[1.05rem] leading-8 text-slate-600">{step.description}</p>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
