@@ -1,11 +1,12 @@
 import {
   ArrowRight,
   BarChart3,
-  Building2,
+  Bot,
+  CalendarCheck2,
   CheckCircle2,
-  FileText,
-  Receipt,
-  ShieldCheck,
+  CreditCard,
+  KeyRound,
+  MessageSquareText,
   Sparkles,
   UsersRound
 } from "lucide-react";
@@ -42,12 +43,12 @@ export default function HomePage() {
     "Executive Analytics"
   ];
   const productBenefits = [
-    { title: "Property management", icon: Building2 },
-    { title: "Tenant management", icon: UsersRound },
-    { title: "Leases", icon: FileText },
-    { title: "Billing", icon: Receipt },
-    { title: "Occupancy", icon: CheckCircle2 },
-    { title: "Documents", icon: ShieldCheck }
+    { title: "Payment routing", icon: CreditCard },
+    { title: "Access control", icon: KeyRound },
+    { title: "Tenant workflows", icon: UsersRound },
+    { title: "Bookings", icon: CalendarCheck2 },
+    { title: "Ask AI", icon: Bot },
+    { title: "SMS/WhatsApp-ready alerts", icon: MessageSquareText }
   ];
 
   return (
@@ -198,12 +199,12 @@ export default function HomePage() {
           <div className="relative p-2 lg:p-6">
             <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-cyan-200">Flagship platform</p>
             <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-5xl">
-              ElgonOS — Property Management Made Simple
+              ElgonOS — Property Operations Platform
             </h2>
             <p className="mt-7 max-w-3xl text-[1.2rem] leading-9 text-slate-200">
-              ElgonOS is a digital property management platform designed to help landlords, property managers,
-              and real estate teams manage properties, units, tenants, leases, occupancy, billing, and documents
-              from one platform.
+              ElgonOS helps landlords, property managers, and real estate teams run billing, payment routing,
+              access control, tenant experience, communication, AI-assisted reporting, and executive dashboards
+              from one operating layer.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="/elgonos" variant="glass">
@@ -219,12 +220,12 @@ export default function HomePage() {
               <div className="mb-5 flex items-center justify-between rounded-2xl bg-white/[0.06] px-5 py-4">
                 <div>
                   <p className="text-base font-bold">Portfolio dashboard</p>
-                  <p className="text-sm text-slate-400">Properties, tenants, billing, documents</p>
+                  <p className="text-sm text-slate-400">Billing, access, tenants, intelligence</p>
                 </div>
                 <BarChart3 className="h-5 w-5 text-cyan-200" aria-hidden="true" />
               </div>
               <div className="mb-5 grid grid-cols-3 gap-3">
-                {["92% Occupancy", "18 Units", "KES Billing"].map((metric) => (
+                {["M-PESA/Bank", "Gate Access", "Ask AI"].map((metric) => (
                   <div key={metric} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
                     <p className="text-sm font-bold">{metric}</p>
                   </div>

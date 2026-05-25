@@ -3,12 +3,12 @@ import ElgonOsPage from "@/app/elgonos/page";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "ElgonOS | Property Management Software by Elgon Edge Consulting",
+  title: "ElgonOS | Property Operations Platform by Elgon Edge Consulting",
   path: "/elgonos-property-management-software",
   description:
-    "ElgonOS is a digital property management platform for landlords, property managers, and real estate teams to manage properties, units, tenants, leases, billing, occupancy, and documents.",
+    "ElgonOS is a property operations platform for billing, payment routing, access control, tenant experience, intelligence, communication, and executive reporting.",
   absoluteTitle: true,
-  keywords: ["ElgonOS", "ElgonOS property management", "property management software Kenya"]
+  keywords: ["ElgonOS", "property operations platform", "property management software Kenya"]
 });
 
 export default ElgonOsPage;

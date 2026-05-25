@@ -13,6 +13,7 @@ export const seoKeywords = [
   "Elgon Edge Consulting",
   "ElgonOS",
   "ElgonOS property management",
+  "property operations platform",
   "EDGE Framework",
   "Explore Design Govern Execute",
   "data-driven governed execution",
@@ -114,7 +115,8 @@ export const organizationJsonLd = {
     "Data-driven governed execution",
     "Intelligent automation",
     "SaaS development",
-    "Property management software"
+    "Property management software",
+    "Property operations platform"
   ]
 };
 
@@ -139,7 +141,7 @@ export const elgonOsSoftwareJsonLd = {
   operatingSystem: "Web",
   url: "https://elgonos.elgonedge.com",
   description:
-    "ElgonOS is a digital property management platform for landlords, property managers, and real estate teams to manage properties, units, tenants, leases, occupancy, billing, and documents from one platform.",
+    "ElgonOS is a property operations platform for landlords, property managers, and real estate teams to run billing, payment routing, access control, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
   creator: {
     "@id": `${siteUrl}/#organization`
   },
@@ -151,6 +153,7 @@ export const elgonOsSoftwareJsonLd = {
   keywords: [
     "ElgonOS",
     "ElgonOS property management",
+    "property operations platform",
     "property management software Kenya",
     "property management platform"
   ]
