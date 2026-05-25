@@ -63,7 +63,7 @@ const platformPillars = [
     title: "Communication",
     icon: MessageSquareText,
     summary: "Keep residents and teams aligned with timely operating alerts.",
-    points: ["SMS-ready reminders", "WhatsApp-ready alerts", "Payment and lease nudges", "Operational notifications"]
+    points: ["Email communication", "SMS-ready reminders", "WhatsApp-ready alerts", "Payment and lease nudges"]
   },
   {
     title: "Mobile app",
@@ -93,7 +93,7 @@ const plans = [
       "Tenant predictability",
       "Audit trail",
       "Staff roles",
-      "SMS/WhatsApp-ready communication"
+      "Email, SMS, and WhatsApp-ready communication"
     ]
   },
   {
@@ -116,7 +116,7 @@ const featureMatrix = [
   ["Tenant workflows", "Bookings, wishlist, referrals, feedback, lease signing"],
   ["Intelligence", "Ask AI, conversational reporting, tenant predictability, executive dashboards"],
   ["Data quality", "Portfolio data quality dashboard and operational exception visibility"],
-  ["Communication", "SMS and WhatsApp-ready reminders and alerts"],
+  ["Communication", "Email communication plus SMS and WhatsApp-ready reminders and alerts"],
   ["Mobile", "Mobile app coming soon with rollout support on Enterprise"]
 ];
 

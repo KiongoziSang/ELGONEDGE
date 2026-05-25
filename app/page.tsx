@@ -48,7 +48,7 @@ export default function HomePage() {
     { title: "Tenant workflows", icon: UsersRound },
     { title: "Bookings", icon: CalendarCheck2 },
     { title: "Ask AI", icon: Bot },
-    { title: "SMS/WhatsApp-ready alerts", icon: MessageSquareText }
+    { title: "Email, SMS, WhatsApp-ready alerts", icon: MessageSquareText }
   ];
 
   return (
