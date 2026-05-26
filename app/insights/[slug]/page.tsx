@@ -66,9 +66,9 @@ export default function InsightPage({ params }: InsightPageProps) {
         <div className="galaxy-grid absolute inset-0 opacity-22" aria-hidden="true" />
         <div className="absolute right-10 top-8 h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto max-w-[1180px]">
-          <Link href="/" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-cyan-100 hover:text-white">
+          <Link href="/insights" className="inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.16em] text-cyan-100 hover:text-white">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            Elgon Edge
+            All insights
           </Link>
           <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-extrabold uppercase tracking-[0.18em] text-cyan-100 backdrop-blur">
             <Sparkles className="h-4 w-4" aria-hidden="true" />

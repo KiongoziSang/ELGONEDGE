@@ -8,6 +8,7 @@ const publicRoutes = [
   "/services",
   ...services.map((service) => `/services/${service.slug}`),
   "/about",
+  "/insights",
   "/elgonos",
   "/elgonos-property-management-software",
   "/contact",

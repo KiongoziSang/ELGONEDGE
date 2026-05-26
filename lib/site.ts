@@ -35,6 +35,7 @@ export const navItems = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
+  { href: "/insights", label: "Insights" },
   { href: "/elgonos", label: "ElgonOS" },
   { href: "/contact", label: "Contact" }
 ];

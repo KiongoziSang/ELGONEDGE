@@ -49,6 +49,9 @@ export function Footer() {
             <Link href="/about" className="text-slate-300 transition hover:text-white">
               About
             </Link>
+            <Link href="/insights" className="text-slate-300 transition hover:text-white">
+              Insights
+            </Link>
             <Link href="/elgonos" className="text-slate-300 transition hover:text-white">
               ElgonOS
             </Link>
