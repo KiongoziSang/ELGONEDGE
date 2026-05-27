@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { unstable_noStore as noStore } from "next/cache";
-import { ArrowRight, CheckCircle2, Inbox, LockKeyhole, LogOut, Mail, Trash2 } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, Inbox, LockKeyhole, LogOut, Mail, Trash2 } from "lucide-react";
 import { isAdminAuthenticated, isAdminPasswordConfigured } from "@/lib/admin/auth";
 import { prisma } from "@/lib/prisma";
 import { deleteSubmission, loginAdmin, logoutAdmin, updateSubmissionStatus } from "./actions";
@@ -17,8 +18,11 @@ export const metadata: Metadata = {
 type AdminContactSubmissionsPageProps = {
   searchParams?: {
     login?: string;
+    page?: string;
   };
 };
+
+const PAGE_SIZE = 20;
 
 function formatDate(date: Date) {
   return new Intl.DateTimeFormat("en-KE", {
@@ -26,6 +30,22 @@ function formatDate(date: Date) {
     timeStyle: "short",
     timeZone: "Africa/Nairobi"
   }).format(date);
+}
+
+function parsePage(value?: string) {
+  const page = Number(value);
+  return Number.isInteger(page) && page > 0 ? page : 1;
+}
+
+function pageHref(page: number) {
+  return page === 1 ? "/admin/contact-submissions" : `/admin/contact-submissions?page=${page}`;
+}
+
+function getVisiblePages(currentPage: number, totalPages: number) {
+  const start = Math.max(1, currentPage - 2);
+  const end = Math.min(totalPages, currentPage + 2);
+
+  return Array.from({ length: end - start + 1 }, (_, index) => start + index);
 }
 
 function LoginPanel({ login }: { login?: string }) {
@@ -89,15 +109,23 @@ export default async function AdminContactSubmissionsPage({ searchParams }: Admi
     return <LoginPanel login={searchParams?.login} />;
   }
 
-  const [submissions, totalCount, newCount, readCount] = await Promise.all([
-    prisma.contactSubmission.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 100
-    }),
+  const requestedPage = parsePage(searchParams?.page);
+  const [totalCount, newCount, readCount] = await Promise.all([
     prisma.contactSubmission.count(),
     prisma.contactSubmission.count({ where: { status: "new" } }),
     prisma.contactSubmission.count({ where: { status: "read" } })
   ]);
+  const totalPages = Math.max(1, Math.ceil(totalCount / PAGE_SIZE));
+  const currentPage = Math.min(requestedPage, totalPages);
+  const pageStart = totalCount === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1;
+  const pageEnd = Math.min(currentPage * PAGE_SIZE, totalCount);
+  const visiblePages = getVisiblePages(currentPage, totalPages);
+
+  const submissions = await prisma.contactSubmission.findMany({
+    orderBy: { createdAt: "desc" },
+    skip: (currentPage - 1) * PAGE_SIZE,
+    take: PAGE_SIZE
+  });
 
   return (
     <main className="fine-grid bg-slate-50 px-4 py-16 sm:px-6 lg:px-8">
@@ -141,8 +169,18 @@ export default async function AdminContactSubmissionsPage({ searchParams }: Admi
         </div>
 
         <section className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-soft">
-          <div className="border-b border-slate-200 px-6 py-5">
-            <h2 className="text-xl font-black text-brand-navy">Latest enquiries</h2>
+          <div className="flex flex-col gap-2 border-b border-slate-200 px-6 py-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <h2 className="text-xl font-black text-brand-navy">Latest enquiries</h2>
+              <p className="mt-1 text-sm font-semibold text-slate-500">
+                Showing {pageStart}-{pageEnd} of {totalCount}
+              </p>
+            </div>
+            {totalPages > 1 ? (
+              <p className="text-sm font-bold text-slate-500">
+                Page {currentPage} of {totalPages}
+              </p>
+            ) : null}
           </div>
 
           {submissions.length === 0 ? (
@@ -152,71 +190,148 @@ export default async function AdminContactSubmissionsPage({ searchParams }: Admi
               <p className="mt-2 text-slate-500">New contact form enquiries will appear here.</p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-                <thead className="bg-slate-50">
-                  <tr>
-                    {["Status", "Contact", "Service", "Message", "Submitted", "Actions"].map((heading) => (
-                      <th key={heading} className="px-5 py-4 text-xs font-black uppercase tracking-[0.16em] text-slate-500">
-                        {heading}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100">
-                  {submissions.map((submission) => (
-                    <tr key={submission.id} className="align-top">
-                      <td className="px-5 py-5">
-                        <span
-                          className={`inline-flex rounded-full px-3 py-1 text-xs font-black uppercase tracking-[0.12em] ${
-                            submission.status === "new"
-                              ? "bg-cyan-50 text-brand-blue"
-                              : "bg-slate-100 text-slate-500"
-                          }`}
-                        >
-                          {submission.status}
-                        </span>
-                      </td>
-                      <td className="px-5 py-5">
-                        <p className="font-black text-brand-navy">{submission.name}</p>
-                        <a className="mt-1 block text-brand-blue hover:text-brand-navy" href={`mailto:${submission.email}`}>
-                          {submission.email}
-                        </a>
-                        {submission.phone ? <p className="mt-1 text-slate-500">{submission.phone}</p> : null}
-                        {submission.company ? <p className="mt-1 text-slate-500">{submission.company}</p> : null}
-                      </td>
-                      <td className="max-w-[220px] px-5 py-5 font-semibold text-slate-700">{submission.serviceInterest}</td>
-                      <td className="max-w-md px-5 py-5 leading-7 text-slate-600">{submission.message}</td>
-                      <td className="whitespace-nowrap px-5 py-5 text-slate-500">{formatDate(submission.createdAt)}</td>
-                      <td className="px-5 py-5">
-                        <div className="flex flex-col gap-2">
-                          <form action={updateSubmissionStatus}>
-                            <input type="hidden" name="id" value={submission.id} />
-                            <input type="hidden" name="status" value={submission.status === "new" ? "read" : "new"} />
-                            <button
-                              type="submit"
-                              className="w-full rounded-full border border-slate-200 px-4 py-2 text-xs font-black text-brand-navy transition hover:border-brand-blue hover:text-brand-blue"
-                            >
-                              Mark {submission.status === "new" ? "read" : "new"}
-                            </button>
-                          </form>
-                          <form action={deleteSubmission}>
-                            <input type="hidden" name="id" value={submission.id} />
-                            <button
-                              type="submit"
-                              className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-red-100 px-4 py-2 text-xs font-black text-red-600 transition hover:bg-red-50"
-                            >
-                              <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
-                              Delete
-                            </button>
-                          </form>
-                        </div>
-                      </td>
+            <>
+              <div className="overflow-x-auto">
+                <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
+                  <thead className="bg-slate-50">
+                    <tr>
+                      {["Status", "Contact", "Service", "Message", "Submitted", "Actions"].map((heading) => (
+                        <th key={heading} className="px-5 py-4 text-xs font-black uppercase tracking-[0.16em] text-slate-500">
+                          {heading}
+                        </th>
+                      ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {submissions.map((submission) => (
+                      <tr key={submission.id} className="align-top">
+                        <td className="px-5 py-5">
+                          <span
+                            className={`inline-flex rounded-full px-3 py-1 text-xs font-black uppercase tracking-[0.12em] ${
+                              submission.status === "new"
+                                ? "bg-cyan-50 text-brand-blue"
+                                : "bg-slate-100 text-slate-500"
+                            }`}
+                          >
+                            {submission.status}
+                          </span>
+                        </td>
+                        <td className="px-5 py-5">
+                          <p className="font-black text-brand-navy">{submission.name}</p>
+                          <a className="mt-1 block text-brand-blue hover:text-brand-navy" href={`mailto:${submission.email}`}>
+                            {submission.email}
+                          </a>
+                          {submission.phone ? <p className="mt-1 text-slate-500">{submission.phone}</p> : null}
+                          {submission.company ? <p className="mt-1 text-slate-500">{submission.company}</p> : null}
+                        </td>
+                        <td className="max-w-[220px] px-5 py-5 font-semibold text-slate-700">{submission.serviceInterest}</td>
+                        <td className="max-w-md px-5 py-5 leading-7 text-slate-600">{submission.message}</td>
+                        <td className="whitespace-nowrap px-5 py-5 text-slate-500">{formatDate(submission.createdAt)}</td>
+                        <td className="px-5 py-5">
+                          <div className="flex flex-col gap-2">
+                            <form action={updateSubmissionStatus}>
+                              <input type="hidden" name="id" value={submission.id} />
+                              <input type="hidden" name="status" value={submission.status === "new" ? "read" : "new"} />
+                              <button
+                                type="submit"
+                                className="w-full rounded-full border border-slate-200 px-4 py-2 text-xs font-black text-brand-navy transition hover:border-brand-blue hover:text-brand-blue"
+                              >
+                                Mark {submission.status === "new" ? "read" : "new"}
+                              </button>
+                            </form>
+                            <form action={deleteSubmission}>
+                              <input type="hidden" name="id" value={submission.id} />
+                              <button
+                                type="submit"
+                                className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-red-100 px-4 py-2 text-xs font-black text-red-600 transition hover:bg-red-50"
+                              >
+                                <Trash2 className="h-3.5 w-3.5" aria-hidden="true" />
+                                Delete
+                              </button>
+                            </form>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              {totalPages > 1 ? (
+                <nav
+                  className="flex flex-col gap-3 border-t border-slate-200 px-5 py-4 sm:flex-row sm:items-center sm:justify-between"
+                  aria-label="Contact submissions pagination"
+                >
+                  <Link
+                    href={pageHref(Math.max(1, currentPage - 1))}
+                    aria-disabled={currentPage === 1}
+                    className={`inline-flex items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-black transition ${
+                      currentPage === 1
+                        ? "pointer-events-none border-slate-100 text-slate-300"
+                        : "border-slate-200 text-brand-navy hover:border-brand-blue hover:text-brand-blue"
+                    }`}
+                  >
+                    <ChevronLeft className="h-4 w-4" aria-hidden="true" />
+                    Previous
+                  </Link>
+
+                  <div className="flex flex-wrap items-center justify-center gap-2">
+                    {visiblePages[0] > 1 ? (
+                      <>
+                        <Link
+                          href={pageHref(1)}
+                          className="inline-flex h-10 min-w-10 items-center justify-center rounded-full border border-slate-200 px-3 text-sm font-black text-brand-navy transition hover:border-brand-blue hover:text-brand-blue"
+                        >
+                          1
+                        </Link>
+                        {visiblePages[0] > 2 ? <span className="px-1 text-sm font-bold text-slate-400">...</span> : null}
+                      </>
+                    ) : null}
+
+                    {visiblePages.map((page) => (
+                      <Link
+                        key={page}
+                        href={pageHref(page)}
+                        aria-current={page === currentPage ? "page" : undefined}
+                        className={`inline-flex h-10 min-w-10 items-center justify-center rounded-full border px-3 text-sm font-black transition ${
+                          page === currentPage
+                            ? "border-brand-blue bg-brand-blue text-white"
+                            : "border-slate-200 text-brand-navy hover:border-brand-blue hover:text-brand-blue"
+                        }`}
+                      >
+                        {page}
+                      </Link>
+                    ))}
+
+                    {visiblePages[visiblePages.length - 1] < totalPages ? (
+                      <>
+                        {visiblePages[visiblePages.length - 1] < totalPages - 1 ? (
+                          <span className="px-1 text-sm font-bold text-slate-400">...</span>
+                        ) : null}
+                        <Link
+                          href={pageHref(totalPages)}
+                          className="inline-flex h-10 min-w-10 items-center justify-center rounded-full border border-slate-200 px-3 text-sm font-black text-brand-navy transition hover:border-brand-blue hover:text-brand-blue"
+                        >
+                          {totalPages}
+                        </Link>
+                      </>
+                    ) : null}
+                  </div>
+
+                  <Link
+                    href={pageHref(Math.min(totalPages, currentPage + 1))}
+                    aria-disabled={currentPage === totalPages}
+                    className={`inline-flex items-center justify-center gap-2 rounded-full border px-4 py-2 text-sm font-black transition ${
+                      currentPage === totalPages
+                        ? "pointer-events-none border-slate-100 text-slate-300"
+                        : "border-slate-200 text-brand-navy hover:border-brand-blue hover:text-brand-blue"
+                    }`}
+                  >
+                    Next
+                    <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </nav>
+              ) : null}
+            </>
           )}
         </section>
       </div>
