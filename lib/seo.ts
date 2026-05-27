@@ -41,6 +41,12 @@ type PageMetadataInput = {
   path?: string;
   keywords?: string[];
   absoluteTitle?: boolean;
+  image?: {
+    url: string;
+    width: number;
+    height: number;
+    alt: string;
+  };
 };
 
 export function createPageMetadata({
@@ -48,7 +54,8 @@ export function createPageMetadata({
   description = defaultSeoDescription,
   path = "/",
   keywords = [],
-  absoluteTitle = false
+  absoluteTitle = false,
+  image = ogImage
 }: PageMetadataInput): Metadata {
   const url = `${siteUrl}${path === "/" ? "" : path}`;
   const pageTitle = absoluteTitle || title === siteName ? title : `${title} | ${siteName}`;
@@ -67,7 +74,7 @@ export function createPageMetadata({
       description,
       url,
       siteName,
-      images: [ogImage],
+      images: [image],
       locale: "en_KE",
       type: "website"
     },
@@ -75,7 +82,7 @@ export function createPageMetadata({
       card: "summary_large_image",
       title: pageTitle,
       description,
-      images: [ogImage.url]
+      images: [image.url]
     }
   };
 }

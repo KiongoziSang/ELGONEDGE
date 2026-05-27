@@ -2,6 +2,8 @@ export type Insight = {
   slug: string;
   title: string;
   description: string;
+  image: string;
+  imageAlt: string;
   keywords: string[];
   intro: string;
   sections: {
@@ -16,6 +18,8 @@ export const insights: Insight[] = [
     title: "What Is Data Governance and Why It Matters for Growing Organizations",
     description:
       "Learn what data governance means, why it matters for growing organizations, and how trusted data foundations support reporting, automation, and AI.",
+    image: "/insights/data-governance-ai-insight.png",
+    imageAlt: "Abstract data governance dashboard with trusted data blocks and control icons",
     keywords: ["data governance consulting Kenya", "data quality", "trusted data foundations"],
     intro:
       "Data governance is the operating discipline that helps organizations define ownership, improve quality, protect data, and use information with confidence.",
@@ -42,6 +46,8 @@ export const insights: Insight[] = [
     title: "How AI Readiness Helps Organizations Adopt AI Responsibly",
     description:
       "Understand how AI readiness helps organizations identify practical use cases, manage risk, and adopt responsible AI with better governance.",
+    image: "/insights/responsible-ai-insight.png",
+    imageAlt: "Responsible AI governance concept with neural network, shield, and risk controls",
     keywords: ["AI consulting Kenya", "AI readiness", "responsible AI governance"],
     intro:
       "AI readiness helps organizations understand whether their data, processes, people, governance, and risks are prepared for practical AI adoption.",
@@ -68,6 +74,8 @@ export const insights: Insight[] = [
     title: "Why Businesses Need a Single Source of Truth for Reporting",
     description:
       "Learn why organizations need a single source of truth for reporting, dashboards, KPIs, business intelligence, and executive decision-making.",
+    image: "/insights/data-governance-ai-insight.png",
+    imageAlt: "Executive analytics dashboard with governed data flows and reporting panels",
     keywords: ["business intelligence consulting Kenya", "executive analytics", "single source of truth"],
     intro:
       "A single source of truth gives leaders and teams confidence that reports, dashboards, and KPIs are based on consistent definitions and reliable data.",
@@ -94,6 +102,8 @@ export const insights: Insight[] = [
     title: "How Workflow Automation Reduces Manual Work",
     description:
       "Explore how workflow automation, RPA, AI agents, and document intelligence reduce manual work and improve operational efficiency.",
+    image: "/insights/automation-platform-insight.png",
+    imageAlt: "Workflow automation command center with connected documents and digital process lanes",
     keywords: ["automation consulting Kenya", "workflow automation", "agentic AI"],
     intro:
       "Workflow automation helps organizations reduce repetitive work, improve consistency, speed up approvals, and give teams more time for higher-value activities.",
@@ -120,6 +130,8 @@ export const insights: Insight[] = [
     title: "What to Check Before a Data Migration Go-Live",
     description:
       "A practical checklist for data migration go-live readiness, including reconciliation, completeness, accuracy, exceptions, and post-migration validation.",
+    image: "/insights/automation-platform-insight.png",
+    imageAlt: "Data migration pathways connecting records, controls, and reporting dashboards",
     keywords: ["data migration assurance", "data reconciliation", "go-live readiness"],
     intro:
       "A data migration go-live should be supported by clear validation evidence, reconciliation checks, issue tracking, and business readiness.",
@@ -146,6 +158,8 @@ export const insights: Insight[] = [
     title: "How Property Managers Can Move from Spreadsheets to ElgonOS",
     description:
       "Learn how property managers can move from spreadsheets to ElgonOS for properties, units, tenants, leases, billing, occupancy, and documents.",
+    image: "/insights/automation-platform-insight.png",
+    imageAlt: "Property operations platform with connected documents, dashboards, and portfolio tiles",
     keywords: ["ElgonOS property management", "property management software Kenya", "ElgonOS"],
     intro:
       "ElgonOS helps property managers move from fragmented spreadsheets to a centralized property management platform for daily operations.",

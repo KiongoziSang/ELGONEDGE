@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, BookOpenText, CheckCircle2, Layers3, SearchCheck, Sparkles } from "lucide-react";
 import { CTASection } from "@/components/CTASection";
 import { insights } from "@/lib/insights";
@@ -9,6 +10,12 @@ export const metadata = createPageMetadata({
   description:
     "Read Elgon Edge insights on data governance, AI readiness, business intelligence, workflow automation, data migration, and ElgonOS property operations.",
   path: "/insights",
+  image: {
+    url: "/insights/data-governance-ai-insight.png",
+    width: 1672,
+    height: 941,
+    alt: "Elgon Edge Insights cover image with governed data and AI transformation visuals"
+  },
   keywords: [
     "Elgon Edge insights",
     "data governance articles",
@@ -101,18 +108,25 @@ export default function InsightsPage() {
           </div>
 
           <article className="premium-card-border mt-14 grid overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-soft lg:grid-cols-[0.85fr_1.15fr]">
-            <div className="executive-hero relative min-h-[22rem] p-8 text-white sm:p-10">
-              <div className="galaxy-grid absolute inset-0 opacity-20" aria-hidden="true" />
-              <div className="relative flex h-full flex-col justify-between gap-12">
-                <div>
-                  <BookOpenText className="h-10 w-10 text-cyan-200" aria-hidden="true" />
-                  <p className="mt-6 text-sm font-extrabold uppercase tracking-[0.2em] text-cyan-100">
-                    Featured article
-                  </p>
-                </div>
-                <div className="grid gap-3 text-sm font-bold text-slate-300 sm:grid-cols-2">
+            <div className="relative min-h-[22rem] overflow-hidden">
+              <Image
+                src={featuredInsight.image}
+                alt={featuredInsight.imageAlt}
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/78 via-slate-950/20 to-transparent" aria-hidden="true" />
+              <div className="absolute inset-x-0 bottom-0 p-8 text-white sm:p-10">
+                <p className="text-sm font-extrabold uppercase tracking-[0.2em] text-cyan-100">Featured article</p>
+                <div className="mt-5 grid gap-3 text-sm font-bold text-slate-200 sm:grid-cols-2">
                   <span>{featuredInsight.keywords[0]}</span>
-                  <span>{getReadTime(featuredInsight.intro + " " + featuredInsight.sections.map((section) => section.body).join(" "))}</span>
+                  <span>
+                    {getReadTime(
+                      featuredInsight.intro + " " + featuredInsight.sections.map((section) => section.body).join(" ")
+                    )}
+                  </span>
                 </div>
               </div>
             </div>
@@ -150,25 +164,38 @@ export default function InsightsPage() {
             {remainingInsights.map((insight) => (
               <article
                 key={insight.slug}
-                className="flex h-full flex-col rounded-[1.5rem] border border-slate-200 bg-slate-50 p-7 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-soft"
+                className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-50 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-soft"
               >
-                <div className="flex items-start justify-between gap-5">
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15">
-                    <BookOpenText className="h-6 w-6" aria-hidden="true" />
-                  </span>
-                  <span className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-black tracking-[0.14em] text-brand-blue">
-                    {getReadTime(insight.intro + " " + insight.sections.map((section) => section.body).join(" "))}
-                  </span>
+                <div className="relative aspect-[16/9] overflow-hidden bg-slate-900">
+                  <Image
+                    src={insight.image}
+                    alt={insight.imageAlt}
+                    fill
+                    sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
+                    className="object-cover transition duration-300 hover:scale-[1.03]"
+                  />
                 </div>
-                <h3 className="mt-7 text-2xl font-black leading-tight tracking-tight text-brand-navy">{insight.title}</h3>
-                <p className="mt-4 flex-1 text-[1.05rem] leading-8 text-slate-600">{insight.description}</p>
-                <Link
-                  href={`/insights/${insight.slug}`}
-                  className="mt-7 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.14em] text-brand-blue transition hover:text-brand-navy"
-                >
-                  Read article
-                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                </Link>
+                <div className="flex flex-1 flex-col p-7">
+                  <div className="flex items-start justify-between gap-5">
+                    <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15">
+                      <BookOpenText className="h-6 w-6" aria-hidden="true" />
+                    </span>
+                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-black tracking-[0.14em] text-brand-blue">
+                      {getReadTime(insight.intro + " " + insight.sections.map((section) => section.body).join(" "))}
+                    </span>
+                  </div>
+                  <h3 className="mt-7 text-2xl font-black leading-tight tracking-tight text-brand-navy">
+                    {insight.title}
+                  </h3>
+                  <p className="mt-4 flex-1 text-[1.05rem] leading-8 text-slate-600">{insight.description}</p>
+                  <Link
+                    href={`/insights/${insight.slug}`}
+                    className="mt-7 inline-flex items-center gap-2 text-sm font-black uppercase tracking-[0.14em] text-brand-blue transition hover:text-brand-navy"
+                  >
+                    Read article
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </div>
               </article>
             ))}
           </div>

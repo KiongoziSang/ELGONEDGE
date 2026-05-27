@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft, CheckCircle2, Sparkles } from "lucide-react";
 import { CTASection } from "@/components/CTASection";
+import { ShareButtons } from "@/components/ShareButtons";
 import { insights } from "@/lib/insights";
 import { createPageMetadata, JsonLd, siteUrl } from "@/lib/seo";
 
@@ -32,6 +34,12 @@ export function generateMetadata({ params }: InsightPageProps): Metadata {
     description: insight.description,
     path: `/insights/${insight.slug}`,
     absoluteTitle: true,
+    image: {
+      url: insight.image,
+      width: 1672,
+      height: 941,
+      alt: insight.imageAlt
+    },
     keywords: insight.keywords
   });
 }
@@ -50,6 +58,7 @@ export default function InsightPage({ params }: InsightPageProps) {
     headline: insight.title,
     description: insight.description,
     url: `${siteUrl}/insights/${insight.slug}`,
+    image: `${siteUrl}${insight.image}`,
     author: {
       "@id": `${siteUrl}/#organization`
     },
@@ -84,7 +93,25 @@ export default function InsightPage({ params }: InsightPageProps) {
       </section>
 
       <section className="fine-grid px-4 py-24 sm:px-6 lg:px-10">
-        <article className="mx-auto max-w-[980px] rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft sm:p-12">
+        <div className="mx-auto max-w-[1120px]">
+          <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-slate-900 shadow-soft">
+            <Image
+              src={insight.image}
+              alt={insight.imageAlt}
+              width={1672}
+              height={941}
+              sizes="(min-width: 1180px) 1120px, 100vw"
+              className="aspect-[16/9] w-full object-cover"
+              priority
+            />
+          </div>
+
+          <div className="mt-8">
+            <ShareButtons title={insight.title} url={`${siteUrl}/insights/${insight.slug}`} />
+          </div>
+        </div>
+
+        <article className="mx-auto mt-10 max-w-[980px] rounded-[2rem] border border-slate-200 bg-white p-8 shadow-soft sm:p-12">
           <div className="space-y-10">
             {insight.sections.map((section) => (
               <section key={section.heading}>
