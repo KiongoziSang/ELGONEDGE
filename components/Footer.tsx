@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Mail, Phone } from "lucide-react";
-import { contactInfo, elgonOsUrl, services, socialLinks } from "@/lib/site";
+import { ArrowUpRight, Download, Mail, Phone } from "lucide-react";
+import { companyProfilePdfPath, contactInfo, elgonOsUrl, services, socialLinks } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -49,6 +49,13 @@ export function Footer() {
             <Link href="/about" className="text-slate-300 transition hover:text-white">
               About
             </Link>
+            <Link href="/company-profile" className="text-slate-300 transition hover:text-white">
+              Company Profile
+            </Link>
+            <a href={companyProfilePdfPath} download className="inline-flex items-center gap-2 text-slate-300 transition hover:text-white">
+              Download Profile
+              <Download className="h-4 w-4 text-cyan-200" aria-hidden="true" />
+            </a>
             <Link href="/insights" className="text-slate-300 transition hover:text-white">
               Insights
             </Link>

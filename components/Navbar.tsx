@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, Menu } from "lucide-react";
-import { elgonOsUrl, navItems } from "@/lib/site";
+import { ArrowUpRight, Download, Menu } from "lucide-react";
+import { companyProfilePdfPath, elgonOsUrl, navItems } from "@/lib/site";
 import { ButtonLink } from "./ButtonLink";
 
 export function Navbar() {
@@ -38,6 +38,14 @@ export function Navbar() {
         </div>
 
         <div className="hidden items-center gap-3 xl:flex">
+          <a
+            href={companyProfilePdfPath}
+            download
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-[0.95rem] font-black text-brand-navy shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-brand-blue/40 hover:text-brand-blue hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2"
+          >
+            Profile
+            <Download className="h-4 w-4" aria-hidden="true" />
+          </a>
           <ButtonLink href={elgonOsUrl} variant="dark" className="gap-2 px-7 py-3.5">
             Launch ElgonOS
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
@@ -59,6 +67,14 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
+            <a
+              href={companyProfilePdfPath}
+              download
+              className="mt-3 flex items-center justify-center gap-2 rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-bold text-white hover:bg-white/15"
+            >
+              Download Profile
+              <Download className="h-4 w-4" aria-hidden="true" />
+            </a>
             <ButtonLink href={elgonOsUrl} variant="dark" className="mt-3 w-full gap-2">
               Launch ElgonOS
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />

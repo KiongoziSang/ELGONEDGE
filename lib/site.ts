@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 
 export const elgonOsUrl = "https://elgonos.elgonedge.com";
+export const companyProfilePdfPath = "/elgon-edge-consulting-company-profile.pdf";
 
 export const contactInfo = {
   phone: "+254 755 366 306",
@@ -35,6 +36,7 @@ export const navItems = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/about", label: "About" },
+  { href: "/company-profile", label: "Profile" },
   { href: "/insights", label: "Insights" },
   { href: "/elgonos", label: "ElgonOS" },
   { href: "/contact", label: "Contact" }
