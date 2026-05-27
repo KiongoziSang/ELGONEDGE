@@ -120,6 +120,21 @@ const featureMatrix = [
   ["Mobile", "Mobile app coming soon with rollout support on Enterprise"]
 ];
 
+const marqueeFeatures = [
+  "Entry",
+  "ElgonOS Access",
+  "Smart gate",
+  "Verified identity",
+  "Tenant workflows",
+  "M-PESA routing",
+  "Receipts",
+  "Lease signing",
+  "Ask AI",
+  "Executive dashboards",
+  "Audit trail",
+  "Mobile-ready"
+];
+
 export default function ElgonOsPage() {
   return (
     <main>
@@ -174,6 +189,26 @@ export default function ElgonOsPage() {
                   </article>
                 );
               })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-[#050b1a] px-4 py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="overflow-hidden rounded-2xl border border-cyan-300/30 bg-cyan-400/10 px-3 py-3 shadow-[0_16px_55px_rgba(8,47,73,0.22)]">
+            <div className="elgonos-marquee-mask">
+              <div className="flex w-max animate-elgonos-marquee items-center gap-0">
+                {[...marqueeFeatures, ...marqueeFeatures].map((feature, index) => (
+                  <span
+                    key={`${feature}-${index}`}
+                    className="inline-flex items-center text-[0.78rem] font-extrabold uppercase tracking-[0.28em] text-cyan-100"
+                  >
+                    {feature}
+                    <span className="mx-4 text-cyan-300/80">•</span>
+                  </span>
+                ))}
               </div>
             </div>
           </div>
