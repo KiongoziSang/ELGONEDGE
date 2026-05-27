@@ -45,9 +45,11 @@ export async function createContactSubmission(formData: FormData) {
       }
     });
 
-    void sendContactNotification(submission).catch((error: unknown) => {
+    try {
+      await sendContactNotification(submission);
+    } catch (error) {
       console.error("Failed to send contact notification email", error);
-    });
+    }
   } catch (error) {
     console.error("Failed to create contact submission", error);
     redirect("/contact?submitted=error");
