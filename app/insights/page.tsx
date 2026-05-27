@@ -28,7 +28,7 @@ export const metadata = createPageMetadata({
 
 function getReadTime(text: string) {
   const words = text.trim().split(/\s+/).filter(Boolean).length;
-  const minutes = Math.max(2, Math.ceil(words / 180));
+  const minutes = Math.max(1, Math.ceil(words / 180));
 
   return `${minutes} min read`;
 }
