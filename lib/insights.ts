@@ -98,6 +98,34 @@ export const insights: Insight[] = [
     ]
   },
   {
+    slug: "what-executives-should-expect-from-a-modern-dashboard",
+    title: "What Executives Should Expect from a Modern Dashboard",
+    description:
+      "Learn what makes a modern executive dashboard useful, including clear KPIs, trusted data, decision context, accountability, and action-oriented reporting.",
+    image: "/insights/data-governance-ai-insight.png",
+    imageAlt: "Executive dashboard concept with governed data flows and performance reporting panels",
+    keywords: ["executive dashboards", "KPI reporting", "business intelligence consulting Kenya"],
+    intro:
+      "A modern executive dashboard should help leaders understand performance quickly, trust the numbers, and move from reporting into informed action.",
+    sections: [
+      {
+        heading: "Start with the decisions leaders need to make",
+        body:
+          "Dashboards should not begin with every metric that is available. They should begin with the decisions executives need to make, the risks they need to monitor, and the outcomes they are accountable for improving."
+      },
+      {
+        heading: "Use KPIs with clear ownership and definitions",
+        body:
+          "Every key metric should have a clear definition, data source, owner, update frequency, and interpretation. Without this discipline, dashboards can create more debate than clarity."
+      },
+      {
+        heading: "Connect insight to action",
+        body:
+          "The best dashboards highlight trends, exceptions, targets, and accountability. They help leadership teams see what needs attention, who owns the follow-up, and whether corrective actions are improving performance."
+      }
+    ]
+  },
+  {
     slug: "how-workflow-automation-reduces-manual-work",
     title: "How Workflow Automation Reduces Manual Work",
     description:
