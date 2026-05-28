@@ -11,7 +11,6 @@ const publicRoutes = [
   "/company-profile",
   "/insights",
   "/elgonos",
-  "/elgonos-property-management-software",
   "/contact",
   ...insights.map((insight) => `/insights/${insight.slug}`)
 ];

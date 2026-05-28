@@ -3,12 +3,20 @@ import ElgonOsPage from "@/app/elgonos/page";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "ElgonOS | Property Operations Platform by Elgon Edge Consulting",
+  title: "ElgonOS Property Management Software Kenya | M-PESA Rent Collection and Tenant Management",
   path: "/elgonos-property-management-software",
+  canonicalPath: "/elgonos",
   description:
-    "ElgonOS is a property operations platform for billing, payment routing, access control, tenant experience, intelligence, communication, and executive reporting.",
+    "ElgonOS is property management software for Kenya with rent collection workflows, M-PESA payment routing, tenant management, leases, access control, receipts, communication, and dashboards.",
   absoluteTitle: true,
-  keywords: ["ElgonOS", "property operations platform", "property management software Kenya"]
+  keywords: [
+    "ElgonOS",
+    "property management software Kenya",
+    "M-PESA rent collection software",
+    "rent collection software Kenya",
+    "tenant management software Kenya",
+    "landlord software Kenya"
+  ]
 });
 
 export default ElgonOsPage;

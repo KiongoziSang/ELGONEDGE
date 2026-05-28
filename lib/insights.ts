@@ -14,6 +14,51 @@ export type Insight = {
 
 export const insights: Insight[] = [
   {
+    slug: "best-property-management-software-in-kenya",
+    title: "Best Property Management Software in Kenya: What Landlords and Property Managers Should Compare",
+    description:
+      "A practical guide to choosing property management software in Kenya, including rent collection, M-PESA workflows, tenant management, leases, dashboards, and rollout support.",
+    image: "/insights/automation-platform-insight.png",
+    imageAlt: "Property management software dashboard with rent collection, tenant workflows, and reporting controls",
+    keywords: [
+      "best property management software Kenya",
+      "property management software Kenya",
+      "rent collection software Kenya",
+      "M-PESA rent collection software",
+      "tenant management software Kenya",
+      "ElgonOS"
+    ],
+    intro:
+      "The best property management software in Kenya should fit local rent collection workflows, tenant operations, reporting needs, and the realities of implementation.",
+    sections: [
+      {
+        heading: "Start with local rent collection workflows",
+        body:
+          "For landlords and property managers in Kenya, payment workflows are central. A useful property management system should support how teams handle rent billing, M-PESA and bank payment channels, receipts, arrears follow-up, reconciliations, and portfolio-level visibility."
+      },
+      {
+        heading: "Compare tenant, lease, unit, and document management",
+        body:
+          "Strong tenant management software should centralize property records, units, tenant profiles, lease details, occupancy status, documents, bookings, feedback, and service workflows. This reduces spreadsheet dependence and makes daily operations easier to control."
+      },
+      {
+        heading: "Look for dashboards, controls, and audit trails",
+        body:
+          "Property teams need more than data entry screens. Good software should provide dashboards, staff roles, audit trails, exception visibility, data quality checks, and reports that help owners and managers understand what needs attention."
+      },
+      {
+        heading: "Check implementation and migration support",
+        body:
+          "The right software should come with a practical transition path. Before choosing a platform, confirm how property, unit, tenant, lease, billing, and document data will be cleaned, migrated, tested, and adopted by the team."
+      },
+      {
+        heading: "Where ElgonOS fits",
+        body:
+          "ElgonOS is built by Elgon Edge Consulting Limited for landlords, property managers, and real estate teams that want one operating layer for rent collection workflows, M-PESA-aware payment routing, tenant management, access control, communication, Ask AI reporting, dashboards, and rollout support."
+      }
+    ]
+  },
+  {
     slug: "what-is-data-governance-and-why-it-matters",
     title: "What Is Data Governance and Why It Matters for Growing Organizations",
     description:

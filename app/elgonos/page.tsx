@@ -19,12 +19,21 @@ import { elgonOsUrl } from "@/lib/site";
 import { createPageMetadata, elgonOsSoftwareJsonLd, JsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "ElgonOS | Property Management Software by Elgon Edge Consulting",
+  title: "ElgonOS Property Management Software Kenya | Rent Collection, Tenants and Dashboards",
   path: "/elgonos",
   description:
-    "ElgonOS is a property operations platform for billing, payment routing, access control, tenant experience, intelligence, communication, and executive reporting.",
+    "ElgonOS is property management software for Kenya built for landlords and property managers to manage rent collection, M-PESA payment routing, tenants, leases, access control, receipts, communication, and executive dashboards.",
   absoluteTitle: true,
-  keywords: ["ElgonOS", "property operations platform", "property management software Kenya"]
+  keywords: [
+    "ElgonOS",
+    "property management software Kenya",
+    "rent collection software Kenya",
+    "tenant management software Kenya",
+    "M-PESA rent collection software",
+    "landlord software Kenya",
+    "property management system Kenya",
+    "real estate management software Kenya"
+  ]
 });
 
 const features = [
@@ -135,23 +144,92 @@ const marqueeFeatures = [
   "Mobile-ready"
 ];
 
+const kenyaBenefits = [
+  {
+    title: "Rent collection software for Kenya",
+    summary:
+      "Coordinate rent billing, payment routing, receipts, reminders, and portfolio visibility from one operating layer."
+  },
+  {
+    title: "Tenant management and lease workflows",
+    summary:
+      "Keep tenant records, lease details, documents, bookings, feedback, referrals, and service workflows connected."
+  },
+  {
+    title: "M-PESA-aware property operations",
+    summary:
+      "Support local payment workflows around M-PESA PayBill, bank PayBill, tills, bank transfers, and card channels."
+  }
+];
+
+const comparisonCriteria = [
+  "Local payment workflows such as M-PESA and bank channels",
+  "Tenant, lease, unit, document, and occupancy records in one place",
+  "Automated receipts, reminders, and communication workflows",
+  "Dashboards for landlords, property managers, and executives",
+  "Audit trail, staff roles, controls, and data quality visibility",
+  "Implementation support for migration, rollout, and adoption"
+];
+
+const faqs = [
+  {
+    question: "Is ElgonOS property management software for Kenya?",
+    answer:
+      "Yes. ElgonOS is built by Elgon Edge Consulting Limited for Kenyan landlords, property managers, and real estate teams that need a practical system for rent operations, tenant workflows, access control, communication, and reporting."
+  },
+  {
+    question: "Does ElgonOS support M-PESA rent collection workflows?",
+    answer:
+      "ElgonOS is designed around local payment routing workflows, including M-PESA PayBill, bank PayBill, till, bank transfer, and card channels, so property teams can manage billing and rent collection with better operational visibility."
+  },
+  {
+    question: "Can ElgonOS manage tenants, leases, units, and documents?",
+    answer:
+      "Yes. ElgonOS centralizes properties, units, tenants, leases, occupancy information, billing records, and documents so property teams can reduce spreadsheet dependence."
+  },
+  {
+    question: "Does ElgonOS include dashboards and AI-assisted reporting?",
+    answer:
+      "Yes. ElgonOS includes executive dashboards and Ask AI capabilities to help teams understand portfolio activity, tenant workflows, billing visibility, and operational exceptions."
+  },
+  {
+    question: "Who should use ElgonOS?",
+    answer:
+      "ElgonOS is suitable for landlords, property managers, real estate teams, and organizations that want a more controlled way to manage rent collection, tenants, access, communication, and reporting."
+  }
+];
+
 export default function ElgonOsPage() {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://www.elgonedge.com/elgonos#faq",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer
+      }
+    }))
+  };
+
   return (
     <main>
-      <JsonLd data={elgonOsSoftwareJsonLd} />
+      <JsonLd data={[elgonOsSoftwareJsonLd, faqJsonLd]} />
       <section className="executive-hero relative overflow-hidden px-4 py-20 text-white sm:px-6 lg:px-8">
         <div className="galaxy-grid absolute inset-0 opacity-30" aria-hidden="true" />
         <div className="absolute right-10 top-8 h-80 w-80 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
-            <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-cyan-200">ElgonOS</p>
+            <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-cyan-200">ElgonOS property management software Kenya</p>
             <h1 className="mt-6 max-w-4xl text-5xl font-black leading-tight tracking-tight sm:text-6xl">
-              Property Operations, Run From One Platform
+              Property Management Software for Rent Collection, Tenants, and Dashboards
             </h1>
             <p className="mt-7 text-xl leading-9 text-slate-200">
-              ElgonOS helps landlords, property managers, and real estate teams coordinate billing, payment routing,
-              access control, tenant experience, communication, AI-assisted reporting, and executive visibility from
-              one operating layer.
+              ElgonOS helps landlords, property managers, and real estate teams in Kenya coordinate rent collection,
+              M-PESA payment routing, access control, tenant management, lease workflows, communication,
+              AI-assisted reporting, and executive visibility from one operating layer.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href={elgonOsUrl} className="gap-2">
@@ -211,6 +289,51 @@ export default function ElgonOsPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="fine-grid bg-white px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+            <div>
+              <p className="section-kicker">Property management software Kenya</p>
+              <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
+                Built for local rent collection, tenant workflows, and operating control
+              </h2>
+            </div>
+            <p className="text-lg leading-8 text-slate-600">
+              Property teams in Kenya need more than a generic database. ElgonOS connects rent collection software,
+              tenant management software, lease records, access workflows, communication, and executive dashboards
+              so daily operations can move with stronger visibility and fewer spreadsheets.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {kenyaBenefits.map((benefit) => (
+              <article key={benefit.title} className="rounded-[1.5rem] border border-slate-200 bg-slate-50 p-7 shadow-sm">
+                <CheckCircle2 className="h-7 w-7 text-brand-blue" aria-hidden="true" />
+                <h3 className="mt-5 text-xl font-black text-brand-navy">{benefit.title}</h3>
+                <p className="mt-4 text-[1.02rem] leading-8 text-slate-600">{benefit.summary}</p>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-10 rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm">
+            <h3 className="text-2xl font-black tracking-tight text-brand-navy">
+              What to compare when choosing property management software in Kenya
+            </h3>
+            <div className="mt-6 grid gap-3 md:grid-cols-2">
+              {comparisonCriteria.map((criterion) => (
+                <div key={criterion} className="flex gap-3 rounded-2xl bg-slate-50 px-4 py-3">
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-blue" aria-hidden="true" />
+                  <p className="text-sm font-bold leading-6 text-slate-700">{criterion}</p>
+                </div>
+              ))}
+            </div>
+            <ButtonLink href="/insights/best-property-management-software-in-kenya" variant="secondary" className="mt-7">
+              Read the Selection Guide
+            </ButtonLink>
           </div>
         </div>
       </section>
@@ -306,9 +429,28 @@ export default function ElgonOsPage() {
         </div>
       </section>
 
+      <section className="fine-grid bg-slate-50 px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 max-w-3xl">
+            <p className="section-kicker">ElgonOS FAQs</p>
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
+              Questions about ElgonOS property management software
+            </h2>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {faqs.map((faq) => (
+              <article key={faq.question} className="rounded-[1.5rem] border border-slate-200 bg-white p-7 shadow-sm">
+                <h3 className="text-xl font-black text-brand-navy">{faq.question}</h3>
+                <p className="mt-4 text-[1.02rem] leading-8 text-slate-600">{faq.answer}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CTASection
-        title="Launch ElgonOS or discuss your property operations workflow"
-        text="Use the live ElgonOS platform or contact Elgon Edge Consulting Limited for implementation, migration, and rollout support conversations."
+        title="Launch ElgonOS or discuss your property management workflow"
+        text="Use the live ElgonOS property management platform or contact Elgon Edge Consulting Limited for rent collection, tenant workflow, migration, and rollout support conversations."
       />
     </main>
   );

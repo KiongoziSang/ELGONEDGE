@@ -39,6 +39,7 @@ type PageMetadataInput = {
   title: string;
   description?: string;
   path?: string;
+  canonicalPath?: string;
   keywords?: string[];
   absoluteTitle?: boolean;
   image?: {
@@ -53,11 +54,13 @@ export function createPageMetadata({
   title,
   description = defaultSeoDescription,
   path = "/",
+  canonicalPath,
   keywords = [],
   absoluteTitle = false,
   image = ogImage
 }: PageMetadataInput): Metadata {
   const url = `${siteUrl}${path === "/" ? "" : path}`;
+  const canonicalUrl = `${siteUrl}${(canonicalPath ?? path) === "/" ? "" : canonicalPath ?? path}`;
   const pageTitle = absoluteTitle || title === siteName ? title : `${title} | ${siteName}`;
 
   return {
@@ -67,7 +70,7 @@ export function createPageMetadata({
     description,
     keywords: [...seoKeywords, ...keywords],
     alternates: {
-      canonical: url
+      canonical: canonicalUrl
     },
     openGraph: {
       title: pageTitle,
@@ -148,9 +151,22 @@ export const elgonOsSoftwareJsonLd = {
   operatingSystem: "Web",
   url: "https://elgonos.elgonedge.com",
   description:
-    "ElgonOS is a property operations platform for landlords, property managers, and real estate teams to run billing, payment routing, access control, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
+    "ElgonOS is property management software for Kenya built for landlords, property managers, and real estate teams to run billing, M-PESA payment routing, rent collection workflows, access control, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
   creator: {
     "@id": `${siteUrl}/#organization`
+  },
+  featureList: [
+    "M-PESA rent collection workflows",
+    "Tenant and lease management",
+    "Billing and receipt workflows",
+    "Access control workflows",
+    "Executive dashboards",
+    "Ask AI reporting",
+    "Audit trail and operational controls"
+  ],
+  areaServed: {
+    "@type": "Country",
+    name: "Kenya"
   },
   offers: {
     "@type": "Offer",
@@ -162,6 +178,10 @@ export const elgonOsSoftwareJsonLd = {
     "ElgonOS property management",
     "property operations platform",
     "property management software Kenya",
-    "property management platform"
+    "property management platform",
+    "rent collection software Kenya",
+    "tenant management software Kenya",
+    "M-PESA rent collection software",
+    "landlord software Kenya"
   ]
 };
