@@ -34,6 +34,18 @@ export const metadata = createPageMetadata({
 
 const WorkflowIcon = workflowIcon;
 
+const homepageMarqueeFeatures = [
+  "Data governance",
+  "AI strategy",
+  "Automation",
+  "Digital platforms",
+  "Executive dashboards",
+  "Audit trails",
+  "Workflow modernization",
+  "ElgonOS",
+  "Implementation support"
+];
+
 export default function HomePage() {
   const heroCapabilities = [
     "Data Governance",
@@ -131,6 +143,23 @@ export default function HomePage() {
                   <p className="text-2xl font-black">AI</p>
                   <p className="mt-1 text-xs font-bold uppercase tracking-[0.16em] text-slate-400">Governed adoption</p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="relative mx-auto mt-16 max-w-[1520px]">
+          <div className="overflow-hidden rounded-2xl border border-cyan-300/25 bg-cyan-400/[0.07] px-3 py-3 shadow-[0_16px_55px_rgba(8,47,73,0.16)]">
+            <div className="elgonos-marquee-mask">
+              <div className="flex w-max animate-elgonos-marquee items-center gap-0 hover:[animation-play-state:paused]">
+                {[...homepageMarqueeFeatures, ...homepageMarqueeFeatures].map((feature, index) => (
+                  <span
+                    key={`${feature}-${index}`}
+                    className="inline-flex items-center text-[0.74rem] font-extrabold uppercase tracking-[0.28em] text-cyan-100/90"
+                  >
+                    {feature}
+                    <span className="mx-4 text-cyan-300/70">•</span>
+                  </span>
+                ))}
               </div>
             </div>
           </div>
