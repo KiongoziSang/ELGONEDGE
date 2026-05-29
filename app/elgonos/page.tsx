@@ -8,9 +8,11 @@ import {
   CreditCard,
   KeyRound,
   MessageSquareText,
+  PhoneCall,
   ShieldCheck,
   Smartphone,
   Sparkles,
+  Store,
   UsersRound
 } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
@@ -22,7 +24,7 @@ export const metadata: Metadata = createPageMetadata({
   title: "ElgonOS Property Management Software Kenya | Rent Collection, Tenants and Dashboards",
   path: "/elgonos",
   description:
-    "ElgonOS is property management software for Kenya built for landlords and property managers to manage rent collection, M-PESA payment routing, tenants, leases, access control, receipts, communication, and executive dashboards.",
+    "ElgonOS is property management software for Kenya built for landlords and property managers to manage rent collection, M-PESA payment routing, tenants, leases, resident services, access control, receipts, communication, and executive dashboards.",
   absoluteTitle: true,
   keywords: [
     "ElgonOS",
@@ -40,6 +42,7 @@ const features = [
   { title: "Payment routing", icon: CreditCard },
   { title: "Access workflows", icon: KeyRound },
   { title: "Tenant experience", icon: UsersRound },
+  { title: "Resident marketplace", icon: Store },
   { title: "AI intelligence", icon: Bot }
 ];
 
@@ -59,8 +62,14 @@ const platformPillars = [
   {
     title: "Tenant experience",
     icon: CalendarCheck2,
-    summary: "Give tenants a smoother way to request, book, sign, refer, and respond.",
+    summary: "Give tenants a smoother way to request, book, sign, refer, respond, and find approved local help.",
     points: ["Bookings", "Wishlist", "Referrals", "Feedback", "Lease signing"]
+  },
+  {
+    title: "Resident Services Marketplace",
+    icon: Store,
+    summary: "Reduce manual coordination by giving tenants a directory of property-approved local providers.",
+    points: ["Provider registration", "Admin approval", "Approved directory", "Direct call or WhatsApp"]
   },
   {
     title: "Intelligence",
@@ -91,7 +100,7 @@ const plans = [
   {
     name: "Growth",
     description: "Rent operations plus tenant demand workflows for expanding portfolios.",
-    highlights: ["Rent operations", "Bookings", "Wishlist", "Referrals"]
+    highlights: ["Rent operations", "Bookings", "Wishlist", "Referrals", "Approved provider directory"]
   },
   {
     name: "Professional",
@@ -102,6 +111,7 @@ const plans = [
       "Tenant predictability",
       "Audit trail",
       "Staff roles",
+      "Resident Services Marketplace",
       "Email, SMS, and WhatsApp-ready communication"
     ]
   },
@@ -122,7 +132,8 @@ const plans = [
 const featureMatrix = [
   ["Billing", "M-PESA PayBill, Bank PayBill, Till, bank transfer, cards"],
   ["Access", "Gate passes/cards, visitor pre-registration, guard workflows"],
-  ["Tenant workflows", "Bookings, wishlist, referrals, feedback, lease signing"],
+  ["Tenant workflows", "Bookings, wishlist, referrals, feedback, lease signing, approved provider directory"],
+  ["Resident services", "Provider registration, admin approval, approved directory, direct tenant call or WhatsApp"],
   ["Intelligence", "Ask AI, conversational reporting, tenant predictability, executive dashboards"],
   ["Data quality", "Portfolio data quality dashboard and operational exception visibility"],
   ["Communication", "Email communication plus SMS and WhatsApp-ready reminders and alerts"],
@@ -135,6 +146,8 @@ const marqueeFeatures = [
   "Smart gate",
   "Verified identity",
   "Tenant workflows",
+  "Resident services",
+  "Approved providers",
   "M-PESA routing",
   "Receipts",
   "Lease signing",
@@ -156,6 +169,11 @@ const kenyaBenefits = [
       "Keep tenant records, lease details, documents, bookings, feedback, referrals, and service workflows connected."
   },
   {
+    title: "Resident services without constant coordination",
+    summary:
+      "Approve trusted local providers once, then let tenants contact them directly from the tenant portal by phone or WhatsApp."
+  },
+  {
     title: "M-PESA-aware property operations",
     summary:
       "Support local payment workflows around M-PESA PayBill, bank PayBill, tills, bank transfers, and card channels."
@@ -165,6 +183,7 @@ const kenyaBenefits = [
 const comparisonCriteria = [
   "Local payment workflows such as M-PESA and bank channels",
   "Tenant, lease, unit, document, and occupancy records in one place",
+  "Approved resident service providers for common tenant needs",
   "Automated receipts, reminders, and communication workflows",
   "Dashboards for landlords, property managers, and executives",
   "Audit trail, staff roles, controls, and data quality visibility",
@@ -186,6 +205,11 @@ const faqs = [
     question: "Can ElgonOS manage tenants, leases, units, and documents?",
     answer:
       "Yes. ElgonOS centralizes properties, units, tenants, leases, occupancy information, billing records, and documents so property teams can reduce spreadsheet dependence."
+  },
+  {
+    question: "Does ElgonOS include a Resident Services Marketplace?",
+    answer:
+      "Yes. ElgonOS includes a Resident Services Marketplace where property managers can approve local providers and tenants can contact approved providers directly from the tenant portal."
   },
   {
     question: "Does ElgonOS include dashboards and AI-assisted reporting?",
@@ -228,7 +252,7 @@ export default function ElgonOsPage() {
             </h1>
             <p className="mt-7 text-xl leading-9 text-slate-200">
               ElgonOS helps landlords, property managers, and real estate teams in Kenya coordinate rent collection,
-              M-PESA payment routing, access control, tenant management, lease workflows, communication,
+              M-PESA payment routing, access control, tenant management, resident services, lease workflows, communication,
               AI-assisted reporting, and executive visibility from one operating layer.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -299,12 +323,12 @@ export default function ElgonOsPage() {
             <div>
               <p className="section-kicker">Property management software Kenya</p>
               <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
-                Built for local rent collection, tenant workflows, and operating control
+                Built for local rent collection, tenant workflows, resident services, and operating control
               </h2>
             </div>
             <p className="text-lg leading-8 text-slate-600">
               Property teams in Kenya need more than a generic database. ElgonOS connects rent collection software,
-              tenant management software, lease records, access workflows, communication, and executive dashboards
+              tenant management software, lease records, approved resident services, access workflows, communication, and executive dashboards
               so daily operations can move with stronger visibility and fewer spreadsheets.
             </p>
           </div>
@@ -349,7 +373,7 @@ export default function ElgonOsPage() {
             </div>
             <p className="text-lg leading-8 text-slate-600">
               ElgonOS goes beyond rent collection. It connects payments, access, tenant workflows, communication,
-              intelligence, and operational controls into a cleaner daily system for property teams.
+              resident services, intelligence, and operational controls into a cleaner daily system for property teams.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -381,6 +405,47 @@ export default function ElgonOsPage() {
       </section>
 
       <section className="bg-slate-50 px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <div>
+            <p className="section-kicker">Resident Services Marketplace</p>
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
+              Turn common tenant requests into a lighter operating model
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-slate-600">
+              Property managers can approve local providers for gas refills, drinking water, dry cleaning,
+              electricians, carpenters, plumbers, cleaners, tailors, movers, and internet installation. Tenants
+              contact approved providers directly from the tenant portal by call or WhatsApp, reducing the need
+              for the management team to coordinate every service request manually.
+            </p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {[
+              "Provider registration",
+              "Admin approval",
+              "Approved provider directory",
+              "Direct tenant call or WhatsApp"
+            ].map((step, index) => (
+              <article key={step} className="rounded-[1.5rem] border border-slate-200 bg-white p-7 shadow-sm">
+                <div className="flex items-center justify-between gap-4">
+                  <Store className="h-7 w-7 text-brand-blue" aria-hidden="true" />
+                  <span className="text-xs font-black tracking-[0.18em] text-slate-400">0{index + 1}</span>
+                </div>
+                <h3 className="mt-5 text-xl font-black text-brand-navy">{step}</h3>
+              </article>
+            ))}
+            <article className="rounded-[1.5rem] border border-slate-200 bg-brand-navy p-7 text-white shadow-sm md:col-span-2">
+              <PhoneCall className="h-7 w-7 text-cyan-200" aria-hidden="true" />
+              <h3 className="mt-5 text-xl font-black">Built for service convenience, not extra admin work</h3>
+              <p className="mt-4 leading-8 text-slate-200">
+                Future commercial models can support featured listings, commissions, managed dispatch, or service
+                fees as the marketplace matures.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 max-w-3xl">
             <p className="section-kicker">Plans</p>

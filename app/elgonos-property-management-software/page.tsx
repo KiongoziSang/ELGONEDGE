@@ -7,7 +7,7 @@ export const metadata: Metadata = createPageMetadata({
   path: "/elgonos-property-management-software",
   canonicalPath: "/elgonos",
   description:
-    "ElgonOS is property management software for Kenya with rent collection workflows, M-PESA payment routing, tenant management, leases, access control, receipts, communication, and dashboards.",
+    "ElgonOS is property management software for Kenya with rent collection workflows, M-PESA payment routing, tenant management, resident services, leases, access control, receipts, communication, and dashboards.",
   absoluteTitle: true,
   keywords: [
     "ElgonOS",

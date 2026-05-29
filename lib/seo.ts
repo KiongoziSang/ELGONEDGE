@@ -14,6 +14,7 @@ export const seoKeywords = [
   "ElgonOS",
   "ElgonOS property management",
   "property operations platform",
+  "resident services marketplace",
   "EDGE Framework",
   "Explore Design Govern Execute",
   "data-driven governed execution",
@@ -126,7 +127,8 @@ export const organizationJsonLd = {
     "Intelligent automation",
     "SaaS development",
     "Property management software",
-    "Property operations platform"
+    "Property operations platform",
+    "Resident services marketplace"
   ]
 };
 
@@ -151,7 +153,7 @@ export const elgonOsSoftwareJsonLd = {
   operatingSystem: "Web",
   url: "https://elgonos.elgonedge.com",
   description:
-    "ElgonOS is property management software for Kenya built for landlords, property managers, and real estate teams to run billing, M-PESA payment routing, rent collection workflows, access control, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
+    "ElgonOS is property management software for Kenya built for landlords, property managers, and real estate teams to run billing, M-PESA payment routing, rent collection workflows, access control, resident services, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
   creator: {
     "@id": `${siteUrl}/#organization`
   },
@@ -160,6 +162,8 @@ export const elgonOsSoftwareJsonLd = {
     "Tenant and lease management",
     "Billing and receipt workflows",
     "Access control workflows",
+    "Resident Services Marketplace with approved provider directory",
+    "Direct tenant call and WhatsApp contact for approved providers",
     "Executive dashboards",
     "Ask AI reporting",
     "Audit trail and operational controls"
@@ -179,6 +183,7 @@ export const elgonOsSoftwareJsonLd = {
     "property operations platform",
     "property management software Kenya",
     "property management platform",
+    "resident services marketplace",
     "rent collection software Kenya",
     "tenant management software Kenya",
     "M-PESA rent collection software",

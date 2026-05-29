@@ -224,22 +224,24 @@ export const services: Service[] = [
   {
     slug: "custom-software-saas-digital-platforms",
     title: "Custom Software, SaaS & Digital Platforms",
-    description: "Building business apps, portals, SaaS products, and digital platforms.",
+    description: "Building business apps, portals, SaaS products, marketplaces, and digital platforms.",
     icon: Layers3,
     capabilities: [
       "Custom web applications",
       "SaaS product development",
       "Customer and staff portals",
+      "Marketplace and directory workflows",
       "Platform architecture and delivery"
     ],
     seoTitle: "Custom Software, SaaS and Digital Platform Development | Elgon Edge Consulting Limited",
     seoDescription:
-      "SaaS development and custom software delivery for business applications, portals, workflow platforms, dashboards, and digital operating systems.",
+      "SaaS development and custom software delivery for business applications, portals, marketplaces, workflow platforms, dashboards, and digital operating systems.",
     overview:
-      "Elgon Edge Consulting Limited designs and builds custom software, SaaS products, portals, workflow platforms, and digital operating systems that support modern business operations.",
+      "Elgon Edge Consulting Limited designs and builds custom software, SaaS products, portals, marketplace workflows, and digital operating systems that support modern business operations, including ElgonOS resident services.",
     outcomes: [
       "Digital platforms aligned to real operating workflows",
       "Scalable applications with role-based access and data foundations",
+      "Service directories and approval flows that reduce manual coordination",
       "Better user experience, reporting, and operational control"
     ]
   }
