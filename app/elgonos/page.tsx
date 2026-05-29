@@ -8,11 +8,13 @@ import {
   CreditCard,
   KeyRound,
   MessageSquareText,
+  Monitor,
   PhoneCall,
   ShieldCheck,
   Smartphone,
   Sparkles,
   Store,
+  Tags,
   UsersRound
 } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
@@ -43,6 +45,7 @@ const features = [
   { title: "Access workflows", icon: KeyRound },
   { title: "Tenant experience", icon: UsersRound },
   { title: "Resident marketplace", icon: Store },
+  { title: "Resident exchange", icon: Tags },
   { title: "AI intelligence", icon: Bot }
 ];
 
@@ -62,7 +65,7 @@ const platformPillars = [
   {
     title: "Tenant experience",
     icon: CalendarCheck2,
-    summary: "Give tenants a smoother way to request, book, sign, refer, respond, and find approved local help.",
+    summary: "Give tenants a smoother way to request, book, sign, refer, respond, find approved local help, and exchange household items.",
     points: ["Bookings", "Wishlist", "Referrals", "Feedback", "Lease signing"]
   },
   {
@@ -70,6 +73,12 @@ const platformPillars = [
     icon: Store,
     summary: "Reduce manual coordination by giving tenants a directory of property-approved local providers.",
     points: ["Provider registration", "Admin approval", "Approved directory", "Direct call or WhatsApp"]
+  },
+  {
+    title: "Resident Exchange",
+    icon: Tags,
+    summary: "Let residents advertise household items when moving, upgrading, or clearing space, with management approval before listings go live.",
+    points: ["Item photos", "Price and condition", "Admin moderation", "Direct buyer-seller contact"]
   },
   {
     title: "Intelligence",
@@ -100,7 +109,7 @@ const plans = [
   {
     name: "Growth",
     description: "Rent operations plus tenant demand workflows for expanding portfolios.",
-    highlights: ["Rent operations", "Bookings", "Wishlist", "Referrals", "Approved provider directory"]
+    highlights: ["Rent operations", "Bookings", "Wishlist", "Referrals", "Approved provider directory", "Resident Exchange listings"]
   },
   {
     name: "Professional",
@@ -112,6 +121,7 @@ const plans = [
       "Audit trail",
       "Staff roles",
       "Resident Services Marketplace",
+      "Moderated Resident Exchange",
       "Email, SMS, and WhatsApp-ready communication"
     ]
   },
@@ -132,8 +142,10 @@ const plans = [
 const featureMatrix = [
   ["Billing", "M-PESA PayBill, Bank PayBill, Till, bank transfer, cards"],
   ["Access", "Gate passes/cards, visitor pre-registration, guard workflows"],
-  ["Tenant workflows", "Bookings, wishlist, referrals, feedback, lease signing, approved provider directory"],
+  ["Tenant workflows", "Bookings, wishlist, referrals, feedback, lease signing, approved provider directory, Resident Exchange"],
   ["Resident services", "Provider registration, admin approval, approved directory, direct tenant call or WhatsApp"],
+  ["Resident Exchange", "Moderated household item listings, listing photos, price, condition, and direct buyer-seller contact"],
+  ["Property display board", "Optional lobby or gate display for approved notices, service providers, and resident listings"],
   ["Intelligence", "Ask AI, conversational reporting, tenant predictability, executive dashboards"],
   ["Data quality", "Portfolio data quality dashboard and operational exception visibility"],
   ["Communication", "Email communication plus SMS and WhatsApp-ready reminders and alerts"],
@@ -148,6 +160,8 @@ const marqueeFeatures = [
   "Tenant workflows",
   "Resident services",
   "Approved providers",
+  "Resident Exchange",
+  "Display board",
   "M-PESA routing",
   "Receipts",
   "Lease signing",
@@ -174,6 +188,11 @@ const kenyaBenefits = [
       "Approve trusted local providers once, then let tenants contact them directly from the tenant portal by phone or WhatsApp."
   },
   {
+    title: "Resident-to-resident item exchange",
+    summary:
+      "Give moving or upgrading tenants a moderated way to advertise household items to residents in the same property community."
+  },
+  {
     title: "M-PESA-aware property operations",
     summary:
       "Support local payment workflows around M-PESA PayBill, bank PayBill, tills, bank transfers, and card channels."
@@ -184,6 +203,7 @@ const comparisonCriteria = [
   "Local payment workflows such as M-PESA and bank channels",
   "Tenant, lease, unit, document, and occupancy records in one place",
   "Approved resident service providers for common tenant needs",
+  "Moderated resident listings for household item resale",
   "Automated receipts, reminders, and communication workflows",
   "Dashboards for landlords, property managers, and executives",
   "Audit trail, staff roles, controls, and data quality visibility",
@@ -210,6 +230,11 @@ const faqs = [
     question: "Does ElgonOS include a Resident Services Marketplace?",
     answer:
       "Yes. ElgonOS includes a Resident Services Marketplace where property managers can approve local providers and tenants can contact approved providers directly from the tenant portal."
+  },
+  {
+    question: "Can residents advertise items they want to sell?",
+    answer:
+      "ElgonOS can support Resident Exchange listings for household items such as furniture, appliances, electronics, and moving-out sales. Listings should be moderated by property management before other residents see them."
   },
   {
     question: "Does ElgonOS include dashboards and AI-assisted reporting?",
@@ -252,8 +277,8 @@ export default function ElgonOsPage() {
             </h1>
             <p className="mt-7 text-xl leading-9 text-slate-200">
               ElgonOS helps landlords, property managers, and real estate teams in Kenya coordinate rent collection,
-              M-PESA payment routing, access control, tenant management, resident services, lease workflows, communication,
-              AI-assisted reporting, and executive visibility from one operating layer.
+              M-PESA payment routing, access control, tenant management, resident services, resident exchange,
+              lease workflows, communication, AI-assisted reporting, and executive visibility from one operating layer.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href={elgonOsUrl} className="gap-2">
@@ -323,12 +348,12 @@ export default function ElgonOsPage() {
             <div>
               <p className="section-kicker">Property management software Kenya</p>
               <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
-                Built for local rent collection, tenant workflows, resident services, and operating control
+                Built for local rent collection, tenant workflows, resident services, resident exchange, and operating control
               </h2>
             </div>
             <p className="text-lg leading-8 text-slate-600">
               Property teams in Kenya need more than a generic database. ElgonOS connects rent collection software,
-              tenant management software, lease records, approved resident services, access workflows, communication, and executive dashboards
+              tenant management software, lease records, approved resident services, resident exchange, access workflows, communication, and executive dashboards
               so daily operations can move with stronger visibility and fewer spreadsheets.
             </p>
           </div>
@@ -373,7 +398,7 @@ export default function ElgonOsPage() {
             </div>
             <p className="text-lg leading-8 text-slate-600">
               ElgonOS goes beyond rent collection. It connects payments, access, tenant workflows, communication,
-              resident services, intelligence, and operational controls into a cleaner daily system for property teams.
+              resident services, resident exchange, intelligence, and operational controls into a cleaner daily system for property teams.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -400,6 +425,45 @@ export default function ElgonOsPage() {
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
+          <div>
+            <p className="section-kicker">Resident Exchange</p>
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
+              Help residents sell household items without turning managers into brokers
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-slate-600">
+              When tenants move, upgrade appliances, or refresh their homes, ElgonOS can provide a moderated
+              resident-to-resident listing space for furniture, electronics, appliances, curtains, baby items,
+              desks, and other household goods. Property managers approve listings before they appear, while
+              buyers and sellers contact each other directly.
+            </p>
+            <p className="mt-5 text-base leading-8 text-slate-500">
+              The property team provides the controlled channel, not item guarantees, payment handling, delivery,
+              or dispute resolution.
+            </p>
+          </div>
+          <div className="grid gap-5">
+            {[
+              "Resident creates a listing with photos, price, category, and condition",
+              "Admin reviews the listing before it becomes visible",
+              "Approved residents browse and contact the seller directly",
+              "Optional gate or lobby display can rotate approved listings and notices"
+            ].map((step, index) => (
+              <article key={step} className="flex gap-4 rounded-[1.5rem] border border-slate-200 bg-slate-50 p-6 shadow-sm">
+                <span className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-brand-navy text-cyan-200">
+                  {index === 3 ? <Monitor className="h-5 w-5" aria-hidden="true" /> : <Tags className="h-5 w-5" aria-hidden="true" />}
+                </span>
+                <div>
+                  <p className="text-xs font-black tracking-[0.18em] text-slate-400">0{index + 1}</p>
+                  <h3 className="mt-2 text-lg font-black leading-7 text-brand-navy">{step}</h3>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

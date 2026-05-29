@@ -9,6 +9,7 @@ import {
   MessageSquareText,
   Sparkles,
   Store,
+  Tags,
   UsersRound
 } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
@@ -60,6 +61,7 @@ export default function HomePage() {
     { title: "Access control", icon: KeyRound },
     { title: "Tenant workflows", icon: UsersRound },
     { title: "Resident marketplace", icon: Store },
+    { title: "Resident exchange", icon: Tags },
     { title: "Bookings", icon: CalendarCheck2 },
     { title: "Ask AI", icon: Bot },
     { title: "Email, SMS, WhatsApp-ready alerts", icon: MessageSquareText }
@@ -234,8 +236,8 @@ export default function HomePage() {
             </h2>
             <p className="mt-7 max-w-3xl text-[1.2rem] leading-9 text-slate-200">
               ElgonOS helps landlords, property managers, and real estate teams run billing, payment routing,
-              access control, tenant experience, approved resident services, communication, AI-assisted reporting,
-              and executive dashboards from one operating layer.
+              access control, tenant experience, approved resident services, resident-to-resident item listings,
+              communication, AI-assisted reporting, and executive dashboards from one operating layer.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="/elgonos" variant="glass">
@@ -256,7 +258,7 @@ export default function HomePage() {
                 <BarChart3 className="h-5 w-5 text-cyan-200" aria-hidden="true" />
               </div>
               <div className="mb-5 grid grid-cols-3 gap-3">
-                {["M-PESA/Bank", "Resident Services", "Ask AI"].map((metric) => (
+                {["M-PESA/Bank", "Resident Exchange", "Ask AI"].map((metric) => (
                   <div key={metric} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
                     <p className="text-sm font-bold">{metric}</p>
                   </div>

@@ -15,6 +15,7 @@ export const seoKeywords = [
   "ElgonOS property management",
   "property operations platform",
   "resident services marketplace",
+  "resident exchange",
   "EDGE Framework",
   "Explore Design Govern Execute",
   "data-driven governed execution",
@@ -128,7 +129,8 @@ export const organizationJsonLd = {
     "SaaS development",
     "Property management software",
     "Property operations platform",
-    "Resident services marketplace"
+    "Resident services marketplace",
+    "Resident exchange"
   ]
 };
 
@@ -153,7 +155,7 @@ export const elgonOsSoftwareJsonLd = {
   operatingSystem: "Web",
   url: "https://elgonos.elgonedge.com",
   description:
-    "ElgonOS is property management software for Kenya built for landlords, property managers, and real estate teams to run billing, M-PESA payment routing, rent collection workflows, access control, resident services, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
+    "ElgonOS is property management software for Kenya built for landlords, property managers, and real estate teams to run billing, M-PESA payment routing, rent collection workflows, access control, resident services, resident exchange, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
   creator: {
     "@id": `${siteUrl}/#organization`
   },
@@ -164,6 +166,8 @@ export const elgonOsSoftwareJsonLd = {
     "Access control workflows",
     "Resident Services Marketplace with approved provider directory",
     "Direct tenant call and WhatsApp contact for approved providers",
+    "Moderated Resident Exchange listings for household items",
+    "Optional property display board for approved listings and notices",
     "Executive dashboards",
     "Ask AI reporting",
     "Audit trail and operational controls"
@@ -184,6 +188,7 @@ export const elgonOsSoftwareJsonLd = {
     "property management software Kenya",
     "property management platform",
     "resident services marketplace",
+    "resident exchange",
     "rent collection software Kenya",
     "tenant management software Kenya",
     "M-PESA rent collection software",
