@@ -6,7 +6,7 @@ export const siteUrl = "https://www.elgonedge.com";
 export const siteName = "Elgon Edge Consulting Limited";
 export const defaultSeoTitle = `${siteName} | Data, AI and Digital Transformation Consulting`;
 export const defaultSeoDescription =
-  "Elgon Edge Consulting Limited helps organizations move from strategy to implementation through the EDGE Framework, data, AI, automation, governance, business intelligence, and digital platforms.";
+  "Elgon Edge Consulting Limited helps organizations move from strategy to implementation through the EDGE Framework, data, AI, automation, governance, business intelligence, digital platforms, and ElgonOS AI-powered property management software for Kenya.";
 
 export const seoKeywords = [
   "Elgon Edge Consulting Limited",
@@ -19,6 +19,11 @@ export const seoKeywords = [
   "resident services marketplace",
   "resident community",
   "resident exchange",
+  "M-PESA rent collection software",
+  "construction tracking software Kenya",
+  "property maintenance software Kenya",
+  "Ask AI property management",
+  "tenant predictability",
   "EDGE Framework",
   "Explore Design Govern Execute",
   "data-driven governed execution",
@@ -135,7 +140,13 @@ export const organizationJsonLd = {
     "Property operations platform",
     "Resident services marketplace",
     "Resident community",
-    "Resident exchange"
+    "Resident exchange",
+    "M-PESA rent collection",
+    "Construction tracking",
+    "Maintenance workflows",
+    "Access control and gate passes",
+    "Ask AI property questions",
+    "Tenant predictability"
   ]
 };
 
@@ -160,25 +171,26 @@ export const elgonOsSoftwareJsonLd = {
   operatingSystem: "Web",
   url: "https://elgonos.elgonedge.com",
   description:
-    "ElgonOS is AI-powered property management software for Kenya built for landlords, property managers, and real estate teams to run billing, M-PESA payment routing, rent collection workflows, access control, Resident Community, resident services, resident exchange, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
+    "ElgonOS is AI-powered property management software for Kenya built by Elgon Edge for landlords, property managers, and real estate teams to run rent collection, M-PESA workflows, tenant management, leases, units, billing, receipts, documents, construction tracking, maintenance, access control, Resident Community, Resident Services Marketplace, Resident Exchange, AI-assisted reporting, tenant predictability, Ask AI, executive dashboards, operational automation, approvals, reminders, audit trails, communication, and operational insights from one operating layer.",
   creator: {
     "@id": `${siteUrl}/#organization`
   },
   featureList: [
     "M-PESA rent collection workflows",
-    "AI-assisted reporting and Ask AI portfolio questions",
+    "Tenant, lease, unit, billing, receipt, and document management",
+    "AI-assisted reporting and Ask AI portfolio and property questions",
     "Tenant predictability and operational intelligence",
-    "Tenant and lease management",
-    "Billing and receipt workflows",
-    "Access control workflows",
+    "Construction tracking for properties and units with phases, progress percentages, estimated ready dates, dashboards, reports, and tenant pipeline reservations",
+    "Maintenance request, assignment, status, update, and history workflows",
+    "Access control, gate pass, visitor, and guard workflows",
     "Resident Community for official notices, private grievances, approved resident posts, pinned updates, closed threads, official replies, and notifications",
     "Resident Services Marketplace with approved provider directory",
     "Direct tenant call and WhatsApp contact for approved providers",
     "Moderated Resident Exchange listings for household items",
     "Optional property display board for approved listings and notices",
     "Executive dashboards",
-    "Ask AI reporting",
-    "Audit trail and operational controls"
+    "Operational insights and exception visibility",
+    "Operational automation, approvals, reminders, audit trails, and controls"
   ],
   areaServed: {
     "@type": "Country",
@@ -203,6 +215,10 @@ export const elgonOsSoftwareJsonLd = {
     "rent collection software Kenya",
     "tenant management software Kenya",
     "M-PESA rent collection software",
+    "construction tracking software Kenya",
+    "property maintenance software Kenya",
+    "Ask AI property management",
+    "tenant predictability",
     "landlord software Kenya"
   ]
 };

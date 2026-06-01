@@ -4,23 +4,28 @@ import {
   Bot,
   CalendarCheck2,
   CheckCircle2,
+  ClipboardCheck,
   CreditCard,
+  FileText,
+  HardHat,
   KeyRound,
   MessageSquareText,
   Sparkles,
   Store,
   Tags,
-  UsersRound
+  UsersRound,
+  Wrench
 } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
 import { differentiators, edgeFrameworkSteps, elgonOsUrl, services, workflowIcon } from "@/lib/site";
-import { createPageMetadata, defaultSeoDescription, defaultSeoTitle } from "@/lib/seo";
+import { createPageMetadata, defaultSeoTitle } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: defaultSeoTitle,
-  description: defaultSeoDescription,
+  description:
+    "Elgon Edge Consulting Limited builds data, AI, automation, and digital platforms, led by ElgonOS: AI-powered property management software for Kenya covering rent collection, M-PESA workflows, tenants, construction, maintenance, access, dashboards, and Ask AI.",
   path: "/",
   absoluteTitle: true,
   keywords: [
@@ -30,7 +35,9 @@ export const metadata = createPageMetadata({
     "strategy to implementation",
     "data consulting Kenya",
     "AI consulting Kenya",
-    "digital transformation consulting Kenya"
+    "digital transformation consulting Kenya",
+    "ElgonOS property management software Kenya",
+    "M-PESA rent collection software"
   ]
 });
 
@@ -41,6 +48,8 @@ const homepageMarqueeFeatures = [
   "AI strategy",
   "Automation",
   "Digital platforms",
+  "ElgonOS rent collection",
+  "M-PESA workflows",
   "Executive dashboards",
   "Audit trails",
   "Workflow modernization",
@@ -57,15 +66,18 @@ export default function HomePage() {
     "Executive Analytics"
   ];
   const productBenefits = [
-    { title: "Payment routing", icon: CreditCard },
-    { title: "Access control", icon: KeyRound },
-    { title: "Tenant workflows", icon: UsersRound },
+    { title: "Rent and M-PESA", icon: CreditCard },
+    { title: "Tenants, leases, units", icon: UsersRound },
+    { title: "Billing, receipts, documents", icon: FileText },
+    { title: "Construction tracking", icon: HardHat },
+    { title: "Maintenance", icon: Wrench },
+    { title: "Access and gate passes", icon: KeyRound },
     { title: "Resident Community", icon: MessageSquareText },
     { title: "Resident marketplace", icon: Store },
     { title: "Resident exchange", icon: Tags },
     { title: "Bookings", icon: CalendarCheck2 },
     { title: "Ask AI", icon: Bot },
-    { title: "Email, SMS, WhatsApp-ready alerts", icon: MessageSquareText }
+    { title: "Approvals and audit trails", icon: ClipboardCheck }
   ];
 
   return (
@@ -236,10 +248,12 @@ export default function HomePage() {
               ElgonOS — AI-Powered Property Management Software
             </h2>
             <p className="mt-7 max-w-3xl text-[1.2rem] leading-9 text-slate-200">
-              ElgonOS helps landlords, property managers, and real estate teams run AI-assisted reporting,
-              tenant predictability, billing, M-PESA payment routing, access control, tenant experience,
-              Resident Community, approved resident services, resident-to-resident item listings, communication,
-              and executive dashboards from one operating layer.
+              ElgonOS is AI-powered property management software for Kenya, built by Elgon Edge. It helps landlords,
+              property managers, and real estate teams run rent collection, M-PESA workflows, tenant, lease, unit,
+              billing, receipt, and document management, Ask AI portfolio and property questions, AI-assisted
+              reporting, tenant predictability, construction tracking, maintenance, access control, Resident
+              Community, Resident Services Marketplace, Resident Exchange, approvals, reminders, audit trails,
+              operational insights, and executive dashboards from one operating layer.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="/elgonos" variant="glass">
@@ -255,12 +269,12 @@ export default function HomePage() {
               <div className="mb-5 flex items-center justify-between rounded-2xl bg-white/[0.06] px-5 py-4">
                 <div>
                   <p className="text-base font-bold">Portfolio dashboard</p>
-                  <p className="text-sm text-slate-400">Billing, access, tenants, intelligence</p>
+                  <p className="text-sm text-slate-400">Rent, access, tenants, construction, intelligence</p>
                 </div>
                 <BarChart3 className="h-5 w-5 text-cyan-200" aria-hidden="true" />
               </div>
               <div className="mb-5 grid grid-cols-3 gap-3">
-                {["M-PESA/Bank", "Resident Community", "Ask AI"].map((metric) => (
+                {["M-PESA/Bank", "Ask AI", "Construction"].map((metric) => (
                   <div key={metric} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
                     <p className="text-sm font-bold">{metric}</p>
                   </div>

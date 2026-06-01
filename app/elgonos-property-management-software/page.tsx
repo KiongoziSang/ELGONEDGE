@@ -3,11 +3,11 @@ import ElgonOsPage from "@/app/elgonos/page";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "ElgonOS AI-Powered Property Management Software Kenya | M-PESA Rent Collection and Tenant Management",
+  title: "ElgonOS AI-Powered Property Management Software Kenya | M-PESA, Tenants, Construction and Maintenance",
   path: "/elgonos-property-management-software",
   canonicalPath: "/elgonos",
   description:
-    "ElgonOS is AI-powered property management software for Kenya with rent collection workflows, M-PESA payment routing, tenant management, Resident Community, resident services, Resident Exchange listings, leases, access control, receipts, communication, and dashboards.",
+    "ElgonOS is AI-powered property management software for Kenya by Elgon Edge, with rent collection, M-PESA workflows, tenants, leases, units, billing, receipts, documents, Ask AI, construction tracking, maintenance, access control, resident services, and dashboards.",
   absoluteTitle: true,
   keywords: [
     "ElgonOS",
@@ -16,6 +16,8 @@ export const metadata: Metadata = createPageMetadata({
     "M-PESA rent collection software",
     "rent collection software Kenya",
     "tenant management software Kenya",
+    "construction tracking software Kenya",
+    "property maintenance software Kenya",
     "landlord software Kenya"
   ]
 });

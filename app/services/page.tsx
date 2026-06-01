@@ -10,7 +10,7 @@ export const metadata: Metadata = createPageMetadata({
   title: "Services | Data, AI, Automation and Digital Transformation Consulting",
   path: "/services",
   description:
-    "Explore Elgon Edge Consulting services across digital transformation, data governance, business intelligence, responsible AI, automation, data migration assurance, and SaaS platforms.",
+    "Explore Elgon Edge Consulting services across digital transformation, data governance, business intelligence, responsible AI, automation, data migration assurance, SaaS platforms, and ElgonOS AI-powered property management software.",
   absoluteTitle: true,
   keywords: [
     "data governance consulting Kenya",
@@ -55,7 +55,8 @@ export default function ServicesPage() {
             <p className="mt-7 max-w-4xl text-[1.32rem] leading-10 text-slate-200">
               Elgon Edge Consulting Limited supports organizations across the full modernization lifecycle:
               assessing the opportunity, designing the target state, implementing fit-for-purpose systems, and
-              embedding the controls needed for long-term value.
+              embedding the controls needed for long-term value. ElgonOS is our flagship software product for
+              AI-powered property management in Kenya.
             </p>
           </div>
 

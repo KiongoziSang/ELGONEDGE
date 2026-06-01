@@ -5,7 +5,10 @@ import {
   Bot,
   CalendarCheck2,
   CheckCircle2,
+  ClipboardCheck,
   CreditCard,
+  FileText,
+  HardHat,
   KeyRound,
   MessageSquareText,
   Monitor,
@@ -15,7 +18,8 @@ import {
   Sparkles,
   Store,
   Tags,
-  UsersRound
+  UsersRound,
+  Wrench
 } from "lucide-react";
 import { ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
@@ -23,10 +27,10 @@ import { elgonOsUrl } from "@/lib/site";
 import { createPageMetadata, elgonOsSoftwareJsonLd, JsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "ElgonOS AI-Powered Property Management Software Kenya | Rent Collection, Tenants and Dashboards",
+  title: "ElgonOS AI-Powered Property Management Software Kenya | Rent, M-PESA, Tenants and Construction",
   path: "/elgonos",
   description:
-    "ElgonOS is AI-powered property management software for Kenya built for landlords and property managers to manage rent collection, M-PESA payment routing, tenants, leases, resident services, Resident Community, access control, receipts, communication, and executive dashboards.",
+    "ElgonOS is AI-powered property management software for Kenya by Elgon Edge, covering rent collection, M-PESA workflows, tenants, leases, units, billing, receipts, documents, construction tracking, access control, maintenance, dashboards, and Ask AI.",
   absoluteTitle: true,
   keywords: [
     "ElgonOS",
@@ -35,6 +39,8 @@ export const metadata: Metadata = createPageMetadata({
     "rent collection software Kenya",
     "tenant management software Kenya",
     "M-PESA rent collection software",
+    "construction tracking software Kenya",
+    "property maintenance software Kenya",
     "landlord software Kenya",
     "property management system Kenya",
     "real estate management software Kenya"
@@ -42,27 +48,47 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 const features = [
-  { title: "Payment routing", icon: CreditCard },
+  { title: "Rent and M-PESA", icon: CreditCard },
+  { title: "Tenant and leases", icon: UsersRound },
+  { title: "Documents and receipts", icon: FileText },
   { title: "Access workflows", icon: KeyRound },
-  { title: "Tenant experience", icon: UsersRound },
-  { title: "Resident community", icon: MessageSquareText },
-  { title: "Resident marketplace", icon: Store },
-  { title: "Resident exchange", icon: Tags },
-  { title: "AI intelligence", icon: Bot }
+  { title: "Construction tracking", icon: HardHat },
+  { title: "Maintenance", icon: Wrench },
+  { title: "Ask AI", icon: Bot },
+  { title: "Resident services", icon: Store },
+  { title: "Resident exchange", icon: Tags }
 ];
 
 const platformPillars = [
   {
-    title: "Billing and payment routing",
+    title: "Rent, billing, receipts, and M-PESA workflows",
     icon: CreditCard,
-    summary: "Route rent and service charges through the rails property teams already use.",
-    points: ["M-PESA PayBill", "Bank PayBill", "Till", "Bank transfer", "Cards"]
+    summary: "Manage rent collection, billing cycles, receipt records, and payment routing around the rails Kenyan teams use.",
+    points: ["Rent collection", "M-PESA PayBill", "Bank PayBill", "Till", "Bank transfer", "Receipts"]
+  },
+  {
+    title: "Lease, unit, tenant, and document management",
+    icon: FileText,
+    summary: "Keep core portfolio records connected so teams can see occupancy, commitments, documents, billing, and tenant history together.",
+    points: ["Properties and units", "Tenant records", "Lease files", "Billing records", "Document management"]
   },
   {
     title: "Access control",
     icon: KeyRound,
     summary: "Coordinate entry, visitor movement, and guard-side operating workflows.",
-    points: ["Gate passes and cards", "Visitor pre-registration", "Guard workflows", "Entry records"]
+    points: ["Gate passes and cards", "Visitor pre-registration", "Guard workflows", "Visitor workflows", "Entry records"]
+  },
+  {
+    title: "Construction tracking",
+    icon: HardHat,
+    summary: "Track properties and units under construction from pipeline to tenant-ready handover.",
+    points: ["Phases", "Progress %", "Estimated ready dates", "Dashboards", "Reports", "Tenant pipeline reservations"]
+  },
+  {
+    title: "Maintenance workflows",
+    icon: Wrench,
+    summary: "Capture maintenance requests, coordinate work, and keep service activity visible to managers and tenants.",
+    points: ["Tenant requests", "Assignment", "Status tracking", "Updates", "Operational history"]
   },
   {
     title: "Tenant experience",
@@ -91,8 +117,14 @@ const platformPillars = [
   {
     title: "Intelligence",
     icon: Sparkles,
-    summary: "Use AI-assisted reporting, tenant predictability, and dashboards to turn operational data into fast answers and leadership visibility.",
-    points: ["Ask AI", "Conversational reporting", "Tenant predictability", "Executive dashboards", "Data quality dashboard"]
+    summary: "Use Ask AI, AI-assisted reporting, tenant predictability, dashboards, and insights to turn portfolio data into practical answers.",
+    points: ["Ask AI portfolio questions", "Property questions", "AI-assisted reporting", "Tenant predictability", "Executive dashboards", "Operational insights"]
+  },
+  {
+    title: "Automation and controls",
+    icon: ClipboardCheck,
+    summary: "Standardize approvals, reminders, operating exceptions, and accountability across daily property work.",
+    points: ["Approvals", "Reminders", "Audit trails", "Staff roles", "Operational exceptions"]
   },
   {
     title: "Communication",
@@ -112,7 +144,7 @@ const plans = [
   {
     name: "Starter",
     description: "Essentials for teams moving core property records and rent basics into one platform.",
-    highlights: ["Properties, units, tenants", "Lease and document records", "Billing essentials"]
+    highlights: ["Properties, units, tenants", "Lease and document records", "Billing and receipt essentials"]
   },
   {
     name: "Growth",
@@ -123,7 +155,9 @@ const plans = [
     name: "Professional",
     description: "Full operations for property teams that need stronger controls and service workflows.",
     highlights: [
-      "Access control",
+      "Access control and gate passes",
+      "Maintenance workflows",
+      "Construction progress tracking",
       "Feedback",
       "Tenant predictability",
       "Audit trail",
@@ -140,6 +174,7 @@ const plans = [
     highlights: [
       "AI and conversational reporting",
       "Executive dashboards",
+      "Operational insights",
       "Custom workflows",
       "Integrations",
       "Data migration",
@@ -149,16 +184,19 @@ const plans = [
 ];
 
 const featureMatrix = [
-  ["Billing", "M-PESA PayBill, Bank PayBill, Till, bank transfer, cards"],
-  ["Access", "Gate passes/cards, visitor pre-registration, guard workflows"],
+  ["Rent collection", "Rent billing, M-PESA PayBill, Bank PayBill, Till, bank transfer, cards, reminders, receipts, and payment visibility"],
+  ["Portfolio records", "Property, unit, tenant, lease, billing, receipt, document, and occupancy management"],
+  ["Access", "Gate passes/cards, visitor pre-registration, visitor workflows, guard workflows, and entry records"],
+  ["Maintenance", "Tenant maintenance requests, assignment, status tracking, updates, and operational history"],
+  ["Construction", "Property and unit construction phases, progress %, estimated ready dates, dashboards, reports, and tenant pipeline reservations"],
   ["Tenant workflows", "Bookings, wishlist, referrals, feedback, lease signing, Resident Community, approved provider directory, Resident Exchange"],
   ["Resident Community", "Moderated notices, private grievances, approved resident posts, official replies, pinned updates, closed threads, and notifications"],
   ["Resident services", "Provider registration, admin approval, approved directory, direct tenant call or WhatsApp"],
   ["Resident Exchange", "Moderated household item listings, listing photos, price, condition, and direct buyer-seller contact"],
   ["Property display board", "Optional lobby or gate display for approved notices, service providers, and resident listings"],
-  ["Intelligence", "Ask AI, conversational reporting, tenant predictability, executive dashboards"],
-  ["Data quality", "Portfolio data quality dashboard and operational exception visibility"],
-  ["Communication", "Email communication plus SMS and WhatsApp-ready reminders and alerts"],
+  ["Intelligence", "Ask AI for portfolio and property questions, conversational reporting, tenant predictability, executive dashboards, and operational insights"],
+  ["Automation and controls", "Approvals, reminders, audit trails, staff roles, portfolio data quality dashboard, and operational exception visibility"],
+  ["Communication", "Email communication plus SMS and WhatsApp-ready reminders, alerts, and resident notifications"],
   ["Mobile", "Mobile app coming soon with rollout support on Enterprise"]
 ];
 
@@ -175,7 +213,11 @@ const marqueeFeatures = [
   "Display board",
   "M-PESA routing",
   "Receipts",
+  "Documents",
   "Lease signing",
+  "Maintenance",
+  "Construction tracking",
+  "Tenant reservations",
   "Ask AI",
   "Executive dashboards",
   "Audit trail",
@@ -186,12 +228,22 @@ const kenyaBenefits = [
   {
     title: "Rent collection software for Kenya",
     summary:
-      "Coordinate rent billing, payment routing, receipts, reminders, and portfolio visibility from one operating layer."
+      "Coordinate rent billing, M-PESA workflows, payment routing, receipts, reminders, and portfolio visibility from one operating layer."
   },
   {
     title: "Tenant management and lease workflows",
     summary:
       "Keep tenant records, lease details, documents, bookings, feedback, resident community workflows, referrals, and service workflows connected."
+  },
+  {
+    title: "Construction tracking for growing portfolios",
+    summary:
+      "Track property and unit phases, progress percentages, estimated ready dates, dashboards, reports, and tenant pipeline reservations."
+  },
+  {
+    title: "Maintenance workflows with operating history",
+    summary:
+      "Capture maintenance requests, coordinate assignments, update tenants, and preserve activity records for management review."
   },
   {
     title: "Controlled resident communication",
@@ -218,11 +270,14 @@ const kenyaBenefits = [
 const comparisonCriteria = [
   "Local payment workflows such as M-PESA and bank channels",
   "Tenant, lease, unit, document, and occupancy records in one place",
+  "Construction phases, progress %, estimated ready dates, and reservations",
+  "Maintenance requests, assignments, status updates, and history",
   "Moderated Resident Community for notices, grievances, and approved posts",
   "Approved resident service providers for common tenant needs",
   "Moderated resident listings for household item resale",
-  "Automated receipts, reminders, and communication workflows",
-  "Dashboards for landlords, property managers, and executives",
+  "Automated receipts, approvals, reminders, and communication workflows",
+  "Ask AI for portfolio and property questions",
+  "Dashboards, reports, tenant predictability, and operational insights",
   "Audit trail, staff roles, controls, and data quality visibility",
   "Implementation support for migration, rollout, and adoption"
 ];
@@ -244,9 +299,19 @@ const faqs = [
       "Yes. ElgonOS centralizes properties, units, tenants, leases, occupancy information, billing records, and documents so property teams can reduce spreadsheet dependence."
   },
   {
+    question: "Can ElgonOS track construction progress for properties and units?",
+    answer:
+      "Yes. ElgonOS supports construction tracking for properties and units, including phases, progress percentages, estimated ready dates, dashboards, reports, and tenant pipeline reservations before handover."
+  },
+  {
+    question: "Does ElgonOS include maintenance workflows?",
+    answer:
+      "Yes. Property teams can manage maintenance requests, assignments, status updates, tenant communication, and operating history from the same property management platform."
+  },
+  {
     question: "Does ElgonOS include Resident Community?",
     answer:
-      "Yes. Resident Community gives property managers a moderated communication layer for official notices, private tenant grievances, approved resident posts, pinned updates, closed threads, official replies, and notifications."
+      "Yes. Resident Community is a controlled communication layer, not social media. It gives property managers a moderated space for official notices, private tenant grievances, approved resident posts, pinned updates, closed threads, official replies, and notifications."
   },
   {
     question: "Does ElgonOS include a Resident Services Marketplace?",
@@ -261,7 +326,7 @@ const faqs = [
   {
     question: "Does ElgonOS include dashboards and AI-assisted reporting?",
     answer:
-      "Yes. ElgonOS includes executive dashboards and Ask AI capabilities to help teams understand portfolio activity, tenant workflows, billing visibility, and operational exceptions."
+      "Yes. ElgonOS includes executive dashboards, AI-assisted reporting, tenant predictability, operational insights, and Ask AI capabilities for portfolio and property questions."
   },
   {
     question: "Who should use ElgonOS?",
@@ -295,13 +360,14 @@ export default function ElgonOsPage() {
           <div>
             <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-cyan-200">ElgonOS AI-powered property management software Kenya</p>
             <h1 className="mt-6 max-w-4xl text-5xl font-black leading-tight tracking-tight sm:text-6xl">
-              AI-Powered Property Management Software for Rent Collection, Tenants, and Dashboards
+              AI-Powered Property Management Software for Rent Collection, M-PESA, Tenants, and Property Operations
             </h1>
             <p className="mt-7 text-xl leading-9 text-slate-200">
               ElgonOS helps landlords, property managers, and real estate teams in Kenya use AI-assisted reporting,
-              tenant predictability, and operational dashboards alongside rent collection, M-PESA payment routing,
-              access control, tenant management, Resident Community, resident services, resident exchange, lease
-              workflows, communication, and executive visibility from one operating layer.
+              Ask AI, tenant predictability, and operational dashboards alongside rent collection, M-PESA workflows,
+              access control, gate passes, visitor and guard workflows, tenant management, leases, units, billing,
+              receipts, documents, maintenance, construction tracking, Resident Community, resident services,
+              Resident Exchange, communication, and executive visibility from one operating layer built by Elgon Edge.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href={elgonOsUrl} className="gap-2">
@@ -323,7 +389,7 @@ export default function ElgonOsPage() {
                 <BarChart3 className="h-6 w-6 text-cyan-200" aria-hidden="true" />
               </div>
               <div className="mb-5 grid grid-cols-3 gap-3">
-                {["KES routing", "Gate access", "Ask AI"].map((metric) => (
+                {["M-PESA workflows", "Ask AI", "Construction"].map((metric) => (
                   <div key={metric} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
                     <p className="text-sm font-black">{metric}</p>
                   </div>
@@ -371,13 +437,14 @@ export default function ElgonOsPage() {
             <div>
               <p className="section-kicker">Property management software Kenya</p>
               <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
-                AI-powered for local rent collection, tenant workflows, Resident Community, resident services, resident exchange, and operating control
+                AI-powered for local rent collection, tenant workflows, construction tracking, maintenance, resident layers, and operating control
               </h2>
             </div>
             <p className="text-lg leading-8 text-slate-600">
               Property teams in Kenya need more than a generic database. ElgonOS connects AI-powered property
-              management software, rent collection software, tenant management software, lease records, Resident
-              Community, approved resident services, resident exchange, access workflows, communication, and
+              management software, rent collection software, M-PESA workflows, tenant management software, lease
+              records, unit and document management, Resident Community, approved resident services, Resident
+              Exchange, construction tracking, maintenance, access workflows, automation, communication, and
               executive dashboards so daily operations can move with stronger visibility and fewer spreadsheets.
             </p>
           </div>
@@ -421,8 +488,10 @@ export default function ElgonOsPage() {
               </h2>
             </div>
             <p className="text-lg leading-8 text-slate-600">
-              ElgonOS goes beyond rent collection. It connects payments, access, tenant workflows, communication,
-              Resident Community, resident services, resident exchange, AI intelligence, and operational controls into a cleaner daily system for property teams.
+              ElgonOS goes beyond rent collection. It connects payments, access, tenants, leases, units, billing,
+              receipts, documents, construction, maintenance, communication, Resident Community, resident services,
+              Resident Exchange, AI intelligence, automation, approvals, reminders, and audit trails into a cleaner
+              daily system for property teams.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">

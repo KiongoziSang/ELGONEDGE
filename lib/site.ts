@@ -233,19 +233,21 @@ export const services: Service[] = [
       "Marketplace and directory workflows",
       "Moderated resident community workflows",
       "Resident exchange and display board workflows",
+      "Property, construction, maintenance, and access workflows",
       "Platform architecture and delivery"
     ],
     seoTitle: "Custom Software, SaaS and Digital Platform Development | Elgon Edge Consulting Limited",
     seoDescription:
       "SaaS development and custom software delivery for business applications, portals, marketplaces, workflow platforms, dashboards, and digital operating systems.",
     overview:
-      "Elgon Edge Consulting Limited designs and builds custom software, SaaS products, portals, marketplace workflows, moderated resident community features, resident exchange features, and digital operating systems that support modern business operations, including ElgonOS resident services.",
+      "Elgon Edge Consulting Limited designs and builds custom software, SaaS products, portals, marketplace workflows, moderated resident community features, resident exchange features, and digital operating systems that support modern business operations. ElgonOS is our flagship AI-powered property management software for Kenya, covering rent collection, M-PESA workflows, tenant, lease, unit, billing, receipt, and document management, construction tracking, maintenance, access control, resident services, Ask AI, dashboards, approvals, reminders, and audit trails.",
     outcomes: [
       "Digital platforms aligned to real operating workflows",
       "Scalable applications with role-based access and data foundations",
       "Service directories and approval flows that reduce manual coordination",
       "Moderated communication layers for notices, grievances, approvals, and official responses",
       "Moderated community listing workflows for resident-to-resident exchange",
+      "Property operations workflows for construction progress, maintenance, access, approvals, reminders, and audit trails",
       "Better user experience, reporting, and operational control"
     ]
   }

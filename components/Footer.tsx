@@ -20,7 +20,7 @@ export function Footer() {
             </div>
           </div>
           <p className="mt-7 max-w-md text-[1.18rem] leading-9 text-slate-300">
-            Premium consulting for data, AI, automation, governance, and digital platforms.
+            Data, AI, automation, governance, digital platforms, and ElgonOS AI-powered property management software.
           </p>
           {socialLinks.length > 0 ? (
             <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -60,7 +60,7 @@ export function Footer() {
               Insights
             </Link>
             <Link href="/elgonos" className="text-slate-300 transition hover:text-white">
-              ElgonOS
+              ElgonOS Property Management
             </Link>
             <Link href="/contact" className="text-slate-300 transition hover:text-white">
               Contact
