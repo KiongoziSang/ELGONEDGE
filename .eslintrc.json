@@ -18,5 +18,5 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
-  "ignorePatterns": ["node_modules/", ".next/", "public/"]
+  "ignorePatterns": ["node_modules/", ".next/", "public/", "apps/mobile/"]
 }
