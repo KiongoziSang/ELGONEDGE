@@ -231,15 +231,15 @@ export default function HomePage() {
         <div className="executive-hero relative mx-auto grid max-w-[1520px] overflow-hidden rounded-[2.35rem] p-9 text-white shadow-2xl shadow-slate-900/20 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:p-16">
           <div className="galaxy-grid absolute inset-0 opacity-18" aria-hidden="true" />
           <div className="relative p-2 lg:p-6">
-            <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-cyan-200">Flagship platform</p>
+            <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-cyan-200">Flagship AI-powered platform</p>
             <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-5xl">
-              ElgonOS — Property Operations Platform
+              ElgonOS — AI-Powered Property Management Software
             </h2>
             <p className="mt-7 max-w-3xl text-[1.2rem] leading-9 text-slate-200">
-              ElgonOS helps landlords, property managers, and real estate teams run billing, payment routing,
-              access control, tenant experience, Resident Community, approved resident services,
-              resident-to-resident item listings, communication, AI-assisted reporting, and executive dashboards
-              from one operating layer.
+              ElgonOS helps landlords, property managers, and real estate teams run AI-assisted reporting,
+              tenant predictability, billing, M-PESA payment routing, access control, tenant experience,
+              Resident Community, approved resident services, resident-to-resident item listings, communication,
+              and executive dashboards from one operating layer.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="/elgonos" variant="glass">

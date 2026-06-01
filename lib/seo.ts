@@ -13,6 +13,8 @@ export const seoKeywords = [
   "Elgon Edge Consulting",
   "ElgonOS",
   "ElgonOS property management",
+  "AI-powered property management software Kenya",
+  "AI property management software Kenya",
   "property operations platform",
   "resident services marketplace",
   "resident community",
@@ -129,6 +131,7 @@ export const organizationJsonLd = {
     "Intelligent automation",
     "SaaS development",
     "Property management software",
+    "AI-powered property management software",
     "Property operations platform",
     "Resident services marketplace",
     "Resident community",
@@ -157,12 +160,14 @@ export const elgonOsSoftwareJsonLd = {
   operatingSystem: "Web",
   url: "https://elgonos.elgonedge.com",
   description:
-    "ElgonOS is property management software for Kenya built for landlords, property managers, and real estate teams to run billing, M-PESA payment routing, rent collection workflows, access control, Resident Community, resident services, resident exchange, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
+    "ElgonOS is AI-powered property management software for Kenya built for landlords, property managers, and real estate teams to run billing, M-PESA payment routing, rent collection workflows, access control, Resident Community, resident services, resident exchange, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
   creator: {
     "@id": `${siteUrl}/#organization`
   },
   featureList: [
     "M-PESA rent collection workflows",
+    "AI-assisted reporting and Ask AI portfolio questions",
+    "Tenant predictability and operational intelligence",
     "Tenant and lease management",
     "Billing and receipt workflows",
     "Access control workflows",
@@ -187,6 +192,8 @@ export const elgonOsSoftwareJsonLd = {
   keywords: [
     "ElgonOS",
     "ElgonOS property management",
+    "AI-powered property management software Kenya",
+    "AI property management software Kenya",
     "property operations platform",
     "property management software Kenya",
     "property management platform",

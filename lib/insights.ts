@@ -17,11 +17,12 @@ export const insights: Insight[] = [
     slug: "best-property-management-software-in-kenya",
     title: "Best Property Management Software in Kenya: What Landlords and Property Managers Should Compare",
     description:
-      "A practical guide to choosing property management software in Kenya, including rent collection, M-PESA workflows, tenant management, leases, dashboards, and rollout support.",
+      "A practical guide to choosing AI-powered property management software in Kenya, including rent collection, M-PESA workflows, tenant management, leases, dashboards, and rollout support.",
     image: "/insights/automation-platform-insight.png",
     imageAlt: "Property management software dashboard with rent collection, tenant workflows, and reporting controls",
     keywords: [
       "best property management software Kenya",
+      "AI-powered property management software Kenya",
       "property management software Kenya",
       "rent collection software Kenya",
       "M-PESA rent collection software",
@@ -54,7 +55,7 @@ export const insights: Insight[] = [
       {
         heading: "Where ElgonOS fits",
         body:
-          "ElgonOS is built by Elgon Edge Consulting Limited for landlords, property managers, and real estate teams that want one operating layer for rent collection workflows, M-PESA-aware payment routing, tenant management, access control, communication, Ask AI reporting, dashboards, and rollout support."
+          "ElgonOS is built by Elgon Edge Consulting Limited for landlords, property managers, and real estate teams that want AI-powered property management software for rent collection workflows, M-PESA-aware payment routing, tenant management, access control, communication, Ask AI reporting, dashboards, and rollout support."
       }
     ]
   },
@@ -233,9 +234,9 @@ export const insights: Insight[] = [
       "Learn how property managers can move from spreadsheets to ElgonOS for properties, units, tenants, leases, billing, occupancy, and documents.",
     image: "/insights/automation-platform-insight.png",
     imageAlt: "Property operations platform with connected documents, dashboards, and portfolio tiles",
-    keywords: ["ElgonOS property management", "property management software Kenya", "ElgonOS"],
+    keywords: ["ElgonOS property management", "AI-powered property management software Kenya", "property management software Kenya", "ElgonOS"],
     intro:
-      "ElgonOS helps property managers move from fragmented spreadsheets to a centralized property management platform for daily operations.",
+      "ElgonOS helps property managers move from fragmented spreadsheets to a centralized AI-powered property management platform for daily operations.",
     sections: [
       {
         heading: "Why spreadsheets become difficult",

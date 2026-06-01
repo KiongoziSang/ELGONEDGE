@@ -23,13 +23,14 @@ import { elgonOsUrl } from "@/lib/site";
 import { createPageMetadata, elgonOsSoftwareJsonLd, JsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "ElgonOS Property Management Software Kenya | Rent Collection, Tenants and Dashboards",
+  title: "ElgonOS AI-Powered Property Management Software Kenya | Rent Collection, Tenants and Dashboards",
   path: "/elgonos",
   description:
-    "ElgonOS is property management software for Kenya built for landlords and property managers to manage rent collection, M-PESA payment routing, tenants, leases, resident services, Resident Community, access control, receipts, communication, and executive dashboards.",
+    "ElgonOS is AI-powered property management software for Kenya built for landlords and property managers to manage rent collection, M-PESA payment routing, tenants, leases, resident services, Resident Community, access control, receipts, communication, and executive dashboards.",
   absoluteTitle: true,
   keywords: [
     "ElgonOS",
+    "AI-powered property management software Kenya",
     "property management software Kenya",
     "rent collection software Kenya",
     "tenant management software Kenya",
@@ -90,7 +91,7 @@ const platformPillars = [
   {
     title: "Intelligence",
     icon: Sparkles,
-    summary: "Turn operational data into fast answers and leadership visibility.",
+    summary: "Use AI-assisted reporting, tenant predictability, and dashboards to turn operational data into fast answers and leadership visibility.",
     points: ["Ask AI", "Conversational reporting", "Tenant predictability", "Executive dashboards", "Data quality dashboard"]
   },
   {
@@ -228,9 +229,9 @@ const comparisonCriteria = [
 
 const faqs = [
   {
-    question: "Is ElgonOS property management software for Kenya?",
+    question: "Is ElgonOS AI-powered property management software for Kenya?",
     answer:
-      "Yes. ElgonOS is built by Elgon Edge Consulting Limited for Kenyan landlords, property managers, and real estate teams that need a practical system for rent operations, tenant workflows, access control, communication, and reporting."
+      "Yes. ElgonOS is built by Elgon Edge Consulting Limited for Kenyan landlords, property managers, and real estate teams that need AI-assisted reporting, rent operations, tenant workflows, access control, communication, and dashboards in one practical system."
   },
   {
     question: "Does ElgonOS support M-PESA rent collection workflows?",
@@ -292,14 +293,15 @@ export default function ElgonOsPage() {
         <div className="absolute right-10 top-8 h-80 w-80 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden="true" />
         <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
-            <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-cyan-200">ElgonOS property management software Kenya</p>
+            <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-cyan-200">ElgonOS AI-powered property management software Kenya</p>
             <h1 className="mt-6 max-w-4xl text-5xl font-black leading-tight tracking-tight sm:text-6xl">
-              Property Management Software for Rent Collection, Tenants, and Dashboards
+              AI-Powered Property Management Software for Rent Collection, Tenants, and Dashboards
             </h1>
             <p className="mt-7 text-xl leading-9 text-slate-200">
-              ElgonOS helps landlords, property managers, and real estate teams in Kenya coordinate rent collection,
-              M-PESA payment routing, access control, tenant management, Resident Community, resident services,
-              resident exchange, lease workflows, communication, AI-assisted reporting, and executive visibility from one operating layer.
+              ElgonOS helps landlords, property managers, and real estate teams in Kenya use AI-assisted reporting,
+              tenant predictability, and operational dashboards alongside rent collection, M-PESA payment routing,
+              access control, tenant management, Resident Community, resident services, resident exchange, lease
+              workflows, communication, and executive visibility from one operating layer.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href={elgonOsUrl} className="gap-2">
@@ -369,13 +371,14 @@ export default function ElgonOsPage() {
             <div>
               <p className="section-kicker">Property management software Kenya</p>
               <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
-                Built for local rent collection, tenant workflows, Resident Community, resident services, resident exchange, and operating control
+                AI-powered for local rent collection, tenant workflows, Resident Community, resident services, resident exchange, and operating control
               </h2>
             </div>
             <p className="text-lg leading-8 text-slate-600">
-              Property teams in Kenya need more than a generic database. ElgonOS connects rent collection software,
-              tenant management software, lease records, Resident Community, approved resident services, resident exchange, access workflows, communication, and executive dashboards
-              so daily operations can move with stronger visibility and fewer spreadsheets.
+              Property teams in Kenya need more than a generic database. ElgonOS connects AI-powered property
+              management software, rent collection software, tenant management software, lease records, Resident
+              Community, approved resident services, resident exchange, access workflows, communication, and
+              executive dashboards so daily operations can move with stronger visibility and fewer spreadsheets.
             </p>
           </div>
 
@@ -419,7 +422,7 @@ export default function ElgonOsPage() {
             </div>
             <p className="text-lg leading-8 text-slate-600">
               ElgonOS goes beyond rent collection. It connects payments, access, tenant workflows, communication,
-              Resident Community, resident services, resident exchange, intelligence, and operational controls into a cleaner daily system for property teams.
+              Resident Community, resident services, resident exchange, AI intelligence, and operational controls into a cleaner daily system for property teams.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -619,7 +622,7 @@ export default function ElgonOsPage() {
           <div className="mb-10 max-w-3xl">
             <p className="section-kicker">ElgonOS FAQs</p>
             <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
-              Questions about ElgonOS property management software
+              Questions about ElgonOS AI-powered property management software
             </h2>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
@@ -635,7 +638,7 @@ export default function ElgonOsPage() {
 
       <CTASection
         title="Launch ElgonOS or discuss your property management workflow"
-        text="Use the live ElgonOS property management platform or contact Elgon Edge Consulting Limited for rent collection, tenant workflow, migration, and rollout support conversations."
+        text="Use the live ElgonOS AI-powered property management platform or contact Elgon Edge Consulting Limited for rent collection, tenant workflow, migration, and rollout support conversations."
       />
     </main>
   );
