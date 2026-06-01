@@ -16,7 +16,7 @@ export function ServiceCard({ service, detailed = false }: ServiceCardProps) {
       className={`group h-full rounded-[2.15rem] bg-white p-9 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-soft sm:p-10 ${
         featured
           ? "premium-card-border border border-transparent bg-gradient-to-br from-white via-white to-blue-50/45"
-          : "border border-slate-200 hover:border-blue-200"
+          : "border border-slate-200 hover:border-brand-blue/25"
       }`}
     >
       <div

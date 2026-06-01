@@ -433,7 +433,7 @@ export default function ElgonOsPage() {
 
       <section className="fine-grid bg-white px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
             <div>
               <p className="section-kicker">Property management software Kenya</p>
               <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
@@ -480,7 +480,7 @@ export default function ElgonOsPage() {
 
       <section className="fine-grid bg-white px-4 py-20 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12 grid gap-6 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div className="mb-12 grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
             <div>
               <p className="section-kicker">Platform pillars</p>
               <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
@@ -498,7 +498,7 @@ export default function ElgonOsPage() {
             {platformPillars.map((pillar) => {
               const Icon = pillar.icon;
               return (
-                <article key={pillar.title} className="rounded-[1.5rem] border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-soft">
+                <article key={pillar.title} className="rounded-[1.5rem] border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-soft">
                   <div className="flex items-start gap-4">
                     <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-navy text-cyan-200">
                       <Icon className="h-6 w-6" aria-hidden="true" />

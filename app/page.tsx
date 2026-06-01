@@ -207,7 +207,7 @@ export default function HomePage() {
 
       <section className="bg-white px-4 py-32 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-[1520px]">
-          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+          <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
             <div>
               <p className="section-kicker">Why Elgon Edge</p>
               <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
@@ -225,7 +225,7 @@ export default function HomePage() {
               return (
                 <article
                   key={item.title}
-                  className="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-soft"
+                  className="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-soft"
                 >
                   <div className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-navy p-3 text-cyan-200 shadow-lg shadow-slate-900/15">
                     <Icon className="h-7 w-7" aria-hidden="true" />
@@ -324,7 +324,7 @@ export default function HomePage() {
               return (
                 <article
                   key={step.title}
-                  className="premium-card-border flex h-full flex-col rounded-[1.85rem] border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-soft"
+                  className="premium-card-border flex h-full flex-col rounded-[1.85rem] border border-slate-200 bg-white p-8 shadow-sm transition hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-soft"
                 >
                   <div className="flex items-start justify-between gap-5">
                     <span className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15">

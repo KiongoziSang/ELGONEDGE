@@ -109,7 +109,7 @@ export default function AboutPage() {
               return (
                 <article
                   key={item.title}
-                  className="premium-card-border flex h-full flex-col rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-soft"
+                  className="premium-card-border flex h-full flex-col rounded-[1.75rem] border border-slate-200 bg-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-soft"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15">

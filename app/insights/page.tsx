@@ -164,7 +164,7 @@ export default function InsightsPage() {
             {remainingInsights.map((insight) => (
               <article
                 key={insight.slug}
-                className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-50 shadow-sm transition hover:-translate-y-1 hover:border-blue-200 hover:bg-white hover:shadow-soft"
+                className="flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-50 shadow-sm transition hover:-translate-y-1 hover:border-brand-blue/25 hover:bg-white hover:shadow-soft"
               >
                 <div className="relative aspect-[16/9] overflow-hidden bg-slate-900">
                   <Image
