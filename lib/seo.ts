@@ -15,6 +15,7 @@ export const seoKeywords = [
   "ElgonOS property management",
   "property operations platform",
   "resident services marketplace",
+  "resident community",
   "resident exchange",
   "EDGE Framework",
   "Explore Design Govern Execute",
@@ -130,6 +131,7 @@ export const organizationJsonLd = {
     "Property management software",
     "Property operations platform",
     "Resident services marketplace",
+    "Resident community",
     "Resident exchange"
   ]
 };
@@ -155,7 +157,7 @@ export const elgonOsSoftwareJsonLd = {
   operatingSystem: "Web",
   url: "https://elgonos.elgonedge.com",
   description:
-    "ElgonOS is property management software for Kenya built for landlords, property managers, and real estate teams to run billing, M-PESA payment routing, rent collection workflows, access control, resident services, resident exchange, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
+    "ElgonOS is property management software for Kenya built for landlords, property managers, and real estate teams to run billing, M-PESA payment routing, rent collection workflows, access control, Resident Community, resident services, resident exchange, tenant experience, intelligence, communication, and executive reporting from one operating layer.",
   creator: {
     "@id": `${siteUrl}/#organization`
   },
@@ -164,6 +166,7 @@ export const elgonOsSoftwareJsonLd = {
     "Tenant and lease management",
     "Billing and receipt workflows",
     "Access control workflows",
+    "Resident Community for official notices, private grievances, approved resident posts, pinned updates, closed threads, official replies, and notifications",
     "Resident Services Marketplace with approved provider directory",
     "Direct tenant call and WhatsApp contact for approved providers",
     "Moderated Resident Exchange listings for household items",
@@ -188,6 +191,7 @@ export const elgonOsSoftwareJsonLd = {
     "property management software Kenya",
     "property management platform",
     "resident services marketplace",
+    "resident community",
     "resident exchange",
     "rent collection software Kenya",
     "tenant management software Kenya",

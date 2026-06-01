@@ -26,7 +26,7 @@ export const metadata: Metadata = createPageMetadata({
   title: "ElgonOS Property Management Software Kenya | Rent Collection, Tenants and Dashboards",
   path: "/elgonos",
   description:
-    "ElgonOS is property management software for Kenya built for landlords and property managers to manage rent collection, M-PESA payment routing, tenants, leases, resident services, access control, receipts, communication, and executive dashboards.",
+    "ElgonOS is property management software for Kenya built for landlords and property managers to manage rent collection, M-PESA payment routing, tenants, leases, resident services, Resident Community, access control, receipts, communication, and executive dashboards.",
   absoluteTitle: true,
   keywords: [
     "ElgonOS",
@@ -44,6 +44,7 @@ const features = [
   { title: "Payment routing", icon: CreditCard },
   { title: "Access workflows", icon: KeyRound },
   { title: "Tenant experience", icon: UsersRound },
+  { title: "Resident community", icon: MessageSquareText },
   { title: "Resident marketplace", icon: Store },
   { title: "Resident exchange", icon: Tags },
   { title: "AI intelligence", icon: Bot }
@@ -69,6 +70,12 @@ const platformPillars = [
     points: ["Bookings", "Wishlist", "Referrals", "Feedback", "Lease signing"]
   },
   {
+    title: "Resident Community",
+    icon: MessageSquareText,
+    summary: "Replace unmanaged WhatsApp group noise with a moderated layer for official notices, private grievances, and approved resident posts.",
+    points: ["Official announcements", "Private grievances", "Admin approval", "Pinned responses"]
+  },
+  {
     title: "Resident Services Marketplace",
     icon: Store,
     summary: "Reduce manual coordination by giving tenants a directory of property-approved local providers.",
@@ -89,8 +96,8 @@ const platformPillars = [
   {
     title: "Communication",
     icon: MessageSquareText,
-    summary: "Keep residents and teams aligned with timely operating alerts.",
-    points: ["Email communication", "SMS-ready reminders", "WhatsApp-ready alerts", "Payment and lease nudges"]
+    summary: "Keep residents and teams aligned with timely operating alerts and controlled community communication.",
+    points: ["Email communication", "SMS-ready reminders", "WhatsApp-ready alerts", "Community notifications"]
   },
   {
     title: "Mobile app",
@@ -120,6 +127,7 @@ const plans = [
       "Tenant predictability",
       "Audit trail",
       "Staff roles",
+      "Resident Community moderation",
       "Resident Services Marketplace",
       "Moderated Resident Exchange",
       "Email, SMS, and WhatsApp-ready communication"
@@ -142,7 +150,8 @@ const plans = [
 const featureMatrix = [
   ["Billing", "M-PESA PayBill, Bank PayBill, Till, bank transfer, cards"],
   ["Access", "Gate passes/cards, visitor pre-registration, guard workflows"],
-  ["Tenant workflows", "Bookings, wishlist, referrals, feedback, lease signing, approved provider directory, Resident Exchange"],
+  ["Tenant workflows", "Bookings, wishlist, referrals, feedback, lease signing, Resident Community, approved provider directory, Resident Exchange"],
+  ["Resident Community", "Moderated notices, private grievances, approved resident posts, official replies, pinned updates, closed threads, and notifications"],
   ["Resident services", "Provider registration, admin approval, approved directory, direct tenant call or WhatsApp"],
   ["Resident Exchange", "Moderated household item listings, listing photos, price, condition, and direct buyer-seller contact"],
   ["Property display board", "Optional lobby or gate display for approved notices, service providers, and resident listings"],
@@ -159,6 +168,7 @@ const marqueeFeatures = [
   "Verified identity",
   "Tenant workflows",
   "Resident services",
+  "Resident Community",
   "Approved providers",
   "Resident Exchange",
   "Display board",
@@ -180,7 +190,12 @@ const kenyaBenefits = [
   {
     title: "Tenant management and lease workflows",
     summary:
-      "Keep tenant records, lease details, documents, bookings, feedback, referrals, and service workflows connected."
+      "Keep tenant records, lease details, documents, bookings, feedback, resident community workflows, referrals, and service workflows connected."
+  },
+  {
+    title: "Controlled resident communication",
+    summary:
+      "Publish official notices, receive private tenant grievances, and approve resident posts before they become visible to the community."
   },
   {
     title: "Resident services without constant coordination",
@@ -202,6 +217,7 @@ const kenyaBenefits = [
 const comparisonCriteria = [
   "Local payment workflows such as M-PESA and bank channels",
   "Tenant, lease, unit, document, and occupancy records in one place",
+  "Moderated Resident Community for notices, grievances, and approved posts",
   "Approved resident service providers for common tenant needs",
   "Moderated resident listings for household item resale",
   "Automated receipts, reminders, and communication workflows",
@@ -225,6 +241,11 @@ const faqs = [
     question: "Can ElgonOS manage tenants, leases, units, and documents?",
     answer:
       "Yes. ElgonOS centralizes properties, units, tenants, leases, occupancy information, billing records, and documents so property teams can reduce spreadsheet dependence."
+  },
+  {
+    question: "Does ElgonOS include Resident Community?",
+    answer:
+      "Yes. Resident Community gives property managers a moderated communication layer for official notices, private tenant grievances, approved resident posts, pinned updates, closed threads, official replies, and notifications."
   },
   {
     question: "Does ElgonOS include a Resident Services Marketplace?",
@@ -277,8 +298,8 @@ export default function ElgonOsPage() {
             </h1>
             <p className="mt-7 text-xl leading-9 text-slate-200">
               ElgonOS helps landlords, property managers, and real estate teams in Kenya coordinate rent collection,
-              M-PESA payment routing, access control, tenant management, resident services, resident exchange,
-              lease workflows, communication, AI-assisted reporting, and executive visibility from one operating layer.
+              M-PESA payment routing, access control, tenant management, Resident Community, resident services,
+              resident exchange, lease workflows, communication, AI-assisted reporting, and executive visibility from one operating layer.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href={elgonOsUrl} className="gap-2">
@@ -348,12 +369,12 @@ export default function ElgonOsPage() {
             <div>
               <p className="section-kicker">Property management software Kenya</p>
               <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
-                Built for local rent collection, tenant workflows, resident services, resident exchange, and operating control
+                Built for local rent collection, tenant workflows, Resident Community, resident services, resident exchange, and operating control
               </h2>
             </div>
             <p className="text-lg leading-8 text-slate-600">
               Property teams in Kenya need more than a generic database. ElgonOS connects rent collection software,
-              tenant management software, lease records, approved resident services, resident exchange, access workflows, communication, and executive dashboards
+              tenant management software, lease records, Resident Community, approved resident services, resident exchange, access workflows, communication, and executive dashboards
               so daily operations can move with stronger visibility and fewer spreadsheets.
             </p>
           </div>
@@ -398,7 +419,7 @@ export default function ElgonOsPage() {
             </div>
             <p className="text-lg leading-8 text-slate-600">
               ElgonOS goes beyond rent collection. It connects payments, access, tenant workflows, communication,
-              resident services, resident exchange, intelligence, and operational controls into a cleaner daily system for property teams.
+              Resident Community, resident services, resident exchange, intelligence, and operational controls into a cleaner daily system for property teams.
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -425,6 +446,41 @@ export default function ElgonOsPage() {
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-slate-50 px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div>
+            <p className="section-kicker">Resident Community</p>
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
+              A controlled alternative to unmanaged WhatsApp groups
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-slate-600">
+              Resident Community gives property managers a moderated communication layer for notices, grievances,
+              and approved resident posts. Management keeps visibility controlled, auditable, and official while
+              reducing misinformation, tenant disputes, repeated calls, and scattered communication.
+            </p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {[
+              "Publish official notices and announcements to tenants",
+              "Receive private tenant grievances and feedback",
+              "Approve or reject resident posts before they go live",
+              "Pin, close, and reply officially with notifications"
+            ].map((item) => (
+              <article key={item} className="rounded-[1.5rem] border border-slate-200 bg-white p-7 shadow-sm">
+                <MessageSquareText className="h-7 w-7 text-brand-blue" aria-hidden="true" />
+                <h3 className="mt-5 text-xl font-black leading-7 text-brand-navy">{item}</h3>
+              </article>
+            ))}
+            <article className="rounded-[1.5rem] border border-slate-200 bg-brand-navy p-7 text-white shadow-sm md:col-span-2">
+              <h3 className="text-xl font-black">Simple operating flow</h3>
+              <p className="mt-4 leading-8 text-slate-200">
+                Tenant message or post, admin review, controlled visibility, official response, and notifications.
+              </p>
+            </article>
           </div>
         </div>
       </section>
