@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import { colors, spacing } from "../theme";
+import { BrandMark } from "./BrandMark";
 
 export function AppHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <View style={styles.header}>
+      <BrandMark light />
       <Text style={styles.title}>{title}</Text>
       {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
     </View>
@@ -21,7 +23,8 @@ const styles = StyleSheet.create({
     color: colors.white,
     fontSize: 28,
     fontWeight: "900",
-    lineHeight: 34
+    lineHeight: 34,
+    marginTop: 18
   },
   subtitle: {
     color: "#C8D5E2",

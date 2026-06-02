@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { AppInput } from "../components/AppInput";
+import { BrandMark } from "../components/BrandMark";
 import { useAuth } from "../context/AuthContext";
 import { colors, spacing } from "../theme";
 
@@ -14,7 +15,7 @@ export function LoginScreen({ onForgotPassword }: { onForgotPassword: () => void
   return (
     <View style={styles.screen}>
       <View style={styles.hero}>
-        <Text style={styles.logo}>ElgonOS</Text>
+        <BrandMark size="large" light />
         <Text style={styles.title}>Tenant mobile access</Text>
         <Text style={styles.subtitle}>
           Sign in to manage rent, documents, maintenance, notices, community, services, and resident exchange.
@@ -58,11 +59,6 @@ const styles = StyleSheet.create({
     borderRadius: 28,
     marginBottom: 18,
     padding: 22
-  },
-  logo: {
-    color: colors.cyan,
-    fontSize: 16,
-    fontWeight: "900"
   },
   title: {
     color: colors.white,

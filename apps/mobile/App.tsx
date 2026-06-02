@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import { BrandMark } from "./src/components/BrandMark";
 import { AuthProvider, useAuth } from "./src/context/AuthContext";
 import { AccessScreen } from "./src/screens/AccessScreen";
 import { AnnouncementsScreen } from "./src/screens/AnnouncementsScreen";
@@ -43,6 +44,7 @@ function RootNavigator() {
   if (loading && !session) {
     return (
       <View style={styles.restoreScreen}>
+        <BrandMark size="large" showText={false} />
         <Text style={styles.restoreLogo}>ElgonOS</Text>
         <Text style={styles.restoreText}>Restoring tenant session...</Text>
       </View>

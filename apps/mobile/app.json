@@ -4,7 +4,12 @@
     "slug": "elgonos-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/elgonos-logo.png",
+    "splash": {
+      "image": "./assets/elgonos-logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A1B2E"
+    },
     "scheme": "elgonos",
     "userInterfaceStyle": "light",
     "ios": {
@@ -12,15 +17,15 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundColor": "#0A1B2E",
+        "foregroundImage": "./assets/elgonos-logo.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/elgonos-logo.png"
     },
     "plugins": [
       "expo-secure-store"
