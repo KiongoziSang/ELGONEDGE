@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { BrandMark } from "./src/components/BrandMark";
 import { AuthProvider, useAuth } from "./src/context/AuthContext";
 import { AccessScreen } from "./src/screens/AccessScreen";
@@ -37,11 +37,11 @@ export default function App() {
 }
 
 function RootNavigator() {
-  const { session, loading } = useAuth();
+  const { session, restoring } = useAuth();
   const [authScreen, setAuthScreen] = useState<"login" | "forgotPassword">("login");
   const [screen, setScreen] = useState<ScreenName>("home");
 
-  if (loading && !session) {
+  if (restoring) {
     return (
       <View style={styles.restoreScreen}>
         <BrandMark size="large" showText={false} />
@@ -64,17 +64,19 @@ function RootNavigator() {
   return (
     <View style={styles.app}>
       <View style={styles.content}>{renderScreen(screen, setScreen)}</View>
-      <View style={styles.tabs}>
-        {tabs.map((tab) => {
-          const active = tab.id === activeTab;
-          return (
-            <Pressable key={tab.id} onPress={() => setScreen(tab.id)} style={styles.tab}>
-              <Text style={[styles.tabIcon, active && styles.tabIconActive]}>{tab.label.slice(0, 1)}</Text>
-              <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{tab.label}</Text>
-            </Pressable>
-          );
-        })}
-      </View>
+      <SafeAreaView style={styles.tabSafe}>
+        <View style={styles.tabs}>
+          {tabs.map((tab) => {
+            const active = tab.id === activeTab;
+            return (
+              <Pressable key={tab.id} onPress={() => setScreen(tab.id)} style={styles.tab}>
+                <Text style={[styles.tabIcon, active && styles.tabIconActive]}>{tab.label.slice(0, 1)}</Text>
+                <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{tab.label}</Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      </SafeAreaView>
     </View>
   );
 }
@@ -123,6 +125,9 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingBottom: 8,
     paddingTop: 8
+  },
+  tabSafe: {
+    backgroundColor: colors.white
   },
   tab: {
     alignItems: "center",

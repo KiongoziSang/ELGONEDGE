@@ -25,6 +25,16 @@ npm run start
 
 Scan the Expo QR code with Expo Go. If port `8081` is already in use, accept Expo's prompt to use another port.
 
+## Mock login
+
+MVP1 uses mock authentication through `src/services/api/auth.ts`.
+
+- Email: `grace.wanjiku@example.com`
+- Phone alternatives: `+254712345678` or `0712345678`
+- Password: `password`
+
+Any other credentials show a failed login message. Session data is stored with Expo SecureStore where the platform supports it and is cleared on logout.
+
 ## Useful scripts
 
 ```bash
@@ -38,7 +48,7 @@ npm run web
 
 ## Mock mode and API wiring
 
-The app currently uses mock mode through the service layer in `src/services/api`.
+The app currently uses mock mode through the service layer in `src/services/api`. Screens call API service modules rather than calling backend endpoints or importing domain records directly.
 
 Copy `.env.example` to `.env` when wiring real APIs:
 

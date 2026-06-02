@@ -141,8 +141,7 @@ export type ScreenName =
   | "announcements"
   | "services"
   | "exchange"
-  | "access"
-  | "forgotPassword";
+  | "access";
 
 export type LoadingState<T> = {
   data: T;

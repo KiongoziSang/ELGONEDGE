@@ -1,4 +1,4 @@
-import { Linking, StyleSheet, Text, View } from "react-native";
+import { Alert, Linking, StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { EmptyState } from "../components/EmptyState";
@@ -32,11 +32,11 @@ export function ServicesScreen() {
                 <StatusBadge label={provider.status} />
               </View>
               <View style={styles.actions}>
-                <AppButton label="Call" variant="secondary" onPress={() => void Linking.openURL(`tel:${provider.phone}`)} />
+                <AppButton label="Call" variant="secondary" onPress={() => void openExternalUrl(`tel:${provider.phone}`)} />
                 <AppButton
                   label="WhatsApp"
                   variant="secondary"
-                  onPress={() => void Linking.openURL(`https://wa.me/${provider.phone.replace(/\D/g, "")}`)}
+                  onPress={() => void openExternalUrl(`https://wa.me/${provider.phone.replace(/\D/g, "")}`)}
                 />
               </View>
             </AppCard>
@@ -45,6 +45,16 @@ export function ServicesScreen() {
       )}
     </Screen>
   );
+}
+
+async function openExternalUrl(url: string) {
+  const supported = await Linking.canOpenURL(url);
+  if (supported) {
+    await Linking.openURL(url);
+    return;
+  }
+
+  Alert.alert("Action unavailable", "This contact action is not available on this device.");
 }
 
 const styles = StyleSheet.create({

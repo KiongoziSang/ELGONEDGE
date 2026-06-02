@@ -9,6 +9,7 @@ const sessionKey = "elgonos-mobile-session";
 type AuthContextValue = {
   session: AuthSession | null;
   loading: boolean;
+  restoring: boolean;
   error: string | null;
   login: (identifier: string, password: string) => Promise<void>;
   logout: () => Promise<void>;
@@ -19,7 +20,8 @@ const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<AuthSession | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [restoring, setRestoring] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -37,7 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       } finally {
         if (mounted) {
-          setLoading(false);
+          setRestoring(false);
         }
       }
     }
@@ -53,6 +55,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     () => ({
       session,
       loading,
+      restoring,
       error,
       async login(identifier, password) {
         setLoading(true);
@@ -89,7 +92,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       }
     }),
-    [error, loading, session]
+    [error, loading, restoring, session]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

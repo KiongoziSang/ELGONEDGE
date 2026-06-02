@@ -1,16 +1,4 @@
-import type { MaintenanceCategory, MaintenanceRequest, Priority } from "../types";
-
-export const maintenanceCategories: MaintenanceCategory[] = [
-  "Plumbing",
-  "Electrical",
-  "Security",
-  "Cleaning",
-  "Internet",
-  "Access / Gate",
-  "Other"
-];
-
-export const priorities: Priority[] = ["Low", "Medium", "High"];
+import type { MaintenanceRequest } from "../types";
 
 export const maintenanceRequests: MaintenanceRequest[] = [
   {
