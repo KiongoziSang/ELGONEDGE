@@ -1,13 +1,20 @@
-# ElgonOS Mobile
+# ElgonOS Mobile MVP1
 
-Expo + React Native client for the first ElgonOS mobile companion app.
+Universal Expo + React Native tenant/resident app for Android and iOS.
 
-## Current scope
+## MVP1 scope
 
-- Tenant view for rent visibility, M-PESA workflow entry points, maintenance, gate passes, resident services, documents, Resident Community, and Resident Exchange.
-- Guard view for visitor queues, gate pass validation, service provider checks, entry logs, and access exceptions.
-- Manager view for lightweight approvals across Resident Community, services, construction reservations, and access exceptions.
-- Typed mock data and a small API config seam ready for backend wiring.
+- Login and forgot password placeholder.
+- Tenant dashboard for Grace Wanjiku at Elgon Heights Apartments, Unit B-204.
+- Rent balance, payment instructions, invoices, payment history, and receipts.
+- Documents for lease agreement, invoices, receipts, notices, and access card records.
+- Maintenance request list and create request form.
+- Official announcements/notices.
+- Controlled Resident Community with approved posts and tenant post/grievance submission.
+- Resident Services list with approved provider contact actions.
+- Resident Exchange listings and create listing form with pending review status.
+- Tenant-facing access/gate pass placeholder.
+- Tenant profile, lease details, emergency contact placeholder, and logout.
 
 ## Run locally
 
@@ -16,7 +23,7 @@ npm install
 npm run start
 ```
 
-Then scan the Expo QR code with Expo Go.
+Scan the Expo QR code with Expo Go. If port `8081` is already in use, accept Expo's prompt to use another port.
 
 ## Useful scripts
 
@@ -29,6 +36,42 @@ npm run web
 
 `npm run ios` requires macOS for simulator builds. Expo Go can still be used for iPhone testing from the QR code.
 
-## Backend wiring
+## Mock mode and API wiring
 
-Set `EXPO_PUBLIC_ELGONOS_API_URL` in a local `.env` when the ElgonOS API contract is ready. The current app keeps the URL in `src/config.ts` as the integration seam.
+The app currently uses mock mode through the service layer in `src/services/api`.
+
+Copy `.env.example` to `.env` when wiring real APIs:
+
+```bash
+EXPO_PUBLIC_ELGONOS_API_URL=https://elgonos.elgonedge.com
+EXPO_PUBLIC_ELGONOS_MOCK_MODE=true
+```
+
+Set `EXPO_PUBLIC_ELGONOS_MOCK_MODE=false` after real backend endpoints are available and implemented in the service modules.
+
+## Expected backend endpoints later
+
+- `POST /api/mobile/auth/login`
+- `POST /api/mobile/auth/forgot-password`
+- `GET /api/mobile/tenant/profile`
+- `GET /api/mobile/tenant/dashboard`
+- `GET /api/mobile/payments/invoices`
+- `GET /api/mobile/payments/receipts`
+- `GET /api/mobile/payments/instructions`
+- `GET /api/mobile/documents`
+- `GET /api/mobile/maintenance`
+- `POST /api/mobile/maintenance`
+- `GET /api/mobile/announcements`
+- `GET /api/mobile/community`
+- `POST /api/mobile/community`
+- `GET /api/mobile/services`
+- `GET /api/mobile/exchange`
+- `POST /api/mobile/exchange`
+- `GET /api/mobile/access`
+
+## MVP1 known gaps
+
+- Session persistence uses Expo SecureStore where available; backend-issued token refresh and expiry handling remain future work.
+- M-PESA STK push, card checkout, proof upload, QR gate pass, push notifications, and admin moderation are placeholders.
+- Resident Services onboarding and approvals remain backend/admin-side workflows.
+- Resident Exchange payments and dispute flows are out of scope.

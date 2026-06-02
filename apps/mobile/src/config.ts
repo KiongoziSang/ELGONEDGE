@@ -1,6 +1,4 @@
-export const apiConfig = {
-  baseUrl: "https://elgonos.elgonedge.com",
-  tenantPortalPath: "/dashboard/tenant",
-  guardPortalPath: "/dashboard/access",
-  managerPortalPath: "/dashboard"
+export const appConfig = {
+  apiBaseUrl: process.env.EXPO_PUBLIC_ELGONOS_API_URL ?? "https://elgonos.elgonedge.com",
+  mockMode: process.env.EXPO_PUBLIC_ELGONOS_MOCK_MODE !== "false"
 };
