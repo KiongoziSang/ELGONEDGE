@@ -1,6 +1,38 @@
-export type AuthSession = {
+export type JsonPrimitive = string | number | boolean | null;
+
+export type JsonValue = JsonPrimitive | JsonValue[] | { [key: string]: JsonValue };
+
+export type ApiError = {
+  code: string;
+  message: string;
+  status?: number;
+  details?: JsonValue;
+};
+
+export type Session = {
   token: string;
   userId: string;
+  refreshToken?: string;
+  expiresAt?: string;
+};
+
+export type AuthSession = Session;
+
+export type AuthLoginRequest = {
+  identifier: string;
+  password: string;
+};
+
+export type AuthLoginResponse = {
+  accessToken: string;
+  refreshToken?: string;
+  expiresIn?: number;
+  tenant: {
+    id: string;
+    fullName: string;
+    phone: string;
+    email: string;
+  };
 };
 
 export type TenantProfile = {
@@ -14,6 +46,15 @@ export type TenantProfile = {
   leaseEndDate: string;
   leaseStatus: "Active" | "Expiring" | "Ended";
   emergencyContact: string;
+};
+
+export type LeaseDetails = {
+  id: string;
+  propertyName: string;
+  unitNumber: string;
+  startDate: string;
+  endDate: string;
+  status: TenantProfile["leaseStatus"];
 };
 
 export type PaymentMethod = "M-PESA PayBill" | "Bank PayBill" | "Till" | "Bank Transfer" | "Card";

@@ -58,11 +58,13 @@ The app currently uses mock mode through the service layer in `src/services/api`
 Copy `.env.example` to `.env` when wiring real APIs:
 
 ```bash
-EXPO_PUBLIC_ELGONOS_API_URL=https://elgonos.elgonedge.com
-EXPO_PUBLIC_ELGONOS_MOCK_MODE=true
+EXPO_PUBLIC_API_BASE_URL=https://elgonos.elgonedge.com
+EXPO_PUBLIC_USE_MOCKS=true
 ```
 
-Set `EXPO_PUBLIC_ELGONOS_MOCK_MODE=false` after real backend endpoints are available and implemented in the service modules.
+Phase 1A keeps the app in mock mode by default. `EXPO_PUBLIC_API_BASE_URL` is read by the shared API client, and `EXPO_PUBLIC_USE_MOCKS=true` keeps the existing Grace Wanjiku mock flow active. Set `EXPO_PUBLIC_USE_MOCKS=false` only after a Phase 1B service module is intentionally wired to a real endpoint.
+
+The previous `EXPO_PUBLIC_ELGONOS_API_URL` and `EXPO_PUBLIC_ELGONOS_MOCK_MODE` names are still read as fallbacks for older local environments.
 
 ## Expected backend endpoints later
 

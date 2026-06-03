@@ -5,11 +5,19 @@ This draft defines the expected REST API shape for wiring ElgonOS Mobile MVP1 to
 ## Common Conventions
 
 - Base path: `/api/mobile`
+- Mobile environment variables:
+  - `EXPO_PUBLIC_API_BASE_URL` sets the backend origin, for example `https://elgonos.elgonedge.com`.
+  - `EXPO_PUBLIC_USE_MOCKS=true` keeps the Expo app on local mock handlers.
+  - `EXPO_PUBLIC_USE_MOCKS=false` should be used only after a service module is intentionally wired to real endpoints.
 - Request and response format: JSON, unless a document download URL is returned.
 - Auth: authenticated endpoints require `Authorization: Bearer <accessToken>`.
 - Dates: ISO 8601 strings.
 - Money: numeric amount plus explicit currency where needed.
 - Errors: return a clear code and message.
+
+## Phase 1A Mobile Integration Approach
+
+Phase 1A prepares the mobile foundation without connecting screens to the backend yet. The shared API client owns base URL resolution, JSON request/response handling, bearer token injection, timeout handling, mock mode detection, and consistent API errors. Existing screen-facing service modules remain mock-backed until Phase 1B explicitly wires one endpoint group at a time.
 
 Example error:
 

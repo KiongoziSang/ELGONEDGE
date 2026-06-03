@@ -1,17 +1,18 @@
-import type { AuthSession } from "../../types";
+import type { AuthLoginRequest, AuthSession } from "../../types";
 import { mockDelay } from "./client";
 
 export async function loginTenant(identifier: string, password: string): Promise<AuthSession> {
   await mockDelay();
+  const request: AuthLoginRequest = { identifier, password };
 
-  if (!identifier.trim() || !password.trim()) {
+  if (!request.identifier.trim() || !request.password.trim()) {
     throw new Error("Enter your email or phone number and password.");
   }
 
-  const normalizedIdentifier = identifier.trim().toLowerCase();
+  const normalizedIdentifier = request.identifier.trim().toLowerCase();
   const allowedIdentifiers = ["grace.wanjiku@example.com", "+254712345678", "0712345678"];
 
-  if (!allowedIdentifiers.includes(normalizedIdentifier) || password !== "password") {
+  if (!allowedIdentifiers.includes(normalizedIdentifier) || request.password !== "password") {
     throw new Error("Invalid mock credentials. Use grace.wanjiku@example.com and password.");
   }
 
