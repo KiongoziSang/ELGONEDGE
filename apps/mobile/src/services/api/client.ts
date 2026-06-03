@@ -122,6 +122,7 @@ function createUrl(path: string) {
 
 function createHeaders(headers: Record<string, string> | undefined, token: string | undefined) {
   const nextHeaders = new Headers();
+  nextHeaders.set("Accept", "application/json");
   nextHeaders.set("Content-Type", "application/json");
 
   if (token) {
@@ -137,7 +138,8 @@ function createHeaders(headers: Record<string, string> | undefined, token: strin
 
 async function parseResponse<TResponse>(response: Response): Promise<TResponse> {
   const text = await response.text();
-  const parsed = parseJson(text);
+  const contentType = response.headers.get("content-type") ?? "";
+  const parsed = parseJson(text, contentType, response.status);
 
   if (!response.ok) {
     throw new ApiClientError(readErrorResponse(parsed, response.status));
@@ -146,9 +148,20 @@ async function parseResponse<TResponse>(response: Response): Promise<TResponse> 
   return parsed as TResponse;
 }
 
-function parseJson(text: string): JsonValue | undefined {
+function parseJson(text: string, contentType: string, status: number): JsonValue | undefined {
   if (!text.trim()) {
     return undefined;
+  }
+
+  if (!contentType.toLowerCase().includes("application/json")) {
+    throw new ApiClientError({
+      code: "INVALID_RESPONSE",
+      message:
+        status === 404
+          ? "Backend endpoint was not found. Check EXPO_PUBLIC_API_BASE_URL and confirm the mobile auth API is deployed."
+          : "Backend returned a non-JSON response. Check EXPO_PUBLIC_API_BASE_URL and backend API routing.",
+      status
+    });
   }
 
   try {
