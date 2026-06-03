@@ -39,16 +39,20 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
       {error ? <EmptyState title="Unable to load tenant details" text={error} /> : null}
       {!loading && !error ? (
         <>
-          <Text style={styles.welcome}>Welcome, {profile.data.fullName}</Text>
-          <Text style={styles.location}>
-            {profile.data.propertyName} · Unit {profile.data.unitNumber}
-          </Text>
-          <AmountCard
-            label="Current rent balance"
-            amount={summary.data.rentBalance}
-            detail={`Next due ${formatDate(summary.data.nextDueDate)}`}
-            status={summary.data.paymentStatus}
-          />
+          <View style={styles.intro}>
+            <Text style={styles.welcome}>Welcome, {profile.data.fullName}</Text>
+            <Text style={styles.location}>
+              {profile.data.propertyName} · Unit {profile.data.unitNumber}
+            </Text>
+          </View>
+          <View style={styles.balance}>
+            <AmountCard
+              label="Current rent balance"
+              amount={summary.data.rentBalance}
+              detail={`Next due ${formatDate(summary.data.nextDueDate)}`}
+              status={summary.data.paymentStatus}
+            />
+          </View>
           <View style={styles.row}>
             <AppCard compact>
               <Text style={styles.smallLabel}>Lease</Text>
@@ -92,6 +96,9 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
 }
 
 const styles = StyleSheet.create({
+  intro: {
+    marginBottom: 18
+  },
   welcome: {
     color: colors.navy,
     fontSize: 25,
@@ -100,8 +107,10 @@ const styles = StyleSheet.create({
   location: {
     color: colors.slate,
     fontSize: 15,
-    marginBottom: 16,
     marginTop: 4
+  },
+  balance: {
+    marginBottom: 2
   },
   row: {
     flexDirection: "row",

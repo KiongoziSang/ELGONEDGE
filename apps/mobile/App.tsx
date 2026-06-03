@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { BrandMark } from "./src/components/BrandMark";
 import { AuthProvider, useAuth } from "./src/context/AuthContext";
 import { AccessScreen } from "./src/screens/AccessScreen";
@@ -29,10 +30,12 @@ const tabs: { id: AppTab; label: string }[] = [
 
 export default function App() {
   return (
-    <AuthProvider>
-      <StatusBar style="light" />
-      <RootNavigator />
-    </AuthProvider>
+    <SafeAreaProvider>
+      <AuthProvider>
+        <StatusBar style="light" backgroundColor={colors.navy} translucent={false} />
+        <RootNavigator />
+      </AuthProvider>
+    </SafeAreaProvider>
   );
 }
 
@@ -64,7 +67,7 @@ function RootNavigator() {
   return (
     <View style={styles.app}>
       <View style={styles.content}>{renderScreen(screen, setScreen)}</View>
-      <SafeAreaView style={styles.tabSafe}>
+      <SafeAreaView edges={["bottom"]} style={styles.tabSafe}>
         <View style={styles.tabs}>
           {tabs.map((tab) => {
             const active = tab.id === activeTab;

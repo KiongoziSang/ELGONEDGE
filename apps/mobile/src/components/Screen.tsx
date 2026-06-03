@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { colors, spacing } from "../theme";
 import { AppHeader } from "./AppHeader";
 
@@ -15,13 +15,13 @@ export function Screen({
   footer?: ReactNode;
 }) {
   return (
-    <SafeAreaView style={styles.safe}>
+    <View style={styles.safe}>
       <AppHeader title={title} subtitle={subtitle} />
       <ScrollView style={styles.scroll} contentContainerStyle={styles.content}>
         {children}
       </ScrollView>
       {footer ? <View style={styles.footer}>{footer}</View> : null}
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   content: {
     padding: spacing.screen,
-    paddingBottom: 36
+    paddingBottom: 48
   },
   footer: {
     backgroundColor: colors.white,

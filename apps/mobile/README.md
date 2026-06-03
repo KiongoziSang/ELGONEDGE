@@ -46,6 +46,11 @@ npm run web
 
 `npm run ios` requires macOS for simulator builds. Expo Go can still be used for iPhone testing from the QR code.
 
+## QA and integration planning
+
+- [MVP1 manual QA checklist](docs/MVP1_QA_CHECKLIST.md)
+- [MVP1 backend API contract draft](docs/MVP1_API_CONTRACT.md)
+
 ## Mock mode and API wiring
 
 The app currently uses mock mode through the service layer in `src/services/api`. Screens call API service modules rather than calling backend endpoints or importing domain records directly.
