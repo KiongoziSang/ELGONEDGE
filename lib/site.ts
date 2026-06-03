@@ -1,15 +1,20 @@
 import type { LucideIcon } from "lucide-react";
 import {
   BarChart3,
+  Banknote,
   Bot,
   BrainCircuit,
+  BriefcaseBusiness,
   Building2,
   CheckCircle2,
   Compass,
   DatabaseZap,
   Facebook,
   FileCheck2,
+  GraduationCap,
+  HeartPulse,
   Instagram,
+  Landmark,
   Layers3,
   Linkedin,
   LineChart,
@@ -18,6 +23,7 @@ import {
   Rocket,
   ShieldCheck,
   Twitter,
+  UsersRound,
   Workflow,
   Youtube
 } from "lucide-react";
@@ -92,7 +98,7 @@ export const services: Service[] = [
   {
     slug: "digital-transformation-advisory",
     title: "Digital Transformation Advisory",
-    description: "Modernizing business processes, systems, and operating models.",
+    description: "Digital transformation consulting Kenya teams can use to modernize processes, systems, and operating models.",
     icon: Network,
     capabilities: [
       "Digital maturity assessments",
@@ -102,9 +108,9 @@ export const services: Service[] = [
     ],
     seoTitle: "Digital Transformation Advisory | Elgon Edge Consulting Limited",
     seoDescription:
-      "Digital transformation advisory for organizations modernizing business processes, systems, operating models, governance, and digital platforms.",
+      "Digital transformation consulting Kenya organizations can use for business processes, operating models, cloud consulting, governance, and enterprise technology delivery.",
     overview:
-      "Elgon Edge Consulting Limited helps organizations define practical modernization roadmaps, align stakeholders, and move transformation priorities from strategy into structured implementation.",
+      "Elgon Edge Consulting Limited helps organizations define practical modernization roadmaps, align stakeholders, and move transformation priorities from strategy into structured implementation across cloud, data, AI, workflow, and enterprise technology programs.",
     outcomes: [
       "Clear modernization roadmap aligned to business outcomes",
       "Improved process visibility and operating model clarity",
@@ -114,7 +120,7 @@ export const services: Service[] = [
   {
     slug: "data-strategy-governance-quality",
     title: "Data Strategy, Governance & Quality",
-    description: "Building trusted, governed, and high-quality data foundations.",
+    description: "Data governance consulting, data quality management, and modern data platform foundations.",
     icon: DatabaseZap,
     capabilities: [
       "Data strategy and governance frameworks",
@@ -124,9 +130,9 @@ export const services: Service[] = [
     ],
     seoTitle: "Data Strategy, Governance and Quality Consulting | Elgon Edge Consulting Limited",
     seoDescription:
-      "Data strategy, governance, and quality consulting for organizations building trusted data foundations, ownership models, controls, and reporting confidence.",
+      "Data governance consulting, data quality management, modern data platform consulting, and BigQuery consulting for trusted data foundations.",
     overview:
-      "We help organizations strengthen data foundations through governance frameworks, data quality controls, stewardship models, and practical standards that support analytics, automation, and AI adoption.",
+      "We help organizations strengthen data foundations through governance frameworks, data quality controls, stewardship models, BigQuery-aware architecture patterns, and practical standards that support analytics, automation, and AI adoption.",
     outcomes: [
       "Trusted data foundations for reporting and decision-making",
       "Clear ownership, stewardship, and governance controls",
@@ -136,7 +142,7 @@ export const services: Service[] = [
   {
     slug: "business-intelligence-executive-analytics",
     title: "Business Intelligence & Executive Analytics",
-    description: "Creating dashboards, KPIs, board reports, and actionable insights.",
+    description: "Business intelligence consulting, Power BI consulting Kenya teams, dashboards, KPIs, and board reporting.",
     icon: BarChart3,
     capabilities: [
       "Executive dashboards",
@@ -146,9 +152,9 @@ export const services: Service[] = [
     ],
     seoTitle: "Business Intelligence and Executive Analytics Consulting | Elgon Edge Consulting Limited",
     seoDescription:
-      "Business intelligence consulting for dashboards, KPIs, executive analytics, board reporting, and decision-ready management insights.",
+      "Business intelligence consulting and Power BI consulting Kenya organizations can use for dashboards, KPIs, executive analytics, board reporting, and decision-ready insights.",
     overview:
-      "Elgon Edge Consulting Limited designs dashboards, KPI frameworks, board reports, and executive analytics that help leadership teams understand performance and act with confidence.",
+      "Elgon Edge Consulting Limited designs Power BI and modern analytics dashboards, KPI frameworks, board reports, and executive analytics that help leadership teams understand performance and act with confidence.",
     outcomes: [
       "Clear executive dashboards and performance indicators",
       "Reduced manual reporting effort",
@@ -158,7 +164,7 @@ export const services: Service[] = [
   {
     slug: "ai-readiness-responsible-ai-governance",
     title: "AI Readiness & Responsible AI Governance",
-    description: "Enabling safe, practical, and governed AI adoption.",
+    description: "AI consulting Kenya organizations can use for AI strategy, readiness, and responsible AI governance.",
     icon: BrainCircuit,
     capabilities: [
       "AI readiness assessments",
@@ -168,7 +174,7 @@ export const services: Service[] = [
     ],
     seoTitle: "AI Readiness and Responsible AI Governance Consulting | Elgon Edge Consulting Limited",
     seoDescription:
-      "AI readiness and responsible AI governance consulting for organizations adopting practical, safe, governed, and business-aligned AI capabilities.",
+      "AI consulting Kenya, AI strategy consulting, and responsible AI governance for organizations adopting practical, safe, governed, and business-aligned AI capabilities.",
     overview:
       "We help organizations assess AI readiness, identify practical use cases, define responsible AI controls, and build adoption roadmaps grounded in data readiness, governance, and risk management.",
     outcomes: [
@@ -224,7 +230,7 @@ export const services: Service[] = [
   {
     slug: "custom-software-saas-digital-platforms",
     title: "Custom Software, SaaS & Digital Platforms",
-    description: "Building business apps, portals, SaaS products, marketplaces, and digital platforms.",
+    description: "Custom SaaS, platform engineering, cloud consulting, portals, marketplaces, and digital operating systems.",
     icon: Layers3,
     capabilities: [
       "Custom web applications",
@@ -238,7 +244,7 @@ export const services: Service[] = [
     ],
     seoTitle: "Custom Software, SaaS and Digital Platform Development | Elgon Edge Consulting Limited",
     seoDescription:
-      "SaaS development and custom software delivery for business applications, portals, marketplaces, workflow platforms, dashboards, and digital operating systems.",
+      "Custom SaaS development, cloud consulting, platform engineering, portals, marketplaces, workflow platforms, dashboards, and digital operating systems.",
     overview:
       "Elgon Edge Consulting Limited designs and builds custom software, SaaS products, portals, marketplace workflows, moderated resident community features, resident exchange features, and digital operating systems that support modern business operations. ElgonOS is our flagship AI-powered property management software for Kenya, covering rent collection, M-PESA workflows, tenant, lease, unit, billing, receipt, and document management, construction tracking, maintenance, access control, resident services, Ask AI, dashboards, approvals, reminders, and audit trails.",
     outcomes: [
@@ -256,7 +262,7 @@ export const services: Service[] = [
 export const differentiators = [
   {
     title: "Practical Modernization",
-    description: "Strategy is translated into working systems, measurable processes, and adoption plans.",
+    description: "Strategy, architecture, governance, engineering, implementation, and adoption support are tied to measurable outcomes.",
     icon: CheckCircle2
   },
   {
@@ -273,6 +279,89 @@ export const differentiators = [
     title: "Platform Delivery",
     description: "Consulting insight is backed by implementation capability across web, SaaS, and workflow tools.",
     icon: Building2
+  }
+];
+
+export const industries = [
+  {
+    title: "Financial services",
+    description: "Trusted data, controls, dashboards, automation, and governed AI for regulated operating environments.",
+    icon: Banknote
+  },
+  {
+    title: "Insurance",
+    description: "Cleaner customer, policy, claims, reporting, and workflow foundations for better operational visibility.",
+    icon: ShieldCheck
+  },
+  {
+    title: "Real estate and property management",
+    description: "Property operations platforms, rent workflows, tenant visibility, maintenance, access, and resident services.",
+    icon: Building2
+  },
+  {
+    title: "Public sector",
+    description: "Data governance, service delivery dashboards, workflow modernization, and accountable digital programs.",
+    icon: Landmark
+  },
+  {
+    title: "Education",
+    description: "Student, finance, performance, reporting, and engagement data patterns for better institutional decisions.",
+    icon: GraduationCap
+  },
+  {
+    title: "Healthcare",
+    description: "Operational dashboards, data quality controls, workflow improvement, and responsible AI readiness.",
+    icon: HeartPulse
+  },
+  {
+    title: "SMEs and growing enterprises",
+    description: "Practical systems, dashboards, automation, and SaaS patterns that scale with the business.",
+    icon: BriefcaseBusiness
+  }
+];
+
+export const solutionAccelerators = [
+  {
+    title: "ElgonOS property operations platform",
+    description: "A flagship AI-powered property management product for Kenya, with rent, tenant, maintenance, access, construction, resident, and dashboard workflows.",
+    icon: Building2,
+    href: "/elgonos"
+  },
+  {
+    title: "Customer 360 accelerators",
+    description: "Implementation patterns for consolidating customer, account, service, communication, and performance views.",
+    icon: UsersRound,
+    href: "/services/data-strategy-governance-quality"
+  },
+  {
+    title: "Data Quality Monitoring dashboards",
+    description: "Dashboard templates and controls for tracking completeness, consistency, exceptions, ownership, and remediation.",
+    icon: DatabaseZap,
+    href: "/services/data-strategy-governance-quality"
+  },
+  {
+    title: "Responsible AI governance toolkit",
+    description: "Engagement assets for AI policies, risk review, use case prioritization, human oversight, and adoption controls.",
+    icon: BrainCircuit,
+    href: "/services/ai-readiness-responsible-ai-governance"
+  },
+  {
+    title: "Digital performance monitoring tools",
+    description: "Solution patterns for KPIs, service levels, exception tracking, executive dashboards, and improvement routines.",
+    icon: BarChart3,
+    href: "/services/business-intelligence-executive-analytics"
+  },
+  {
+    title: "Workflow automation accelerators",
+    description: "Reusable process patterns for approvals, reminders, handoffs, document intelligence, audit trails, and controlled automation.",
+    icon: Workflow,
+    href: "/services/intelligent-automation-agentic-ai"
+  },
+  {
+    title: "Executive dashboard frameworks",
+    description: "Board-ready reporting structures for strategy, finance, operations, risk, customer, and delivery performance.",
+    icon: LineChart,
+    href: "/services/business-intelligence-executive-analytics"
   }
 ];
 

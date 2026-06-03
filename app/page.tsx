@@ -16,16 +16,25 @@ import {
   UsersRound,
   Wrench
 } from "lucide-react";
+import Link from "next/link";
 import { ButtonLink } from "@/components/ButtonLink";
 import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
-import { differentiators, edgeFrameworkSteps, elgonOsUrl, services, workflowIcon } from "@/lib/site";
+import {
+  differentiators,
+  edgeFrameworkSteps,
+  elgonOsUrl,
+  industries,
+  services,
+  solutionAccelerators,
+  workflowIcon
+} from "@/lib/site";
 import { createPageMetadata, defaultSeoTitle } from "@/lib/seo";
 
 export const metadata = createPageMetadata({
   title: defaultSeoTitle,
   description:
-    "Elgon Edge Consulting Limited builds data, AI, automation, and digital platforms, led by ElgonOS: AI-powered property management software for Kenya covering rent collection, M-PESA workflows, tenants, construction, maintenance, access, dashboards, and Ask AI.",
+    "Elgon Edge Consulting Limited is a technology consulting firm in Kenya for data strategy, governance, analytics, responsible AI, automation, cloud, digital platforms, and flagship products including ElgonOS.",
   path: "/",
   absoluteTitle: true,
   keywords: [
@@ -34,8 +43,14 @@ export const metadata = createPageMetadata({
     "data-driven governed execution",
     "strategy to implementation",
     "data consulting Kenya",
+    "data analytics consulting Kenya",
     "AI consulting Kenya",
+    "cloud consulting Kenya",
     "digital transformation consulting Kenya",
+    "technology consulting firm Kenya",
+    "enterprise technology consulting",
+    "modern data platform consulting",
+    "Power BI consulting Kenya",
     "ElgonOS property management software Kenya",
     "M-PESA rent collection software"
   ]
@@ -45,12 +60,17 @@ const WorkflowIcon = workflowIcon;
 
 const homepageMarqueeFeatures = [
   "Data governance",
+  "Data quality management",
   "AI strategy",
+  "Responsible AI governance",
   "Automation",
+  "Agentic AI",
   "Digital platforms",
-  "ElgonOS rent collection",
-  "M-PESA workflows",
+  "Cloud consulting",
+  "Modern data platforms",
   "Executive dashboards",
+  "Power BI consulting",
+  "BigQuery consulting",
   "Audit trails",
   "Workflow modernization",
   "ElgonOS",
@@ -215,8 +235,8 @@ export default function HomePage() {
             </h2>
             </div>
             <p className="max-w-3xl text-[1.2rem] leading-9 text-slate-600 lg:justify-self-end">
-              We bring the discipline of a consulting engagement and the delivery focus needed to turn modern
-              data, AI, and platform ideas into durable operating capability.
+              Elgon Edge combines consulting discipline with hands-on delivery, helping teams move from strategy
+              documents into governed, working platforms, dashboards, automation, and AI-enabled operating capability.
             </p>
           </div>
           <div className="mt-14 grid gap-7 md:grid-cols-2 xl:grid-cols-4">
@@ -235,6 +255,87 @@ export default function HomePage() {
                 </article>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="fine-grid bg-slate-50 px-4 py-32 sm:px-6 lg:px-10">
+        <div className="mx-auto max-w-[1520px]">
+          <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div>
+              <p className="section-kicker">Industries We Support</p>
+              <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
+                Practical consulting for data-heavy and operations-led teams
+              </h2>
+            </div>
+            <p className="max-w-3xl text-[1.16rem] leading-9 text-slate-600 lg:justify-self-end">
+              We apply data analytics consulting, AI consulting, cloud consulting, governance, automation, and digital
+              transformation patterns to sectors where trusted systems and measurable delivery matter.
+            </p>
+          </div>
+          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {industries.map((industry) => {
+              const Icon = industry.icon;
+              return (
+                <article
+                  key={industry.title}
+                  className="rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-soft"
+                >
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-blue text-white shadow-lg shadow-blue-900/15">
+                    <Icon className="h-6 w-6" aria-hidden="true" />
+                  </div>
+                  <h3 className="mt-5 text-xl font-black text-brand-navy">{industry.title}</h3>
+                  <p className="mt-3 text-[1.02rem] leading-8 text-slate-600">{industry.description}</p>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-32 sm:px-6 lg:px-10">
+        <div className="mx-auto max-w-[1520px]">
+          <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
+            <div>
+              <p className="section-kicker">Solutions & Accelerators</p>
+              <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
+                Reusable patterns that shorten the path from advisory to delivery
+              </h2>
+            </div>
+            <p className="max-w-3xl text-[1.16rem] leading-9 text-slate-600 lg:justify-self-end">
+              Beyond advisory documents, Elgon Edge uses product experience, implementation templates, and
+              engagement assets to help teams ship governed dashboards, workflows, platforms, and AI-ready operating
+              capability. ElgonOS is one flagship product in this wider delivery portfolio.
+            </p>
+          </div>
+          <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {solutionAccelerators.map((accelerator) => {
+              const Icon = accelerator.icon;
+              return (
+                <Link
+                  key={accelerator.title}
+                  href={accelerator.href}
+                  className="group rounded-[1.5rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-brand-blue/30 hover:shadow-soft"
+                >
+                  <div className="flex items-start justify-between gap-5">
+                    <div className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-navy p-3 text-cyan-200 shadow-lg shadow-slate-900/15">
+                      <Icon className="h-7 w-7" aria-hidden="true" />
+                    </div>
+                    <ArrowRight className="h-5 w-5 text-brand-blue transition group-hover:translate-x-1" aria-hidden="true" />
+                  </div>
+                  <h3 className="mt-6 text-xl font-black text-brand-navy">{accelerator.title}</h3>
+                  <p className="mt-4 text-[1.04rem] leading-8 text-slate-600">{accelerator.description}</p>
+                </Link>
+              );
+            })}
+          </div>
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <ButtonLink href="/elgonos" variant="secondary">
+              View ElgonOS
+            </ButtonLink>
+            <ButtonLink href={elgonOsUrl}>
+              Launch ElgonOS
+            </ButtonLink>
           </div>
         </div>
       </section>

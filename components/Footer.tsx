@@ -20,7 +20,8 @@ export function Footer() {
             </div>
           </div>
           <p className="mt-7 max-w-md text-[1.18rem] leading-9 text-slate-300">
-            Data, AI, automation, governance, digital platforms, and ElgonOS AI-powered property management software.
+            Technology consulting for data, AI, automation, governance, cloud, digital platforms, and flagship
+            products including ElgonOS.
           </p>
           {socialLinks.length > 0 ? (
             <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -72,7 +73,7 @@ export function Footer() {
           <p className="mb-5 text-xs font-extrabold uppercase tracking-[0.18em] text-cyan-200">Services</p>
           <div className="grid gap-4 text-[1.08rem]">
             {services.slice(0, 5).map((service) => (
-              <Link key={service.title} href="/services" className="text-slate-300 transition hover:text-white">
+              <Link key={service.title} href={`/services/${service.slug}`} className="text-slate-300 transition hover:text-white">
                 {service.title}
               </Link>
             ))}

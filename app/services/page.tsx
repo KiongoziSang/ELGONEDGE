@@ -10,12 +10,25 @@ export const metadata: Metadata = createPageMetadata({
   title: "Services | Data, AI, Automation and Digital Transformation Consulting",
   path: "/services",
   description:
-    "Explore Elgon Edge Consulting services across digital transformation, data governance, business intelligence, responsible AI, automation, data migration assurance, SaaS platforms, and ElgonOS AI-powered property management software.",
+    "Explore Elgon Edge Consulting services across digital transformation consulting Kenya, data governance consulting, business intelligence consulting, AI strategy consulting, cloud consulting, automation, migration assurance, SaaS platforms, and ElgonOS.",
   absoluteTitle: true,
   keywords: [
+    "data analytics consulting Kenya",
+    "AI consulting Kenya",
+    "cloud consulting Kenya",
+    "digital transformation consulting Kenya",
     "data governance consulting Kenya",
+    "data governance consulting",
     "business intelligence consulting Kenya",
-    "automation consulting Kenya",
+    "business intelligence consulting",
+    "responsible AI governance",
+    "enterprise technology consulting",
+    "modern data platform consulting",
+    "AI strategy consulting",
+    "data quality management",
+    "Power BI consulting Kenya",
+    "BigQuery consulting",
+    "technology consulting firm Kenya",
     "SaaS development Kenya"
   ]
 });
@@ -33,7 +46,7 @@ const servicesJsonLd = services.map((service) => ({
     "@type": "Country",
     name: "Kenya"
   },
-  url: `${siteUrl}/services`
+  url: `${siteUrl}/services/${service.slug}`
 }));
 
 export default function ServicesPage() {
@@ -55,8 +68,9 @@ export default function ServicesPage() {
             <p className="mt-7 max-w-4xl text-[1.32rem] leading-10 text-slate-200">
               Elgon Edge Consulting Limited supports organizations across the full modernization lifecycle:
               assessing the opportunity, designing the target state, implementing fit-for-purpose systems, and
-              embedding the controls needed for long-term value. ElgonOS is our flagship software product for
-              AI-powered property management in Kenya.
+              embedding the controls needed for long-term value. We combine strategy, architecture, governance,
+              engineering, implementation, adoption support, and measurable outcomes. ElgonOS is our flagship
+              software product for AI-powered property management in Kenya.
             </p>
           </div>
 

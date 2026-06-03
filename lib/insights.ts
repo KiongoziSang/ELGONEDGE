@@ -5,6 +5,7 @@ export type Insight = {
   image: string;
   imageAlt: string;
   keywords: string[];
+  relatedServiceSlugs?: string[];
   intro: string;
   sections: {
     heading: string;
@@ -29,6 +30,7 @@ export const insights: Insight[] = [
       "tenant management software Kenya",
       "ElgonOS"
     ],
+    relatedServiceSlugs: ["custom-software-saas-digital-platforms"],
     intro:
       "The best property management software in Kenya should fit local rent collection workflows, tenant operations, reporting needs, and the realities of implementation.",
     sections: [
@@ -67,6 +69,7 @@ export const insights: Insight[] = [
     image: "/insights/data-governance-ai-insight.png",
     imageAlt: "Abstract data governance dashboard with trusted data blocks and control icons",
     keywords: ["data governance consulting Kenya", "data quality", "trusted data foundations"],
+    relatedServiceSlugs: ["data-strategy-governance-quality"],
     intro:
       "Data governance is the operating discipline that helps organizations define ownership, improve quality, protect data, and use information with confidence.",
     sections: [
@@ -95,6 +98,7 @@ export const insights: Insight[] = [
     image: "/insights/responsible-ai-insight.png",
     imageAlt: "Responsible AI governance concept with neural network, shield, and risk controls",
     keywords: ["AI consulting Kenya", "AI readiness", "responsible AI governance"],
+    relatedServiceSlugs: ["ai-readiness-responsible-ai-governance"],
     intro:
       "AI readiness helps organizations understand whether their data, processes, people, governance, and risks are prepared for practical AI adoption.",
     sections: [
@@ -123,6 +127,7 @@ export const insights: Insight[] = [
     image: "/insights/data-governance-ai-insight.png",
     imageAlt: "Executive analytics dashboard with governed data flows and reporting panels",
     keywords: ["business intelligence consulting Kenya", "executive analytics", "single source of truth"],
+    relatedServiceSlugs: ["business-intelligence-executive-analytics", "data-strategy-governance-quality"],
     intro:
       "A single source of truth gives leaders and teams confidence that reports, dashboards, and KPIs are based on consistent definitions and reliable data.",
     sections: [
@@ -151,6 +156,7 @@ export const insights: Insight[] = [
     image: "/insights/data-governance-ai-insight.png",
     imageAlt: "Executive dashboard concept with governed data flows and performance reporting panels",
     keywords: ["executive dashboards", "KPI reporting", "business intelligence consulting Kenya"],
+    relatedServiceSlugs: ["business-intelligence-executive-analytics"],
     intro:
       "A modern executive dashboard should help leaders understand performance quickly, trust the numbers, and move from reporting into informed action.",
     sections: [
@@ -179,6 +185,7 @@ export const insights: Insight[] = [
     image: "/insights/automation-platform-insight.png",
     imageAlt: "Workflow automation command center with connected documents and digital process lanes",
     keywords: ["automation consulting Kenya", "workflow automation", "agentic AI"],
+    relatedServiceSlugs: ["intelligent-automation-agentic-ai"],
     intro:
       "Workflow automation helps organizations reduce repetitive work, improve consistency, speed up approvals, and give teams more time for higher-value activities.",
     sections: [
@@ -207,6 +214,7 @@ export const insights: Insight[] = [
     image: "/insights/automation-platform-insight.png",
     imageAlt: "Data migration pathways connecting records, controls, and reporting dashboards",
     keywords: ["data migration assurance", "data reconciliation", "go-live readiness"],
+    relatedServiceSlugs: ["data-migration-assurance-reconciliation"],
     intro:
       "A data migration go-live should be supported by clear validation evidence, reconciliation checks, issue tracking, and business readiness.",
     sections: [
@@ -235,6 +243,7 @@ export const insights: Insight[] = [
     image: "/insights/automation-platform-insight.png",
     imageAlt: "Property operations platform with connected documents, dashboards, and portfolio tiles",
     keywords: ["ElgonOS property management", "AI-powered property management software Kenya", "property management software Kenya", "ElgonOS"],
+    relatedServiceSlugs: ["custom-software-saas-digital-platforms"],
     intro:
       "ElgonOS helps property managers move from fragmented spreadsheets to a centralized AI-powered property management platform for daily operations.",
     sections: [

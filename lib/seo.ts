@@ -6,7 +6,7 @@ export const siteUrl = "https://www.elgonedge.com";
 export const siteName = "Elgon Edge Consulting Limited";
 export const defaultSeoTitle = `${siteName} | Data, AI and Digital Transformation Consulting`;
 export const defaultSeoDescription =
-  "Elgon Edge Consulting Limited helps organizations move from strategy to implementation through the EDGE Framework, data, AI, automation, governance, business intelligence, digital platforms, and ElgonOS AI-powered property management software for Kenya.";
+  "Elgon Edge Consulting Limited is a technology consulting firm in Kenya helping organizations move from strategy to implementation through the EDGE Framework, data, AI, automation, governance, business intelligence, cloud, digital platforms, and flagship products including ElgonOS.";
 
 export const seoKeywords = [
   "Elgon Edge Consulting Limited",
@@ -29,10 +29,22 @@ export const seoKeywords = [
   "data-driven governed execution",
   "strategy to implementation",
   "data consulting Kenya",
+  "data analytics consulting Kenya",
   "AI consulting Kenya",
+  "cloud consulting Kenya",
   "digital transformation consulting Kenya",
   "data governance consulting Kenya",
+  "data governance consulting",
+  "modern data platform consulting",
+  "AI strategy consulting",
+  "data quality management",
+  "Power BI consulting Kenya",
+  "BigQuery consulting",
+  "enterprise technology consulting",
+  "technology consulting firm Kenya",
+  "responsible AI governance",
   "business intelligence consulting Kenya",
+  "business intelligence consulting",
   "automation consulting Kenya",
   "property management software Kenya",
   "SaaS development Kenya"
@@ -126,10 +138,24 @@ export const organizationJsonLd = {
   },
   knowsAbout: [
     "Data consulting",
+    "Data analytics consulting Kenya",
     "AI consulting",
+    "AI strategy consulting",
+    "AI consulting Kenya",
+    "Cloud consulting Kenya",
     "Digital transformation",
+    "Digital transformation consulting Kenya",
+    "Enterprise technology consulting",
+    "Technology consulting firm Kenya",
+    "Modern data platform consulting",
     "Data governance",
+    "Data governance consulting",
+    "Data quality management",
     "Business intelligence",
+    "Business intelligence consulting",
+    "Power BI consulting Kenya",
+    "BigQuery consulting",
+    "Responsible AI governance",
     "EDGE Framework",
     "Explore Design Govern Execute",
     "Data-driven governed execution",

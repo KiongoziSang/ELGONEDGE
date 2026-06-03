@@ -7,6 +7,7 @@ import { CTASection } from "@/components/CTASection";
 import { ShareButtons } from "@/components/ShareButtons";
 import { insights } from "@/lib/insights";
 import { createPageMetadata, JsonLd, siteUrl } from "@/lib/seo";
+import { services } from "@/lib/site";
 
 type InsightPageProps = {
   params: {
@@ -67,6 +68,7 @@ export default function InsightPage({ params }: InsightPageProps) {
     },
     inLanguage: "en-KE"
   };
+  const relatedServices = services.filter((service) => insight.relatedServiceSlugs?.includes(service.slug));
 
   return (
     <main>
@@ -126,6 +128,23 @@ export default function InsightPage({ params }: InsightPageProps) {
             ))}
           </div>
         </article>
+
+        {relatedServices.length > 0 ? (
+          <div className="mx-auto mt-8 max-w-[980px] rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm">
+            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-brand-blue">Relevant services</p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              {relatedServices.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/services/${service.slug}`}
+                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-black text-brand-navy transition hover:border-brand-blue/35 hover:text-brand-blue"
+                >
+                  {service.title}
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
       </section>
 
       <CTASection
