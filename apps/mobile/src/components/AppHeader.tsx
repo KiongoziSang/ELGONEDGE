@@ -8,7 +8,7 @@ export function AppHeader({ title, subtitle }: { title: string; subtitle?: strin
 
   return (
     <View style={[styles.header, { paddingTop: insets.top + 18 }]}>
-      <BrandMark light />
+      <BrandMark size="medium" light />
       <Text style={styles.title}>{title}</Text>
       {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
     </View>
@@ -18,7 +18,7 @@ export function AppHeader({ title, subtitle }: { title: string; subtitle?: strin
 const styles = StyleSheet.create({
   header: {
     backgroundColor: colors.navy,
-    paddingBottom: 20,
+    paddingBottom: 18,
     paddingHorizontal: spacing.screen
   },
   title: {
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: "900",
     lineHeight: 34,
-    marginTop: 18
+    marginTop: 16
   },
   subtitle: {
     color: "#C8D5E2",
