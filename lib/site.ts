@@ -314,6 +314,11 @@ export const industries = [
     icon: HeartPulse
   },
   {
+    title: "Manufacturing",
+    description: "Production visibility, quality monitoring, inventory data, maintenance workflows, and operational dashboards.",
+    icon: Workflow
+  },
+  {
     title: "SMEs and growing enterprises",
     description: "Practical systems, dashboards, automation, and SaaS patterns that scale with the business.",
     icon: BriefcaseBusiness
