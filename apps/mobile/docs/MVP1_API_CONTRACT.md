@@ -19,6 +19,27 @@ This draft defines the expected REST API shape for wiring ElgonOS Mobile MVP1 to
 
 Phase 1A prepares the mobile foundation without connecting screens to the backend yet. The shared API client owns base URL resolution, JSON request/response handling, bearer token injection, timeout handling, mock mode detection, and consistent API errors. Existing screen-facing service modules remain mock-backed until Phase 1B explicitly wires one endpoint group at a time.
 
+## Phase 1B Mobile Integration Scope
+
+Phase 1B wires only authentication, session restore/validation, logout, tenant profile, dashboard summary, and lease details. In mock mode, the Grace Wanjiku mock flow remains fully usable without a backend. In real API mode, the app uses `EXPO_PUBLIC_API_BASE_URL`, stores access and optional refresh tokens in Expo SecureStore, validates stored sessions on reload, clears invalid sessions locally, and keeps all other MVP1 modules mock-backed.
+
+Integrated Phase 1B endpoints:
+
+- `POST /api/mobile/auth/login`
+- `POST /api/mobile/auth/logout`
+- `POST /api/mobile/auth/refresh`
+- `GET /api/mobile/auth/session`
+- `GET /api/mobile/tenant/me`
+- `GET /api/mobile/tenant/dashboard`
+- `GET /api/mobile/lease`
+
+Backend assumptions:
+
+- Login returns `accessToken`, optional `refreshToken`, optional expiry metadata, and a tenant summary.
+- Authenticated endpoints accept `Authorization: Bearer <accessToken>`.
+- If refresh is unavailable, `GET /api/mobile/auth/session` or `GET /api/mobile/tenant/me` can validate an existing token.
+- Mobile service modules may map backend DTOs into the app's existing view models.
+
 Example error:
 
 ```json

@@ -8,6 +8,8 @@ type ApiRequestOptions = Omit<RequestInit, "body" | "headers"> & {
   timeoutMs?: number;
 };
 
+let activeAuthToken: string | null = null;
+
 export class ApiClientError extends Error {
   apiError: ApiError;
 
@@ -45,6 +47,10 @@ export function createSessionAuthHeader(token: string | null | undefined) {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
+export function setApiAuthToken(token: string | null) {
+  activeAuthToken = token;
+}
+
 export function toApiError(error: unknown): ApiError {
   if (error instanceof ApiClientError) {
     return error.apiError;
@@ -72,7 +78,7 @@ export async function apiRequest<TResponse>(path: string, options: ApiRequestOpt
     throw new MockModeError();
   }
 
-  const { body, headers, token, timeoutMs = appConfig.requestTimeoutMs, ...init } = options;
+  const { body, headers, token = activeAuthToken ?? undefined, timeoutMs = appConfig.requestTimeoutMs, ...init } = options;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 

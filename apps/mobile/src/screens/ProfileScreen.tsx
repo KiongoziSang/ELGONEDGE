@@ -7,20 +7,23 @@ import { Screen } from "../components/Screen";
 import { StatusBadge } from "../components/StatusBadge";
 import { useAuth } from "../context/AuthContext";
 import { useApiData } from "../hooks/useApiData";
-import { getTenantProfile } from "../services/api/tenant";
+import { getLeaseDetails, getTenantProfile } from "../services/api/tenant";
 import { colors } from "../theme";
-import type { TenantProfile } from "../types";
-import { formatDate } from "../utils/format";
+import type { LeaseDetails, TenantProfile } from "../types";
+import { formatDate, formatKes } from "../utils/format";
 
 export function ProfileScreen() {
   const { logout } = useAuth();
   const profile = useApiData<TenantProfile>(getTenantProfile, {} as TenantProfile);
+  const lease = useApiData<LeaseDetails>(getLeaseDetails, {} as LeaseDetails);
+  const loading = profile.loading || lease.loading;
+  const error = profile.error ?? lease.error;
 
   return (
     <Screen title="Profile" subtitle="Tenant profile and lease details.">
-      {profile.loading ? <LoadingState label="Loading profile..." /> : null}
-      {profile.error ? <EmptyState title="Unable to load profile" text={profile.error} /> : null}
-      {!profile.loading && !profile.error ? (
+      {loading ? <LoadingState label="Loading profile..." /> : null}
+      {error ? <EmptyState title="Unable to load profile" text={error} /> : null}
+      {!loading && !error ? (
         <View style={styles.stack}>
           <AppCard>
             <View style={styles.row}>
@@ -33,14 +36,7 @@ export function ProfileScreen() {
             </View>
           </AppCard>
           <DetailsCard
-            rows={[
-              ["Property", profile.data.propertyName],
-              ["Unit", profile.data.unitNumber],
-              ["Lease start", formatDate(profile.data.leaseStartDate)],
-              ["Lease end", formatDate(profile.data.leaseEndDate)],
-              ["Lease status", profile.data.leaseStatus],
-              ["Emergency contact", profile.data.emergencyContact]
-            ]}
+            rows={buildProfileRows(profile.data, lease.data)}
           />
           <AppButton label="Log out" onPress={logout} />
         </View>
@@ -60,6 +56,32 @@ function DetailsCard({ rows }: { rows: [string, string][] }) {
       ))}
     </AppCard>
   );
+}
+
+function buildProfileRows(profile: TenantProfile, lease: LeaseDetails): [string, string][] {
+  const rows: [string, string][] = [
+    ["Property", profile.propertyName],
+    ["Unit", profile.unitNumber],
+    ["Lease start", formatDisplayDate(lease.startDate)],
+    ["Lease end", formatDisplayDate(lease.endDate)],
+    ["Lease status", lease.status]
+  ];
+
+  if (lease.rentAmount) {
+    rows.push(["Rent", formatKes(lease.rentAmount)]);
+  }
+
+  if (lease.depositAmount) {
+    rows.push(["Deposit", formatKes(lease.depositAmount)]);
+  }
+
+  rows.push(["Emergency contact", profile.emergencyContact]);
+
+  return rows;
+}
+
+function formatDisplayDate(value: string) {
+  return value ? formatDate(value) : "Not available";
 }
 
 const styles = StyleSheet.create({

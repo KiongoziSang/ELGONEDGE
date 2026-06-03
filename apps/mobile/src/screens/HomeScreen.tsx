@@ -32,6 +32,9 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
 
   const loading = profile.loading || summary.loading;
   const error = profile.error ?? summary.error;
+  const tenantName = summary.data.tenantName ?? profile.data.fullName;
+  const propertyName = summary.data.propertyName ?? profile.data.propertyName;
+  const unitNumber = summary.data.unitNumber ?? profile.data.unitNumber;
 
   return (
     <Screen title="Home" subtitle="Tenant dashboard for Elgon Heights Apartments.">
@@ -40,9 +43,9 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
       {!loading && !error ? (
         <>
           <View style={styles.intro}>
-            <Text style={styles.welcome}>Welcome, {profile.data.fullName}</Text>
+            <Text style={styles.welcome}>Welcome, {tenantName}</Text>
             <Text style={styles.location}>
-              {profile.data.propertyName} · Unit {profile.data.unitNumber}
+              {propertyName} · Unit {unitNumber}
             </Text>
           </View>
           <View style={styles.balance}>

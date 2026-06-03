@@ -14,6 +14,12 @@ export type Session = {
   userId: string;
   refreshToken?: string;
   expiresAt?: string;
+  tenant?: {
+    id: string;
+    fullName: string;
+    phone?: string;
+    email?: string;
+  };
 };
 
 export type AuthSession = Session;
@@ -27,11 +33,12 @@ export type AuthLoginResponse = {
   accessToken: string;
   refreshToken?: string;
   expiresIn?: number;
+  expiresAt?: string;
   tenant: {
     id: string;
     fullName: string;
-    phone: string;
-    email: string;
+    phone?: string;
+    email?: string;
   };
 };
 
@@ -40,8 +47,11 @@ export type TenantProfile = {
   fullName: string;
   phone: string;
   email: string;
+  propertyId?: string;
   propertyName: string;
+  unitId?: string;
   unitNumber: string;
+  leaseId?: string;
   leaseStartDate: string;
   leaseEndDate: string;
   leaseStatus: "Active" | "Expiring" | "Ended";
@@ -54,6 +64,8 @@ export type LeaseDetails = {
   unitNumber: string;
   startDate: string;
   endDate: string;
+  rentAmount?: number;
+  depositAmount?: number;
   status: TenantProfile["leaseStatus"];
 };
 
@@ -165,7 +177,11 @@ export type AccessInfo = {
 };
 
 export type DashboardSummary = {
+  tenantName?: string;
+  propertyName?: string;
+  unitNumber?: string;
   rentBalance: number;
+  currency?: string;
   nextDueDate: string;
   paymentStatus: string;
   leaseStatus: string;

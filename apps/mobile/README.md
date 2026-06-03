@@ -62,16 +62,24 @@ EXPO_PUBLIC_API_BASE_URL=https://elgonos.elgonedge.com
 EXPO_PUBLIC_USE_MOCKS=true
 ```
 
-Phase 1A keeps the app in mock mode by default. `EXPO_PUBLIC_API_BASE_URL` is read by the shared API client, and `EXPO_PUBLIC_USE_MOCKS=true` keeps the existing Grace Wanjiku mock flow active. Set `EXPO_PUBLIC_USE_MOCKS=false` only after a Phase 1B service module is intentionally wired to a real endpoint.
+Mock mode is enabled by default. `EXPO_PUBLIC_API_BASE_URL` is read by the shared API client, and `EXPO_PUBLIC_USE_MOCKS=true` keeps the existing Grace Wanjiku mock flow active.
+
+Set `EXPO_PUBLIC_USE_MOCKS=false` to use the Phase 1B real API wiring for login, logout, session restore/validation, tenant profile, dashboard summary, and lease details. Other MVP1 modules remain mock-backed until later integration phases.
 
 The previous `EXPO_PUBLIC_ELGONOS_API_URL` and `EXPO_PUBLIC_ELGONOS_MOCK_MODE` names are still read as fallbacks for older local environments.
+
+In real API mode, login stores the access token and optional refresh token in Expo SecureStore. App reload validates the stored session using refresh/session validation where available, falling back to `GET /api/mobile/tenant/me`; invalid sessions are cleared locally.
 
 ## Expected backend endpoints later
 
 - `POST /api/mobile/auth/login`
+- `POST /api/mobile/auth/logout`
+- `POST /api/mobile/auth/refresh`
+- `GET /api/mobile/auth/session`
 - `POST /api/mobile/auth/forgot-password`
-- `GET /api/mobile/tenant/profile`
+- `GET /api/mobile/tenant/me`
 - `GET /api/mobile/tenant/dashboard`
+- `GET /api/mobile/lease`
 - `GET /api/mobile/payments/invoices`
 - `GET /api/mobile/payments/receipts`
 - `GET /api/mobile/payments/instructions`

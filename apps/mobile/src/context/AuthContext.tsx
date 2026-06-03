@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import * as SecureStore from "expo-secure-store";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { loginTenant, requestPasswordReset } from "../services/api/auth";
+import { loginTenant, logoutTenant, requestPasswordReset, restoreTenantSession } from "../services/api/auth";
+import { setApiAuthToken } from "../services/api/client";
 import type { AuthSession } from "../types";
 
 const sessionKey = "elgonos-mobile-session";
@@ -31,10 +32,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         const stored = await readStoredSession();
         if (mounted && stored) {
-          setSession(JSON.parse(stored) as AuthSession);
+          const parsedSession = JSON.parse(stored) as AuthSession;
+          const restoredSession = await restoreTenantSession(parsedSession);
+
+          if (!mounted) {
+            return;
+          }
+
+          if (restoredSession) {
+            await writeStoredSession(restoredSession);
+            setSession(restoredSession);
+          } else {
+            await clearStoredSession();
+            setSession(null);
+          }
         }
       } catch {
         if (mounted) {
+          await clearStoredSession();
           setSession(null);
         }
       } finally {
@@ -73,6 +88,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         }
       },
       async logout() {
+        await logoutTenant(session);
         await clearStoredSession();
         setSession(null);
         setError(null);
@@ -118,6 +134,7 @@ async function writeStoredSession(session: AuthSession) {
   if (available) {
     await SecureStore.setItemAsync(sessionKey, JSON.stringify(session));
   }
+  setApiAuthToken(session.token);
 }
 
 async function clearStoredSession() {
@@ -125,4 +142,5 @@ async function clearStoredSession() {
   if (available) {
     await SecureStore.deleteItemAsync(sessionKey);
   }
+  setApiAuthToken(null);
 }
