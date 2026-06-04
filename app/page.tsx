@@ -23,6 +23,8 @@ import { ServiceCard } from "@/components/ServiceCard";
 import {
   differentiators,
   edgeFrameworkSteps,
+  elgonOsPricingUrl,
+  elgonOsRequestAccessUrl,
   elgonOsUrl,
   industries,
   services,
@@ -51,8 +53,9 @@ export const metadata = createPageMetadata({
     "enterprise technology consulting",
     "modern data platform consulting",
     "Power BI consulting Kenya",
-    "ElgonOS property management software Kenya",
-    "M-PESA rent collection software"
+    "digital platform development Kenya",
+    "product engineering Kenya",
+    "enterprise AI governance Kenya"
   ]
 });
 
@@ -125,8 +128,8 @@ export default function HomePage() {
                 Explore Our Services
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </ButtonLink>
-              <ButtonLink href={elgonOsUrl} variant="glass">
-                Launch ElgonOS
+            <ButtonLink href={elgonOsUrl} variant="glass">
+                Visit ElgonOS
               </ButtonLink>
             </div>
             <div className="mt-12 grid max-w-2xl grid-cols-1 gap-4 border-t border-white/10 pt-7 sm:grid-cols-3">
@@ -303,9 +306,10 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="max-w-3xl text-[1.16rem] leading-9 text-slate-600 lg:justify-self-end">
-              Beyond advisory documents, Elgon Edge uses product experience, implementation templates, and
-              engagement assets to help teams ship governed dashboards, workflows, platforms, and AI-ready operating
-              capability. ElgonOS is one flagship product in this wider delivery portfolio.
+              Beyond advisory documents, Elgon Edge uses product experience, solution patterns, implementation
+              templates, delivery frameworks, and engagement assets to help teams ship governed dashboards,
+              workflows, platforms, and AI-ready operating capability. ElgonOS is one flagship product in this wider
+              delivery portfolio.
             </p>
           </div>
           <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -334,7 +338,7 @@ export default function HomePage() {
               View ElgonOS
             </ButtonLink>
             <ButtonLink href={elgonOsUrl}>
-              Launch ElgonOS
+              Visit ElgonOS
             </ButtonLink>
           </div>
         </div>
@@ -346,24 +350,33 @@ export default function HomePage() {
           <div className="relative p-2 lg:p-6">
             <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-cyan-200">Flagship AI-powered platform</p>
             <h2 className="mt-6 text-4xl font-black tracking-tight sm:text-5xl">
-              ElgonOS — AI-Powered Property Management Software
+              ElgonOS — flagship property operations platform
             </h2>
             <p className="mt-7 max-w-3xl text-[1.2rem] leading-9 text-slate-200">
-              ElgonOS is AI-powered property management software for Kenya, built by Elgon Edge. It helps landlords,
-              property managers, and real estate teams run rent collection, M-PESA workflows, tenant, lease, unit,
-              billing, receipt, and document management, Ask AI portfolio and property questions, AI-assisted
-              reporting, tenant predictability, construction tracking, maintenance, access control, Resident
-              Community, Resident Services Marketplace, Resident Exchange, approvals, reminders, audit trails,
-              operational insights, and executive dashboards from one operating layer.
+              ElgonOS is our AI-powered property operations platform for landlords, property managers, gated
+              communities, apartments, and real estate teams in Kenya. It summarizes how Elgon Edge applies product
+              engineering, governed data, workflow automation, responsible AI, dashboards, and operating controls in a
+              real domain, while the standalone ElgonOS website carries the deeper product SEO, pricing, and access
+              details.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="/elgonos" variant="glass">
-                Learn More
+                Elgon Edge Overview
               </ButtonLink>
               <ButtonLink href={elgonOsUrl}>
-                Launch ElgonOS
+                Visit ElgonOS
+              </ButtonLink>
+              <ButtonLink href={elgonOsRequestAccessUrl} variant="glass">
+                Request Access
               </ButtonLink>
             </div>
+            <p className="mt-5 text-sm font-bold text-cyan-100">
+              See ElgonOS pricing at{" "}
+              <Link href={elgonOsPricingUrl} className="underline decoration-cyan-200/60 underline-offset-4 hover:text-white">
+                elgonos.elgonedge.com/pricing
+              </Link>
+              .
+            </p>
           </div>
           <div className="relative mt-8 rounded-[1.85rem] border border-white/15 bg-white/[0.08] p-5 backdrop-blur lg:mt-0">
             <div className="rounded-[1.45rem] border border-white/10 bg-slate-950/45 p-5">

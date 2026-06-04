@@ -6,6 +6,10 @@ export type Insight = {
   imageAlt: string;
   keywords: string[];
   relatedServiceSlugs?: string[];
+  relatedLinks?: {
+    label: string;
+    href: string;
+  }[];
   intro: string;
   sections: {
     heading: string;
@@ -14,6 +18,223 @@ export type Insight = {
 };
 
 export const insights: Insight[] = [
+  {
+    slug: "ai-property-operations-kenya",
+    title: "How AI Is Changing Property Operations in Kenya",
+    description:
+      "How AI, dashboards, automation, tenant insights, governance, and decision support are changing property operations in Kenya.",
+    image: "/insights/automation-platform-insight.png",
+    imageAlt: "AI-assisted property operations dashboard with tenant insights, workflows, and governance controls",
+    keywords: [
+      "AI consulting Kenya",
+      "responsible AI governance",
+      "AI property operations Kenya",
+      "property operations platform",
+      "AI automation consulting Kenya"
+    ],
+    relatedServiceSlugs: [
+      "ai-readiness-responsible-ai-governance",
+      "business-intelligence-executive-analytics",
+      "custom-software-saas-digital-platforms"
+    ],
+    relatedLinks: [
+      {
+        label: "AI-powered property management software",
+        href: "https://elgonos.elgonedge.com/ai-property-management-software-kenya"
+      },
+      {
+        label: "ElgonOS property operations platform",
+        href: "https://elgonos.elgonedge.com/"
+      }
+    ],
+    intro:
+      "AI is starting to change property operations in Kenya by helping teams see risk earlier, automate routine follow-up, and turn fragmented tenant, payment, service, and portfolio data into clearer decisions.",
+    sections: [
+      {
+        heading: "Property operations are becoming more data-driven",
+        body:
+          "Many property teams already hold useful data across rent records, tenant interactions, maintenance requests, access workflows, lease dates, arrears notes, and service history. The next operating shift is connecting that information into dashboards and decision support rather than leaving it scattered across spreadsheets, messages, and manual files."
+      },
+      {
+        heading: "AI works best when the operating model is clear",
+        body:
+          "AI can support tenant insights, reporting, exception detection, reminders, and portfolio questions, but it depends on clean data definitions, stable workflows, access controls, and human review. This is where responsible AI governance matters: teams need to understand what AI can suggest, what managers must approve, and how decisions are tracked."
+      },
+      {
+        heading: "Dashboards turn AI into management action",
+        body:
+          "Useful AI in property operations should not stop at chat responses. It should connect to dashboards, arrears views, maintenance backlogs, occupancy trends, tenant predictability, and service-level indicators so managers can see what requires action and whether follow-up is improving performance."
+      },
+      {
+        heading: "ElgonOS as a practical example",
+        body:
+          "ElgonOS reflects Elgon Edge's product engineering, data, AI, automation, and governance capability in a real operating domain. The standalone ElgonOS website carries the deeper product detail, while Elgon Edge focuses on the consulting patterns behind governed AI-enabled platforms."
+      }
+    ]
+  },
+  {
+    slug: "rent-collection-to-property-operations-platforms",
+    title: "From Rent Collection to Property Operations Platforms",
+    description:
+      "Why property teams are moving from simple rent collection tools toward broader platforms for tenants, maintenance, access, resident services, dashboards, AI reporting, and governance.",
+    image: "/insights/automation-platform-insight.png",
+    imageAlt: "Property operations platform connecting rent collection, tenant lifecycle, maintenance, access, and dashboards",
+    keywords: [
+      "digital platform development Kenya",
+      "business intelligence consulting",
+      "workflow automation",
+      "property operations platform",
+      "product engineering Kenya"
+    ],
+    relatedServiceSlugs: [
+      "custom-software-saas-digital-platforms",
+      "intelligent-automation-agentic-ai",
+      "business-intelligence-executive-analytics"
+    ],
+    relatedLinks: [
+      {
+        label: "Rent collection software for Kenya",
+        href: "https://elgonos.elgonedge.com/rent-collection-software-kenya"
+      },
+      {
+        label: "ElgonOS property operations platform",
+        href: "https://elgonos.elgonedge.com/"
+      }
+    ],
+    intro:
+      "Rent collection is still central to property management, but the market is moving toward broader property operations platforms that connect payments with tenants, services, reporting, controls, and operating maturity.",
+    sections: [
+      {
+        heading: "Rent collection is only one operating workflow",
+        body:
+          "Payment visibility matters, but property teams also manage tenant onboarding, leases, documents, maintenance, access, communication, arrears follow-up, resident requests, and management reporting. When those workflows sit in separate tools, leaders still lack a complete operating view."
+      },
+      {
+        heading: "The tenant lifecycle needs connected records",
+        body:
+          "A stronger platform connects prospect, tenant, unit, lease, billing, receipt, service, access, and communication records. This reduces repeated data entry and gives managers a clearer view of each tenant relationship from onboarding through renewal, exit, or escalation."
+      },
+      {
+        heading: "Dashboards and AI reporting raise operating maturity",
+        body:
+          "As portfolios grow, teams need dashboards for arrears, occupancy, service backlog, access activity, construction readiness, resident services, and exception management. AI-assisted reporting can help managers ask better questions, but governance and data quality still determine whether the answers are useful."
+      },
+      {
+        heading: "Platforms require governance, not just features",
+        body:
+          "A property operations platform should support roles, approvals, audit trails, data quality checks, and clear operating routines. These controls turn software into a repeatable management system rather than another place to store records."
+      }
+    ]
+  },
+  {
+    slug: "mpesa-property-management-workflows",
+    title: "Why M-PESA-Aware Workflows Matter in Property Management",
+    description:
+      "Why local payment visibility, rent tracking, billing, receipts, reconciliation workflows, integration readiness, and operating fit matter for property management in Kenya.",
+    image: "/insights/data-governance-ai-insight.png",
+    imageAlt: "M-PESA-aware property management workflow with billing, receipts, reconciliation, and dashboard controls",
+    keywords: [
+      "data quality management",
+      "workflow automation",
+      "data governance consulting",
+      "business intelligence consulting",
+      "M-PESA-aware property management workflows"
+    ],
+    relatedServiceSlugs: [
+      "data-strategy-governance-quality",
+      "intelligent-automation-agentic-ai",
+      "business-intelligence-executive-analytics"
+    ],
+    relatedLinks: [
+      {
+        label: "M-PESA-aware property management workflows",
+        href: "https://elgonos.elgonedge.com/mpesa-property-management-software-kenya"
+      },
+      {
+        label: "Rent collection software for Kenya",
+        href: "https://elgonos.elgonedge.com/rent-collection-software-kenya"
+      }
+    ],
+    intro:
+      "In Kenya, property management workflows need to understand how local payment channels affect billing, receipts, rent tracking, reconciliations, exceptions, and management visibility.",
+    sections: [
+      {
+        heading: "Local payment fit affects daily control",
+        body:
+          "Rent teams need to know which tenant paid, which unit the payment relates to, whether a payment is partial or late, whether a receipt has been issued, and what still needs follow-up. M-PESA-aware workflows help teams align software with how money actually moves in the local market."
+      },
+      {
+        heading: "Reconciliation is an operating workflow",
+        body:
+          "Payment data is useful only when it can be reconciled against billing records, tenant balances, receipts, and exceptions. A strong workflow should help teams identify unmatched payments, duplicated records, incorrect allocations, delayed receipts, and missing follow-up."
+      },
+      {
+        heading: "Data quality supports better dashboards",
+        body:
+          "Dashboards depend on accurate payment status, tenant identifiers, unit records, billing periods, and receipt history. Data quality management turns payment visibility into reliable arrears reporting, cash collection analysis, and executive oversight."
+      },
+      {
+        heading: "Integration readiness should be designed early",
+        body:
+          "Not every organization starts with full integrations, but the data model and workflows should be designed for integration readiness. This makes it easier to connect payment channels, accounting tools, dashboards, and AI-assisted reporting as operating maturity grows."
+      }
+    ]
+  },
+  {
+    slug: "building-digital-platforms-for-real-estate",
+    title: "Building Digital Platforms for Real Estate and Property Managers",
+    description:
+      "How consulting, product engineering, data platforms, workflow automation, AI-enabled operations, governance, and scalable delivery come together in real estate technology.",
+    image: "/insights/automation-platform-insight.png",
+    imageAlt: "Digital platform architecture for real estate operations with data, workflow automation, AI, and governance layers",
+    keywords: [
+      "digital platform development Kenya",
+      "product engineering Kenya",
+      "cloud consulting Kenya",
+      "modern data platform consulting",
+      "enterprise technology consulting"
+    ],
+    relatedServiceSlugs: [
+      "custom-software-saas-digital-platforms",
+      "data-strategy-governance-quality",
+      "ai-readiness-responsible-ai-governance",
+      "digital-transformation-advisory"
+    ],
+    relatedLinks: [
+      {
+        label: "ElgonOS property operations platform",
+        href: "https://elgonos.elgonedge.com/"
+      },
+      {
+        label: "Request ElgonOS access",
+        href: "https://elgonos.elgonedge.com/request-access"
+      }
+    ],
+    intro:
+      "Real estate and property management platforms succeed when product engineering, workflow automation, data architecture, AI enablement, governance, and adoption are designed as one operating system.",
+    sections: [
+      {
+        heading: "Start with the operating model",
+        body:
+          "A digital platform should reflect how property teams actually work: tenant lifecycle, rent operations, maintenance, access, resident services, approvals, communication, reporting, and management review. Technology choices should follow the operating model rather than forcing teams into generic screens."
+      },
+      {
+        heading: "Use platform engineering discipline",
+        body:
+          "Scalable real estate platforms need role-based access, clean domain models, reliable workflows, audit trails, integration readiness, responsive interfaces, and maintainable cloud architecture. Product engineering is the discipline that turns a workflow idea into software that can survive real use."
+      },
+      {
+        heading: "Build data and AI foundations early",
+        body:
+          "AI-enabled operations depend on trusted data foundations. Property, unit, tenant, lease, billing, service, access, and communication data should be structured well enough to support dashboards, questions, predictions, and exception handling without weakening governance."
+      },
+      {
+        heading: "Connect delivery to adoption",
+        body:
+          "A platform is only valuable when teams use it consistently. Implementation should include migration planning, data cleanup, training, operating routines, issue tracking, and governance so the system becomes part of daily management rather than a side project."
+      }
+    ]
+  },
   {
     slug: "best-property-management-software-in-kenya",
     title: "Best Property Management Software in Kenya: What Landlords and Property Managers Should Compare",

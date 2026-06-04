@@ -29,6 +29,8 @@ import {
 } from "lucide-react";
 
 export const elgonOsUrl = "https://elgonos.elgonedge.com";
+export const elgonOsPricingUrl = "https://elgonos.elgonedge.com/pricing";
+export const elgonOsRequestAccessUrl = "https://elgonos.elgonedge.com/request-access";
 export const companyProfilePdfPath = "/elgon-edge-consulting-company-profile.pdf";
 
 export const contactInfo = {
@@ -246,7 +248,7 @@ export const services: Service[] = [
     seoDescription:
       "Custom SaaS development, cloud consulting, platform engineering, portals, marketplaces, workflow platforms, dashboards, and digital operating systems.",
     overview:
-      "Elgon Edge Consulting Limited designs and builds custom software, SaaS products, portals, marketplace workflows, moderated resident community features, resident exchange features, and digital operating systems that support modern business operations. ElgonOS is our flagship AI-powered property management software for Kenya, covering rent collection, M-PESA workflows, tenant, lease, unit, billing, receipt, and document management, construction tracking, maintenance, access control, resident services, Ask AI, dashboards, approvals, reminders, and audit trails.",
+      "Elgon Edge Consulting Limited designs and builds custom software, SaaS products, portals, marketplace workflows, governed workflow platforms, and digital operating systems that support modern business operations. ElgonOS is our flagship AI-powered property operations platform for Kenya and demonstrates our product engineering, automation, data, AI, dashboard, and governance capability in a real operating domain.",
     outcomes: [
       "Digital platforms aligned to real operating workflows",
       "Scalable applications with role-based access and data foundations",
@@ -328,7 +330,7 @@ export const industries = [
 export const solutionAccelerators = [
   {
     title: "ElgonOS property operations platform",
-    description: "A flagship AI-powered property management product for Kenya, with rent, tenant, maintenance, access, construction, resident, and dashboard workflows.",
+    description: "A flagship AI-powered property operations product for landlords, property managers, gated communities, apartments, and real estate teams in Kenya.",
     icon: Building2,
     href: "/elgonos"
   },

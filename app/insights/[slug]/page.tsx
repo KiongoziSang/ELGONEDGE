@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, CheckCircle2, Sparkles } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CheckCircle2, Sparkles } from "lucide-react";
 import { CTASection } from "@/components/CTASection";
 import { ShareButtons } from "@/components/ShareButtons";
 import { insights } from "@/lib/insights";
@@ -68,11 +68,36 @@ export default function InsightPage({ params }: InsightPageProps) {
     },
     inLanguage: "en-KE"
   };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${siteUrl}/insights/${insight.slug}#breadcrumb`,
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: siteUrl
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Insights",
+        item: `${siteUrl}/insights`
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: insight.title,
+        item: `${siteUrl}/insights/${insight.slug}`
+      }
+    ]
+  };
   const relatedServices = services.filter((service) => insight.relatedServiceSlugs?.includes(service.slug));
 
   return (
     <main>
-      <JsonLd data={articleJsonLd} />
+      <JsonLd data={[articleJsonLd, breadcrumbJsonLd]} />
       <section className="executive-hero relative overflow-hidden px-4 py-28 text-white sm:px-6 lg:px-10">
         <div className="galaxy-grid absolute inset-0 opacity-22" aria-hidden="true" />
         <div className="absolute right-10 top-8 h-72 w-72 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden="true" />
@@ -130,16 +155,51 @@ export default function InsightPage({ params }: InsightPageProps) {
         </article>
 
         {relatedServices.length > 0 ? (
-          <div className="mx-auto mt-8 max-w-[980px] rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm">
-            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-brand-blue">Relevant services</p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              {relatedServices.map((service) => (
+          <div className="mx-auto mt-8 grid max-w-[980px] gap-5 md:grid-cols-2">
+            <div className="rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm">
+              <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-brand-blue">Relevant services</p>
+              <div className="mt-4 flex flex-wrap gap-3">
+                {relatedServices.map((service) => (
+                  <Link
+                    key={service.slug}
+                    href={`/services/${service.slug}`}
+                    className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-black text-brand-navy transition hover:border-brand-blue/35 hover:text-brand-blue"
+                  >
+                    {service.title}
+                  </Link>
+                ))}
+              </div>
+            </div>
+            {insight.relatedLinks && insight.relatedLinks.length > 0 ? (
+              <div className="rounded-[1.5rem] border border-cyan-200 bg-cyan-50 p-6 shadow-sm">
+                <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-brand-blue">ElgonOS links</p>
+                <div className="mt-4 grid gap-3">
+                  {insight.relatedLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="inline-flex items-center gap-2 text-sm font-black text-brand-navy transition hover:text-brand-blue"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="h-4 w-4 text-brand-blue" aria-hidden="true" />
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        ) : insight.relatedLinks && insight.relatedLinks.length > 0 ? (
+          <div className="mx-auto mt-8 max-w-[980px] rounded-[1.5rem] border border-cyan-200 bg-cyan-50 p-6 shadow-sm">
+            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-brand-blue">ElgonOS links</p>
+            <div className="mt-4 flex flex-wrap gap-4">
+              {insight.relatedLinks.map((link) => (
                 <Link
-                  key={service.slug}
-                  href={`/services/${service.slug}`}
-                  className="rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-black text-brand-navy transition hover:border-brand-blue/35 hover:text-brand-blue"
+                  key={link.href}
+                  href={link.href}
+                  className="inline-flex items-center gap-2 text-sm font-black text-brand-navy transition hover:text-brand-blue"
                 >
-                  {service.title}
+                  {link.label}
+                  <ArrowUpRight className="h-4 w-4 text-brand-blue" aria-hidden="true" />
                 </Link>
               ))}
             </div>

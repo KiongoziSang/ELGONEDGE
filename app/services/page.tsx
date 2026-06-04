@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, CheckCircle2, Sparkles } from "lucide-react";
 import { CTASection } from "@/components/CTASection";
 import { ServiceCard } from "@/components/ServiceCard";
-import { services } from "@/lib/site";
+import { elgonOsRequestAccessUrl, elgonOsUrl, services } from "@/lib/site";
 import { createPageMetadata, JsonLd, siteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -114,6 +114,45 @@ export default function ServicesPage() {
               </Link>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="bg-white px-4 py-24 sm:px-6 lg:px-10">
+        <div className="mx-auto grid max-w-[1520px] gap-10 rounded-[2rem] border border-slate-200 bg-slate-50 p-8 shadow-sm lg:grid-cols-[0.86fr_1.14fr] lg:items-center lg:p-12">
+          <div>
+            <p className="section-kicker">Flagship solution</p>
+            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy">
+              ElgonOS shows how our consulting work becomes operating software
+            </h2>
+            <p className="mt-6 text-[1.12rem] leading-9 text-slate-600">
+              ElgonOS is our AI-powered property operations platform for Kenya. It is a product example of Elgon
+              Edge&apos;s wider capability in digital platform development, product engineering, business intelligence,
+              workflow automation, data quality management, and responsible AI governance.
+            </p>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            {[
+              "AI-powered property management software",
+              "M-PESA-aware property management workflows",
+              "Property management dashboards and AI reporting",
+              "Gated community management software"
+            ].map((anchor) => (
+              <Link
+                key={anchor}
+                href={elgonOsUrl}
+                className="rounded-[1.25rem] border border-slate-200 bg-white p-5 text-base font-black leading-7 text-brand-navy shadow-sm transition hover:-translate-y-0.5 hover:border-brand-blue/25 hover:text-brand-blue"
+              >
+                {anchor}
+              </Link>
+            ))}
+            <Link
+              href={elgonOsRequestAccessUrl}
+              className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3 text-sm font-black text-white shadow-lg shadow-slate-900/15 transition hover:-translate-y-0.5 hover:bg-slate-900 md:col-span-2 md:w-max"
+            >
+              Request ElgonOS access
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
       </section>
 

@@ -1,7 +1,15 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Download, Mail, Phone } from "lucide-react";
-import { companyProfilePdfPath, contactInfo, elgonOsUrl, services, socialLinks } from "@/lib/site";
+import {
+  companyProfilePdfPath,
+  contactInfo,
+  elgonOsPricingUrl,
+  elgonOsRequestAccessUrl,
+  elgonOsUrl,
+  services,
+  socialLinks
+} from "@/lib/site";
 
 export function Footer() {
   return (
@@ -92,13 +100,23 @@ export function Footer() {
               <span>{contactInfo.email}</span>
             </Link>
           </div>
-          <Link
-            href={elgonOsUrl}
-            className="mt-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-black text-white shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:bg-white/15"
-          >
-            Launch ElgonOS
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+          <div className="mt-7 grid gap-3">
+            <Link
+              href={elgonOsUrl}
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-black text-white shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:bg-white/15"
+            >
+              ElgonOS property operations platform
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+            <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm font-bold">
+              <Link href={elgonOsPricingUrl} className="text-slate-300 transition hover:text-white">
+                ElgonOS pricing
+              </Link>
+              <Link href={elgonOsRequestAccessUrl} className="text-slate-300 transition hover:text-white">
+                Request access
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
       <div className="border-t border-white/10 py-6 text-center text-sm text-slate-400">
