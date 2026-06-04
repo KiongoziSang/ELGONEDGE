@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { createElement } from "react";
-import { elgonOsUrl, socialLinks } from "@/lib/site";
+import { elgonOsUrl, services, socialLinks } from "@/lib/site";
 
 export const siteUrl = "https://www.elgonedge.com";
 export const siteName = "Elgon Edge Consulting Limited";
 export const defaultSeoTitle = `${siteName} | Data, AI and Digital Transformation Consulting`;
 export const defaultSeoDescription =
-  "Elgon Edge Consulting Limited is a technology consulting firm in Kenya helping organizations move from strategy to implementation through the EDGE Framework, data, AI, automation, governance, business intelligence, cloud, digital platforms, and flagship products including ElgonOS.";
+  "Elgon Edge Consulting Limited helps organizations in Kenya design, build, and govern data, AI, cloud, automation, BI, and digital platforms, with practical training and vetted technology talent support for delivery teams.";
 
 export const seoKeywords = [
   "Elgon Edge Consulting Limited",
@@ -39,7 +39,30 @@ export const seoKeywords = [
   "automation consulting Kenya",
   "digital platform development Kenya",
   "product engineering Kenya",
-  "SaaS development Kenya"
+  "SaaS development Kenya",
+  "data training Kenya",
+  "AI training Kenya",
+  "Power BI training Kenya",
+  "data analytics training Kenya",
+  "data governance training",
+  "responsible AI training",
+  "business intelligence training",
+  "dashboard training for teams",
+  "executive AI workshops",
+  "digital transformation training",
+  "workflow automation training",
+  "cloud data platform training",
+  "technology staff augmentation Kenya",
+  "IT staff augmentation Kenya",
+  "data engineering talent Kenya",
+  "BI developer outsourcing Kenya",
+  "AI talent support Kenya",
+  "cloud engineering talent",
+  "software engineering staff augmentation",
+  "business analyst outsourcing",
+  "product management support",
+  "automation specialist support",
+  "data and AI delivery teams"
 ];
 
 const ogImage = {
@@ -128,6 +151,15 @@ export const organizationJsonLd = {
     "@type": "Country",
     name: "Kenya"
   },
+  makesOffer: services.map((service) => ({
+    "@type": "Offer",
+    itemOffered: {
+      "@type": "Service",
+      name: service.title,
+      description: service.description,
+      url: `${siteUrl}/services/${service.slug}`
+    }
+  })),
   knowsAbout: [
     "Data consulting",
     "Data analytics consulting Kenya",
@@ -158,7 +190,31 @@ export const organizationJsonLd = {
     "Digital platform development Kenya",
     "Property operations platform",
     "Workflow automation accelerators",
-    "Executive dashboard frameworks"
+    "Executive dashboard frameworks",
+    "Training and capability building",
+    "Data training Kenya",
+    "AI training Kenya",
+    "Power BI training Kenya",
+    "Data analytics training Kenya",
+    "Data governance training",
+    "Responsible AI training",
+    "Business intelligence training",
+    "Dashboard training for teams",
+    "Executive AI workshops",
+    "Digital transformation training",
+    "Workflow automation training",
+    "Cloud data platform training",
+    "Technology staff augmentation Kenya",
+    "IT staff augmentation Kenya",
+    "Data engineering talent Kenya",
+    "BI developer outsourcing Kenya",
+    "AI talent support Kenya",
+    "Cloud engineering talent",
+    "Software engineering staff augmentation",
+    "Business analyst outsourcing",
+    "Product management support",
+    "Automation specialist support",
+    "Data and AI delivery teams"
   ]
 };
 

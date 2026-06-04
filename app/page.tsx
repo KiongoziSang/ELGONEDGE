@@ -36,7 +36,7 @@ import { createPageMetadata, defaultSeoTitle } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: defaultSeoTitle,
   description:
-    "Elgon Edge Consulting Limited is a technology consulting firm in Kenya for data strategy, governance, analytics, responsible AI, automation, cloud, digital platforms, and flagship products including ElgonOS.",
+    "Elgon Edge Consulting helps organizations in Kenya design, build, and govern data, AI, cloud, automation, BI, and digital platforms, with practical training and vetted technology talent support for delivery teams.",
   path: "/",
   absoluteTitle: true,
   keywords: [
@@ -220,6 +220,12 @@ export default function HomePage() {
             <p className="mt-6 max-w-4xl text-[1.2rem] leading-9 text-slate-600">
               Senior advisory, governed data foundations, practical AI, workflow automation, and platform delivery
               aligned to business outcomes.
+            </p>
+            <p className="mt-5 max-w-5xl text-[1.08rem] leading-8 text-slate-600">
+              Beyond advisory and platform delivery, Elgon Edge helps teams build lasting internal capability
+              through practical training, executive workshops, and role-based enablement. We also support
+              organizations that need flexible delivery capacity through vetted specialists across data, AI, cloud,
+              BI, automation, product, and software engineering.
             </p>
           </div>
           <div className="mt-16 grid gap-9 md:grid-cols-2 lg:grid-cols-3">

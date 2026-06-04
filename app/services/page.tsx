@@ -7,10 +7,10 @@ import { elgonOsRequestAccessUrl, elgonOsUrl, services } from "@/lib/site";
 import { createPageMetadata, JsonLd, siteUrl } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Services | Data, AI, Automation and Digital Transformation Consulting",
+  title: "Data, AI, Cloud, BI, Training & Technology Talent Services | Elgon Edge Consulting",
   path: "/services",
   description:
-    "Explore Elgon Edge Consulting services across digital transformation consulting Kenya, data governance consulting, business intelligence consulting, AI strategy consulting, cloud consulting, automation, migration assurance, SaaS platforms, and ElgonOS.",
+    "Explore Elgon Edge Consulting services across digital transformation, data governance, AI, BI, automation, cloud platforms, software engineering, training, and technology staff augmentation in Kenya.",
   absoluteTitle: true,
   keywords: [
     "data analytics consulting Kenya",
@@ -79,8 +79,8 @@ export default function ServicesPage() {
               Elgon Edge Consulting Limited supports organizations across the full modernization lifecycle:
               assessing the opportunity, designing the target state, implementing fit-for-purpose systems, and
               embedding the controls needed for long-term value. We combine strategy, architecture, governance,
-              engineering, implementation, adoption support, and measurable outcomes. ElgonOS is our flagship
-              software product for AI-powered property management in Kenya.
+              engineering, implementation, training, talent support, adoption, and measurable outcomes. ElgonOS is
+              our flagship software product for AI-powered property management in Kenya.
             </p>
           </div>
 
@@ -115,6 +115,15 @@ export default function ServicesPage() {
             Discuss a priority
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </a>
+        </div>
+        <div className="mx-auto mb-12 max-w-[1520px] rounded-[1.5rem] border border-slate-200 bg-white p-7 shadow-sm">
+          <p className="max-w-5xl text-[1.08rem] leading-8 text-slate-600">
+            Elgon Edge helps organizations build internal capability through practical data training, AI training,
+            Power BI training, data governance training, responsible AI training, executive AI workshops, workflow
+            automation training, and cloud data platform training. We also help extend delivery capacity through
+            vetted specialists across data engineering, BI development, AI and cloud talent support, software
+            engineering, business analysis, product management support, and automation specialist support.
+          </p>
         </div>
         <div className="mx-auto grid max-w-[1520px] gap-9 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (

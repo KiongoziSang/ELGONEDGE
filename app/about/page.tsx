@@ -8,7 +8,7 @@ export const metadata: Metadata = createPageMetadata({
   title: "About Elgon Edge Consulting Limited",
   path: "/about",
   description:
-    "Elgon Edge Consulting Limited is a modern consulting and technology delivery company focused on the EDGE Framework, data-driven governed execution, data, AI, automation, governance, and digital platforms.",
+    "Elgon Edge Consulting Limited is a modern consulting and technology delivery company focused on data, AI, automation, governance, digital platforms, practical training, and vetted technology talent support.",
   absoluteTitle: true,
   keywords: [
     "Elgon Edge Consulting Limited",
@@ -17,7 +17,10 @@ export const metadata: Metadata = createPageMetadata({
     "data-driven governed execution",
     "strategy to implementation",
     "AI consulting Kenya",
-    "data consulting Kenya"
+    "data consulting Kenya",
+    "data training Kenya",
+    "AI training Kenya",
+    "technology staff augmentation Kenya"
   ]
 });
 
@@ -43,6 +46,11 @@ export default function AboutPage() {
             <p className="mt-4 text-xl leading-9 text-slate-200">
               We work from strategy to implementation, combining advisory depth with hands-on delivery across data
               foundations, analytics, responsible AI, automation, governance, and business platforms.
+            </p>
+            <p className="mt-4 text-xl leading-9 text-slate-200">
+              We also help organizations build internal capability through practical training and extend delivery
+              capacity through vetted technology professionals across data, AI, cloud, BI, automation, and software
+              engineering.
             </p>
           </div>
           <div className="rounded-[2rem] border border-white/15 bg-white/[0.08] p-6 shadow-2xl shadow-black/25 backdrop-blur">
