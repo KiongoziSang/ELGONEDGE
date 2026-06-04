@@ -258,6 +258,62 @@ export const services: Service[] = [
       "Property operations workflows for construction progress, maintenance, access, approvals, reminders, and audit trails",
       "Better user experience, reporting, and operational control"
     ]
+  },
+  {
+    slug: "training-capability-building",
+    title: "Training & Capability Building",
+    description:
+      "Practical training for teams on data, AI, governance, dashboards, automation, cloud, and modern digital platforms.",
+    icon: GraduationCap,
+    capabilities: [
+      "Data literacy and analytics adoption",
+      "Power BI and executive dashboard training",
+      "AI readiness and GenAI awareness",
+      "Responsible AI governance",
+      "Data governance and data quality",
+      "Workflow automation",
+      "Cloud and modern data platforms",
+      "Executive data and AI strategy workshops"
+    ],
+    seoTitle: "Training and Capability Building | Elgon Edge Consulting Limited",
+    seoDescription:
+      "Data training Kenya, AI training Kenya, Power BI training Kenya, data governance training, responsible AI training, and executive workshops for practical capability building.",
+    overview:
+      "Elgon Edge Consulting Limited helps organizations build internal capability through practical, role-based training and executive workshops across data literacy, Power BI, AI readiness, responsible AI governance, data governance, data quality, workflow automation, cloud platforms, and digital transformation.",
+    outcomes: [
+      "Stronger internal data, AI, and digital confidence",
+      "Role-based learning linked to real operating needs",
+      "Improved adoption of dashboards, governance, automation, and platforms"
+    ]
+  },
+  {
+    slug: "technology-talent-staff-augmentation",
+    title: "Technology Talent & Staff Augmentation",
+    description:
+      "Flexible access to vetted data, AI, cloud, software, BI, and automation professionals to support delivery teams.",
+    icon: UsersRound,
+    capabilities: [
+      "Data analysts",
+      "BI developers",
+      "Data engineers",
+      "AI/ML engineers",
+      "Cloud engineers",
+      "Software engineers",
+      "Automation specialists",
+      "Business analysts",
+      "Product managers",
+      "Project delivery support"
+    ],
+    seoTitle: "Technology Talent and Staff Augmentation | Elgon Edge Consulting Limited",
+    seoDescription:
+      "Technology staff augmentation Kenya, IT staff augmentation Kenya, data engineering talent, BI developer outsourcing, and AI and cloud talent support for delivery teams.",
+    overview:
+      "Elgon Edge Consulting Limited helps organizations extend delivery capacity with vetted technology professionals across data engineering, business intelligence, AI/ML, cloud, software engineering, automation, business analysis, product management, and project delivery support. This service complements our advisory and platform delivery work through embedded specialists and flexible delivery support.",
+    outcomes: [
+      "Extended delivery capacity without weakening governance",
+      "Access to vetted technology professionals and embedded specialists",
+      "Flexible implementation support across data, AI, cloud, software, BI, and automation"
+    ]
   }
 ];
 
@@ -433,6 +489,8 @@ export const serviceInterestOptions = [
   "Intelligent Automation & Agentic AI",
   "Data Migration Assurance & Reconciliation",
   "Custom Software, SaaS & Digital Platforms",
+  "Training & Capability Building",
+  "Technology Talent & Staff Augmentation",
   "ElgonOS"
 ];
 

@@ -55,7 +55,11 @@ export const metadata = createPageMetadata({
     "Power BI consulting Kenya",
     "digital platform development Kenya",
     "product engineering Kenya",
-    "enterprise AI governance Kenya"
+    "enterprise AI governance Kenya",
+    "data training Kenya",
+    "AI training Kenya",
+    "Power BI training Kenya",
+    "technology staff augmentation Kenya"
   ]
 });
 
@@ -219,8 +223,8 @@ export default function HomePage() {
             </p>
           </div>
           <div className="mt-16 grid gap-9 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => (
-              <div key={service.title} className={index === services.length - 1 ? "md:col-span-2 md:mx-auto md:w-[calc(50%-1.125rem)] lg:col-span-1 lg:col-start-2 lg:w-full" : ""}>
+            {services.map((service) => (
+              <div key={service.title}>
                 <ServiceCard service={service} />
               </div>
             ))}

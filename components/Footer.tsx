@@ -80,7 +80,7 @@ export function Footer() {
         <div>
           <p className="mb-5 text-xs font-extrabold uppercase tracking-[0.18em] text-cyan-200">Services</p>
           <div className="grid gap-4 text-[1.08rem]">
-            {services.slice(0, 5).map((service) => (
+            {services.map((service) => (
               <Link key={service.title} href={`/services/${service.slug}`} className="text-slate-300 transition hover:text-white">
                 {service.title}
               </Link>
