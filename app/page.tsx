@@ -356,8 +356,8 @@ export default function HomePage() {
               ElgonOS is our AI-powered property operations platform for landlords, property managers, gated
               communities, apartments, and real estate teams in Kenya. It summarizes how Elgon Edge applies product
               engineering, governed data, workflow automation, responsible AI, dashboards, and operating controls in a
-              real domain, while the standalone ElgonOS website carries the deeper product SEO, pricing, and access
-              details.
+              real domain. For ElgonOS product features, pricing, and access, visit the standalone ElgonOS platform
+              site.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="/elgonos" variant="glass">

@@ -68,7 +68,7 @@ export const insights: Insight[] = [
       {
         heading: "ElgonOS as a practical example",
         body:
-          "ElgonOS reflects Elgon Edge's product engineering, data, AI, automation, and governance capability in a real operating domain. The standalone ElgonOS website carries the deeper product detail, while Elgon Edge focuses on the consulting patterns behind governed AI-enabled platforms."
+          "ElgonOS reflects Elgon Edge's product engineering, data, AI, automation, and governance capability in a real operating domain. For detailed ElgonOS features, pricing, and access, visit the standalone ElgonOS platform site."
       }
     ]
   },

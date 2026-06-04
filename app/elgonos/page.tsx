@@ -162,8 +162,8 @@ export default function ElgonOsPage() {
                 ))}
               </div>
               <p className="mt-6 text-sm leading-7 text-slate-300">
-                Detailed product SEO pages, feature depth, pricing, and onboarding belong on the standalone ElgonOS
-                website.
+                Detailed product features, pricing, access, and onboarding information are available on the
+                standalone ElgonOS platform site.
               </p>
             </div>
           </div>
@@ -244,8 +244,9 @@ export default function ElgonOsPage() {
               </h2>
             </div>
             <p className="max-w-3xl text-[1.16rem] leading-9 text-slate-600 lg:justify-self-end">
-              These Elgon Edge articles discuss AI, payments, platform engineering, dashboards, workflow automation,
-              and governance. The standalone ElgonOS site remains the product SEO destination.
+              These Elgon Edge insights explore AI, payments, platform engineering, dashboards, workflow automation,
+              and governance behind modern property operations. For ElgonOS features, pricing, and access, visit the
+              standalone ElgonOS platform site.
             </p>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -269,7 +270,7 @@ export default function ElgonOsPage() {
 
       <CTASection
         title="Explore ElgonOS or discuss a platform engagement"
-        text="Use the standalone ElgonOS website for product detail, pricing, and access. Contact Elgon Edge for broader data, AI, automation, governance, and digital platform consulting."
+        text="Visit the standalone ElgonOS platform site for product details, pricing, and access. Contact Elgon Edge for broader data, AI, automation, governance, and digital platform consulting."
         primaryHref={elgonOsUrl}
         primaryLabel="Visit ElgonOS"
         secondaryHref="/contact"
