@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { createElement } from "react";
-import { elgonOsUrl, services, socialLinks } from "@/lib/site";
+import { elgonOsUrl, services, socialLinks, solutionAccelerators } from "@/lib/site";
 
 export const siteUrl = "https://www.elgonedge.com";
 export const siteName = "Elgon Edge Consulting Limited";
 export const defaultSeoTitle = `${siteName} | Data, AI and Digital Transformation Consulting`;
 export const defaultSeoDescription =
-  "Elgon Edge Consulting Limited helps organizations in Kenya design, build, and govern data, AI, cloud, automation, BI, and digital platforms, with practical training and vetted technology talent support for delivery teams.";
+  "Elgon Edge Consulting Limited helps organizations in Kenya design, build, and govern data, AI, cloud, automation, BI, semantic layers, governance frameworks, and digital platforms that turn strategy into measurable execution.";
 
 export const seoKeywords = [
   "Elgon Edge Consulting Limited",
@@ -41,13 +41,21 @@ export const seoKeywords = [
   "product engineering Kenya",
   "SaaS development Kenya",
   "enterprise data model accelerators",
+  "enterprise data model consulting",
   "semantic layer consulting",
   "KPI definition frameworks",
+  "metric layer design",
   "data governance operating model",
   "data governance framework",
   "data stewardship model",
+  "data ownership framework",
+  "data quality controls",
   "AI-ready data foundations",
   "analytics foundations",
+  "data management consulting Kenya",
+  "business intelligence foundations",
+  "Customer 360 data model",
+  "executive dashboard data model",
   "data training Kenya",
   "AI training Kenya",
   "Power BI training Kenya",
@@ -159,15 +167,26 @@ export const organizationJsonLd = {
     "@type": "Country",
     name: "Kenya"
   },
-  makesOffer: services.map((service) => ({
-    "@type": "Offer",
-    itemOffered: {
-      "@type": "Service",
-      name: service.title,
-      description: service.description,
-      url: `${siteUrl}/services/${service.slug}`
-    }
-  })),
+  makesOffer: [
+    ...services.map((service) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: service.title,
+        description: service.description,
+        url: `${siteUrl}/services/${service.slug}`
+      }
+    })),
+    ...solutionAccelerators.map((accelerator) => ({
+      "@type": "Offer",
+      itemOffered: {
+        "@type": "Service",
+        name: accelerator.title,
+        description: accelerator.description,
+        url: `${siteUrl}${accelerator.href}`
+      }
+    }))
+  ],
   knowsAbout: [
     "Data consulting",
     "Data analytics consulting Kenya",
@@ -200,13 +219,21 @@ export const organizationJsonLd = {
     "Workflow automation accelerators",
     "Executive dashboard frameworks",
     "Enterprise data model accelerators",
+    "Enterprise data model consulting",
     "Semantic layer consulting",
     "KPI definition frameworks",
+    "Metric layer design",
     "Data governance operating model",
     "Data governance framework",
     "Data stewardship model",
+    "Data ownership framework",
+    "Data quality controls",
     "AI-ready data foundations",
     "Analytics foundations",
+    "Data management consulting Kenya",
+    "Business intelligence foundations",
+    "Customer 360 data model",
+    "Executive dashboard data model",
     "Training and capability building",
     "Data training Kenya",
     "AI training Kenya",

@@ -126,6 +126,7 @@ export const services: Service[] = [
     icon: DatabaseZap,
     capabilities: [
       "Data strategy and governance frameworks",
+      "Enterprise data model and semantic layer foundations",
       "Data quality controls",
       "Master data management",
       "Data ownership and stewardship models"
@@ -149,6 +150,7 @@ export const services: Service[] = [
     capabilities: [
       "Executive dashboards",
       "KPI definition and tracking",
+      "Metric layer design",
       "Board and management reporting",
       "Self-service analytics enablement"
     ],
@@ -399,14 +401,14 @@ export const solutionAccelerators = [
   {
     title: "Enterprise Data Model & Semantic Layer Accelerators",
     description:
-      "Reusable data models, KPI definitions, metric layers, and domain structures for standardized reporting, analytics, and AI-ready data products.",
+      "Reusable data models, KPI definitions, metric layer design, and domain structures for standardized reporting, analytics, and AI-ready data products.",
     icon: Layers3,
     href: "/services/data-strategy-governance-quality"
   },
   {
     title: "Data Governance Operating Model Frameworks",
     description:
-      "Practical governance frameworks for data ownership, stewardship, policies, standards, issue management, controls, and accountability routines.",
+      "Practical governance frameworks for data ownership, stewardship, policies, standards, issue management, data quality controls, and accountability routines.",
     icon: ShieldCheck,
     href: "/services/data-strategy-governance-quality"
   },

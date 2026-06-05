@@ -36,7 +36,7 @@ import { createPageMetadata, defaultSeoTitle } from "@/lib/seo";
 export const metadata = createPageMetadata({
   title: defaultSeoTitle,
   description:
-    "Elgon Edge Consulting helps organizations in Kenya design, build, and govern data, AI, cloud, automation, BI, and digital platforms, with practical training and vetted technology talent support for delivery teams.",
+    "Elgon Edge Consulting helps organizations in Kenya design, build, and govern data, AI, cloud, automation, BI, semantic layers, governance frameworks, and digital platforms that turn strategy into measurable execution.",
   path: "/",
   absoluteTitle: true,
   keywords: [
@@ -57,9 +57,12 @@ export const metadata = createPageMetadata({
     "product engineering Kenya",
     "enterprise AI governance Kenya",
     "enterprise data model accelerators",
+    "enterprise data model consulting",
     "semantic layer consulting",
     "KPI definition frameworks",
+    "metric layer design",
     "data governance operating model",
+    "data ownership framework",
     "AI-ready data foundations",
     "data training Kenya",
     "AI training Kenya",
@@ -321,9 +324,9 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="max-w-3xl text-[1.16rem] leading-9 text-slate-600 lg:justify-self-end">
-              Beyond advisory documents, Elgon Edge uses product experience, solution patterns, implementation
-              templates, delivery frameworks, and engagement assets to help teams ship governed dashboards,
-              workflows, platforms, and AI-ready operating capability. ElgonOS is one flagship product in this wider
+              Elgon Edge helps organizations move beyond isolated dashboards by strengthening the foundations behind
+              analytics and AI: enterprise data models, semantic layers, KPI definitions, governance operating models,
+              data quality controls, and reusable delivery frameworks. ElgonOS is one flagship product in this wider
               delivery portfolio.
             </p>
           </div>
