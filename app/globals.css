@@ -110,8 +110,67 @@ summary::-webkit-details-marker {
 }
 
 @media (min-width: 1024px) {
+  .home-hero-section {
+    padding-top: clamp(5rem, 7vh, 7rem);
+    padding-bottom: clamp(4.5rem, 6.5vh, 6.25rem);
+  }
+
+  .home-hero-grid {
+    gap: clamp(2.5rem, 4vw, 4.5rem);
+  }
+
   .home-hero-heading {
-    font-size: clamp(3.45rem, 5.2vw, 5.35rem);
+    margin-top: 2.25rem;
+    font-size: clamp(3.35rem, 4.5vw, 4.35rem);
+    line-height: 1.02;
+  }
+
+  .home-hero-copy {
+    margin-top: 1.75rem;
+    font-size: clamp(1.12rem, 1.35vw, 1.32rem);
+    line-height: 1.62;
+  }
+
+  .home-hero-card {
+    padding: 1rem;
+    transform: scale(0.94);
+    transform-origin: center right;
+  }
+
+  .home-hero-card-inner {
+    padding: 1.35rem;
+  }
+
+  .home-hero-card-inner h2 {
+    font-size: clamp(1.5rem, 1.8vw, 1.75rem);
+  }
+
+  .home-hero-map-card {
+    padding: 1rem;
+  }
+
+  .home-hero-marquee {
+    margin-top: 3rem;
+  }
+
+  .home-section {
+    padding-top: clamp(5rem, 7.5vh, 6.75rem);
+    padding-bottom: clamp(5rem, 7.5vh, 6.75rem);
+  }
+
+  .home-product-section {
+    padding-top: clamp(4.5rem, 6.5vh, 6rem);
+    padding-bottom: clamp(4.5rem, 6.5vh, 6rem);
+  }
+
+  .home-product-panel {
+    padding: clamp(2.25rem, 3.5vw, 3.5rem);
+  }
+
+  .site-footer-inner {
+    gap: 2.75rem;
+    padding-top: 4.75rem;
+    padding-bottom: 4.75rem;
   }
 }
 
@@ -180,6 +239,44 @@ summary::-webkit-details-marker {
     gap: 2.5rem;
     padding-top: 4rem;
     padding-bottom: 4rem;
+  }
+}
+
+@media (min-width: 1921px) and (min-height: 1100px) {
+  .home-hero-section {
+    padding-top: 8rem;
+    padding-bottom: 7rem;
+  }
+
+  .home-hero-heading {
+    font-size: clamp(4.35rem, 4.2vw, 5.35rem);
+  }
+
+  .home-hero-copy {
+    font-size: clamp(1.28rem, 1.25vw, 1.5rem);
+  }
+
+  .home-hero-card {
+    padding: 1.25rem;
+    transform: none;
+  }
+
+  .home-hero-card-inner {
+    padding: 1.75rem;
+  }
+
+  .home-section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  .home-product-section {
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+  }
+
+  .home-product-panel {
+    padding: 4rem;
   }
 }
 
