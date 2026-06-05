@@ -119,21 +119,21 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="executive-hero relative overflow-hidden px-4 py-32 text-white sm:px-6 lg:px-10 lg:py-40">
+      <section className="home-hero-section executive-hero relative overflow-hidden px-4 py-32 text-white sm:px-6 lg:px-10 lg:py-40">
         <div className="galaxy-grid absolute inset-0 opacity-20" aria-hidden="true" />
         <div className="absolute left-1/2 top-10 h-80 w-80 -translate-x-1/2 rounded-full bg-cyan-300/10 blur-3xl" aria-hidden="true" />
         <div className="absolute bottom-0 right-0 h-[28rem] w-[28rem] rounded-full bg-violet-500/10 blur-3xl" aria-hidden="true" />
-        <div className="relative mx-auto grid max-w-[1520px] gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center xl:gap-20">
+        <div className="home-hero-grid relative mx-auto grid max-w-[1520px] gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:items-center xl:gap-20">
           <div className="min-w-0">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-extrabold uppercase tracking-[0.18em] text-cyan-100 shadow-xl shadow-black/10 backdrop-blur">
               <Sparkles className="h-4 w-4" aria-hidden="true" />
               Enterprise modernization advisory
             </div>
-            <h1 className="mt-10 max-w-[1120px] text-5xl font-black leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-[4rem] xl:text-[4.75rem] 2xl:text-[5.35rem]">
+            <h1 className="home-hero-heading mt-10 max-w-[1120px] text-5xl font-black leading-[1.03] tracking-tight text-white sm:text-6xl lg:text-[4rem] xl:text-[4.75rem] 2xl:text-[5.35rem]">
               <span className="block">Data, AI and Digital Solutions</span>
               <span className="block">for Smarter Businesses</span>
             </h1>
-            <p className="mt-9 max-w-[900px] text-[1.38rem] leading-10 text-slate-100/90 lg:text-[1.5rem] lg:leading-[1.75]">
+            <p className="home-hero-copy mt-9 max-w-[900px] text-[1.38rem] leading-10 text-slate-100/90 lg:text-[1.5rem] lg:leading-[1.75]">
               Elgon Edge Consulting Limited helps organizations modernize operations through data, AI,
               automation, governance, and digital platforms — from strategy to implementation.
             </p>
@@ -156,9 +156,9 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative min-w-0 rounded-[2.25rem] border border-white/15 bg-white/[0.08] p-5 shadow-2xl shadow-black/30 backdrop-blur">
+          <div className="home-hero-card relative min-w-0 rounded-[2.25rem] border border-white/15 bg-white/[0.08] p-5 shadow-2xl shadow-black/30 backdrop-blur">
             <div className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-blue-400/20 blur-3xl" aria-hidden="true" />
-            <div className="relative rounded-[1.75rem] border border-white/10 bg-slate-950/55 p-7">
+            <div className="home-hero-card-inner relative rounded-[1.75rem] border border-white/10 bg-slate-950/55 p-7">
               <div className="flex items-start justify-between gap-6 border-b border-white/10 pb-7">
                 <div>
                   <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-cyan-200">
@@ -172,7 +172,7 @@ export default function HomePage() {
               </div>
               <div className="mt-7 grid gap-4">
                 {heroCapabilities.map((item, index) => (
-                  <div key={item} className="rounded-2xl border border-white/10 bg-white/[0.07] p-5 transition hover:bg-white/[0.10]">
+                  <div key={item} className="home-hero-map-card rounded-2xl border border-white/10 bg-white/[0.07] p-5 transition hover:bg-white/[0.10]">
                     <div className="flex items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
                         <span className="grid h-9 w-9 place-items-center rounded-xl bg-cyan-300/10 text-cyan-100">
@@ -201,7 +201,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <div className="relative mx-auto mt-16 max-w-[1520px]">
+        <div className="home-hero-marquee relative mx-auto mt-16 max-w-[1520px]">
           <div className="overflow-hidden rounded-2xl border border-cyan-300/25 bg-cyan-400/[0.07] px-3 py-3 shadow-[0_16px_55px_rgba(8,47,73,0.16)]">
             <div className="elgonos-marquee-mask">
               <div className="flex w-max animate-elgonos-marquee items-center gap-0 hover:[animation-play-state:paused]">
@@ -220,7 +220,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="fine-grid px-4 py-32 sm:px-6 lg:px-10">
+      <section className="home-section fine-grid px-4 py-32 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-[1520px]">
           <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
             <div>
@@ -252,7 +252,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white px-4 py-32 sm:px-6 lg:px-10">
+      <section className="home-section bg-white px-4 py-32 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-[1520px]">
           <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
             <div>
@@ -286,7 +286,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="fine-grid bg-slate-50 px-4 py-32 sm:px-6 lg:px-10">
+      <section className="home-section fine-grid bg-slate-50 px-4 py-32 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-[1520px]">
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
             <div>
@@ -320,7 +320,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white px-4 py-32 sm:px-6 lg:px-10">
+      <section className="home-section bg-white px-4 py-32 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-[1520px]">
           <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
             <div>
@@ -368,8 +368,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="px-4 py-32 sm:px-6 lg:px-10">
-        <div className="executive-hero relative mx-auto grid max-w-[1520px] overflow-hidden rounded-[2.35rem] p-9 text-white shadow-2xl shadow-slate-900/20 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:p-16">
+      <section className="home-section home-product-section px-4 py-32 sm:px-6 lg:px-10">
+        <div className="home-product-panel executive-hero relative mx-auto grid max-w-[1520px] overflow-hidden rounded-[2.35rem] p-9 text-white shadow-2xl shadow-slate-900/20 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:p-16">
           <div className="galaxy-grid absolute inset-0 opacity-18" aria-hidden="true" />
           <div className="relative p-2 lg:p-6">
             <p className="text-sm font-extrabold uppercase tracking-[0.22em] text-cyan-200">Flagship AI-powered platform</p>
@@ -434,7 +434,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="fine-grid bg-slate-50 px-4 py-32 sm:px-6 lg:px-10">
+      <section className="home-section fine-grid bg-slate-50 px-4 py-32 sm:px-6 lg:px-10">
         <div className="mx-auto grid max-w-[1520px] gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:items-start xl:gap-20">
           <div className="lg:sticky lg:top-28">
             <div className="inline-grid h-14 w-14 place-items-center rounded-2xl border border-slate-200 bg-white text-brand-blue shadow-soft">

@@ -14,7 +14,7 @@ import {
 export function Footer() {
   return (
     <footer className="executive-hero text-white">
-      <div className="mx-auto grid max-w-[1520px] gap-14 px-4 py-24 sm:px-6 md:grid-cols-[1.3fr_0.8fr_1.15fr_0.8fr] lg:px-10">
+      <div className="site-footer-inner mx-auto grid max-w-[1520px] gap-14 px-4 py-24 sm:px-6 md:grid-cols-[1.3fr_0.8fr_1.15fr_0.8fr] lg:px-10">
         <div>
           <div className="flex items-center gap-3">
             <div className="rounded-[1.35rem] border border-white/10 bg-white px-5 py-4 shadow-xl shadow-black/20">
