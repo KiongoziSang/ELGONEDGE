@@ -10,6 +10,8 @@ export function ServiceCard({ service, detailed = false }: ServiceCardProps) {
   const featured = ["Data Strategy, Governance & Quality", "AI Readiness & Responsible AI Governance", "Custom Software, SaaS & Digital Platforms"].includes(
     service.title
   );
+  const iconBadgeClass =
+    "bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15 group-hover:bg-brand-blue group-hover:text-white";
 
   return (
     <article
@@ -21,9 +23,7 @@ export function ServiceCard({ service, detailed = false }: ServiceCardProps) {
     >
       <div
         className={`mb-8 grid h-[4.5rem] w-[4.5rem] place-items-center rounded-2xl transition sm:h-20 sm:w-20 ${
-          featured
-            ? "bg-brand-navy text-cyan-200 shadow-lg shadow-slate-900/15 group-hover:bg-brand-blue group-hover:text-white"
-            : "bg-blue-50 text-brand-blue group-hover:bg-brand-blue group-hover:text-white"
+          iconBadgeClass
         }`}
       >
         <Icon className="h-8 w-8 sm:h-9 sm:w-9" aria-hidden="true" />

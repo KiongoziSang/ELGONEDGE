@@ -72,6 +72,8 @@ export const metadata = createPageMetadata({
 });
 
 const WorkflowIcon = workflowIcon;
+const cardIconBadgeClass =
+  "grid h-14 w-14 place-items-center rounded-2xl bg-brand-navy p-3 text-cyan-200 shadow-lg shadow-slate-900/15";
 
 const homepageMarqueeFeatures = [
   "Data governance",
@@ -220,23 +222,27 @@ export default function HomePage() {
 
       <section className="fine-grid px-4 py-32 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-[1520px]">
-          <div className="max-w-4xl">
-            <p className="section-kicker">Consulting capabilities</p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
-              Consulting and delivery capabilities for modern organizations
-            </h2>
-            <p className="mt-6 max-w-4xl text-[1.2rem] leading-9 text-slate-600">
-              Senior advisory, governed data foundations, practical AI, workflow automation, and platform delivery
-              aligned to business outcomes.
-            </p>
-            <p className="mt-5 max-w-5xl text-[1.08rem] leading-8 text-slate-600">
-              Beyond advisory and platform delivery, Elgon Edge helps teams build lasting internal capability
-              through practical training, executive workshops, and role-based enablement. We also support
-              organizations that need flexible delivery capacity through vetted specialists across data, AI, cloud,
-              BI, automation, product, and software engineering.
-            </p>
+          <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-end">
+            <div>
+              <p className="section-kicker">Consulting capabilities</p>
+              <h2 className="mt-4 text-4xl font-black tracking-tight text-brand-navy sm:text-5xl">
+                Consulting and delivery capabilities for modern organizations
+              </h2>
+            </div>
+            <div className="max-w-4xl text-slate-600 lg:justify-self-end">
+              <p className="text-[1.2rem] leading-9">
+                Senior advisory, governed data foundations, practical AI, workflow automation, and platform delivery
+                aligned to business outcomes.
+              </p>
+              <p className="mt-5 text-[1.08rem] leading-8">
+                Beyond advisory and platform delivery, Elgon Edge helps teams build lasting internal capability
+                through practical training, executive workshops, and role-based enablement. We also support
+                organizations that need flexible delivery capacity through vetted specialists across data, AI, cloud,
+                BI, automation, product, and software engineering.
+              </p>
+            </div>
           </div>
-          <div className="mt-16 grid gap-9 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-14 grid gap-9 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service) => (
               <div key={service.title}>
                 <ServiceCard service={service} />
@@ -268,7 +274,7 @@ export default function HomePage() {
                   key={item.title}
                   className="rounded-[1.75rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-brand-blue/25 hover:shadow-soft"
                 >
-                  <div className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-navy p-3 text-cyan-200 shadow-lg shadow-slate-900/15">
+                  <div className={cardIconBadgeClass}>
                     <Icon className="h-7 w-7" aria-hidden="true" />
                   </div>
                   <h3 className="mt-6 text-xl font-black text-brand-navy">{item.title}</h3>
@@ -340,7 +346,7 @@ export default function HomePage() {
                   className="group rounded-[1.5rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-7 shadow-sm transition hover:-translate-y-1 hover:border-brand-blue/30 hover:shadow-soft"
                 >
                   <div className="flex items-start justify-between gap-5">
-                    <div className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-navy p-3 text-cyan-200 shadow-lg shadow-slate-900/15">
+                    <div className={cardIconBadgeClass}>
                       <Icon className="h-7 w-7" aria-hidden="true" />
                     </div>
                     <ArrowRight className="h-5 w-5 text-brand-blue transition group-hover:translate-x-1" aria-hidden="true" />
