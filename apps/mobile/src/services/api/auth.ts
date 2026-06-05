@@ -1,5 +1,5 @@
 import type { AuthLoginRequest, AuthLoginResponse, AuthSession, TenantProfile } from "../../types";
-import { apiRequest, isMockMode, mockDelay, setApiAuthToken } from "./client";
+import { apiRequest, enableRuntimeMockFallback, isEndpointUnavailableError, isMockMode, mockDelay, setApiAuthToken } from "./client";
 
 export async function loginTenant(identifier: string, password: string): Promise<AuthSession> {
   const request: AuthLoginRequest = { identifier, password };
@@ -9,36 +9,31 @@ export async function loginTenant(identifier: string, password: string): Promise
   }
 
   if (!isMockMode()) {
-    const response = await apiRequest<AuthLoginResponse>("/api/mobile/auth/login", {
-      method: "POST",
-      body: request
-    });
-    const session = mapLoginResponse(response);
-    setApiAuthToken(session.token);
-    return session;
-  }
+    try {
+      const response = await apiRequest<AuthLoginResponse>("/api/mobile/auth/login", {
+        method: "POST",
+        body: request
+      });
+      const session = mapLoginResponse(response);
+      setApiAuthToken(session.token);
+      return session;
+    } catch (error) {
+      if (!isEndpointUnavailableError(error)) {
+        throw error;
+      }
 
-  await mockDelay();
-  const normalizedIdentifier = request.identifier.trim().toLowerCase();
-  const allowedIdentifiers = ["grace.wanjiku@example.com", "+254712345678", "0712345678"];
-
-  if (!allowedIdentifiers.includes(normalizedIdentifier) || request.password !== "password") {
-    throw new Error("Invalid mock credentials. Use grace.wanjiku@example.com and password.");
-  }
-
-  return {
-    token: "mock-secure-token-grace-wanjiku",
-    userId: "tenant-grace-wanjiku",
-    tenant: {
-      id: "tenant-grace-wanjiku",
-      fullName: "Grace Wanjiku",
-      phone: "+254712345678",
-      email: "grace.wanjiku@example.com"
+      enableRuntimeMockFallback();
     }
-  };
+  }
+
+  return loginMockTenant(request);
 }
 
 export async function restoreTenantSession(storedSession: AuthSession): Promise<AuthSession | null> {
+  if (storedSession.token.startsWith("mock-secure-token-")) {
+    enableRuntimeMockFallback();
+  }
+
   if (isMockMode()) {
     setApiAuthToken(storedSession.token);
     return storedSession;
@@ -106,6 +101,30 @@ export async function requestPasswordReset(identifier: string) {
   return {
     message: "Password reset instructions will be sent when the backend is connected."
   };
+}
+
+async function loginMockTenant(request: AuthLoginRequest): Promise<AuthSession> {
+  await mockDelay();
+  const normalizedIdentifier = request.identifier.trim().toLowerCase();
+  const allowedIdentifiers = ["grace.wanjiku@example.com", "+254712345678", "0712345678"];
+
+  if (!allowedIdentifiers.includes(normalizedIdentifier) || request.password !== "password") {
+    throw new Error("Invalid demo credentials. Use grace.wanjiku@example.com and password.");
+  }
+
+  const session = {
+    token: "mock-secure-token-grace-wanjiku",
+    userId: "tenant-grace-wanjiku",
+    tenant: {
+      id: "tenant-grace-wanjiku",
+      fullName: "Grace Wanjiku",
+      phone: "+254712345678",
+      email: "grace.wanjiku@example.com"
+    }
+  };
+
+  setApiAuthToken(session.token);
+  return session;
 }
 
 async function refreshTenantSession(session: AuthSession): Promise<AuthSession | null> {

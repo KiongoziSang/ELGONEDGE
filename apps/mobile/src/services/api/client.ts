@@ -9,6 +9,7 @@ type ApiRequestOptions = Omit<RequestInit, "body" | "headers"> & {
 };
 
 let activeAuthToken: string | null = null;
+let runtimeMockFallback = false;
 
 export class ApiClientError extends Error {
   apiError: ApiError;
@@ -36,7 +37,7 @@ export class MockModeError extends Error {
 }
 
 export function isMockMode() {
-  return appConfig.mockMode;
+  return appConfig.mockMode || runtimeMockFallback;
 }
 
 export function getApiBaseUrl() {
@@ -49,6 +50,24 @@ export function createSessionAuthHeader(token: string | null | undefined) {
 
 export function setApiAuthToken(token: string | null) {
   activeAuthToken = token;
+}
+
+export function enableRuntimeMockFallback() {
+  runtimeMockFallback = true;
+}
+
+export function isEndpointUnavailableError(error: unknown) {
+  if (!(error instanceof ApiClientError)) {
+    return true;
+  }
+
+  return (
+    error.status === 404 ||
+    error.status === 405 ||
+    error.code === "INVALID_RESPONSE" ||
+    error.code === "REQUEST_TIMEOUT" ||
+    error.code === "REQUEST_ERROR"
+  );
 }
 
 export function toApiError(error: unknown): ApiError {

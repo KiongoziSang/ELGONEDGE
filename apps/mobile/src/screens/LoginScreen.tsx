@@ -42,7 +42,7 @@ export function LoginScreen({ onForgotPassword }: { onForgotPassword: () => void
           <AppButton label="Forgot password" variant="ghost" onPress={onForgotPassword} />
         </View>
       </AppCard>
-      <Text style={styles.helper}>Mock login is enabled for MVP1. Real backend authentication can replace the service layer later.</Text>
+      <Text style={styles.helper}>Demo access is available for MVP1 while backend tenant authentication is being completed.</Text>
     </View>
   );
 }
