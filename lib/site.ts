@@ -397,6 +397,20 @@ export const solutionAccelerators = [
     href: "/services/data-strategy-governance-quality"
   },
   {
+    title: "Enterprise Data Model & Semantic Layer Accelerators",
+    description:
+      "Reusable data models, KPI definitions, metric layers, and domain structures for standardized reporting, analytics, and AI-ready data products.",
+    icon: Layers3,
+    href: "/services/data-strategy-governance-quality"
+  },
+  {
+    title: "Data Governance Operating Model Frameworks",
+    description:
+      "Practical governance frameworks for data ownership, stewardship, policies, standards, issue management, controls, and accountability routines.",
+    icon: ShieldCheck,
+    href: "/services/data-strategy-governance-quality"
+  },
+  {
     title: "Data Quality Monitoring dashboards",
     description: "Dashboard templates and controls for tracking completeness, consistency, exceptions, ownership, and remediation.",
     icon: DatabaseZap,
