@@ -82,35 +82,54 @@ After changing `.env`, fully restart Expo. If Expo keeps old public environment 
 npx expo start -c
 ```
 
-Set `EXPO_PUBLIC_USE_MOCKS=false` to use the Phase 1B real API wiring for login, logout, session restore/validation, tenant profile, dashboard summary, and lease details. Other MVP1 modules remain mock-backed until later integration phases.
+Set `EXPO_PUBLIC_USE_MOCKS=false` to use real API mode for login, logout, session restore/validation, tenant profile, dashboard summary, lease details, payments, maintenance, announcements, community, services, exchange, documents, and access information. The app does not silently fall back to demo data when this value is `false`.
 
 The previous `EXPO_PUBLIC_ELGONOS_API_URL` and `EXPO_PUBLIC_ELGONOS_MOCK_MODE` names are still read as fallbacks for older local environments.
 
 In real API mode, login stores the access token and optional refresh token in Expo SecureStore. App reload validates the stored session using refresh/session validation where available, falling back to `GET /api/mobile/tenant/me`; invalid sessions are cleared locally.
 
-## Expected backend endpoints later
+## Required backend mobile endpoints
 
 - `POST /api/mobile/auth/login`
 - `POST /api/mobile/auth/logout`
 - `POST /api/mobile/auth/refresh`
 - `GET /api/mobile/auth/session`
+- `GET /api/mobile/auth/me`
 - `POST /api/mobile/auth/forgot-password`
 - `GET /api/mobile/tenant/me`
+- `GET /api/mobile/tenant/profile`
 - `GET /api/mobile/tenant/dashboard`
 - `GET /api/mobile/lease`
-- `GET /api/mobile/payments/invoices`
-- `GET /api/mobile/payments/receipts`
-- `GET /api/mobile/payments/instructions`
-- `GET /api/mobile/documents`
-- `GET /api/mobile/maintenance`
-- `POST /api/mobile/maintenance`
-- `GET /api/mobile/announcements`
-- `GET /api/mobile/community`
-- `POST /api/mobile/community`
-- `GET /api/mobile/services`
-- `GET /api/mobile/exchange`
-- `POST /api/mobile/exchange`
-- `GET /api/mobile/access`
+- `GET /api/mobile/tenant/payments`
+- `GET /api/mobile/tenant/documents`
+- `GET /api/mobile/tenant/maintenance`
+- `POST /api/mobile/tenant/maintenance`
+- `GET /api/mobile/tenant/announcements`
+- `GET /api/mobile/tenant/community`
+- `POST /api/mobile/tenant/community`
+- `GET /api/mobile/tenant/services`
+- `GET /api/mobile/tenant/exchange`
+- `POST /api/mobile/tenant/exchange`
+- `GET /api/mobile/tenant/access`
+
+Authenticated endpoints require `Authorization: Bearer <token>` where the token is returned from login. Empty records should return an empty `items` array or empty-state payload, not `404`.
+
+## Expo Go and standalone builds
+
+Expo Go is suitable for development and will show Expo bundling progress, the Expo developer menu, and development overlays. That is expected while testing from the QR code.
+
+Use EAS preview builds when testing an installable APK with production API variables:
+
+```bash
+npx eas build --profile preview --platform android
+```
+
+Use the production profile for store-ready builds. Preview and production profiles set:
+
+```bash
+EXPO_PUBLIC_API_BASE_URL=https://elgonos.elgonedge.com
+EXPO_PUBLIC_USE_MOCKS=false
+```
 
 ## MVP1 known gaps
 

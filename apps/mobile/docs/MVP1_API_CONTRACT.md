@@ -21,7 +21,7 @@ Phase 1A prepares the mobile foundation without connecting screens to the backen
 
 ## Phase 1B Mobile Integration Scope
 
-Phase 1B wires only authentication, session restore/validation, logout, tenant profile, dashboard summary, and lease details. In mock mode, the Grace Wanjiku mock flow remains fully usable without a backend. In real API mode, the app uses `EXPO_PUBLIC_API_BASE_URL`, stores access and optional refresh tokens in Expo SecureStore, validates stored sessions on reload, clears invalid sessions locally, and keeps all other MVP1 modules mock-backed.
+Phase 1B now wires authentication, session restore/validation, logout, tenant profile, dashboard summary, lease details, payments, maintenance, announcements, community, services, exchange, documents, and access information. In mock mode, the Grace Wanjiku mock flow remains fully usable without a backend. In real API mode, the app uses `EXPO_PUBLIC_API_BASE_URL`, stores access and optional refresh tokens in Expo SecureStore, validates stored sessions on reload, clears invalid sessions locally, and does not silently fall back to demo data.
 
 Integrated Phase 1B endpoints:
 
@@ -32,6 +32,17 @@ Integrated Phase 1B endpoints:
 - `GET /api/mobile/tenant/me`
 - `GET /api/mobile/tenant/dashboard`
 - `GET /api/mobile/lease`
+- `GET /api/mobile/tenant/payments`
+- `GET /api/mobile/tenant/documents`
+- `GET /api/mobile/tenant/maintenance`
+- `POST /api/mobile/tenant/maintenance`
+- `GET /api/mobile/tenant/announcements`
+- `GET /api/mobile/tenant/community`
+- `POST /api/mobile/tenant/community`
+- `GET /api/mobile/tenant/services`
+- `GET /api/mobile/tenant/exchange`
+- `POST /api/mobile/tenant/exchange`
+- `GET /api/mobile/tenant/access`
 
 Backend assumptions:
 

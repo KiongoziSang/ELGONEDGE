@@ -212,8 +212,8 @@ function parseJson(text: string, contentType: string, status: number): JsonValue
       code: "INVALID_RESPONSE",
       message:
         status === 404
-          ? "Backend endpoint was not found. Check EXPO_PUBLIC_API_BASE_URL and confirm the mobile auth API is deployed."
-          : "Backend returned a non-JSON response. Check EXPO_PUBLIC_API_BASE_URL and backend API routing.",
+          ? "We could not load this information right now. Please try again later or contact support."
+          : "We could not complete this request right now. Please try again later or contact support.",
       status
     });
   }

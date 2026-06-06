@@ -1,8 +1,13 @@
 import { communityPosts } from "../../mocks/community";
 import type { CommunityPost } from "../../types";
-import { mockDelay } from "./client";
+import { apiRequest, isMockMode, mockDelay } from "./client";
 
 export async function getCommunityPosts() {
+  if (!isMockMode()) {
+    const response = await apiRequest<{ items?: CommunityPost[] }>("/api/mobile/tenant/community");
+    return response.items ?? [];
+  }
+
   await mockDelay();
   return communityPosts;
 }
@@ -12,6 +17,13 @@ export async function submitCommunityPost(input: {
   type: CommunityPost["type"];
   message: string;
 }): Promise<CommunityPost> {
+  if (!isMockMode()) {
+    return apiRequest<CommunityPost>("/api/mobile/tenant/community", {
+      method: "POST",
+      body: input
+    });
+  }
+
   await mockDelay();
 
   return {

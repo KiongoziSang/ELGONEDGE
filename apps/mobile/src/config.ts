@@ -1,3 +1,20 @@
+type AppConfig = {
+  apiBaseUrl: string;
+  apiBaseUrlSource: "EXPO_PUBLIC_API_BASE_URL" | "EXPO_PUBLIC_ELGONOS_API_URL" | "default";
+  configError: string | null;
+  mockMode: boolean;
+  requestTimeoutMs: number;
+};
+
+declare const process: {
+  env: {
+    EXPO_PUBLIC_API_BASE_URL?: string;
+    EXPO_PUBLIC_ELGONOS_API_URL?: string;
+    EXPO_PUBLIC_USE_MOCKS?: string;
+    EXPO_PUBLIC_ELGONOS_MOCK_MODE?: string;
+  };
+};
+
 function readBoolean(value: string | undefined, fallback: boolean) {
   if (value === undefined) {
     return fallback;
@@ -14,7 +31,7 @@ const mockMode = readBoolean(
 );
 const apiBaseUrl = configuredApiBaseUrl ?? legacyApiBaseUrl ?? (mockMode ? "https://elgonos.elgonedge.com" : "");
 
-export const appConfig = {
+export const appConfig: AppConfig = {
   apiBaseUrl,
   apiBaseUrlSource: configuredApiBaseUrl ? "EXPO_PUBLIC_API_BASE_URL" : legacyApiBaseUrl ? "EXPO_PUBLIC_ELGONOS_API_URL" : "default",
   configError: !mockMode && !apiBaseUrl ? "Missing EXPO_PUBLIC_API_BASE_URL while EXPO_PUBLIC_USE_MOCKS=false." : null,

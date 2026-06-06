@@ -1,8 +1,13 @@
 import { maintenanceRequests } from "../../mocks/maintenance";
 import type { MaintenanceCategory, MaintenanceRequest, Priority } from "../../types";
-import { mockDelay } from "./client";
+import { apiRequest, isMockMode, mockDelay } from "./client";
 
 export async function getMaintenanceRequests() {
+  if (!isMockMode()) {
+    const response = await apiRequest<{ items?: MaintenanceRequest[] }>("/api/mobile/tenant/maintenance");
+    return response.items ?? [];
+  }
+
   await mockDelay();
   return maintenanceRequests;
 }
@@ -12,6 +17,13 @@ export async function createMaintenanceRequest(input: {
   description: string;
   priority: Priority;
 }): Promise<MaintenanceRequest> {
+  if (!isMockMode()) {
+    return apiRequest<MaintenanceRequest>("/api/mobile/tenant/maintenance", {
+      method: "POST",
+      body: input
+    });
+  }
+
   await mockDelay();
 
   return {

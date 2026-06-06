@@ -1,8 +1,13 @@
 import { exchangeListings } from "../../mocks/exchange";
 import type { ExchangeListing } from "../../types";
-import { mockDelay } from "./client";
+import { apiRequest, isMockMode, mockDelay } from "./client";
 
 export async function getExchangeListings() {
+  if (!isMockMode()) {
+    const response = await apiRequest<{ items?: ExchangeListing[] }>("/api/mobile/tenant/exchange");
+    return response.items ?? [];
+  }
+
   await mockDelay();
   return exchangeListings;
 }
@@ -14,6 +19,13 @@ export async function createExchangeListing(input: {
   description: string;
   contactMethod: string;
 }): Promise<ExchangeListing> {
+  if (!isMockMode()) {
+    return apiRequest<ExchangeListing>("/api/mobile/tenant/exchange", {
+      method: "POST",
+      body: input
+    });
+  }
+
   await mockDelay();
 
   return {
