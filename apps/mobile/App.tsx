@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { BrandMark } from "./src/components/BrandMark";
 import { AuthProvider, useAuth } from "./src/context/AuthContext";
+import { NavigationProvider } from "./src/context/NavigationContext";
 import { AccessScreen } from "./src/screens/AccessScreen";
 import { AnnouncementsScreen } from "./src/screens/AnnouncementsScreen";
 import { CommunityScreen } from "./src/screens/CommunityScreen";
@@ -67,20 +68,22 @@ function RootNavigator() {
 
   return (
     <View style={styles.app}>
-      <View style={styles.content}>{renderScreen(screen, setScreen)}</View>
-      <SafeAreaView edges={["bottom"]} style={styles.tabSafe}>
-        <View style={styles.tabs}>
-          {tabs.map((tab) => {
-            const active = tab.id === activeTab;
-            return (
-              <Pressable key={tab.id} onPress={() => setScreen(tab.id)} style={styles.tab}>
-                <Text style={[styles.tabIcon, active && styles.tabIconActive]}>{tab.label.slice(0, 1)}</Text>
-                <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{tab.label}</Text>
-              </Pressable>
-            );
-          })}
-        </View>
-      </SafeAreaView>
+      <NavigationProvider value={{ navigate: setScreen }}>
+        <View style={styles.content}>{renderScreen(screen, setScreen)}</View>
+        <SafeAreaView edges={["bottom"]} style={styles.tabSafe}>
+          <View style={styles.tabs}>
+            {tabs.map((tab) => {
+              const active = tab.id === activeTab;
+              return (
+                <Pressable key={tab.id} onPress={() => setScreen(tab.id)} style={styles.tab}>
+                  <Text style={[styles.tabIcon, active && styles.tabIconActive]}>{tab.label.slice(0, 1)}</Text>
+                  <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{tab.label}</Text>
+                </Pressable>
+              );
+            })}
+          </View>
+        </SafeAreaView>
+      </NavigationProvider>
     </View>
   );
 }

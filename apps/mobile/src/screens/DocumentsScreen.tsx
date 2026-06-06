@@ -18,9 +18,9 @@ export function DocumentsScreen() {
     <Screen title="Documents" subtitle="Lease agreement, invoices, receipts, notices, and access documents.">
       {documents.loading ? <LoadingState label="Loading documents..." /> : null}
       {documents.error ? <EmptyState title="Unable to load documents" text={documents.error} actionLabel="Retry" onAction={() => void documents.reload()} /> : null}
-      {!documents.loading && documents.data.length === 0 ? (
+      {!documents.loading && !documents.error && documents.data.length === 0 ? (
         <EmptyState title="No documents available" text="Lease, invoices, receipts, and notices will appear here." />
-      ) : (
+      ) : !documents.loading && !documents.error ? (
         <View style={styles.stack}>
           {documents.data.map((document) => (
             <AppCard key={document.id}>
@@ -28,15 +28,20 @@ export function DocumentsScreen() {
                 <View style={styles.copy}>
                   <Text style={styles.title}>{document.title}</Text>
                   <Text style={styles.meta}>{document.type} · {formatDate(document.date)}</Text>
+                  {document.propertyName || document.unitNumber ? (
+                    <Text style={styles.meta}>
+                      {[document.propertyName, document.unitNumber ? `Unit ${document.unitNumber}` : ""].filter(Boolean).join(" · ")}
+                    </Text>
+                  ) : null}
                   {document.amount ? <Text style={styles.amount}>{formatKes(document.amount)}</Text> : null}
-                  <Text style={styles.placeholder}>View/download available when enabled</Text>
+                  <Text style={styles.placeholder}>Available through management</Text>
                 </View>
                 <BadgeRow labels={[isRecentlyAdded(document.date) && "NEW", document.status]} />
               </View>
             </AppCard>
           ))}
         </View>
-      )}
+      ) : null}
     </Screen>
   );
 }

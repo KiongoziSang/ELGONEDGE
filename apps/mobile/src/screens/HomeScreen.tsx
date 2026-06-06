@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { AmountCard } from "../components/AmountCard";
 import { AppCard } from "../components/AppCard";
 import { BadgeRow } from "../components/BadgeRow";
@@ -69,41 +69,87 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
               status={summary.data.paymentStatus}
             />
           </View>
-          <View style={styles.row}>
-            <AppCard compact>
-              <Text style={styles.smallLabel}>Lease</Text>
-              <Text style={styles.smallValue}>{summary.data.leaseStatus}</Text>
-            </AppCard>
-            <AppCard compact>
-              <Text style={styles.smallLabel}>Payment</Text>
-              <Text style={styles.smallValue}>{summary.data.paymentStatus}</Text>
-            </AppCard>
+          <SectionHeader title="At a glance" />
+          <View style={styles.summaryGrid}>
+            <SummaryCard label="Lease" value={summary.data.leaseStatus || "Active"} detail="Occupancy status" icon="L" />
+            <SummaryCard label="Payment" value={summary.data.paymentStatus || "Unknown"} detail="Current rent state" icon="P" />
+            <SummaryCard
+              label="Documents"
+              value={summary.data.documentStatus || (summary.data.documentCount ? "Available" : "Pending")}
+              detail={`${summary.data.documentCount ?? 0} tenant document${summary.data.documentCount === 1 ? "" : "s"}`}
+              icon="D"
+            />
+            <SummaryCard
+              label="Requests"
+              value={summary.data.openRequestCount ? `${summary.data.openRequestCount} open` : "None"}
+              detail="Maintenance follow-up"
+              icon="R"
+            />
           </View>
+          <SectionHeader title="For you" />
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.featureRail}>
+            <FeatureCard
+              title="Announcements"
+              description={summary.data.unreadAnnouncementCount ? `${summary.data.unreadAnnouncementCount} unread property notice${summary.data.unreadAnnouncementCount === 1 ? "" : "s"}` : "Official property notices"}
+              count={summary.data.announcementCount}
+              badge={getQuickActionBadge("announcement", summary.data)}
+              icon="A"
+              onPress={() => navigate("announcements")}
+            />
+            <FeatureCard
+              title="Community"
+              description="Resident updates and approved posts"
+              count={summary.data.communityCount}
+              badge={summary.data.communityCount ? "View" : undefined}
+              icon="C"
+              onPress={() => navigate("community")}
+            />
+            <FeatureCard
+              title="Exchange"
+              description="Moderated resident listings"
+              count={summary.data.exchangeCount}
+              badge={summary.data.exchangeCount ? "View" : undefined}
+              icon="E"
+              onPress={() => navigate("exchange")}
+            />
+            <FeatureCard
+              title="Services"
+              description="Approved providers for your property"
+              count={summary.data.servicesCount}
+              badge={summary.data.servicesCount ? "View" : undefined}
+              icon="S"
+              onPress={() => navigate("services")}
+            />
+          </ScrollView>
           <SectionHeader title="Recent activity" />
-          <AppCard>
-            <View style={styles.activityHeader}>
-              <Text style={styles.activityTitle}>{summary.data.recentAnnouncement.title}</Text>
-              <BadgeRow
-                labels={[
-                  isRecentlyAdded(summary.data.recentAnnouncement.date) && "NEW",
-                  summary.data.recentAnnouncement.read ? "Read" : "Unread"
-                ]}
-              />
-            </View>
-            <Text style={styles.activityText}>{summary.data.recentAnnouncement.message}</Text>
-          </AppCard>
-          <AppCard>
-            <View style={styles.activityHeader}>
-              <Text style={styles.activityTitle}>{summary.data.recentMaintenance.title}</Text>
-              <BadgeRow
-                labels={[
-                  isRecentlyAdded(summary.data.recentMaintenance.date) && "NEW",
-                  summary.data.recentMaintenance.status
-                ]}
-              />
-            </View>
-            <Text style={styles.activityText}>{summary.data.recentMaintenance.description}</Text>
-          </AppCard>
+          <Pressable onPress={() => navigate("announcements")}>
+            <AppCard>
+              <View style={styles.activityHeader}>
+                <Text style={styles.activityTitle}>{summary.data.recentAnnouncement.title}</Text>
+                <BadgeRow
+                  labels={[
+                    isRecentlyAdded(summary.data.recentAnnouncement.date) && "NEW",
+                    summary.data.recentAnnouncement.read ? "Read" : "Unread"
+                  ]}
+                />
+              </View>
+              <Text style={styles.activityText}>{summary.data.recentAnnouncement.message}</Text>
+            </AppCard>
+          </Pressable>
+          <Pressable onPress={() => navigate("maintenance")}>
+            <AppCard>
+              <View style={styles.activityHeader}>
+                <Text style={styles.activityTitle}>{summary.data.recentMaintenance.title}</Text>
+                <BadgeRow
+                  labels={[
+                    isRecentlyAdded(summary.data.recentMaintenance.date) && "NEW",
+                    summary.data.recentMaintenance.status
+                  ]}
+                />
+              </View>
+              <Text style={styles.activityText}>{summary.data.recentMaintenance.description}</Text>
+            </AppCard>
+          </Pressable>
           <SectionHeader title="Quick actions" />
           <View style={styles.actions}>
             {quickActions.map((action) => (
@@ -139,10 +185,33 @@ const styles = StyleSheet.create({
   balance: {
     marginBottom: 2
   },
-  row: {
+  summaryGrid: {
     flexDirection: "row",
+    flexWrap: "wrap",
     gap: 10,
-    marginTop: 12
+    marginBottom: 2
+  },
+  summaryCard: {
+    width: "48%"
+  },
+  summaryContent: {
+    gap: 8
+  },
+  summaryTop: {
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 10
+  },
+  summaryIcon: {
+    backgroundColor: colors.infoSoft,
+    borderRadius: 14,
+    color: colors.blue,
+    fontSize: 15,
+    fontWeight: "900",
+    height: 34,
+    lineHeight: 34,
+    textAlign: "center",
+    width: 34
   },
   smallLabel: {
     color: colors.muted,
@@ -152,9 +221,72 @@ const styles = StyleSheet.create({
   },
   smallValue: {
     color: colors.navy,
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: "900",
+    marginTop: 2
+  },
+  smallDetail: {
+    color: colors.slate,
+    fontSize: 12,
+    fontWeight: "700",
+    lineHeight: 17
+  },
+  featureRail: {
+    gap: 12,
+    paddingRight: 4
+  },
+  featureCard: {
+    backgroundColor: colors.white,
+    borderColor: colors.line,
+    borderRadius: 22,
+    borderWidth: 1,
+    minHeight: 148,
+    padding: 15,
+    width: 212
+  },
+  featureTop: {
+    alignItems: "flex-start",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  featureIcon: {
+    backgroundColor: colors.navy,
+    borderRadius: 16,
+    color: colors.cyan,
+    fontSize: 17,
+    fontWeight: "900",
+    height: 42,
+    lineHeight: 42,
+    textAlign: "center",
+    width: 42
+  },
+  featureTitle: {
+    color: colors.navy,
+    fontSize: 16,
+    fontWeight: "900",
+    marginTop: 14
+  },
+  featureDescription: {
+    color: colors.slate,
+    fontSize: 13,
+    lineHeight: 19,
     marginTop: 6
+  },
+  featureFooter: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 14
+  },
+  featureCount: {
+    color: colors.blue,
+    fontSize: 12,
+    fontWeight: "900"
+  },
+  featureCta: {
+    color: colors.navy,
+    fontSize: 12,
+    fontWeight: "900"
   },
   activityHeader: {
     alignItems: "center",
@@ -180,6 +312,54 @@ const styles = StyleSheet.create({
     gap: 10
   }
 });
+
+function SummaryCard({ label, value, detail, icon }: { label: string; value: string; detail: string; icon: string }) {
+  return (
+    <View style={styles.summaryCard}>
+      <AppCard compact>
+        <View style={styles.summaryContent}>
+          <View style={styles.summaryTop}>
+            <Text style={styles.summaryIcon}>{icon}</Text>
+            <Text style={styles.smallLabel}>{label}</Text>
+          </View>
+          <Text style={styles.smallValue}>{value}</Text>
+          <Text style={styles.smallDetail}>{detail}</Text>
+        </View>
+      </AppCard>
+    </View>
+  );
+}
+
+function FeatureCard({
+  title,
+  description,
+  count,
+  badge,
+  icon,
+  onPress
+}: {
+  title: string;
+  description: string;
+  count?: number;
+  badge?: string;
+  icon: string;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable onPress={onPress} style={({ pressed }) => [styles.featureCard, pressed && { opacity: 0.78 }]}>
+      <View style={styles.featureTop}>
+        <Text style={styles.featureIcon}>{icon}</Text>
+        <BadgeRow labels={[badge]} />
+      </View>
+      <Text style={styles.featureTitle}>{title}</Text>
+      <Text style={styles.featureDescription}>{description}</Text>
+      <View style={styles.featureFooter}>
+        <Text style={styles.featureCount}>{typeof count === "number" ? `${count} item${count === 1 ? "" : "s"}` : "Ready"}</Text>
+        <Text style={styles.featureCta}>View</Text>
+      </View>
+    </Pressable>
+  );
+}
 
 function getQuickActionBadge(
   badgeKey: "announcement" | "maintenance" | undefined,

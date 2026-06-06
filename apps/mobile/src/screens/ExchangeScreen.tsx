@@ -46,13 +46,18 @@ export function ExchangeScreen() {
     }
 
     setSubmitting(true);
-    const listing = await createExchangeListing({ title, category, price: parsedPrice, description, contactMethod });
-    setItems((current) => [listing, ...current]);
-    setTitle("");
-    setPrice("");
-    setDescription("");
-    setFeedback("Listing submitted for management review.");
-    setSubmitting(false);
+    try {
+      const listing = await createExchangeListing({ title, category, price: parsedPrice, description, contactMethod });
+      setItems((current) => [listing, ...current]);
+      setTitle("");
+      setPrice("");
+      setDescription("");
+      setFeedback("Listing submitted for management review.");
+    } catch (error) {
+      setFeedback(error instanceof Error ? error.message : "We could not submit this listing right now.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -73,9 +78,9 @@ export function ExchangeScreen() {
       <SectionHeader title="Listings" />
       {loaded.loading ? <LoadingState label="Loading exchange listings..." /> : null}
       {loaded.error ? <EmptyState title="Unable to load exchange" text={loaded.error} actionLabel="Retry" onAction={() => void loaded.reload()} /> : null}
-      {!loaded.loading && listings.length === 0 ? (
+      {!loaded.loading && !loaded.error && listings.length === 0 ? (
         <EmptyState title="No exchange listings yet" text="Approved household listings will appear here." />
-      ) : (
+      ) : !loaded.loading && !loaded.error ? (
         <View style={styles.stack}>
           {listings.map((listing) => (
             <AppCard key={listing.id}>
@@ -91,7 +96,7 @@ export function ExchangeScreen() {
             </AppCard>
           ))}
         </View>
-      )}
+      ) : null}
     </Screen>
   );
 }

@@ -48,9 +48,9 @@ export function AnnouncementsScreen() {
           onAction={() => void announcements.reload()}
         />
       ) : null}
-      {!announcements.loading && items.length === 0 ? (
+      {!announcements.loading && !announcements.error && items.length === 0 ? (
         <EmptyState title="No announcements available" text="Official property notices will appear here." />
-      ) : (
+      ) : !announcements.loading && !announcements.error ? (
         <View style={styles.stack}>
           {items.map((announcement) => (
             <Pressable key={`${announcement.source ?? "notification"}-${announcement.id}`} onPress={() => void markRead(announcement)}>
@@ -67,7 +67,7 @@ export function AnnouncementsScreen() {
             </Pressable>
           ))}
         </View>
-      )}
+      ) : null}
     </Screen>
   );
 }

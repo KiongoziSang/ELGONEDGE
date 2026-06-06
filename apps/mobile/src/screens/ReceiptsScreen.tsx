@@ -17,10 +17,12 @@ export function ReceiptsScreen() {
   return (
     <Screen title="Receipts" subtitle="Confirmed payment receipts and supporting records.">
       {receipts.loading ? <LoadingState label="Loading receipts..." /> : null}
-      {receipts.error ? <EmptyState title="Unable to load receipts" text={receipts.error} /> : null}
-      {!receipts.loading && receipts.data.length === 0 ? (
+      {receipts.error ? (
+        <EmptyState title="Unable to load receipts" text={receipts.error} actionLabel="Retry" onAction={() => void receipts.reload()} />
+      ) : null}
+      {!receipts.loading && !receipts.error && receipts.data.length === 0 ? (
         <EmptyState title="No receipts found" text="Payment receipts will appear after confirmation." />
-      ) : (
+      ) : !receipts.loading && !receipts.error ? (
         <View style={styles.stack}>
           {receipts.data.map((receipt) => (
             <AppCard key={receipt.id}>
@@ -36,7 +38,7 @@ export function ReceiptsScreen() {
             </AppCard>
           ))}
         </View>
-      )}
+      ) : null}
     </Screen>
   );
 }

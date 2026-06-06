@@ -5,9 +5,9 @@ Universal Expo + React Native tenant/resident app for Android and iOS.
 ## Tenant app scope
 
 - Login and forgot password support.
-- Tenant dashboard using the authenticated tenant, property, unit, balance, and recent activity context.
+- Tenant dashboard using the authenticated tenant, property, unit, balance, four-card summary, notification count, and recent activity context.
 - Rent balance, payment instructions, invoices, payment history, and receipts.
-- Documents for lease agreement, invoices, receipts, notices, and access card records.
+- Documents for signed lease agreement visibility, invoices, receipts, notices, and access card records.
 - Maintenance request list and create request form.
 - Official announcements/notices.
 - Controlled Resident Community with approved posts and tenant post/grievance submission.
@@ -120,6 +120,7 @@ Authenticated endpoints require `Authorization: Bearer <token>` where the token 
 
 Phase 2 modules use these response groups:
 
+- Home dashboard: rent balance, lease/payment status, document status/count, open request count, announcement/community/exchange/service counts, unread notification count, and recent activity previews.
 - Payments: `invoices`, `receipts`, `paymentMethods`, and `paymentInstructions`.
 - Maintenance: `items` with title, category, description, priority, status, date, and optional latest update.
 - Documents, Announcements, Community, Services, and Exchange: `items` arrays with stable mobile-friendly card fields.
@@ -129,8 +130,15 @@ Status display rules:
 
 - `NEW` is derived in the app from recently created or updated dates, currently within the last 7 days.
 - `Unread` means the item has not been opened/read by the tenant where the backend provides that state.
-- In-app notifications are available through the Notifications quick action. Opening a notification, announcement, or community post marks it read where backend read tracking is available.
+- In-app notifications are available through the header bell and Notifications quick action. The bell shows a count badge when unread notifications exist. Opening a notification, announcement, or community post marks it read where backend read tracking is available.
 - Workflow statuses such as `Approved`, `Pending review`, `Submitted`, `In progress`, `Overdue`, and `Paid` remain separate from `NEW`.
+- Empty states appear only after a successful API response with no records. API failures show a single retryable error state instead of mixing error and empty messages.
+
+Documents behavior:
+
+- `GET /api/mobile/tenant/documents` should include tenant-visible uploaded documents for the active lease, unit, or property.
+- If the tenant has an active signed lease but no separate uploaded lease document row, the backend may return a tenant-visible synthetic `Lease Agreement` document with status `Signed`, property name, unit number, and signing date.
+- Document download/opening can remain disabled until file access is implemented; cards should show `Available through management` rather than broken download actions.
 
 ## Expo Go and standalone builds
 

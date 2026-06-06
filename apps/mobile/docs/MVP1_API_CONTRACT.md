@@ -61,8 +61,9 @@ Status display rules:
 
 - `NEW` is derived by the app from recent item dates, currently a 7-day window, unless the backend later provides an explicit flag.
 - `Unread` is a read-state indicator and should not replace workflow status.
-- In-app notifications combine official notifications, announcements, and resident community updates into one tenant-facing list.
+- In-app notifications combine official notifications, announcements, and resident community updates into one tenant-facing list. The app header bell shows a count badge when unread notifications exist.
 - Workflow statuses include `Paid`, `Due soon`, `Overdue`, `Submitted`, `In review`, `In progress`, `Resolved`, `Approved`, and `Pending review`.
+- Empty states appear only after successful responses with no records. API failures should show one retryable error state, not an empty state and an error at the same time.
 
 Example error:
 
@@ -222,6 +223,15 @@ Example error:
   "nextDueDate": "2026-06-05",
   "paymentStatus": "Pending",
   "leaseStatus": "Active",
+  "documentStatus": "Available",
+  "documentCount": 3,
+  "openRequestCount": 1,
+  "unreadNotificationCount": 2,
+  "announcementCount": 4,
+  "unreadAnnouncementCount": 1,
+  "communityCount": 5,
+  "exchangeCount": 2,
+  "servicesCount": 3,
   "recentAnnouncement": {
     "id": "ann_001",
     "title": "Water maintenance notice",
@@ -237,7 +247,7 @@ Example error:
 }
 ```
 
-- Notes/assumptions: Keep payload optimized for first dashboard render.
+- Notes/assumptions: Keep payload optimized for first dashboard render. The Home screen uses the count and status fields for the four-card summary and property update carousel.
 
 ## Payments
 
@@ -370,31 +380,33 @@ Example error:
 ### Get Tenant Documents
 
 - Method: `GET`
-- Path: `/api/mobile/documents`
+- Path: `/api/mobile/tenant/documents`
 - Purpose: Return lease, invoice, receipt, notice, and access documents.
 - Auth required: Yes
 - Response body:
 
 ```json
 {
-  "documents": [
+  "items": [
     {
       "id": "doc_001",
       "title": "Lease Agreement",
-      "type": "lease",
-      "issuedAt": "2026-01-01T00:00:00Z",
-      "status": "Available"
+      "type": "Lease agreement",
+      "date": "2026-01-01T00:00:00Z",
+      "status": "Signed",
+      "propertyName": "Precious Apartment",
+      "unitNumber": "2B"
     }
   ]
 }
 ```
 
-- Notes/assumptions: Document metadata loads separately from file URLs.
+- Notes/assumptions: Document metadata loads separately from file URLs. If a tenant has an active signed lease but no separate uploaded lease document row, the backend may return a tenant-visible synthetic `Lease Agreement` item with status `Signed`, property name, unit number, and signing date. Download/opening can remain disabled until secure file URLs are implemented.
 
 ### Get Document Download / View URL
 
 - Method: `GET`
-- Path: `/api/mobile/documents/{documentId}/url`
+- Path: `/api/mobile/tenant/documents/{documentId}/url`
 - Purpose: Return a secure URL for viewing or downloading a document.
 - Auth required: Yes
 - Response body:

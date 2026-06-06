@@ -62,12 +62,17 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
     }
 
     setSubmitting(true);
-    const post = await submitCommunityPost({ title, message, type });
-    setPosts((current) => [post, ...current]);
-    setTitle("");
-    setMessage("");
-    setFeedback("Submitted for management review.");
-    setSubmitting(false);
+    try {
+      const post = await submitCommunityPost({ title, message, type });
+      setPosts((current) => [post, ...current]);
+      setTitle("");
+      setMessage("");
+      setFeedback("Submitted for management review.");
+    } catch (error) {
+      setFeedback(error instanceof Error ? error.message : "We could not submit this post right now.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -117,10 +122,17 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
 
       <SectionHeader title="Community feed" />
       {loaded.loading ? <LoadingState label="Loading community posts..." /> : null}
-      {loaded.error ? <EmptyState title="Unable to load community" text={loaded.error} /> : null}
-      {!loaded.loading && visiblePosts.length === 0 ? (
+      {loaded.error ? (
+        <EmptyState
+          title="Unable to load community"
+          text={loaded.error}
+          actionLabel="Retry"
+          onAction={() => void loaded.reload()}
+        />
+      ) : null}
+      {!loaded.loading && !loaded.error && visiblePosts.length === 0 ? (
         <EmptyState title="No approved community posts" text="Approved posts and official notices will appear here." />
-      ) : (
+      ) : !loaded.loading && !loaded.error ? (
         <View style={styles.stack}>
           {visiblePosts.map((post) => (
             <Pressable key={post.id} onPress={() => void markRead(post)}>
@@ -137,7 +149,7 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
             </Pressable>
           ))}
         </View>
-      )}
+      ) : null}
     </Screen>
   );
 }

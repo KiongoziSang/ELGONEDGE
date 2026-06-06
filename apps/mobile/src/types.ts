@@ -105,8 +105,10 @@ export type TenantDocument = {
   title: string;
   type: "Lease agreement" | "Rent invoice" | "Payment receipt" | "Notice" | "Access card" | "Other";
   date: string;
-  status: "Available" | "Pending" | "Archived";
+  status: "Signed" | "Available" | "Pending" | "Archived";
   amount?: number;
+  propertyName?: string;
+  unitNumber?: string;
 };
 
 export type MaintenanceRequest = {
@@ -212,6 +214,15 @@ export type DashboardSummary = {
   leaseStatus: string;
   recentAnnouncement: Announcement;
   recentMaintenance: MaintenanceRequest;
+  documentStatus?: string;
+  documentCount?: number;
+  openRequestCount?: number;
+  unreadNotificationCount?: number;
+  announcementCount?: number;
+  unreadAnnouncementCount?: number;
+  communityCount?: number;
+  exchangeCount?: number;
+  servicesCount?: number;
 };
 
 export type AppTab = "home" | "payments" | "maintenance" | "community" | "profile";

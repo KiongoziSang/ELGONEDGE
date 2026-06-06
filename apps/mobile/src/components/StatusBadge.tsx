@@ -41,6 +41,7 @@ function getTone(label: string) {
   if (
     normalized.includes("approved") ||
     normalized.includes("active") ||
+    normalized.includes("signed") ||
     normalized.includes("paid") ||
     normalized.includes("confirmed") ||
     normalized.includes("read") ||

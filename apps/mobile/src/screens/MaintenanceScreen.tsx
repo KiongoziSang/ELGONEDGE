@@ -36,13 +36,18 @@ export function MaintenanceScreen() {
     }
 
     setSubmitting(true);
-    const request = await createMaintenanceRequest({ title, category, priority, description });
-    setItems((current) => [request, ...current]);
-    await loaded.reload();
-    setTitle("");
-    setDescription("");
-    setSuccess("Maintenance request submitted.");
-    setSubmitting(false);
+    try {
+      const request = await createMaintenanceRequest({ title, category, priority, description });
+      setItems((current) => [request, ...current]);
+      await loaded.reload();
+      setTitle("");
+      setDescription("");
+      setSuccess("Maintenance request submitted.");
+    } catch (error) {
+      setSuccess(error instanceof Error ? error.message : "We could not submit this request right now.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -71,9 +76,9 @@ export function MaintenanceScreen() {
       <SectionHeader title="Request status" />
       {loaded.loading ? <LoadingState label="Loading maintenance requests..." /> : null}
       {loaded.error ? <EmptyState title="Unable to load requests" text={loaded.error} actionLabel="Retry" onAction={() => void loaded.reload()} /> : null}
-      {!loaded.loading && requests.length === 0 ? (
+      {!loaded.loading && !loaded.error && requests.length === 0 ? (
         <EmptyState title="No maintenance requests yet" text="Submitted requests and status updates will appear here." />
-      ) : (
+      ) : !loaded.loading && !loaded.error ? (
         <View style={styles.stack}>
           {requests.map((request) => (
             <AppCard key={request.id}>
@@ -91,7 +96,7 @@ export function MaintenanceScreen() {
             </AppCard>
           ))}
         </View>
-      )}
+      ) : null}
     </Screen>
   );
 }

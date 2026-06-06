@@ -2,13 +2,17 @@ import { StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { colors, spacing } from "../theme";
 import { BrandMark } from "./BrandMark";
+import { NotificationBell } from "./NotificationBell";
 
 export function AppHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   const insets = useSafeAreaInsets();
 
   return (
     <View style={[styles.header, { paddingTop: insets.top + 18 }]}>
-      <BrandMark size="medium" light />
+      <View style={styles.topRow}>
+        <BrandMark size="medium" light />
+        <NotificationBell />
+      </View>
       <Text style={styles.title}>{title}</Text>
       {subtitle ? <Text style={styles.subtitle}>{subtitle}</Text> : null}
     </View>
@@ -20,6 +24,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.navy,
     paddingBottom: 18,
     paddingHorizontal: spacing.screen
+  },
+  topRow: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
   title: {
     color: colors.white,

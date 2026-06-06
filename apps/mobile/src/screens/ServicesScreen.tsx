@@ -18,9 +18,9 @@ export function ServicesScreen() {
     <Screen title="Resident Services" subtitle="Approved providers connected to your property.">
       {providers.loading ? <LoadingState label="Loading approved services..." /> : null}
       {providers.error ? <EmptyState title="Unable to load services" text={providers.error} actionLabel="Retry" onAction={() => void providers.reload()} /> : null}
-      {!providers.loading && providers.data.length === 0 ? (
+      {!providers.loading && !providers.error && providers.data.length === 0 ? (
         <EmptyState title="No resident services available yet" text="Approved providers will appear here when enabled for your property." />
-      ) : (
+      ) : !providers.loading && !providers.error ? (
         <View style={styles.stack}>
           {providers.data.map((provider) => (
             <AppCard key={provider.id}>
@@ -44,7 +44,7 @@ export function ServicesScreen() {
             </AppCard>
           ))}
         </View>
-      )}
+      ) : null}
     </Screen>
   );
 }

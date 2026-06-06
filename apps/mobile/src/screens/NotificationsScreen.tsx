@@ -49,9 +49,9 @@ export function NotificationsScreen() {
           onAction={() => void loaded.reload()}
         />
       ) : null}
-      {!loaded.loading && items.length === 0 ? (
+      {!loaded.loading && !loaded.error && items.length === 0 ? (
         <EmptyState title="No notifications yet" text="Important notices, community updates, and service alerts will appear here." />
-      ) : (
+      ) : !loaded.loading && !loaded.error ? (
         <View style={styles.stack}>
           {items.map((item) => (
             <Pressable key={`${item.source ?? "notification"}-${item.id}`} onPress={() => void markRead(item)}>
@@ -68,7 +68,7 @@ export function NotificationsScreen() {
             </Pressable>
           ))}
         </View>
-      )}
+      ) : null}
     </Screen>
   );
 }

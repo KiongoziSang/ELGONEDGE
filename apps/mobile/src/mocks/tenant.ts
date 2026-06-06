@@ -1,6 +1,10 @@
 import type { DashboardSummary, LeaseDetails, TenantProfile } from "../types";
 import { announcements } from "./announcements";
 import { maintenanceRequests } from "./maintenance";
+import { communityPosts } from "./community";
+import { documents } from "./documents";
+import { exchangeListings } from "./exchange";
+import { serviceProviders } from "./services";
 
 export const tenantProfile: TenantProfile = {
   id: "tenant-grace-wanjiku",
@@ -27,6 +31,15 @@ export const dashboardSummary: DashboardSummary = {
   nextDueDate: "2026-06-05",
   paymentStatus: "Due",
   leaseStatus: tenantProfile.leaseStatus,
+  documentStatus: "Available",
+  documentCount: documents.length,
+  openRequestCount: maintenanceRequests.filter((item) => !["Resolved", "Closed"].includes(item.status)).length,
+  unreadNotificationCount: announcements.filter((item) => !item.read).length,
+  announcementCount: announcements.length,
+  unreadAnnouncementCount: announcements.filter((item) => !item.read).length,
+  communityCount: communityPosts.length,
+  exchangeCount: exchangeListings.length,
+  servicesCount: serviceProviders.length,
   recentAnnouncement: announcements[0],
   recentMaintenance: maintenanceRequests[0]
 };

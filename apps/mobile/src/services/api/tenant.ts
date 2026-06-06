@@ -65,6 +65,15 @@ type DashboardSummaryResponse = Partial<DashboardSummary> & {
   };
   currentRentBalance?: number;
   nextPaymentDueDate?: string;
+  documentStatus?: string;
+  documentCount?: number;
+  openRequestCount?: number;
+  unreadNotificationCount?: number;
+  announcementCount?: number;
+  unreadAnnouncementCount?: number;
+  communityCount?: number;
+  exchangeCount?: number;
+  servicesCount?: number;
   recentAnnouncement?: Partial<Announcement>;
   recentMaintenance?: Partial<MaintenanceRequest>;
 };
@@ -104,6 +113,15 @@ function mapDashboardSummary(response: DashboardSummaryResponse): DashboardSumma
     nextDueDate: readString(response.nextDueDate ?? response.nextPaymentDueDate, ""),
     paymentStatus: readString(response.paymentStatus, "Unknown"),
     leaseStatus: readString(response.leaseStatus, "Unknown"),
+    documentStatus: readOptionalString(response.documentStatus),
+    documentCount: readOptionalNumber(response.documentCount),
+    openRequestCount: readOptionalNumber(response.openRequestCount),
+    unreadNotificationCount: readOptionalNumber(response.unreadNotificationCount),
+    announcementCount: readOptionalNumber(response.announcementCount),
+    unreadAnnouncementCount: readOptionalNumber(response.unreadAnnouncementCount),
+    communityCount: readOptionalNumber(response.communityCount),
+    exchangeCount: readOptionalNumber(response.exchangeCount),
+    servicesCount: readOptionalNumber(response.servicesCount),
     recentAnnouncement: mapAnnouncement(response.recentAnnouncement),
     recentMaintenance: mapMaintenance(response.recentMaintenance)
   };

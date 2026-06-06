@@ -89,7 +89,7 @@ export function PaymentsScreen() {
       ) : null}
 
       <SectionHeader title="Invoices" />
-      {invoices.loading ? null : invoices.data.length === 0 ? (
+      {invoices.loading || invoices.error ? null : invoices.data.length === 0 ? (
         <EmptyState title="No invoices found" text="Rent invoices will appear here once available." />
       ) : (
         <View style={styles.stack}>
@@ -109,7 +109,9 @@ export function PaymentsScreen() {
       )}
 
       <SectionHeader title="Payment history" />
-      {receipts.loading ? <LoadingState label="Loading payment history..." /> : receipts.data.length === 0 ? (
+      {receipts.error ? (
+        <EmptyState title="Unable to load payment history" text={receipts.error} actionLabel="Retry" onAction={() => void receipts.reload()} />
+      ) : receipts.loading ? <LoadingState label="Loading payment history..." /> : receipts.data.length === 0 ? (
         <EmptyState title="No payment history found" text="Confirmed rent payments will appear here." />
       ) : (
         <View style={styles.stack}>
