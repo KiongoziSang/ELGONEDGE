@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
+import { WebsiteChatAssistant } from "@/components/WebsiteChatAssistant";
 import { defaultSeoDescription, defaultSeoTitle, JsonLd, organizationJsonLd, seoKeywords, siteName, siteUrl, websiteJsonLd } from "@/lib/seo";
 import "./globals.css";
 
@@ -59,6 +60,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <WebsiteChatAssistant />
       </body>
     </html>
   );
