@@ -88,7 +88,7 @@ export type Invoice = {
   date: string;
   dueDate: string;
   amount: number;
-  status: "Due" | "Paid" | "Overdue";
+  status: "Due" | "Due soon" | "Paid" | "Overdue" | "Partially paid";
 };
 
 export type Receipt = {
@@ -103,7 +103,7 @@ export type Receipt = {
 export type TenantDocument = {
   id: string;
   title: string;
-  type: "Lease agreement" | "Rent invoice" | "Payment receipt" | "Notice" | "Access card";
+  type: "Lease agreement" | "Rent invoice" | "Payment receipt" | "Notice" | "Access card" | "Other";
   date: string;
   status: "Available" | "Pending" | "Archived";
   amount?: number;
@@ -116,7 +116,8 @@ export type MaintenanceRequest = {
   description: string;
   priority: Priority;
   date: string;
-  status: "Submitted" | "In review" | "Assigned" | "Closed";
+  latestUpdate?: string;
+  status: "Submitted" | "In review" | "Assigned" | "In progress" | "Resolved" | "Closed";
 };
 
 export type MaintenanceCategory =
@@ -154,6 +155,7 @@ export type ServiceProvider = {
   category: ServiceCategory;
   phone: string;
   description: string;
+  date?: string;
   status: "Approved";
 };
 
@@ -215,4 +217,5 @@ export type LoadingState<T> = {
   data: T;
   loading: boolean;
   error: string | null;
+  reload: () => Promise<void>;
 };

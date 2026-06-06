@@ -2,10 +2,10 @@
 
 Universal Expo + React Native tenant/resident app for Android and iOS.
 
-## MVP1 scope
+## Tenant app scope
 
-- Login and forgot password placeholder.
-- Tenant dashboard for Grace Wanjiku at Elgon Heights Apartments, Unit B-204.
+- Login and forgot password support.
+- Tenant dashboard using the authenticated tenant, property, unit, balance, and recent activity context.
 - Rent balance, payment instructions, invoices, payment history, and receipts.
 - Documents for lease agreement, invoices, receipts, notices, and access card records.
 - Maintenance request list and create request form.
@@ -13,7 +13,7 @@ Universal Expo + React Native tenant/resident app for Android and iOS.
 - Controlled Resident Community with approved posts and tenant post/grievance submission.
 - Resident Services list with approved provider contact actions.
 - Resident Exchange listings and create listing form with pending review status.
-- Tenant-facing access/gate pass placeholder.
+- Tenant-facing access and visitor workflow status where enabled by the property.
 - Tenant profile, lease details, emergency contact placeholder, and logout.
 
 ## Run locally
@@ -113,6 +113,19 @@ In real API mode, login stores the access token and optional refresh token in Ex
 - `GET /api/mobile/tenant/access`
 
 Authenticated endpoints require `Authorization: Bearer <token>` where the token is returned from login. Empty records should return an empty `items` array or empty-state payload, not `404`.
+
+Phase 2 modules use these response groups:
+
+- Payments: `invoices`, `receipts`, `paymentMethods`, and `paymentInstructions`.
+- Maintenance: `items` with title, category, description, priority, status, date, and optional latest update.
+- Documents, Announcements, Community, Services, and Exchange: `items` arrays with stable mobile-friendly card fields.
+- Access: access card status, unit access information, visitor pre-registration status, and gate pass status.
+
+Status display rules:
+
+- `NEW` is derived in the app from recently created or updated dates, currently within the last 7 days.
+- `Unread` means the item has not been opened/read by the tenant where the backend provides that state.
+- Workflow statuses such as `Approved`, `Pending review`, `Submitted`, `In progress`, `Overdue`, and `Paid` remain separate from `NEW`.
 
 ## Expo Go and standalone builds
 

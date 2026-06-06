@@ -22,7 +22,17 @@ export function ProfileScreen() {
   return (
     <Screen title="Profile" subtitle="Tenant profile and lease details.">
       {loading ? <LoadingState label="Loading profile..." /> : null}
-      {error ? <EmptyState title="Unable to load profile" text={error} /> : null}
+      {error ? (
+        <EmptyState
+          title="Unable to load profile"
+          text={error}
+          actionLabel="Retry"
+          onAction={() => {
+            void profile.reload();
+            void lease.reload();
+          }}
+        />
+      ) : null}
       {!loading && !error ? (
         <View style={styles.stack}>
           <AppCard>
@@ -38,7 +48,16 @@ export function ProfileScreen() {
           <DetailsCard
             rows={buildProfileRows(profile.data, lease.data)}
           />
-          <AppButton label="Log out" onPress={logout} />
+          <AppButton
+            label={loading ? "Refreshing..." : "Refresh profile"}
+            variant="secondary"
+            onPress={() => {
+              void profile.reload();
+              void lease.reload();
+            }}
+            disabled={loading}
+          />
+          <AppButton label="Log out" onPress={() => void logout()} />
         </View>
       ) : null}
     </Screen>
@@ -62,6 +81,8 @@ function buildProfileRows(profile: TenantProfile, lease: LeaseDetails): [string,
   const rows: [string, string][] = [
     ["Property", profile.propertyName],
     ["Unit", profile.unitNumber],
+    ["Email", profile.email || "Not available"],
+    ["Phone", profile.phone || "Not available"],
     ["Lease start", formatDisplayDate(lease.startDate)],
     ["Lease end", formatDisplayDate(lease.endDate)],
     ["Lease status", lease.status]

@@ -7,12 +7,16 @@ import { BadgeRow } from "../components/BadgeRow";
 import { EmptyState } from "../components/EmptyState";
 import { LoadingState } from "../components/LoadingState";
 import { OptionPicker } from "../components/OptionPicker";
+import { QuickActionCard } from "../components/QuickActionCard";
 import { Screen } from "../components/Screen";
 import { SectionHeader } from "../components/SectionHeader";
 import { useApiData } from "../hooks/useApiData";
+import { getAnnouncements } from "../services/api/announcements";
 import { getCommunityPosts, submitCommunityPost } from "../services/api/community";
+import { getExchangeListings } from "../services/api/exchange";
+import { getServiceProviders } from "../services/api/services";
 import { colors } from "../theme";
-import type { CommunityPost } from "../types";
+import type { CommunityPost, ScreenName } from "../types";
 import { isRecentlyAdded } from "../utils/badges";
 import { formatDate } from "../utils/format";
 
@@ -21,8 +25,11 @@ const postTypes: CommunityPost["type"][] = [
   "Private grievance"
 ];
 
-export function CommunityScreen() {
+export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) => void }) {
   const loaded = useApiData<CommunityPost[]>(getCommunityPosts, []);
+  const announcements = useApiData(getAnnouncements, []);
+  const exchange = useApiData(getExchangeListings, []);
+  const services = useApiData(getServiceProviders, []);
   const [posts, setPosts] = useState<CommunityPost[]>([]);
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
@@ -54,6 +61,29 @@ export function CommunityScreen() {
       title="Community"
       subtitle="A controlled communication layer for approved posts, notices, and private grievances."
     >
+      <SectionHeader title="Resident hub" />
+      <View style={styles.actions}>
+        <QuickActionCard
+          title="Announcements"
+          subtitle="Official notices"
+          badge={announcements.data.some((item) => isRecentlyAdded(item.date) || !item.read) ? "NEW" : undefined}
+          onPress={() => navigate("announcements")}
+        />
+        <QuickActionCard
+          title="Exchange"
+          subtitle="Moderated listings"
+          badge={exchange.data.some((item) => isRecentlyAdded(item.date)) ? "NEW" : undefined}
+          onPress={() => navigate("exchange")}
+        />
+        <QuickActionCard
+          title="Services"
+          subtitle="Approved providers"
+          badge={services.data.some((item) => isRecentlyAdded(item.date)) ? "NEW" : undefined}
+          onPress={() => navigate("services")}
+        />
+        <QuickActionCard title="Access" subtitle="Visitors and gate passes" onPress={() => navigate("access")} />
+      </View>
+
       <SectionHeader title="Submit post or grievance" action="Moderated" />
       <AppCard>
         <View style={styles.form}>
@@ -100,6 +130,11 @@ const styles = StyleSheet.create({
     fontWeight: "800"
   },
   stack: {
+    gap: 10
+  },
+  actions: {
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 10
   },
   row: {

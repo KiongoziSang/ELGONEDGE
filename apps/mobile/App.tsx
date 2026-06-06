@@ -93,7 +93,7 @@ function renderScreen(screen: ScreenName, navigate: (screen: ScreenName) => void
     case "maintenance":
       return <MaintenanceScreen />;
     case "community":
-      return <CommunityScreen />;
+      return <CommunityScreen navigate={navigate} />;
     case "profile":
       return <ProfileScreen />;
     case "documents":

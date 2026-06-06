@@ -72,7 +72,7 @@ export function ExchangeScreen() {
 
       <SectionHeader title="Listings" />
       {loaded.loading ? <LoadingState label="Loading exchange listings..." /> : null}
-      {loaded.error ? <EmptyState title="Unable to load exchange" text={loaded.error} /> : null}
+      {loaded.error ? <EmptyState title="Unable to load exchange" text={loaded.error} actionLabel="Retry" onAction={() => void loaded.reload()} /> : null}
       {!loaded.loading && listings.length === 0 ? (
         <EmptyState title="No exchange listings yet" text="Approved household listings will appear here." />
       ) : (

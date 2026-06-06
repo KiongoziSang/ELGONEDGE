@@ -1,6 +1,6 @@
-# ElgonOS Mobile MVP1 API Contract Draft
+# ElgonOS Mobile API Contract
 
-This draft defines the expected REST API shape for wiring ElgonOS Mobile MVP1 to the backend. It is a planning contract, not an implementation requirement for this pass.
+This document defines the REST API shape used by the ElgonOS tenant mobile app.
 
 ## Common Conventions
 
@@ -15,13 +15,13 @@ This draft defines the expected REST API shape for wiring ElgonOS Mobile MVP1 to
 - Money: numeric amount plus explicit currency where needed.
 - Errors: return a clear code and message.
 
-## Phase 1A Mobile Integration Approach
+## Integration Approach
 
-Phase 1A prepares the mobile foundation without connecting screens to the backend yet. The shared API client owns base URL resolution, JSON request/response handling, bearer token injection, timeout handling, mock mode detection, and consistent API errors. Existing screen-facing service modules remain mock-backed until Phase 1B explicitly wires one endpoint group at a time.
+The shared API client owns base URL resolution, JSON request/response handling, bearer token injection, timeout handling, mock mode detection, and consistent API errors. Screen components call service modules rather than backend routes directly.
 
-## Phase 1B Mobile Integration Scope
+## Phase 2 Mobile Integration Scope
 
-Phase 1B now wires authentication, session restore/validation, logout, tenant profile, dashboard summary, lease details, payments, maintenance, announcements, community, services, exchange, documents, and access information. In mock mode, the Grace Wanjiku mock flow remains fully usable without a backend. In real API mode, the app uses `EXPO_PUBLIC_API_BASE_URL`, stores access and optional refresh tokens in Expo SecureStore, validates stored sessions on reload, clears invalid sessions locally, and does not silently fall back to demo data.
+Phase 2 wires authentication, session restore/validation, logout, tenant profile, dashboard summary, lease details, payments, maintenance, announcements, community, services, exchange, documents, and access information. In mock mode, the Grace Wanjiku demo flow remains fully usable without a backend. In real API mode, the app uses `EXPO_PUBLIC_API_BASE_URL`, stores access and optional refresh tokens in Expo SecureStore, validates stored sessions on reload, clears invalid sessions locally, and does not silently fall back to demo data.
 
 Integrated Phase 1B endpoints:
 
@@ -50,6 +50,14 @@ Backend assumptions:
 - Authenticated endpoints accept `Authorization: Bearer <accessToken>`.
 - If refresh is unavailable, `GET /api/mobile/auth/session` or `GET /api/mobile/tenant/me` can validate an existing token.
 - Mobile service modules may map backend DTOs into the app's existing view models.
+- Expected mobile routes should return empty arrays or empty-state payloads instead of `404` where the feature exists but has no records.
+- Shared property content should be scoped to the tenant's active property where the backend model supports property scoping.
+
+Status display rules:
+
+- `NEW` is derived by the app from recent item dates, currently a 7-day window, unless the backend later provides an explicit flag.
+- `Unread` is a read-state indicator and should not replace workflow status.
+- Workflow statuses include `Paid`, `Due soon`, `Overdue`, `Submitted`, `In review`, `In progress`, `Resolved`, `Approved`, and `Pending review`.
 
 Example error:
 

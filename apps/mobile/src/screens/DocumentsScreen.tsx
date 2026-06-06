@@ -17,7 +17,7 @@ export function DocumentsScreen() {
   return (
     <Screen title="Documents" subtitle="Lease agreement, invoices, receipts, notices, and access documents.">
       {documents.loading ? <LoadingState label="Loading documents..." /> : null}
-      {documents.error ? <EmptyState title="Unable to load documents" text={documents.error} /> : null}
+      {documents.error ? <EmptyState title="Unable to load documents" text={documents.error} actionLabel="Retry" onAction={() => void documents.reload()} /> : null}
       {!documents.loading && documents.data.length === 0 ? (
         <EmptyState title="No documents available" text="Lease, invoices, receipts, and notices will appear here." />
       ) : (

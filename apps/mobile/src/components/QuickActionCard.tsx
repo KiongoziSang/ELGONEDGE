@@ -1,16 +1,21 @@
-import { Pressable, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { colors } from "../theme";
+import { BadgeRow } from "./BadgeRow";
 
 type QuickActionCardProps = {
   title: string;
   subtitle: string;
+  badge?: string;
   onPress: () => void;
 };
 
-export function QuickActionCard({ title, subtitle, onPress }: QuickActionCardProps) {
+export function QuickActionCard({ title, subtitle, badge, onPress }: QuickActionCardProps) {
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [styles.card, pressed && styles.pressed]}>
-      <Text style={styles.icon}>{title.slice(0, 1)}</Text>
+      <View style={styles.top}>
+        <Text style={styles.icon}>{title.slice(0, 1)}</Text>
+        <BadgeRow labels={[badge]} />
+      </View>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.subtitle}>{subtitle}</Text>
     </Pressable>
@@ -26,6 +31,11 @@ const styles = StyleSheet.create({
     minHeight: 122,
     padding: 14,
     width: "48%"
+  },
+  top: {
+    alignItems: "flex-start",
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
   icon: {
     backgroundColor: colors.infoSoft,

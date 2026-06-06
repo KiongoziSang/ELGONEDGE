@@ -14,13 +14,13 @@ import type { DashboardSummary, ScreenName, TenantProfile } from "../types";
 import { isRecentlyAdded } from "../utils/badges";
 import { formatDate } from "../utils/format";
 
-const quickActions: { title: string; subtitle: string; screen: ScreenName }[] = [
+const quickActions: { title: string; subtitle: string; screen: ScreenName; badgeKey?: "announcement" | "maintenance" }[] = [
   { title: "Pay Rent", subtitle: "Instructions and methods", screen: "payments" },
   { title: "Receipts", subtitle: "Confirmed payments", screen: "receipts" },
   { title: "Documents", subtitle: "Lease, invoices, notices", screen: "documents" },
-  { title: "Maintenance", subtitle: "Requests and status", screen: "maintenance" },
-  { title: "Announcements", subtitle: "Official notices", screen: "announcements" },
-  { title: "Community", subtitle: "Controlled resident layer", screen: "community" },
+  { title: "Maintenance", subtitle: "Requests and status", screen: "maintenance", badgeKey: "maintenance" },
+  { title: "Announcements", subtitle: "Official notices", screen: "announcements", badgeKey: "announcement" },
+  { title: "Community", subtitle: "Resident updates", screen: "community", badgeKey: "announcement" },
   { title: "Services", subtitle: "Approved providers", screen: "services" },
   { title: "Exchange", subtitle: "Moderated listings", screen: "exchange" },
   { title: "Access", subtitle: "Gate passes and cards", screen: "access" },
@@ -41,7 +41,17 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
   return (
     <Screen title="Home" subtitle={screenSubtitle}>
       {loading ? <LoadingState label="Loading tenant dashboard..." /> : null}
-      {error ? <EmptyState title="Unable to load tenant details" text={error} /> : null}
+      {error ? (
+        <EmptyState
+          title="Unable to load tenant details"
+          text={error}
+          actionLabel="Retry"
+          onAction={() => {
+            void profile.reload();
+            void summary.reload();
+          }}
+        />
+      ) : null}
       {!loading && !error ? (
         <>
           <View style={styles.intro}>
@@ -100,6 +110,7 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
                 key={action.title}
                 title={action.title}
                 subtitle={action.subtitle}
+                badge={getQuickActionBadge(action.badgeKey, summary.data)}
                 onPress={() => navigate(action.screen)}
               />
             ))}
@@ -168,3 +179,18 @@ const styles = StyleSheet.create({
     gap: 10
   }
 });
+
+function getQuickActionBadge(
+  badgeKey: "announcement" | "maintenance" | undefined,
+  summary: DashboardSummary
+) {
+  if (badgeKey === "announcement") {
+    return isRecentlyAdded(summary.recentAnnouncement?.date) || summary.recentAnnouncement?.read === false ? "NEW" : undefined;
+  }
+
+  if (badgeKey === "maintenance") {
+    return isRecentlyAdded(summary.recentMaintenance?.date) ? "NEW" : undefined;
+  }
+
+  return undefined;
+}

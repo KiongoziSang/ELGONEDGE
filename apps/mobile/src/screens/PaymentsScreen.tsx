@@ -29,19 +29,30 @@ export function PaymentsScreen() {
   });
 
   const currentInvoice = invoices.data[0];
+  const currentPaymentStatus = currentInvoice ? getPaymentStatus(currentInvoice) : "No balance";
 
   return (
     <Screen title="Payments" subtitle="Rent balance, payment instructions, invoices, and payment history.">
       {invoices.loading || instructions.loading ? <LoadingState label="Loading payment details..." /> : null}
-      {invoices.error ? <EmptyState title="Unable to load invoices" text={invoices.error} /> : null}
+      {invoices.error ? <EmptyState title="Unable to load invoices" text={invoices.error} actionLabel="Retry" onAction={() => void invoices.reload()} /> : null}
       {currentInvoice ? (
         <>
           <AmountCard
-            label="Amount due"
+            label="Current rent balance"
             amount={currentInvoice.amount}
             detail={`${currentInvoice.invoiceNumber} · Due ${formatDate(currentInvoice.dueDate)}`}
-            status={currentInvoice.status}
+            status={currentPaymentStatus}
           />
+          <View style={styles.summaryRow}>
+            <AppCard compact>
+              <Text style={styles.smallLabel}>Next due date</Text>
+              <Text style={styles.smallValue}>{formatDate(currentInvoice.dueDate)}</Text>
+            </AppCard>
+            <AppCard compact>
+              <Text style={styles.smallLabel}>Payment status</Text>
+              <Text style={styles.smallValue}>{currentPaymentStatus}</Text>
+            </AppCard>
+          </View>
           <SectionHeader title="Payment methods" action="Setup dependent" />
           <View style={styles.stack}>
             <InstructionCard
@@ -49,7 +60,7 @@ export function PaymentsScreen() {
               lines={[
                 `Business number: ${instructions.data.paymentInstructions.businessNumber}`,
                 `Account/reference: ${instructions.data.paymentInstructions.accountReference}`,
-                "Payment confirmation is available depending on the property setup."
+                "Use this M-PESA-aware reference for payment tracking and reconciliation-ready workflows."
               ]}
             />
             <InstructionCard
@@ -64,7 +75,7 @@ export function PaymentsScreen() {
               lines={[
                 `Bank: ${instructions.data.paymentInstructions.bankName}`,
                 `Account: ${instructions.data.paymentInstructions.bankAccount}`,
-                "Use the reference shown on your invoice when paying."
+                "Use the invoice or unit reference shown here when paying."
               ]}
             />
             <InstructionCard
@@ -73,6 +84,8 @@ export function PaymentsScreen() {
             />
           </View>
         </>
+      ) : !invoices.loading && !invoices.error ? (
+        <EmptyState title="No payments found yet" text="Rent balances, invoices, and payment instructions will appear here." />
       ) : null}
 
       <SectionHeader title="Invoices" />
@@ -133,6 +146,23 @@ const styles = StyleSheet.create({
   stack: {
     gap: 10
   },
+  summaryRow: {
+    flexDirection: "row",
+    gap: 10,
+    marginTop: 12
+  },
+  smallLabel: {
+    color: colors.muted,
+    fontSize: 11,
+    fontWeight: "900",
+    textTransform: "uppercase"
+  },
+  smallValue: {
+    color: colors.navy,
+    fontSize: 15,
+    fontWeight: "900",
+    marginTop: 6
+  },
   row: {
     alignItems: "flex-start",
     flexDirection: "row",
@@ -160,3 +190,25 @@ const styles = StyleSheet.create({
     marginTop: 8
   }
 });
+
+function getPaymentStatus(invoice: Invoice) {
+  if (invoice.status === "Paid" || invoice.status === "Overdue" || invoice.status === "Partially paid") {
+    return invoice.status;
+  }
+
+  const dueTime = new Date(invoice.dueDate).getTime();
+  if (!Number.isFinite(dueTime)) {
+    return invoice.status;
+  }
+
+  const daysUntilDue = Math.ceil((dueTime - Date.now()) / (24 * 60 * 60 * 1000));
+  if (daysUntilDue < 0) {
+    return "Overdue";
+  }
+
+  if (daysUntilDue <= 7) {
+    return "Due soon";
+  }
+
+  return invoice.status;
+}

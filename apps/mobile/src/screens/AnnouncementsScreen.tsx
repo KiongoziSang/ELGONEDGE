@@ -21,7 +21,14 @@ export function AnnouncementsScreen() {
       subtitle={propertyName ? `Official property communication for ${propertyName}.` : "Official property communication."}
     >
       {announcements.loading ? <LoadingState label="Loading announcements..." /> : null}
-      {announcements.error ? <EmptyState title="Unable to load announcements" text={announcements.error} /> : null}
+      {announcements.error ? (
+        <EmptyState
+          title="Unable to load announcements"
+          text={announcements.error}
+          actionLabel="Retry"
+          onAction={() => void announcements.reload()}
+        />
+      ) : null}
       {!announcements.loading && announcements.data.length === 0 ? (
         <EmptyState title="No announcements available" text="Official property notices will appear here." />
       ) : (

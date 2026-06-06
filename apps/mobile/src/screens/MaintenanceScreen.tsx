@@ -20,6 +20,7 @@ import { formatDate } from "../utils/format";
 export function MaintenanceScreen() {
   const loaded = useApiData<MaintenanceRequest[]>(getMaintenanceRequests, []);
   const [items, setItems] = useState<MaintenanceRequest[]>([]);
+  const [title, setTitle] = useState("");
   const [category, setCategory] = useState<MaintenanceCategory>("Plumbing");
   const [priority, setPriority] = useState<Priority>("Medium");
   const [description, setDescription] = useState("");
@@ -29,14 +30,16 @@ export function MaintenanceScreen() {
   const requests = items.length > 0 ? [...items, ...loaded.data] : loaded.data;
 
   async function submit() {
-    if (!description.trim()) {
-      setSuccess("Add a short description before submitting.");
+    if (!title.trim() || !description.trim()) {
+      setSuccess("Add a title and short description before submitting.");
       return;
     }
 
     setSubmitting(true);
-    const request = await createMaintenanceRequest({ category, priority, description });
+    const request = await createMaintenanceRequest({ title, category, priority, description });
     setItems((current) => [request, ...current]);
+    await loaded.reload();
+    setTitle("");
     setDescription("");
     setSuccess("Maintenance request submitted.");
     setSubmitting(false);
@@ -46,7 +49,8 @@ export function MaintenanceScreen() {
     <Screen title="Maintenance" subtitle="Raise and track maintenance requests for your unit.">
       <SectionHeader title="Create request" action="Optional photo" />
       <AppCard>
-        <View style={styles.form}>
+          <View style={styles.form}>
+          <AppInput label="Title" value={title} onChangeText={setTitle} placeholder="Kitchen sink leak, broken bulb..." />
           <OptionPicker label="Category" options={maintenanceCategories} value={category} onChange={setCategory} />
           <OptionPicker label="Priority" options={priorities} value={priority} onChange={setPriority} />
           <AppInput
@@ -66,7 +70,7 @@ export function MaintenanceScreen() {
 
       <SectionHeader title="Request status" />
       {loaded.loading ? <LoadingState label="Loading maintenance requests..." /> : null}
-      {loaded.error ? <EmptyState title="Unable to load requests" text={loaded.error} /> : null}
+      {loaded.error ? <EmptyState title="Unable to load requests" text={loaded.error} actionLabel="Retry" onAction={() => void loaded.reload()} /> : null}
       {!loaded.loading && requests.length === 0 ? (
         <EmptyState title="No maintenance requests yet" text="Submitted requests and status updates will appear here." />
       ) : (
@@ -80,6 +84,7 @@ export function MaintenanceScreen() {
                     {request.category} · {request.priority} · {formatDate(request.date)}
                   </Text>
                   <Text style={styles.description}>{request.description}</Text>
+                  {request.latestUpdate ? <Text style={styles.update}>{request.latestUpdate}</Text> : null}
                 </View>
                 <BadgeRow labels={[isRecentlyAdded(request.date) && "NEW", request.status]} />
               </View>
@@ -139,6 +144,13 @@ const styles = StyleSheet.create({
     color: colors.ink,
     fontSize: 14,
     lineHeight: 21,
+    marginTop: 8
+  },
+  update: {
+    color: colors.blue,
+    fontSize: 13,
+    fontWeight: "800",
+    lineHeight: 19,
     marginTop: 8
   }
 });

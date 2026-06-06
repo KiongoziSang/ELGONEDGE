@@ -13,6 +13,7 @@ export async function getMaintenanceRequests() {
 }
 
 export async function createMaintenanceRequest(input: {
+  title?: string;
   category: MaintenanceCategory;
   description: string;
   priority: Priority;
