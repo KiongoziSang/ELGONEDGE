@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import { AppCard } from "../components/AppCard";
+import { BadgeRow } from "../components/BadgeRow";
 import { EmptyState } from "../components/EmptyState";
 import { LoadingState } from "../components/LoadingState";
 import { Screen } from "../components/Screen";
-import { StatusBadge } from "../components/StatusBadge";
 import { useApiData } from "../hooks/useApiData";
 import { getDocuments } from "../services/api/documents";
 import { colors } from "../theme";
 import type { TenantDocument } from "../types";
+import { isRecentlyAdded } from "../utils/badges";
 import { formatDate, formatKes } from "../utils/format";
 
 export function DocumentsScreen() {
@@ -28,9 +29,9 @@ export function DocumentsScreen() {
                   <Text style={styles.title}>{document.title}</Text>
                   <Text style={styles.meta}>{document.type} · {formatDate(document.date)}</Text>
                   {document.amount ? <Text style={styles.amount}>{formatKes(document.amount)}</Text> : null}
-                  <Text style={styles.placeholder}>View/download placeholder</Text>
+                  <Text style={styles.placeholder}>View/download available when enabled</Text>
                 </View>
-                <StatusBadge label={document.status} />
+                <BadgeRow labels={[isRecentlyAdded(document.date) && "NEW", document.status]} />
               </View>
             </AppCard>
           ))}

@@ -3,16 +3,17 @@ import { StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { AppInput } from "../components/AppInput";
+import { BadgeRow } from "../components/BadgeRow";
 import { EmptyState } from "../components/EmptyState";
 import { LoadingState } from "../components/LoadingState";
 import { OptionPicker } from "../components/OptionPicker";
 import { Screen } from "../components/Screen";
 import { SectionHeader } from "../components/SectionHeader";
-import { StatusBadge } from "../components/StatusBadge";
 import { useApiData } from "../hooks/useApiData";
 import { getCommunityPosts, submitCommunityPost } from "../services/api/community";
 import { colors } from "../theme";
 import type { CommunityPost } from "../types";
+import { isRecentlyAdded } from "../utils/badges";
 import { formatDate } from "../utils/format";
 
 const postTypes: CommunityPost["type"][] = [
@@ -44,7 +45,7 @@ export function CommunityScreen() {
     setPosts((current) => [post, ...current]);
     setTitle("");
     setMessage("");
-    setFeedback("Submitted. Management approval is mocked for MVP1.");
+    setFeedback("Submitted for management review.");
     setSubmitting(false);
   }
 
@@ -79,7 +80,7 @@ export function CommunityScreen() {
                   <Text style={styles.meta}>{post.type} · {formatDate(post.date)}</Text>
                   <Text style={styles.message}>{post.message}</Text>
                 </View>
-                <StatusBadge label={post.status} />
+                <BadgeRow labels={[isRecentlyAdded(post.date) && "NEW", post.status]} />
               </View>
             </AppCard>
           ))}

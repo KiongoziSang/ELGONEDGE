@@ -1,16 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
 import { AmountCard } from "../components/AmountCard";
 import { AppCard } from "../components/AppCard";
+import { BadgeRow } from "../components/BadgeRow";
 import { EmptyState } from "../components/EmptyState";
 import { LoadingState } from "../components/LoadingState";
 import { QuickActionCard } from "../components/QuickActionCard";
 import { Screen } from "../components/Screen";
 import { SectionHeader } from "../components/SectionHeader";
-import { StatusBadge } from "../components/StatusBadge";
 import { useApiData } from "../hooks/useApiData";
 import { getDashboardSummary, getTenantProfile } from "../services/api/tenant";
 import { colors } from "../theme";
 import type { DashboardSummary, ScreenName, TenantProfile } from "../types";
+import { isRecentlyAdded } from "../utils/badges";
 import { formatDate } from "../utils/format";
 
 const quickActions: { title: string; subtitle: string; screen: ScreenName }[] = [
@@ -22,7 +23,7 @@ const quickActions: { title: string; subtitle: string; screen: ScreenName }[] = 
   { title: "Community", subtitle: "Controlled resident layer", screen: "community" },
   { title: "Services", subtitle: "Approved providers", screen: "services" },
   { title: "Exchange", subtitle: "Moderated listings", screen: "exchange" },
-  { title: "Access", subtitle: "Gate pass placeholder", screen: "access" },
+  { title: "Access", subtitle: "Gate passes and cards", screen: "access" },
   { title: "Profile", subtitle: "Lease and contacts", screen: "profile" }
 ];
 
@@ -35,9 +36,10 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
   const tenantName = summary.data.tenantName ?? profile.data.fullName;
   const propertyName = summary.data.propertyName ?? profile.data.propertyName;
   const unitNumber = summary.data.unitNumber ?? profile.data.unitNumber;
+  const screenSubtitle = propertyName ? `Tenant dashboard for ${propertyName}.` : "Tenant dashboard";
 
   return (
-    <Screen title="Home" subtitle="Tenant dashboard for Elgon Heights Apartments.">
+    <Screen title="Home" subtitle={screenSubtitle}>
       {loading ? <LoadingState label="Loading tenant dashboard..." /> : null}
       {error ? <EmptyState title="Unable to load tenant details" text={error} /> : null}
       {!loading && !error ? (
@@ -70,18 +72,28 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
           <AppCard>
             <View style={styles.activityHeader}>
               <Text style={styles.activityTitle}>{summary.data.recentAnnouncement.title}</Text>
-              <StatusBadge label={summary.data.recentAnnouncement.read ? "Read" : "Unread"} />
+              <BadgeRow
+                labels={[
+                  isRecentlyAdded(summary.data.recentAnnouncement.date) && "NEW",
+                  summary.data.recentAnnouncement.read ? "Read" : "Unread"
+                ]}
+              />
             </View>
             <Text style={styles.activityText}>{summary.data.recentAnnouncement.message}</Text>
           </AppCard>
           <AppCard>
             <View style={styles.activityHeader}>
               <Text style={styles.activityTitle}>{summary.data.recentMaintenance.title}</Text>
-              <StatusBadge label={summary.data.recentMaintenance.status} />
+              <BadgeRow
+                labels={[
+                  isRecentlyAdded(summary.data.recentMaintenance.date) && "NEW",
+                  summary.data.recentMaintenance.status
+                ]}
+              />
             </View>
             <Text style={styles.activityText}>{summary.data.recentMaintenance.description}</Text>
           </AppCard>
-          <SectionHeader title="Quick actions" action="MVP1" />
+          <SectionHeader title="Quick actions" />
           <View style={styles.actions}>
             {quickActions.map((action) => (
               <QuickActionCard

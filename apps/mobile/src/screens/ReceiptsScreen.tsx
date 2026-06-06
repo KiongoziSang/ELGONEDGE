@@ -1,20 +1,21 @@
 import { StyleSheet, Text, View } from "react-native";
 import { AppCard } from "../components/AppCard";
+import { BadgeRow } from "../components/BadgeRow";
 import { EmptyState } from "../components/EmptyState";
 import { LoadingState } from "../components/LoadingState";
 import { Screen } from "../components/Screen";
-import { StatusBadge } from "../components/StatusBadge";
 import { useApiData } from "../hooks/useApiData";
 import { getReceipts } from "../services/api/payments";
 import { colors } from "../theme";
 import type { Receipt } from "../types";
+import { isRecentlyAdded } from "../utils/badges";
 import { formatDate, formatKes } from "../utils/format";
 
 export function ReceiptsScreen() {
   const receipts = useApiData<Receipt[]>(getReceipts, []);
 
   return (
-    <Screen title="Receipts" subtitle="Confirmed payment receipts and view/download placeholders.">
+    <Screen title="Receipts" subtitle="Confirmed payment receipts and supporting records.">
       {receipts.loading ? <LoadingState label="Loading receipts..." /> : null}
       {receipts.error ? <EmptyState title="Unable to load receipts" text={receipts.error} /> : null}
       {!receipts.loading && receipts.data.length === 0 ? (
@@ -28,9 +29,9 @@ export function ReceiptsScreen() {
                   <Text style={styles.title}>{receipt.title}</Text>
                   <Text style={styles.meta}>{receipt.receiptNumber} · {formatDate(receipt.date)}</Text>
                   <Text style={styles.amount}>{formatKes(receipt.amount)}</Text>
-                  <Text style={styles.placeholder}>View/download placeholder</Text>
+                  <Text style={styles.placeholder}>View/download available when enabled</Text>
                 </View>
-                <StatusBadge label={receipt.status} />
+                <BadgeRow labels={[isRecentlyAdded(receipt.date) && "NEW", receipt.status]} />
               </View>
             </AppCard>
           ))}

@@ -176,6 +176,7 @@ export type ExchangeListing = {
   price: number;
   description: string;
   contactMethod: string;
+  date?: string;
   status: "Pending review" | "Approved" | "Sold/Closed";
 };
 

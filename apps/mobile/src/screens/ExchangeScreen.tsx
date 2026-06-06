@@ -3,16 +3,17 @@ import { StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { AppInput } from "../components/AppInput";
+import { BadgeRow } from "../components/BadgeRow";
 import { EmptyState } from "../components/EmptyState";
 import { LoadingState } from "../components/LoadingState";
 import { OptionPicker } from "../components/OptionPicker";
 import { Screen } from "../components/Screen";
 import { SectionHeader } from "../components/SectionHeader";
-import { StatusBadge } from "../components/StatusBadge";
 import { useApiData } from "../hooks/useApiData";
 import { createExchangeListing, getExchangeListings } from "../services/api/exchange";
 import { colors } from "../theme";
 import type { ExchangeListing } from "../types";
+import { isRecentlyAdded } from "../utils/badges";
 import { formatKes } from "../utils/format";
 
 const categories: ExchangeListing["category"][] = [
@@ -85,7 +86,7 @@ export function ExchangeScreen() {
                   <Text style={styles.description}>{listing.description}</Text>
                   <Text style={styles.contact}>{listing.contactMethod}</Text>
                 </View>
-                <StatusBadge label={listing.status} />
+                <BadgeRow labels={[isRecentlyAdded(listing.date) && "NEW", listing.status]} />
               </View>
             </AppCard>
           ))}

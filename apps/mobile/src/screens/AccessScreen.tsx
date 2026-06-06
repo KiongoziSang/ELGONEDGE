@@ -13,15 +13,15 @@ export function AccessScreen() {
   const access = useApiData<AccessInfo>(getAccessInfo, {} as AccessInfo);
 
   return (
-    <Screen title="Access" subtitle="Tenant-facing access and gate pass placeholders for MVP1.">
+    <Screen title="Access" subtitle="Tenant-facing access cards and visitor pass information.">
       {access.loading ? <LoadingState label="Loading access information..." /> : null}
       {access.error ? <EmptyState title="Unable to load access" text={access.error} /> : null}
       {!access.loading && !access.error ? (
         <View style={styles.stack}>
           <InfoCard title="Access card status" value={access.data.accessCardStatus} status="Active" />
           <InfoCard title="Unit access information" value={access.data.unitAccessInfo} status="Unit B-204" />
-          <InfoCard title="Visitor pre-registration" value={access.data.visitorPreRegistration} status="Placeholder" />
-          <InfoCard title="Gate pass" value={access.data.gatePassStatus} status="MVP1" />
+          <InfoCard title="Visitor pre-registration" value={access.data.visitorPreRegistration} status="Available" />
+          <InfoCard title="Gate pass" value={access.data.gatePassStatus} status="Active" />
         </View>
       ) : null}
     </Screen>

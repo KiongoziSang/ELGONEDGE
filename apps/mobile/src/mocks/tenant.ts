@@ -8,7 +8,7 @@ export const tenantProfile: TenantProfile = {
   phone: "+254 712 345 678",
   email: "grace.wanjiku@example.com",
   propertyId: "property-elgon-heights",
-  propertyName: "Elgon Heights Apartments",
+  propertyName: "Demo Apartments",
   unitId: "unit-b-204",
   unitNumber: "B-204",
   leaseId: "lease-grace-b-204",

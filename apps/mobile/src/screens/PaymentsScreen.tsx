@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import { AmountCard } from "../components/AmountCard";
 import { AppCard } from "../components/AppCard";
+import { BadgeRow } from "../components/BadgeRow";
 import { EmptyState } from "../components/EmptyState";
 import { LoadingState } from "../components/LoadingState";
 import { Screen } from "../components/Screen";
 import { SectionHeader } from "../components/SectionHeader";
-import { StatusBadge } from "../components/StatusBadge";
 import { useApiData } from "../hooks/useApiData";
 import { getInvoices, getPaymentInstructions, getReceipts } from "../services/api/payments";
 import { colors } from "../theme";
 import type { Invoice, Receipt } from "../types";
+import { isRecentlyAdded } from "../utils/badges";
 import { formatDate, formatKes } from "../utils/format";
 
 export function PaymentsScreen() {
@@ -41,14 +42,14 @@ export function PaymentsScreen() {
             detail={`${currentInvoice.invoiceNumber} · Due ${formatDate(currentInvoice.dueDate)}`}
             status={currentInvoice.status}
           />
-          <SectionHeader title="Payment methods" action="Live confirmation later" />
+          <SectionHeader title="Payment methods" action="Setup dependent" />
           <View style={styles.stack}>
             <InstructionCard
               title="M-PESA PayBill"
               lines={[
                 `Business number: ${instructions.data.paymentInstructions.businessNumber}`,
                 `Account/reference: ${instructions.data.paymentInstructions.accountReference}`,
-                "Live payment confirmation will be integrated later."
+                "Payment confirmation is available depending on the property setup."
               ]}
             />
             <InstructionCard
@@ -63,12 +64,12 @@ export function PaymentsScreen() {
               lines={[
                 `Bank: ${instructions.data.paymentInstructions.bankName}`,
                 `Account: ${instructions.data.paymentInstructions.bankAccount}`,
-                "Upload proof placeholder will be enabled after backend integration."
+                "Use the reference shown on your invoice when paying."
               ]}
             />
             <InstructionCard
               title="Card"
-              lines={[instructions.data.paymentInstructions.cardProvider, "Checkout link placeholder for MVP1."]}
+              lines={[instructions.data.paymentInstructions.cardProvider, "Card checkout is available depending on client setup."]}
             />
           </View>
         </>
@@ -87,7 +88,7 @@ export function PaymentsScreen() {
                   <Text style={styles.meta}>{invoice.invoiceNumber} · {formatDate(invoice.date)}</Text>
                   <Text style={styles.amount}>{formatKes(invoice.amount)}</Text>
                 </View>
-                <StatusBadge label={invoice.status} />
+                <BadgeRow labels={[isRecentlyAdded(invoice.date) && "NEW", invoice.status]} />
               </View>
             </AppCard>
           ))}
@@ -107,7 +108,7 @@ export function PaymentsScreen() {
                   <Text style={styles.meta}>{receipt.receiptNumber} · {formatDate(receipt.date)}</Text>
                   <Text style={styles.amount}>{formatKes(receipt.amount)}</Text>
                 </View>
-                <StatusBadge label={receipt.status} />
+                <BadgeRow labels={[isRecentlyAdded(receipt.date) && "NEW", receipt.status]} />
               </View>
             </AppCard>
           ))}

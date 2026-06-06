@@ -8,6 +8,7 @@ export const exchangeListings: ExchangeListing[] = [
     price: 12500,
     description: "Clean grey sofa, used for one year. Pickup from Block B.",
     contactMethod: "Call or WhatsApp seller",
+    date: "2026-06-04",
     status: "Approved"
   },
   {
@@ -17,6 +18,7 @@ export const exchangeListings: ExchangeListing[] = [
     price: 28000,
     description: "Medium fridge in good condition. Seller moving out this month.",
     contactMethod: "WhatsApp seller",
+    date: "2026-06-01",
     status: "Approved"
   },
   {
@@ -26,6 +28,7 @@ export const exchangeListings: ExchangeListing[] = [
     price: 9000,
     description: "Submitted for review before residents can see it.",
     contactMethod: "Hidden until approved",
+    date: "2026-06-06",
     status: "Pending review"
   }
 ];

@@ -46,7 +46,7 @@ export function LoginScreen({ onForgotPassword }: { onForgotPassword: () => void
       </AppCard>
       <Text style={styles.helper}>
         {authMode === "demo"
-          ? "Demo mode is enabled. Use grace.wanjiku@example.com / password for MVP1 access."
+          ? "Demo mode is enabled. Use grace.wanjiku@example.com / password for demo access."
           : "Tenant login uses the configured backend API. Contact support if your tenant credentials are not accepted."}
       </Text>
     </View>

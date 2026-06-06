@@ -3,17 +3,18 @@ import { StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { AppInput } from "../components/AppInput";
+import { BadgeRow } from "../components/BadgeRow";
 import { EmptyState } from "../components/EmptyState";
 import { LoadingState } from "../components/LoadingState";
 import { OptionPicker } from "../components/OptionPicker";
 import { Screen } from "../components/Screen";
 import { SectionHeader } from "../components/SectionHeader";
-import { StatusBadge } from "../components/StatusBadge";
 import { maintenanceCategories, priorities } from "../constants/options";
 import { useApiData } from "../hooks/useApiData";
 import { createMaintenanceRequest, getMaintenanceRequests } from "../services/api/maintenance";
 import { colors } from "../theme";
 import type { MaintenanceCategory, MaintenanceRequest, Priority } from "../types";
+import { isRecentlyAdded } from "../utils/badges";
 import { formatDate } from "../utils/format";
 
 export function MaintenanceScreen() {
@@ -37,13 +38,13 @@ export function MaintenanceScreen() {
     const request = await createMaintenanceRequest({ category, priority, description });
     setItems((current) => [request, ...current]);
     setDescription("");
-    setSuccess("Maintenance request submitted in mock mode.");
+    setSuccess("Maintenance request submitted.");
     setSubmitting(false);
   }
 
   return (
     <Screen title="Maintenance" subtitle="Raise and track maintenance requests for your unit.">
-      <SectionHeader title="Create request" action="Image placeholder" />
+      <SectionHeader title="Create request" action="Optional photo" />
       <AppCard>
         <View style={styles.form}>
           <OptionPicker label="Category" options={maintenanceCategories} value={category} onChange={setCategory} />
@@ -56,7 +57,7 @@ export function MaintenanceScreen() {
             multiline
           />
           <View style={styles.imagePlaceholder}>
-            <Text style={styles.imageText}>Optional image attachment placeholder</Text>
+            <Text style={styles.imageText}>Optional image attachment</Text>
           </View>
           {success ? <Text style={styles.success}>{success}</Text> : null}
           <AppButton label={submitting ? "Submitting..." : "Submit request"} onPress={() => void submit()} disabled={submitting} />
@@ -80,7 +81,7 @@ export function MaintenanceScreen() {
                   </Text>
                   <Text style={styles.description}>{request.description}</Text>
                 </View>
-                <StatusBadge label={request.status} />
+                <BadgeRow labels={[isRecentlyAdded(request.date) && "NEW", request.status]} />
               </View>
             </AppCard>
           ))}
