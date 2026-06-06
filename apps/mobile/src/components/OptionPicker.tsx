@@ -20,7 +20,7 @@ export function OptionPicker<T extends string>({
           const selected = option === value;
           return (
             <Pressable
-              key={option}
+              key={`${label}-${option}`}
               onPress={() => onChange(option)}
               style={[styles.option, selected && styles.selected]}
             >

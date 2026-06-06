@@ -29,7 +29,7 @@ export async function createMaintenanceRequest(input: {
 
   return {
     id: `mnt-${Date.now()}`,
-    title: `${input.category} request`,
+    title: input.title?.trim() || `${input.category} request`,
     category: input.category,
     description: input.description,
     priority: input.priority,

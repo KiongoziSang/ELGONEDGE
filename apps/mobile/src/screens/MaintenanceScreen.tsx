@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
@@ -25,27 +25,44 @@ export function MaintenanceScreen() {
   const [priority, setPriority] = useState<Priority>("Medium");
   const [description, setDescription] = useState("");
   const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const submittingRef = useRef(false);
 
-  const requests = items.length > 0 ? [...items, ...loaded.data] : loaded.data;
+  const requests = useMemo(
+    () => dedupeMaintenanceRequests(items.length > 0 ? [...items, ...loaded.data] : loaded.data),
+    [items, loaded.data]
+  );
 
   async function submit() {
-    if (!title.trim() || !description.trim()) {
-      setSuccess("Add a title and short description before submitting.");
+    if (submittingRef.current) {
       return;
     }
 
+    setSuccess(null);
+    setError(null);
+
+    if (!title.trim() || !description.trim()) {
+      setError("Please enter a title and description before submitting.");
+      return;
+    }
+
+    submittingRef.current = true;
     setSubmitting(true);
     try {
       const request = await createMaintenanceRequest({ title, category, priority, description });
-      setItems((current) => [request, ...current]);
-      await loaded.reload();
+      setItems((current) => dedupeMaintenanceRequests([request, ...current]));
       setTitle("");
       setDescription("");
-      setSuccess("Maintenance request submitted.");
+      setSuccess("Maintenance request submitted successfully.");
+      void loaded.reload();
     } catch (error) {
-      setSuccess(error instanceof Error ? error.message : "We could not submit this request right now.");
+      if (typeof __DEV__ !== "undefined" && __DEV__) {
+        console.error("[maintenance] submit failed", error);
+      }
+      setError("We could not submit your maintenance request right now. Please try again.");
     } finally {
+      submittingRef.current = false;
       setSubmitting(false);
     }
   }
@@ -69,6 +86,7 @@ export function MaintenanceScreen() {
             <Text style={styles.imageText}>Optional image attachment</Text>
           </View>
           {success ? <Text style={styles.success}>{success}</Text> : null}
+          {error ? <Text style={styles.error}>{error}</Text> : null}
           <AppButton label={submitting ? "Submitting..." : "Submit request"} onPress={() => void submit()} disabled={submitting} />
         </View>
       </AppCard>
@@ -81,7 +99,7 @@ export function MaintenanceScreen() {
       ) : !loaded.loading && !loaded.error ? (
         <View style={styles.stack}>
           {requests.map((request) => (
-            <AppCard key={request.id}>
+            <AppCard key={maintenanceRequestKey(request)}>
               <View style={styles.row}>
                 <View style={styles.copy}>
                   <Text style={styles.title}>{request.title}</Text>
@@ -99,6 +117,26 @@ export function MaintenanceScreen() {
       ) : null}
     </Screen>
   );
+}
+
+function maintenanceRequestKey(request: MaintenanceRequest) {
+  return request.id || `${request.category}-${request.title}-${request.date}`;
+}
+
+function dedupeMaintenanceRequests(requests: MaintenanceRequest[]) {
+  const seen = new Set<string>();
+  const deduped: MaintenanceRequest[] = [];
+
+  for (const request of requests) {
+    const key = maintenanceRequestKey(request);
+    if (seen.has(key)) {
+      continue;
+    }
+    seen.add(key);
+    deduped.push(request);
+  }
+
+  return deduped;
 }
 
 const styles = StyleSheet.create({
@@ -120,6 +158,11 @@ const styles = StyleSheet.create({
   },
   success: {
     color: colors.success,
+    fontSize: 13,
+    fontWeight: "800"
+  },
+  error: {
+    color: colors.danger,
     fontSize: 13,
     fontWeight: "800"
   },
