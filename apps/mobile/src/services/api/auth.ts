@@ -1,5 +1,23 @@
 import type { AuthLoginRequest, AuthLoginResponse, AuthSession, TenantProfile } from "../../types";
-import { apiRequest, enableRuntimeMockFallback, isEndpointUnavailableError, isMockMode, mockDelay, setApiAuthToken } from "./client";
+import {
+  apiRequest,
+  enableRuntimeMockFallback,
+  getApiBaseUrl,
+  getAuthMode,
+  isEndpointUnavailableError,
+  isInvalidCredentialsError,
+  isMockMode,
+  mockDelay,
+  setApiAuthToken
+} from "./client";
+
+type LoginAuthMode = "real-api" | "demo" | "api-unavailable-fallback";
+
+const demoIdentifiers = ["grace.wanjiku@example.com", "+254712345678", "0712345678"];
+const demoPassword = "password";
+const unavailableLoginMessage = "Tenant login service is not available yet. Please use demo access or contact support.";
+const invalidRealCredentialsMessage = "Invalid email or password. Please check your credentials and try again.";
+const invalidDemoCredentialsMessage = "Invalid demo credentials. Use grace.wanjiku@example.com / password for demo access.";
 
 export async function loginTenant(identifier: string, password: string): Promise<AuthSession> {
   const request: AuthLoginRequest = { identifier, password };
@@ -8,8 +26,15 @@ export async function loginTenant(identifier: string, password: string): Promise
     throw new Error("Enter your email or phone number and password.");
   }
 
-  if (!isMockMode()) {
+  const authMode = getAuthMode();
+
+  if (authMode === "real-api") {
     try {
+      logAuthDebug("login-attempt", {
+        mode: authMode,
+        baseUrl: getApiBaseUrl(),
+        endpoint: "/api/mobile/auth/login"
+      });
       const response = await apiRequest<AuthLoginResponse>("/api/mobile/auth/login", {
         method: "POST",
         body: request
@@ -18,15 +43,27 @@ export async function loginTenant(identifier: string, password: string): Promise
       setApiAuthToken(session.token);
       return session;
     } catch (error) {
+      logAuthDebug("login-error", {
+        mode: authMode,
+        fallbackTriggered: isEndpointUnavailableError(error) ? "true" : "false"
+      });
+
       if (!isEndpointUnavailableError(error)) {
-        throw error;
+        throw new Error(mapLoginError(error, authMode));
       }
 
       enableRuntimeMockFallback();
+
+      if (isDemoCredentials(request)) {
+        logAuthDebug("login-fallback", { mode: "api-unavailable-fallback" });
+        return loginMockTenant(request, "api-unavailable-fallback");
+      }
+
+      throw new Error(mapLoginError(error, "api-unavailable-fallback"));
     }
   }
 
-  return loginMockTenant(request);
+  return loginMockTenant(request, authMode);
 }
 
 export async function restoreTenantSession(storedSession: AuthSession): Promise<AuthSession | null> {
@@ -103,13 +140,27 @@ export async function requestPasswordReset(identifier: string) {
   };
 }
 
-async function loginMockTenant(request: AuthLoginRequest): Promise<AuthSession> {
-  await mockDelay();
-  const normalizedIdentifier = request.identifier.trim().toLowerCase();
-  const allowedIdentifiers = ["grace.wanjiku@example.com", "+254712345678", "0712345678"];
+function mapLoginError(error: unknown, authMode: LoginAuthMode) {
+  if (authMode === "demo") {
+    return invalidDemoCredentialsMessage;
+  }
 
-  if (!allowedIdentifiers.includes(normalizedIdentifier) || request.password !== "password") {
-    throw new Error("Invalid demo credentials. Use grace.wanjiku@example.com and password.");
+  if (authMode === "api-unavailable-fallback" || isEndpointUnavailableError(error)) {
+    return unavailableLoginMessage;
+  }
+
+  if (isInvalidCredentialsError(error)) {
+    return invalidRealCredentialsMessage;
+  }
+
+  return "Unable to log in. Please try again or contact support.";
+}
+
+async function loginMockTenant(request: AuthLoginRequest, authMode: LoginAuthMode): Promise<AuthSession> {
+  await mockDelay();
+
+  if (!isDemoCredentials(request)) {
+    throw new Error(mapLoginError(new Error("Invalid demo credentials"), authMode));
   }
 
   const session = {
@@ -125,6 +176,16 @@ async function loginMockTenant(request: AuthLoginRequest): Promise<AuthSession> 
 
   setApiAuthToken(session.token);
   return session;
+}
+
+function isDemoCredentials(request: AuthLoginRequest) {
+  return demoIdentifiers.includes(request.identifier.trim().toLowerCase()) && request.password === demoPassword;
+}
+
+function logAuthDebug(event: string, details: Record<string, string>) {
+  if (typeof __DEV__ !== "undefined" && __DEV__) {
+    console.log(`[mobile-auth] ${event}`, details);
+  }
 }
 
 async function refreshTenantSession(session: AuthSession): Promise<AuthSession | null> {

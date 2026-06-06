@@ -11,6 +11,8 @@ type ApiRequestOptions = Omit<RequestInit, "body" | "headers"> & {
 let activeAuthToken: string | null = null;
 let runtimeMockFallback = false;
 
+export type AuthMode = "real-api" | "demo" | "api-unavailable-fallback";
+
 export class ApiClientError extends Error {
   apiError: ApiError;
 
@@ -40,6 +42,14 @@ export function isMockMode() {
   return appConfig.mockMode || runtimeMockFallback;
 }
 
+export function getAuthMode(): AuthMode {
+  if (appConfig.mockMode) {
+    return "demo";
+  }
+
+  return runtimeMockFallback ? "api-unavailable-fallback" : "real-api";
+}
+
 export function getApiBaseUrl() {
   return appConfig.apiBaseUrl;
 }
@@ -64,10 +74,15 @@ export function isEndpointUnavailableError(error: unknown) {
   return (
     error.status === 404 ||
     error.status === 405 ||
+    (typeof error.status === "number" && error.status >= 500) ||
     error.code === "INVALID_RESPONSE" ||
     error.code === "REQUEST_TIMEOUT" ||
     error.code === "REQUEST_ERROR"
   );
+}
+
+export function isInvalidCredentialsError(error: unknown) {
+  return error instanceof ApiClientError && (error.status === 401 || error.status === 403);
 }
 
 export function toApiError(error: unknown): ApiError {
@@ -102,6 +117,7 @@ export async function apiRequest<TResponse>(path: string, options: ApiRequestOpt
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
+    logApiDebug("request", { path, baseUrl: appConfig.apiBaseUrl, method: init.method ?? "GET" });
     const response = await fetch(createUrl(path), {
       ...init,
       body: body === undefined ? undefined : JSON.stringify(body),
@@ -109,6 +125,7 @@ export async function apiRequest<TResponse>(path: string, options: ApiRequestOpt
       signal: controller.signal
     });
 
+    logApiDebug("response", { path, status: response.status });
     return await parseResponse<TResponse>(response);
   } catch (error) {
     if (isAbortError(error)) {
@@ -125,6 +142,12 @@ export async function apiRequest<TResponse>(path: string, options: ApiRequestOpt
     throw new ApiClientError(toApiError(error));
   } finally {
     clearTimeout(timeout);
+  }
+}
+
+function logApiDebug(event: string, details: Record<string, string | number>) {
+  if (typeof __DEV__ !== "undefined" && __DEV__) {
+    console.log(`[mobile-api] ${event}`, details);
   }
 }
 
