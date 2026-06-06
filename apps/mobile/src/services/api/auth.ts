@@ -15,7 +15,7 @@ type LoginAuthMode = "real-api" | "demo";
 
 const demoIdentifiers = ["grace.wanjiku@example.com", "+254712345678", "0712345678"];
 const demoPassword = "password";
-const unavailableLoginMessage = "Tenant login service is not available yet. Please contact support.";
+const unavailableLoginMessage = "Tenant login service is not available yet. Please use demo access or contact support.";
 const configurationErrorMessage =
   "Tenant login is not configured. Set EXPO_PUBLIC_API_BASE_URL before using real tenant login.";
 const invalidRealCredentialsMessage = "Invalid email or password. Please check your credentials and try again.";
@@ -34,14 +34,21 @@ export async function loginTenant(identifier: string, password: string): Promise
     try {
       logAuthDebug("login-attempt", {
         mode: authMode,
-        baseUrl: getApiBaseUrl(),
+        baseUrl: String(getApiBaseUrl()),
         endpoint: "/api/mobile/auth/login"
       });
-      const response = await apiRequest<AuthLoginResponse>("/api/mobile/auth/login", {
-        method: "POST",
-        body: request
-      });
-      const session = mapLoginResponse(response);
+      const session = mapLoginResponse(
+        normalizeLoginResponse(
+          await apiRequest<unknown>("/api/mobile/auth/login", {
+            method: "POST",
+            body: {
+              email: request.identifier,
+              identifier: request.identifier,
+              password: request.password
+            }
+          })
+        )
+      );
       setApiAuthToken(session.token);
       return session;
     } catch (error) {
@@ -184,6 +191,27 @@ function logAuthDebug(event: string, details: Record<string, string>) {
   }
 }
 
+function normalizeLoginResponse(response: unknown): AuthLoginResponse {
+  if (!isRecord(response)) {
+    throw new Error("Invalid login response.");
+  }
+
+  const accessToken = readOptionalString(response.accessToken) ?? readOptionalString(response.token);
+  const tenant = readTenantProfile(response.tenant) ?? readTenantProfileFromUser(response.user);
+
+  if (!accessToken || !tenant) {
+    throw new Error("Invalid login response.");
+  }
+
+  return {
+    accessToken,
+    refreshToken: readOptionalString(response.refreshToken),
+    expiresIn: readOptionalNumber(response.expiresIn),
+    expiresAt: readOptionalString(response.expiresAt),
+    tenant
+  };
+}
+
 async function refreshTenantSession(session: AuthSession): Promise<AuthSession | null> {
   if (!session.refreshToken) {
     return null;
@@ -200,7 +228,7 @@ async function refreshTenantSession(session: AuthSession): Promise<AuthSession |
 
   return {
     ...session,
-    token: response.accessToken,
+    token: response.accessToken ?? response.token ?? session.token,
     refreshToken: response.refreshToken ?? session.refreshToken,
     expiresAt: response.expiresAt ?? calculateExpiresAt(response.expiresIn),
     tenant: response.tenant ?? session.tenant
@@ -208,8 +236,14 @@ async function refreshTenantSession(session: AuthSession): Promise<AuthSession |
 }
 
 function mapLoginResponse(response: AuthLoginResponse): AuthSession {
+  const token = response.accessToken ?? response.token;
+
+  if (!token) {
+    throw new Error("Invalid login response.");
+  }
+
   return {
-    token: response.accessToken,
+    token,
     refreshToken: response.refreshToken,
     expiresAt: response.expiresAt ?? calculateExpiresAt(response.expiresIn),
     userId: response.tenant.id,
@@ -234,4 +268,55 @@ function calculateExpiresAt(expiresIn: number | undefined) {
   return typeof expiresIn === "number" && Number.isFinite(expiresIn)
     ? new Date(Date.now() + expiresIn * 1000).toISOString()
     : undefined;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function readTenantProfile(value: unknown): AuthLoginResponse["tenant"] | null {
+  if (!isRecord(value)) {
+    return null;
+  }
+
+  const id = readOptionalString(value.id);
+  const fullName = readOptionalString(value.fullName) ?? readOptionalString(value.name);
+
+  if (!id || !fullName) {
+    return null;
+  }
+
+  return {
+    id,
+    fullName,
+    phone: readOptionalString(value.phone),
+    email: readOptionalString(value.email)
+  };
+}
+
+function readTenantProfileFromUser(value: unknown): AuthLoginResponse["tenant"] | null {
+  if (!isRecord(value)) {
+    return null;
+  }
+
+  const id = readOptionalString(value.tenantId) ?? readOptionalString(value.id);
+  const fullName = readOptionalString(value.name) ?? readOptionalString(value.email);
+
+  if (!id || !fullName) {
+    return null;
+  }
+
+  return {
+    id,
+    fullName,
+    email: readOptionalString(value.email)
+  };
+}
+
+function readOptionalString(value: unknown) {
+  return typeof value === "string" && value.trim() ? value : undefined;
+}
+
+function readOptionalNumber(value: unknown) {
+  return typeof value === "number" && Number.isFinite(value) ? value : undefined;
 }

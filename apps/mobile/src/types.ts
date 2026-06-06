@@ -30,10 +30,20 @@ export type AuthLoginRequest = {
 };
 
 export type AuthLoginResponse = {
-  accessToken: string;
+  token?: string;
+  accessToken?: string;
   refreshToken?: string;
   expiresIn?: number;
   expiresAt?: string;
+  user?: {
+    id: string;
+    name?: string;
+    email: string;
+    role: string;
+    tenantId?: string;
+    propertyId?: string;
+    unitId?: string;
+  };
   tenant: {
     id: string;
     fullName: string;
