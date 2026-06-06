@@ -105,8 +105,12 @@ In real API mode, login stores the access token and optional refresh token in Ex
 - `GET /api/mobile/tenant/maintenance`
 - `POST /api/mobile/tenant/maintenance`
 - `GET /api/mobile/tenant/announcements`
+- `POST /api/mobile/tenant/announcements/read`
+- `GET /api/mobile/tenant/notifications`
+- `POST /api/mobile/tenant/notifications`
 - `GET /api/mobile/tenant/community`
 - `POST /api/mobile/tenant/community`
+- `POST /api/mobile/tenant/community/read`
 - `GET /api/mobile/tenant/services`
 - `GET /api/mobile/tenant/exchange`
 - `POST /api/mobile/tenant/exchange`
@@ -125,6 +129,7 @@ Status display rules:
 
 - `NEW` is derived in the app from recently created or updated dates, currently within the last 7 days.
 - `Unread` means the item has not been opened/read by the tenant where the backend provides that state.
+- In-app notifications are available through the Notifications quick action. Opening a notification, announcement, or community post marks it read where backend read tracking is available.
 - Workflow statuses such as `Approved`, `Pending review`, `Submitted`, `In progress`, `Overdue`, and `Paid` remain separate from `NEW`.
 
 ## Expo Go and standalone builds

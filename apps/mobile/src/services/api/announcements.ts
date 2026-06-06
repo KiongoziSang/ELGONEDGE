@@ -11,3 +11,15 @@ export async function getAnnouncements() {
   await mockDelay();
   return announcements;
 }
+
+export async function markAnnouncementRead(announcement: Pick<Announcement, "id" | "source">) {
+  if (isMockMode()) {
+    await mockDelay();
+    return { success: true };
+  }
+
+  return apiRequest<{ success: boolean }>("/api/mobile/tenant/announcements/read", {
+    method: "POST",
+    body: announcement
+  });
+}

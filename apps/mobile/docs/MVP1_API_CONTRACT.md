@@ -37,8 +37,12 @@ Integrated Phase 1B endpoints:
 - `GET /api/mobile/tenant/maintenance`
 - `POST /api/mobile/tenant/maintenance`
 - `GET /api/mobile/tenant/announcements`
+- `POST /api/mobile/tenant/announcements/read`
+- `GET /api/mobile/tenant/notifications`
+- `POST /api/mobile/tenant/notifications`
 - `GET /api/mobile/tenant/community`
 - `POST /api/mobile/tenant/community`
+- `POST /api/mobile/tenant/community/read`
 - `GET /api/mobile/tenant/services`
 - `GET /api/mobile/tenant/exchange`
 - `POST /api/mobile/tenant/exchange`
@@ -57,6 +61,7 @@ Status display rules:
 
 - `NEW` is derived by the app from recent item dates, currently a 7-day window, unless the backend later provides an explicit flag.
 - `Unread` is a read-state indicator and should not replace workflow status.
+- In-app notifications combine official notifications, announcements, and resident community updates into one tenant-facing list.
 - Workflow statuses include `Paid`, `Due soon`, `Overdue`, `Submitted`, `In review`, `In progress`, `Resolved`, `Approved`, and `Pending review`.
 
 Example error:

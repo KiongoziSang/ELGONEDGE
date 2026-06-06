@@ -13,6 +13,7 @@ import { ForgotPasswordScreen } from "./src/screens/ForgotPasswordScreen";
 import { HomeScreen } from "./src/screens/HomeScreen";
 import { LoginScreen } from "./src/screens/LoginScreen";
 import { MaintenanceScreen } from "./src/screens/MaintenanceScreen";
+import { NotificationsScreen } from "./src/screens/NotificationsScreen";
 import { PaymentsScreen } from "./src/screens/PaymentsScreen";
 import { ProfileScreen } from "./src/screens/ProfileScreen";
 import { ReceiptsScreen } from "./src/screens/ReceiptsScreen";
@@ -102,6 +103,8 @@ function renderScreen(screen: ScreenName, navigate: (screen: ScreenName) => void
       return <ReceiptsScreen />;
     case "announcements":
       return <AnnouncementsScreen />;
+    case "notifications":
+      return <NotificationsScreen />;
     case "services":
       return <ServicesScreen />;
     case "exchange":

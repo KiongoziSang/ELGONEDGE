@@ -1,11 +1,12 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { AppCard } from "../components/AppCard";
 import { BadgeRow } from "../components/BadgeRow";
 import { EmptyState } from "../components/EmptyState";
 import { LoadingState } from "../components/LoadingState";
 import { Screen } from "../components/Screen";
 import { useApiData } from "../hooks/useApiData";
-import { getAnnouncements } from "../services/api/announcements";
+import { getAnnouncements, markAnnouncementRead } from "../services/api/announcements";
 import { colors } from "../theme";
 import type { Announcement } from "../types";
 import { isRecentlyAdded } from "../utils/badges";
@@ -13,7 +14,25 @@ import { formatDate } from "../utils/format";
 
 export function AnnouncementsScreen() {
   const announcements = useApiData<Announcement[]>(getAnnouncements, []);
-  const propertyName = announcements.data.find((announcement) => announcement.propertyName)?.propertyName;
+  const [items, setItems] = useState<Announcement[]>([]);
+  const propertyName = items.find((announcement) => announcement.propertyName)?.propertyName;
+
+  useEffect(() => {
+    setItems(announcements.data);
+  }, [announcements.data]);
+
+  async function markRead(announcement: Announcement) {
+    if (announcement.read) {
+      return;
+    }
+
+    setItems((current) => current.map((item) => (item.id === announcement.id ? { ...item, read: true } : item)));
+    try {
+      await markAnnouncementRead(announcement);
+    } catch {
+      setItems((current) => current.map((item) => (item.id === announcement.id ? { ...item, read: false } : item)));
+    }
+  }
 
   return (
     <Screen
@@ -29,21 +48,23 @@ export function AnnouncementsScreen() {
           onAction={() => void announcements.reload()}
         />
       ) : null}
-      {!announcements.loading && announcements.data.length === 0 ? (
+      {!announcements.loading && items.length === 0 ? (
         <EmptyState title="No announcements available" text="Official property notices will appear here." />
       ) : (
         <View style={styles.stack}>
-          {announcements.data.map((announcement) => (
-            <AppCard key={announcement.id}>
-              <View style={styles.row}>
-                <View style={styles.copy}>
-                  <Text style={styles.title}>{announcement.title}</Text>
-                  <Text style={styles.meta}>{announcement.propertyName} · {formatDate(announcement.date)}</Text>
-                  <Text style={styles.message}>{announcement.message}</Text>
+          {items.map((announcement) => (
+            <Pressable key={`${announcement.source ?? "notification"}-${announcement.id}`} onPress={() => void markRead(announcement)}>
+              <AppCard>
+                <View style={styles.row}>
+                  <View style={styles.copy}>
+                    <Text style={styles.title}>{announcement.title}</Text>
+                    <Text style={styles.meta}>{announcement.propertyName} · {formatDate(announcement.date)}</Text>
+                    <Text style={styles.message}>{announcement.message}</Text>
+                  </View>
+                  <BadgeRow labels={[isRecentlyAdded(announcement.date) && "NEW", announcement.read ? "Read" : "Unread"]} />
                 </View>
-                <BadgeRow labels={[isRecentlyAdded(announcement.date) && "NEW", announcement.read ? "Read" : "Unread"]} />
-              </View>
-            </AppCard>
+              </AppCard>
+            </Pressable>
           ))}
         </View>
       )}

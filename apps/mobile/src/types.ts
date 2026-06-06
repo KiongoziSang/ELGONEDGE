@@ -133,6 +133,7 @@ export type Priority = "Low" | "Medium" | "High";
 
 export type Announcement = {
   id: string;
+  source?: "notification" | "community";
   title: string;
   propertyName: string;
   date: string;
@@ -147,6 +148,17 @@ export type CommunityPost = {
   date: string;
   status: "Pending review" | "Approved" | "Closed" | "Private";
   message: string;
+  read?: boolean;
+};
+
+export type AppNotification = {
+  id: string;
+  source?: "notification" | "community";
+  type: string;
+  title: string;
+  message: string;
+  date: string;
+  read: boolean;
 };
 
 export type ServiceProvider = {
@@ -209,6 +221,7 @@ export type ScreenName =
   | "documents"
   | "receipts"
   | "announcements"
+  | "notifications"
   | "services"
   | "exchange"
   | "access";

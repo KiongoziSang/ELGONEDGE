@@ -35,3 +35,15 @@ export async function submitCommunityPost(input: {
     message: input.message
   };
 }
+
+export async function markCommunityPostRead(post: Pick<CommunityPost, "id">) {
+  if (isMockMode()) {
+    await mockDelay();
+    return { success: true };
+  }
+
+  return apiRequest<{ success: boolean }>("/api/mobile/tenant/community/read", {
+    method: "POST",
+    body: post
+  });
+}

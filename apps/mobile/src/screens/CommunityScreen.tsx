@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { AppInput } from "../components/AppInput";
@@ -12,7 +12,7 @@ import { Screen } from "../components/Screen";
 import { SectionHeader } from "../components/SectionHeader";
 import { useApiData } from "../hooks/useApiData";
 import { getAnnouncements } from "../services/api/announcements";
-import { getCommunityPosts, submitCommunityPost } from "../services/api/community";
+import { getCommunityPosts, markCommunityPostRead, submitCommunityPost } from "../services/api/community";
 import { getExchangeListings } from "../services/api/exchange";
 import { getServiceProviders } from "../services/api/services";
 import { colors } from "../theme";
@@ -41,6 +41,20 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
     (post) => post.status === "Approved" || post.status === "Private" || post.status === "Pending review"
   );
 
+  async function markRead(post: CommunityPost) {
+    if (post.read) {
+      return;
+    }
+
+    setPosts((current) => current.map((item) => (item.id === post.id ? { ...item, read: true } : item)));
+    try {
+      await markCommunityPostRead(post);
+      await loaded.reload();
+    } catch {
+      setPosts((current) => current.map((item) => (item.id === post.id ? { ...item, read: false } : item)));
+    }
+  }
+
   async function submit() {
     if (!title.trim() || !message.trim()) {
       setFeedback("Add a title and message before submitting.");
@@ -68,6 +82,12 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
           subtitle="Official notices"
           badge={announcements.data.some((item) => isRecentlyAdded(item.date) || !item.read) ? "NEW" : undefined}
           onPress={() => navigate("announcements")}
+        />
+        <QuickActionCard
+          title="Notifications"
+          subtitle="Unread updates"
+          badge={announcements.data.some((item) => !item.read) || loaded.data.some((item) => !item.read) ? "NEW" : undefined}
+          onPress={() => navigate("notifications")}
         />
         <QuickActionCard
           title="Exchange"
@@ -103,16 +123,18 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
       ) : (
         <View style={styles.stack}>
           {visiblePosts.map((post) => (
-            <AppCard key={post.id}>
-              <View style={styles.row}>
-                <View style={styles.copy}>
-                  <Text style={styles.title}>{post.title}</Text>
-                  <Text style={styles.meta}>{post.type} · {formatDate(post.date)}</Text>
-                  <Text style={styles.message}>{post.message}</Text>
+            <Pressable key={post.id} onPress={() => void markRead(post)}>
+              <AppCard>
+                <View style={styles.row}>
+                  <View style={styles.copy}>
+                    <Text style={styles.title}>{post.title}</Text>
+                    <Text style={styles.meta}>{post.type} · {formatDate(post.date)}</Text>
+                    <Text style={styles.message}>{post.message}</Text>
+                  </View>
+                  <BadgeRow labels={[isRecentlyAdded(post.date) && "NEW", post.read ? "Read" : post.status]} />
                 </View>
-                <BadgeRow labels={[isRecentlyAdded(post.date) && "NEW", post.status]} />
-              </View>
-            </AppCard>
+              </AppCard>
+            </Pressable>
           ))}
         </View>
       )}
