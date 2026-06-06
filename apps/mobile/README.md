@@ -59,10 +59,28 @@ Copy `.env.example` to `.env` when wiring real APIs:
 
 ```bash
 EXPO_PUBLIC_API_BASE_URL=https://elgonos.elgonedge.com
-EXPO_PUBLIC_USE_MOCKS=true
+EXPO_PUBLIC_USE_MOCKS=false
 ```
 
-Mock mode is enabled by default. `EXPO_PUBLIC_API_BASE_URL` is read by the shared API client, and `EXPO_PUBLIC_USE_MOCKS=true` keeps the existing Grace Wanjiku mock flow active.
+`EXPO_PUBLIC_API_BASE_URL` is read by the shared API client. With the values above, login requests are sent to:
+
+```text
+https://elgonos.elgonedge.com/api/mobile/auth/login
+```
+
+Use `EXPO_PUBLIC_USE_MOCKS=false` for real tenant authentication. If this value is `false`, `EXPO_PUBLIC_API_BASE_URL` must be set; otherwise the app shows a configuration error instead of silently using demo data.
+
+Use `EXPO_PUBLIC_USE_MOCKS=true` only for local demo access with:
+
+```text
+grace.wanjiku@example.com / password
+```
+
+After changing `.env`, fully restart Expo. If Expo keeps old public environment values, stop the dev server and restart with a cleared cache:
+
+```bash
+npx expo start -c
+```
 
 Set `EXPO_PUBLIC_USE_MOCKS=false` to use the Phase 1B real API wiring for login, logout, session restore/validation, tenant profile, dashboard summary, and lease details. Other MVP1 modules remain mock-backed until later integration phases.
 

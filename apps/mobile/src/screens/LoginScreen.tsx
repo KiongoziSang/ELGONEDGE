@@ -5,12 +5,14 @@ import { AppCard } from "../components/AppCard";
 import { AppInput } from "../components/AppInput";
 import { BrandMark } from "../components/BrandMark";
 import { useAuth } from "../context/AuthContext";
+import { getAuthMode } from "../services/api/client";
 import { colors, spacing } from "../theme";
 
 export function LoginScreen({ onForgotPassword }: { onForgotPassword: () => void }) {
   const { login, loading, error } = useAuth();
   const [identifier, setIdentifier] = useState("grace.wanjiku@example.com");
   const [password, setPassword] = useState("password");
+  const authMode = getAuthMode();
 
   return (
     <View style={styles.screen}>
@@ -42,7 +44,11 @@ export function LoginScreen({ onForgotPassword }: { onForgotPassword: () => void
           <AppButton label="Forgot password" variant="ghost" onPress={onForgotPassword} />
         </View>
       </AppCard>
-      <Text style={styles.helper}>Demo access is available for MVP1 while backend tenant authentication is being completed.</Text>
+      <Text style={styles.helper}>
+        {authMode === "demo"
+          ? "Demo mode is enabled. Use grace.wanjiku@example.com / password for MVP1 access."
+          : "Tenant login uses the configured backend API. Contact support if your tenant credentials are not accepted."}
+      </Text>
     </View>
   );
 }

@@ -9,9 +9,8 @@ type ApiRequestOptions = Omit<RequestInit, "body" | "headers"> & {
 };
 
 let activeAuthToken: string | null = null;
-let runtimeMockFallback = false;
 
-export type AuthMode = "real-api" | "demo" | "api-unavailable-fallback";
+export type AuthMode = "real-api" | "demo";
 
 export class ApiClientError extends Error {
   apiError: ApiError;
@@ -39,7 +38,7 @@ export class MockModeError extends Error {
 }
 
 export function isMockMode() {
-  return appConfig.mockMode || runtimeMockFallback;
+  return appConfig.mockMode;
 }
 
 export function getAuthMode(): AuthMode {
@@ -47,7 +46,7 @@ export function getAuthMode(): AuthMode {
     return "demo";
   }
 
-  return runtimeMockFallback ? "api-unavailable-fallback" : "real-api";
+  return "real-api";
 }
 
 export function getApiBaseUrl() {
@@ -60,10 +59,6 @@ export function createSessionAuthHeader(token: string | null | undefined) {
 
 export function setApiAuthToken(token: string | null) {
   activeAuthToken = token;
-}
-
-export function enableRuntimeMockFallback() {
-  runtimeMockFallback = true;
 }
 
 export function isEndpointUnavailableError(error: unknown) {
@@ -83,6 +78,10 @@ export function isEndpointUnavailableError(error: unknown) {
 
 export function isInvalidCredentialsError(error: unknown) {
   return error instanceof ApiClientError && (error.status === 401 || error.status === 403);
+}
+
+export function isConfigurationError(error: unknown) {
+  return error instanceof ApiClientError && error.code === "CONFIG_ERROR";
 }
 
 export function toApiError(error: unknown): ApiError {
@@ -112,12 +111,25 @@ export async function apiRequest<TResponse>(path: string, options: ApiRequestOpt
     throw new MockModeError();
   }
 
+  if (appConfig.configError) {
+    throw new ApiClientError({
+      code: "CONFIG_ERROR",
+      message: appConfig.configError
+    });
+  }
+
   const { body, headers, token = activeAuthToken ?? undefined, timeoutMs = appConfig.requestTimeoutMs, ...init } = options;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
-    logApiDebug("request", { path, baseUrl: appConfig.apiBaseUrl, method: init.method ?? "GET" });
+    logApiDebug("request", {
+      path,
+      baseUrl: appConfig.apiBaseUrl,
+      baseUrlSource: appConfig.apiBaseUrlSource,
+      mockMode: String(appConfig.mockMode),
+      method: init.method ?? "GET"
+    });
     const response = await fetch(createUrl(path), {
       ...init,
       body: body === undefined ? undefined : JSON.stringify(body),

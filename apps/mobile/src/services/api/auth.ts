@@ -1,21 +1,23 @@
 import type { AuthLoginRequest, AuthLoginResponse, AuthSession, TenantProfile } from "../../types";
 import {
   apiRequest,
-  enableRuntimeMockFallback,
   getApiBaseUrl,
   getAuthMode,
   isEndpointUnavailableError,
+  isConfigurationError,
   isInvalidCredentialsError,
   isMockMode,
   mockDelay,
   setApiAuthToken
 } from "./client";
 
-type LoginAuthMode = "real-api" | "demo" | "api-unavailable-fallback";
+type LoginAuthMode = "real-api" | "demo";
 
 const demoIdentifiers = ["grace.wanjiku@example.com", "+254712345678", "0712345678"];
 const demoPassword = "password";
-const unavailableLoginMessage = "Tenant login service is not available yet. Please use demo access or contact support.";
+const unavailableLoginMessage = "Tenant login service is not available yet. Please contact support.";
+const configurationErrorMessage =
+  "Tenant login is not configured. Set EXPO_PUBLIC_API_BASE_URL before using real tenant login.";
 const invalidRealCredentialsMessage = "Invalid email or password. Please check your credentials and try again.";
 const invalidDemoCredentialsMessage = "Invalid demo credentials. Use grace.wanjiku@example.com / password for demo access.";
 
@@ -45,21 +47,10 @@ export async function loginTenant(identifier: string, password: string): Promise
     } catch (error) {
       logAuthDebug("login-error", {
         mode: authMode,
-        fallbackTriggered: isEndpointUnavailableError(error) ? "true" : "false"
+        endpointUnavailable: isEndpointUnavailableError(error) ? "true" : "false"
       });
 
-      if (!isEndpointUnavailableError(error)) {
-        throw new Error(mapLoginError(error, authMode));
-      }
-
-      enableRuntimeMockFallback();
-
-      if (isDemoCredentials(request)) {
-        logAuthDebug("login-fallback", { mode: "api-unavailable-fallback" });
-        return loginMockTenant(request, "api-unavailable-fallback");
-      }
-
-      throw new Error(mapLoginError(error, "api-unavailable-fallback"));
+      throw new Error(mapLoginError(error, authMode));
     }
   }
 
@@ -67,13 +58,14 @@ export async function loginTenant(identifier: string, password: string): Promise
 }
 
 export async function restoreTenantSession(storedSession: AuthSession): Promise<AuthSession | null> {
-  if (storedSession.token.startsWith("mock-secure-token-")) {
-    enableRuntimeMockFallback();
-  }
-
   if (isMockMode()) {
     setApiAuthToken(storedSession.token);
     return storedSession;
+  }
+
+  if (storedSession.token.startsWith("mock-secure-token-")) {
+    setApiAuthToken(null);
+    return null;
   }
 
   if (!storedSession.token) {
@@ -145,12 +137,16 @@ function mapLoginError(error: unknown, authMode: LoginAuthMode) {
     return invalidDemoCredentialsMessage;
   }
 
-  if (authMode === "api-unavailable-fallback" || isEndpointUnavailableError(error)) {
-    return unavailableLoginMessage;
+  if (isConfigurationError(error)) {
+    return configurationErrorMessage;
   }
 
   if (isInvalidCredentialsError(error)) {
     return invalidRealCredentialsMessage;
+  }
+
+  if (isEndpointUnavailableError(error)) {
+    return unavailableLoginMessage;
   }
 
   return "Unable to log in. Please try again or contact support.";
