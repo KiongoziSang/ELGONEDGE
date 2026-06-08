@@ -1,14 +1,42 @@
 import { exchangeListings } from "../../mocks/exchange";
 import type { ExchangeListing } from "../../types";
-import { apiRequest, isEndpointUnavailableError, isMockMode, mockDelay } from "./client";
+import { apiRequest, getApiBaseUrl, isEndpointUnavailableError, isMockMode, mockDelay } from "./client";
 
 type ExchangeListingResponse = Partial<ExchangeListing> & {
   photoUrl?: unknown;
   thumbnailUrl?: unknown;
+  coverImageUrl?: unknown;
+  coverPhotoUrl?: unknown;
+  mediaUrl?: unknown;
+  fileUrl?: unknown;
+  url?: unknown;
+  imagePath?: unknown;
+  photoPath?: unknown;
+  attachmentUrl?: unknown;
   image?: {
     url?: unknown;
+    src?: unknown;
+    path?: unknown;
+  };
+  photo?: {
+    url?: unknown;
+    src?: unknown;
+    path?: unknown;
+  };
+  coverImage?: {
+    url?: unknown;
+    src?: unknown;
+    path?: unknown;
+  };
+  primaryImage?: {
+    url?: unknown;
+    src?: unknown;
+    path?: unknown;
   };
   images?: unknown[];
+  photos?: unknown[];
+  media?: unknown[];
+  attachments?: unknown[];
 };
 
 type ExchangeListResponse = {
@@ -184,24 +212,89 @@ function readNumber(value: unknown, fallback: number) {
 }
 
 function readImageUrl(item: ExchangeListingResponse) {
-  const directUrl = readString(item.imageUrl) ?? readString(item.photoUrl) ?? readString(item.thumbnailUrl);
+  const directUrl =
+    readString(item.imageUrl) ??
+    readString(item.photoUrl) ??
+    readString(item.thumbnailUrl) ??
+    readString(item.coverImageUrl) ??
+    readString(item.coverPhotoUrl) ??
+    readString(item.mediaUrl) ??
+    readString(item.fileUrl) ??
+    readString(item.attachmentUrl) ??
+    readString(item.imagePath) ??
+    readString(item.photoPath);
 
   if (directUrl) {
-    return directUrl;
+    return toAbsoluteImageUrl(directUrl);
   }
 
-  if (item.image && typeof item.image === "object") {
-    return readString(item.image.url);
+  const nestedUrl =
+    readNestedImageUrl(item.image) ??
+    readNestedImageUrl(item.photo) ??
+    readNestedImageUrl(item.coverImage) ??
+    readNestedImageUrl(item.primaryImage);
+
+  if (nestedUrl) {
+    return toAbsoluteImageUrl(nestedUrl);
   }
 
-  const firstImage = Array.isArray(item.images) ? item.images[0] : undefined;
+  const listUrl =
+    readFirstImageUrl(item.images) ??
+    readFirstImageUrl(item.photos) ??
+    readFirstImageUrl(item.media) ??
+    readFirstImageUrl(item.attachments);
+
+  if (listUrl) {
+    return toAbsoluteImageUrl(listUrl);
+  }
+
+  const url = readString(item.url);
+  if (url && looksLikeImageUrl(url)) {
+    return toAbsoluteImageUrl(url);
+  }
+
+  return undefined;
+}
+
+function readNestedImageUrl(value: unknown) {
+  if (!value || typeof value !== "object") {
+    return undefined;
+  }
+
+  const candidate = value as { url?: unknown; src?: unknown; path?: unknown; fileUrl?: unknown; publicUrl?: unknown };
+  return (
+    readString(candidate.url) ??
+    readString(candidate.src) ??
+    readString(candidate.path) ??
+    readString(candidate.fileUrl) ??
+    readString(candidate.publicUrl)
+  );
+}
+
+function readFirstImageUrl(value: unknown[] | undefined) {
+  const firstImage = Array.isArray(value) ? value[0] : undefined;
+
   if (typeof firstImage === "string") {
     return readString(firstImage);
   }
 
-  if (firstImage && typeof firstImage === "object" && "url" in firstImage) {
-    return readString((firstImage as { url?: unknown }).url);
+  return readNestedImageUrl(firstImage);
+}
+
+function toAbsoluteImageUrl(value: string) {
+  if (/^https?:\/\//i.test(value) || value.startsWith("data:")) {
+    return value;
   }
 
-  return undefined;
+  if (value.startsWith("//")) {
+    return `https:${value}`;
+  }
+
+  const baseUrl = getApiBaseUrl().replace(/\/+$/, "");
+  const path = value.startsWith("/") ? value : `/${value}`;
+  return `${baseUrl}${path}`;
+}
+
+function looksLikeImageUrl(value: string) {
+  return /\.(avif|gif|jpe?g|png|webp)(\?|#|$)/i.test(value) || value.includes("/uploads/") || value.includes("/images/");
 }

@@ -120,10 +120,13 @@ function formatListingMeta(listing: ExchangeListing) {
 }
 
 function ListingVisual({ listing }: { listing: ExchangeListing }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const showImage = Boolean(listing.imageUrl && !imageFailed);
+
   return (
     <View style={styles.visual}>
-      {listing.imageUrl ? (
-        <Image source={{ uri: listing.imageUrl }} style={styles.image} resizeMode="cover" />
+      {showImage ? (
+        <Image source={{ uri: listing.imageUrl }} style={styles.image} resizeMode="cover" onError={() => setImageFailed(true)} />
       ) : (
         <View style={styles.imageFallback}>
           <Text style={styles.imageInitial}>{getCategoryInitial(listing.category)}</Text>
