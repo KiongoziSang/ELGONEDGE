@@ -74,6 +74,22 @@ type DashboardSummaryResponse = Partial<DashboardSummary> & {
   communityCount?: number;
   exchangeCount?: number;
   servicesCount?: number;
+  accessStatus?: string;
+  activeGatePassCount?: number;
+  pendingApprovalCount?: number;
+  auditTrailCount?: number;
+  constructionPhase?: string;
+  constructionProgress?: number;
+  estimatedReadyDate?: string;
+  tenantPredictability?: string;
+  arrearsRisk?: string;
+  aiInsightSummary?: string;
+  savedAiReportCount?: number;
+  residentServiceRequestCount?: number;
+  openCommunityThreadCount?: number;
+  serviceBacklogCount?: number;
+  exceptionCount?: number;
+  reportHighlights?: DashboardSummary["reportHighlights"];
   recentAnnouncement?: Partial<Announcement>;
   recentMaintenance?: Partial<MaintenanceRequest>;
 };
@@ -122,6 +138,22 @@ function mapDashboardSummary(response: DashboardSummaryResponse): DashboardSumma
     communityCount: readOptionalNumber(response.communityCount),
     exchangeCount: readOptionalNumber(response.exchangeCount),
     servicesCount: readOptionalNumber(response.servicesCount),
+    accessStatus: readOptionalString(response.accessStatus),
+    activeGatePassCount: readOptionalNumber(response.activeGatePassCount),
+    pendingApprovalCount: readOptionalNumber(response.pendingApprovalCount),
+    auditTrailCount: readOptionalNumber(response.auditTrailCount),
+    constructionPhase: readOptionalString(response.constructionPhase),
+    constructionProgress: readOptionalNumber(response.constructionProgress),
+    estimatedReadyDate: readOptionalString(response.estimatedReadyDate),
+    tenantPredictability: readOptionalString(response.tenantPredictability),
+    arrearsRisk: readOptionalString(response.arrearsRisk),
+    aiInsightSummary: readOptionalString(response.aiInsightSummary),
+    savedAiReportCount: readOptionalNumber(response.savedAiReportCount),
+    residentServiceRequestCount: readOptionalNumber(response.residentServiceRequestCount),
+    openCommunityThreadCount: readOptionalNumber(response.openCommunityThreadCount),
+    serviceBacklogCount: readOptionalNumber(response.serviceBacklogCount),
+    exceptionCount: readOptionalNumber(response.exceptionCount),
+    reportHighlights: mapReportHighlights(response.reportHighlights),
     recentAnnouncement: mapAnnouncement(response.recentAnnouncement),
     recentMaintenance: mapMaintenance(response.recentMaintenance)
   };
@@ -163,6 +195,33 @@ function mapMaintenance(value: Partial<MaintenanceRequest> | undefined): Mainten
     date: readString(value?.date, ""),
     status: value?.status ?? "Submitted"
   };
+}
+
+function mapReportHighlights(value: DashboardSummaryResponse["reportHighlights"]): DashboardSummary["reportHighlights"] {
+  if (!Array.isArray(value)) {
+    return undefined;
+  }
+
+  const reports: NonNullable<DashboardSummary["reportHighlights"]> = [];
+
+  value.forEach((item) => {
+    const title = readOptionalString(item?.title);
+    const reportValue = readOptionalString(item?.value);
+    const detail = readOptionalString(item?.detail);
+
+    if (!title || !reportValue || !detail) {
+      return;
+    }
+
+    reports.push({
+      title,
+      value: reportValue,
+      detail,
+      status: readOptionalString(item?.status)
+    });
+  });
+
+  return reports.length ? reports : undefined;
 }
 
 function mapLeaseStatus(value: unknown): TenantProfile["leaseStatus"] {

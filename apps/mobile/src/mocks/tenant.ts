@@ -5,6 +5,7 @@ import { communityPosts } from "./community";
 import { documents } from "./documents";
 import { exchangeListings } from "./exchange";
 import { serviceProviders } from "./services";
+import { accessInfo } from "./access";
 
 export const tenantProfile: TenantProfile = {
   id: "tenant-grace-wanjiku",
@@ -40,6 +41,41 @@ export const dashboardSummary: DashboardSummary = {
   communityCount: communityPosts.length,
   exchangeCount: exchangeListings.length,
   servicesCount: serviceProviders.length,
+  accessStatus: accessInfo.accessCardStatus,
+  activeGatePassCount: accessInfo.gatePassStatus.toLowerCase().includes("no active") ? 0 : 1,
+  pendingApprovalCount: 2,
+  auditTrailCount: 18,
+  constructionPhase: "Interior finishes",
+  constructionProgress: 76,
+  estimatedReadyDate: "2026-07-15",
+  tenantPredictability: "Medium follow-up",
+  arrearsRisk: "Balance due",
+  aiInsightSummary: "Ask AI flags a rent balance, two open maintenance items, and one document follow-up for review.",
+  savedAiReportCount: 3,
+  residentServiceRequestCount: serviceProviders.length,
+  openCommunityThreadCount: communityPosts.filter((item) => item.status !== "Closed").length,
+  serviceBacklogCount: maintenanceRequests.filter((item) => !["Resolved", "Closed"].includes(item.status)).length,
+  exceptionCount: 4,
+  reportHighlights: [
+    {
+      title: "Executive summary",
+      value: "4 exceptions",
+      detail: "Rent balance, maintenance backlog, access follow-up, and document review",
+      status: "Review"
+    },
+    {
+      title: "Construction readiness",
+      value: "76%",
+      detail: "Interior finishes with estimated ready date in July",
+      status: "On track"
+    },
+    {
+      title: "Resident operations",
+      value: "7 items",
+      detail: "Community, services, exchange, and maintenance activity",
+      status: "Active"
+    }
+  ],
   recentAnnouncement: announcements[0],
   recentMaintenance: maintenanceRequests[0]
 };

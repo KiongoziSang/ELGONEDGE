@@ -223,6 +223,27 @@ export type DashboardSummary = {
   communityCount?: number;
   exchangeCount?: number;
   servicesCount?: number;
+  accessStatus?: string;
+  activeGatePassCount?: number;
+  pendingApprovalCount?: number;
+  auditTrailCount?: number;
+  constructionPhase?: string;
+  constructionProgress?: number;
+  estimatedReadyDate?: string;
+  tenantPredictability?: string;
+  arrearsRisk?: string;
+  aiInsightSummary?: string;
+  savedAiReportCount?: number;
+  residentServiceRequestCount?: number;
+  openCommunityThreadCount?: number;
+  serviceBacklogCount?: number;
+  exceptionCount?: number;
+  reportHighlights?: {
+    title: string;
+    value: string;
+    detail: string;
+    status?: string;
+  }[];
 };
 
 export type AppTab = "home" | "payments" | "maintenance" | "community" | "profile";
