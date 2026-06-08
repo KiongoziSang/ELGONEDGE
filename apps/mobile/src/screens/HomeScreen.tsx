@@ -593,7 +593,7 @@ function FeatureCard({
       <Text style={styles.featureTitle}>{title}</Text>
       <Text style={styles.featureDescription}>{description}</Text>
       <View style={styles.featureFooter}>
-        <Text style={styles.featureCount}>{typeof count === "number" ? `${count} item${count === 1 ? "" : "s"}` : "Ready"}</Text>
+        <Text style={styles.featureCount}>{typeof count === "number" ? `${count} item${count === 1 ? "" : "s"}` : "Available"}</Text>
         <Text style={styles.featureCta}>View</Text>
       </View>
     </Pressable>

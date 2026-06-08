@@ -87,7 +87,7 @@ export function ExchangeScreen() {
               <View style={styles.row}>
                 <View style={styles.copy}>
                   <Text style={styles.title}>{listing.title}</Text>
-                  <Text style={styles.meta}>{listing.category} · {formatKes(listing.price)}</Text>
+                  <Text style={styles.meta}>{formatListingMeta(listing)}</Text>
                   <Text style={styles.description}>{listing.description}</Text>
                   <Text style={styles.contact}>{listing.contactMethod}</Text>
                 </View>
@@ -99,6 +99,10 @@ export function ExchangeScreen() {
       ) : null}
     </Screen>
   );
+}
+
+function formatListingMeta(listing: ExchangeListing) {
+  return [listing.category, listing.price > 0 ? formatKes(listing.price) : "Price on request"].join(" · ");
 }
 
 const styles = StyleSheet.create({

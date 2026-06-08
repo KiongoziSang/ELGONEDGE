@@ -59,7 +59,7 @@ export function NotificationsScreen() {
                 <View style={styles.row}>
                   <View style={styles.copy}>
                     <Text style={styles.title}>{item.title}</Text>
-                    <Text style={styles.meta}>{item.type} · {formatDate(item.date)}</Text>
+                    <Text style={styles.meta}>{formatNotificationMeta(item)}</Text>
                     <Text style={styles.message}>{item.message}</Text>
                   </View>
                   <BadgeRow labels={[isRecentlyAdded(item.date) && "NEW", item.read ? "Read" : "Unread"]} />
@@ -71,6 +71,10 @@ export function NotificationsScreen() {
       ) : null}
     </Screen>
   );
+}
+
+function formatNotificationMeta(item: AppNotification) {
+  return [item.type, item.date ? formatDate(item.date) : "Date not shared"].filter(Boolean).join(" · ");
 }
 
 const styles = StyleSheet.create({

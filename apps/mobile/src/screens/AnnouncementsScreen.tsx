@@ -58,7 +58,7 @@ export function AnnouncementsScreen() {
                 <View style={styles.row}>
                   <View style={styles.copy}>
                     <Text style={styles.title}>{announcement.title}</Text>
-                    <Text style={styles.meta}>{announcement.propertyName} · {formatDate(announcement.date)}</Text>
+                    <Text style={styles.meta}>{formatAnnouncementMeta(announcement)}</Text>
                     <Text style={styles.message}>{announcement.message}</Text>
                   </View>
                   <BadgeRow labels={[isRecentlyAdded(announcement.date) && "NEW", announcement.read ? "Read" : "Unread"]} />
@@ -70,6 +70,12 @@ export function AnnouncementsScreen() {
       ) : null}
     </Screen>
   );
+}
+
+function formatAnnouncementMeta(announcement: Announcement) {
+  return [announcement.propertyName, announcement.date ? formatDate(announcement.date) : "Date not shared"]
+    .filter(Boolean)
+    .join(" · ");
 }
 
 const styles = StyleSheet.create({

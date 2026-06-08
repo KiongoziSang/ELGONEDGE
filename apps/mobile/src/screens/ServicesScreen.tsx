@@ -27,16 +27,22 @@ export function ServicesScreen() {
               <View style={styles.row}>
                 <View style={styles.copy}>
                   <Text style={styles.title}>{provider.name}</Text>
-                  <Text style={styles.meta}>{provider.category} · {provider.phone}</Text>
+                  <Text style={styles.meta}>{formatProviderMeta(provider)}</Text>
                   <Text style={styles.description}>{provider.description}</Text>
                 </View>
                 <BadgeRow labels={[isRecentlyAdded(provider.date) && "NEW", provider.status]} />
               </View>
               <View style={styles.actions}>
-                <AppButton label="Call" variant="secondary" onPress={() => void openExternalUrl(`tel:${provider.phone}`)} />
+                <AppButton
+                  label="Call"
+                  variant="secondary"
+                  disabled={!hasPhone(provider.phone)}
+                  onPress={() => void openExternalUrl(`tel:${provider.phone}`)}
+                />
                 <AppButton
                   label="WhatsApp"
                   variant="secondary"
+                  disabled={!hasPhone(provider.phone)}
                   onPress={() => void openExternalUrl(`https://wa.me/${provider.phone.replace(/\D/g, "")}`)}
                 />
                 <AppButton label="Request" variant="ghost" onPress={() => Alert.alert("Request through management", "Service requests are handled through property management where enabled.")} />
@@ -47,6 +53,14 @@ export function ServicesScreen() {
       ) : null}
     </Screen>
   );
+}
+
+function hasPhone(phone: string) {
+  return phone.replace(/\D/g, "").length >= 7;
+}
+
+function formatProviderMeta(provider: ServiceProvider) {
+  return [provider.category, hasPhone(provider.phone) ? provider.phone : "Contact through management"].join(" · ");
 }
 
 async function openExternalUrl(url: string) {

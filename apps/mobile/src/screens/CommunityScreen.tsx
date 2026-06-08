@@ -140,7 +140,7 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
                 <View style={styles.row}>
                   <View style={styles.copy}>
                     <Text style={styles.title}>{post.title}</Text>
-                    <Text style={styles.meta}>{post.type} · {formatDate(post.date)}</Text>
+                    <Text style={styles.meta}>{formatPostMeta(post)}</Text>
                     <Text style={styles.message}>{post.message}</Text>
                   </View>
                   <BadgeRow labels={[isRecentlyAdded(post.date) && "NEW", post.read ? "Read" : post.status]} />
@@ -152,6 +152,10 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
       ) : null}
     </Screen>
   );
+}
+
+function formatPostMeta(post: CommunityPost) {
+  return [post.type, post.date ? formatDate(post.date) : "Date not shared"].join(" · ");
 }
 
 const styles = StyleSheet.create({
