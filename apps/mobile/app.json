@@ -29,7 +29,13 @@
       "favicon": "./assets/elgonos-logo.png"
     },
     "plugins": [
-      "expo-secure-store"
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow ElgonOS to attach item photos to resident exchange listings."
+        }
+      ]
     ]
   }
 }

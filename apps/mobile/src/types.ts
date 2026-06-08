@@ -192,6 +192,8 @@ export type ExchangeListing = {
   price: number;
   description: string;
   contactMethod: string;
+  phone?: string;
+  whatsapp?: string;
   date?: string;
   imageUrl?: string;
   status: "Pending review" | "Approved" | "Sold/Closed";

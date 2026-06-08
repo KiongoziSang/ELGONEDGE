@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import { Alert, Image, Linking, StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { AppInput } from "../components/AppInput";
@@ -33,7 +34,9 @@ export function ExchangeScreen() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [contactMethod, setContactMethod] = useState("WhatsApp seller");
-  const [imageUrl, setImageUrl] = useState("");
+  const [phone, setPhone] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [selectedImage, setSelectedImage] = useState<{ uri: string; name: string; type: string } | null>(null);
   const [feedback, setFeedback] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -54,19 +57,49 @@ export function ExchangeScreen() {
         price: parsedPrice,
         description,
         contactMethod,
-        imageUrl: imageUrl.trim() || undefined
+        phone: phone.trim() || undefined,
+        whatsapp: whatsapp.trim() || phone.trim() || undefined,
+        imageFile: selectedImage ?? undefined
       });
       setItems((current) => [listing, ...current]);
       setTitle("");
       setPrice("");
       setDescription("");
-      setImageUrl("");
+      setPhone("");
+      setWhatsapp("");
+      setSelectedImage(null);
       setFeedback("Listing submitted for management review.");
     } catch (error) {
       setFeedback(error instanceof Error ? error.message : "We could not submit this listing right now.");
     } finally {
       setSubmitting(false);
     }
+  }
+
+  async function pickImage() {
+    const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (!permission.granted) {
+      Alert.alert("Photo access needed", "Allow photo library access to attach an item image.");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+      mediaTypes: ["images"],
+      quality: 0.82
+    });
+
+    if (result.canceled || !result.assets[0]) {
+      return;
+    }
+
+    const asset = result.assets[0];
+    setSelectedImage({
+      uri: asset.uri,
+      name: asset.fileName ?? `exchange-${Date.now()}.jpg`,
+      type: asset.mimeType ?? "image/jpeg"
+    });
   }
 
   return (
@@ -79,7 +112,16 @@ export function ExchangeScreen() {
           <AppInput label="Price" value={price} onChangeText={setPrice} placeholder="12500" keyboardType="phone-pad" />
           <AppInput label="Description" value={description} onChangeText={setDescription} placeholder="Describe the item..." multiline />
           <AppInput label="Contact method" value={contactMethod} onChangeText={setContactMethod} placeholder="Call or WhatsApp seller" />
-          <AppInput label="Image URL" value={imageUrl} onChangeText={setImageUrl} placeholder="Optional listing photo URL" />
+          <AppInput label="Phone" value={phone} onChangeText={setPhone} placeholder="+254 712 345 678" keyboardType="phone-pad" />
+          <AppInput label="WhatsApp" value={whatsapp} onChangeText={setWhatsapp} placeholder="Leave blank to use phone" keyboardType="phone-pad" />
+          {selectedImage ? (
+            <View style={styles.selectedImageWrap}>
+              <Image source={{ uri: selectedImage.uri }} style={styles.selectedImage} resizeMode="cover" />
+              <AppButton label="Change photo" variant="secondary" onPress={() => void pickImage()} />
+            </View>
+          ) : (
+            <AppButton label="Add item photo" variant="secondary" onPress={() => void pickImage()} />
+          )}
           {feedback ? <Text style={styles.feedback}>{feedback}</Text> : null}
           <AppButton label={submitting ? "Submitting..." : "Submit listing"} onPress={() => void submit()} disabled={submitting} />
         </View>
@@ -104,6 +146,20 @@ export function ExchangeScreen() {
                   <Text style={styles.meta}>{formatListingMeta(listing)}</Text>
                   <Text style={styles.description}>{listing.description}</Text>
                   <Text style={styles.contact}>{listing.contactMethod}</Text>
+                  <View style={styles.listingActions}>
+                    <AppButton
+                      label="Call"
+                      variant="secondary"
+                      disabled={!hasPhone(listing.phone)}
+                      onPress={() => void openExternalUrl(`tel:${listing.phone}`)}
+                    />
+                    <AppButton
+                      label="WhatsApp"
+                      variant="secondary"
+                      disabled={!hasPhone(listing.whatsapp ?? listing.phone)}
+                      onPress={() => void openExternalUrl(`https://wa.me/${toWhatsAppPhone(listing.whatsapp ?? listing.phone)}`)}
+                    />
+                  </View>
                 </View>
                 <BadgeRow labels={[isRecentlyAdded(listing.date) && "NEW", listing.status]} />
               </View>
@@ -144,6 +200,24 @@ function getCategoryInitial(category: ExchangeListing["category"]) {
   return category === "Household items" ? "H" : category.slice(0, 1);
 }
 
+function hasPhone(value?: string) {
+  return Boolean(value && toWhatsAppPhone(value).length >= 7);
+}
+
+function toWhatsAppPhone(value?: string) {
+  return value?.replace(/\D/g, "") ?? "";
+}
+
+async function openExternalUrl(url: string) {
+  const supported = await Linking.canOpenURL(url);
+  if (supported) {
+    await Linking.openURL(url);
+    return;
+  }
+
+  Alert.alert("Action unavailable", "This contact action is not available on this device.");
+}
+
 const styles = StyleSheet.create({
   form: {
     gap: 14
@@ -155,6 +229,14 @@ const styles = StyleSheet.create({
   },
   stack: {
     gap: 10
+  },
+  selectedImageWrap: {
+    gap: 12
+  },
+  selectedImage: {
+    borderRadius: 18,
+    height: 190,
+    width: "100%"
   },
   visual: {
     backgroundColor: colors.navy,
@@ -236,5 +318,11 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "900",
     marginTop: 8
+  },
+  listingActions: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 10,
+    marginTop: 14
   }
 });

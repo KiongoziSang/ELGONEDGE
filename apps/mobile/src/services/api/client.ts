@@ -8,6 +8,13 @@ type ApiRequestOptions = Omit<RequestInit, "body" | "headers"> & {
   timeoutMs?: number;
 };
 
+type MultipartRequestOptions = Omit<RequestInit, "body" | "headers" | "method"> & {
+  body: FormData;
+  headers?: Record<string, string>;
+  token?: string;
+  timeoutMs?: number;
+};
+
 let activeAuthToken: string | null = null;
 
 export type AuthMode = "real-api" | "demo";
@@ -133,7 +140,62 @@ export async function apiRequest<TResponse>(path: string, options: ApiRequestOpt
     const response = await fetch(createUrl(path), {
       ...init,
       body: body === undefined ? undefined : JSON.stringify(body),
-      headers: createHeaders(headers, token),
+      headers: createHeaders(headers, token, true),
+      signal: controller.signal
+    });
+
+    logApiDebug("response", { path, status: response.status });
+    return await parseResponse<TResponse>(response);
+  } catch (error) {
+    if (isAbortError(error)) {
+      throw new ApiClientError({
+        code: "REQUEST_TIMEOUT",
+        message: "Request timed out. Please try again."
+      });
+    }
+
+    if (error instanceof ApiClientError) {
+      throw error;
+    }
+
+    throw new ApiClientError(toApiError(error));
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+export async function apiMultipartRequest<TResponse>(
+  path: string,
+  options: MultipartRequestOptions
+): Promise<TResponse> {
+  if (appConfig.mockMode) {
+    throw new MockModeError();
+  }
+
+  if (appConfig.configError) {
+    throw new ApiClientError({
+      code: "CONFIG_ERROR",
+      message: appConfig.configError
+    });
+  }
+
+  const { body, headers, token = activeAuthToken ?? undefined, timeoutMs = appConfig.requestTimeoutMs, ...init } = options;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    logApiDebug("request", {
+      path,
+      baseUrl: appConfig.apiBaseUrl,
+      baseUrlSource: appConfig.apiBaseUrlSource,
+      mockMode: String(appConfig.mockMode),
+      method: "POST"
+    });
+    const response = await fetch(createUrl(path), {
+      ...init,
+      method: "POST",
+      body,
+      headers: createHeaders(headers, token, false),
       signal: controller.signal
     });
 
@@ -174,10 +236,13 @@ function createUrl(path: string) {
   return `${baseUrl}${normalizedPath}`;
 }
 
-function createHeaders(headers: Record<string, string> | undefined, token: string | undefined) {
+function createHeaders(headers: Record<string, string> | undefined, token: string | undefined, includeJsonContentType: boolean) {
   const nextHeaders = new Headers();
   nextHeaders.set("Accept", "application/json");
-  nextHeaders.set("Content-Type", "application/json");
+
+  if (includeJsonContentType) {
+    nextHeaders.set("Content-Type", "application/json");
+  }
 
   if (token) {
     nextHeaders.set("Authorization", `Bearer ${token}`);

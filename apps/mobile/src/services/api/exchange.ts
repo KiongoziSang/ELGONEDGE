@@ -1,9 +1,16 @@
 import { exchangeListings } from "../../mocks/exchange";
 import type { ExchangeListing } from "../../types";
-import { apiRequest, getApiBaseUrl, isEndpointUnavailableError, isMockMode, mockDelay } from "./client";
+import { apiMultipartRequest, apiRequest, getApiBaseUrl, isEndpointUnavailableError, isMockMode, mockDelay } from "./client";
 
 type ExchangeListingResponse = Partial<ExchangeListing> & {
   photoUrl?: unknown;
+  phone?: unknown;
+  whatsapp?: unknown;
+  whatsappPhone?: unknown;
+  sellerPhone?: unknown;
+  sellerWhatsapp?: unknown;
+  contactPhone?: unknown;
+  contactWhatsapp?: unknown;
   thumbnailUrl?: unknown;
   coverImageUrl?: unknown;
   coverPhotoUrl?: unknown;
@@ -74,7 +81,14 @@ export async function createExchangeListing(input: {
   price: number;
   description: string;
   contactMethod: string;
+  phone?: string;
+  whatsapp?: string;
   imageUrl?: string;
+  imageFile?: {
+    uri: string;
+    name: string;
+    type: string;
+  };
 }): Promise<ExchangeListing> {
   if (!isMockMode()) {
     const response = await postExchangeListing(input);
@@ -90,6 +104,8 @@ export async function createExchangeListing(input: {
     price: input.price,
     description: input.description,
     contactMethod: input.contactMethod,
+    phone: input.phone,
+    whatsapp: input.whatsapp,
     imageUrl: input.imageUrl,
     status: "Pending review"
   };
@@ -101,23 +117,121 @@ async function postExchangeListing(input: {
   price: number;
   description: string;
   contactMethod: string;
+  phone?: string;
+  whatsapp?: string;
   imageUrl?: string;
+  imageFile?: {
+    uri: string;
+    name: string;
+    type: string;
+  };
 }) {
   try {
+    if (input.imageFile) {
+      return await apiMultipartRequest<ExchangeListingResponse>("/api/mobile/exchange/listings", {
+        body: createExchangeFormData(input)
+      });
+    }
+
     return await apiRequest<ExchangeListingResponse>("/api/mobile/exchange/listings", {
       method: "POST",
-      body: input
+      body: createExchangeJsonBody(input)
     });
   } catch (error) {
     if (!isEndpointUnavailableError(error)) {
       throw error;
     }
 
+    if (input.imageFile) {
+      return apiMultipartRequest<ExchangeListingResponse>("/api/mobile/tenant/exchange", {
+        body: createExchangeFormData(input)
+      });
+    }
+
     return apiRequest<ExchangeListingResponse>("/api/mobile/tenant/exchange", {
       method: "POST",
-      body: input
+      body: createExchangeJsonBody(input)
     });
   }
+}
+
+function createExchangeJsonBody(input: {
+  title: string;
+  category: ExchangeListing["category"];
+  price: number;
+  description: string;
+  contactMethod: string;
+  phone?: string;
+  whatsapp?: string;
+  imageUrl?: string;
+}) {
+  const body: { [key: string]: string | number } = {
+    title: input.title,
+    category: input.category,
+    price: input.price,
+    description: input.description,
+    contactMethod: input.contactMethod
+  };
+
+  if (input.phone) {
+    body.phone = input.phone;
+    body.contactPhone = input.phone;
+  }
+
+  if (input.whatsapp) {
+    body.whatsapp = input.whatsapp;
+    body.contactWhatsapp = input.whatsapp;
+  }
+
+  if (input.imageUrl) {
+    body.imageUrl = input.imageUrl;
+  }
+
+  return body;
+}
+
+function createExchangeFormData(input: {
+  title: string;
+  category: ExchangeListing["category"];
+  price: number;
+  description: string;
+  contactMethod: string;
+  phone?: string;
+  whatsapp?: string;
+  imageUrl?: string;
+  imageFile?: {
+    uri: string;
+    name: string;
+    type: string;
+  };
+}) {
+  const formData = new FormData();
+  formData.append("title", input.title);
+  formData.append("category", input.category);
+  formData.append("price", String(input.price));
+  formData.append("description", input.description);
+  formData.append("contactMethod", input.contactMethod);
+
+  if (input.phone) {
+    formData.append("phone", input.phone);
+    formData.append("contactPhone", input.phone);
+  }
+
+  if (input.whatsapp) {
+    formData.append("whatsapp", input.whatsapp);
+    formData.append("contactWhatsapp", input.whatsapp);
+  }
+
+  if (input.imageUrl) {
+    formData.append("imageUrl", input.imageUrl);
+  }
+
+  if (input.imageFile) {
+    formData.append("photo", input.imageFile as unknown as Blob);
+    formData.append("image", input.imageFile as unknown as Blob);
+  }
+
+  return formData;
 }
 
 const exchangeCategories: ExchangeListing["category"][] = [
@@ -191,12 +305,42 @@ function mapExchangeListing(item: ExchangeListingResponse, index: number): Excha
     price: readNumber(item.price, 0),
     description: readString(item.description) ?? "Details will be shared by the resident or property team.",
     contactMethod: readString(item.contactMethod) ?? "Contact through management",
+    phone: readContactPhone(item),
+    whatsapp: readContactWhatsapp(item),
     date: readString(item.date),
     imageUrl: readImageUrl(item),
     status: exchangeStatuses.includes(item.status as ExchangeListing["status"])
       ? (item.status as ExchangeListing["status"])
       : "Pending review"
   };
+}
+
+function readContactPhone(item: ExchangeListingResponse) {
+  return (
+    readString(item.phone) ??
+    readString(item.sellerPhone) ??
+    readString(item.contactPhone) ??
+    readPhoneFromText(readString(item.contactMethod))
+  );
+}
+
+function readContactWhatsapp(item: ExchangeListingResponse) {
+  return (
+    readString(item.whatsapp) ??
+    readString(item.whatsappPhone) ??
+    readString(item.sellerWhatsapp) ??
+    readString(item.contactWhatsapp) ??
+    readContactPhone(item)
+  );
+}
+
+function readPhoneFromText(value: string | undefined) {
+  if (!value) {
+    return undefined;
+  }
+
+  const match = value.match(/(?:\+?\d[\d\s().-]{6,}\d)/);
+  return match ? match[0].trim() : undefined;
 }
 
 function isExchangeListing(item: ExchangeListing): item is ExchangeListing {
