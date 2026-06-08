@@ -70,7 +70,7 @@ export function ExchangeScreen() {
   }
 
   return (
-    <Screen title="Resident Exchange" subtitle="Moderated household listings from residents in your property.">
+    <Screen title="Resident Exchange" subtitle="Moderated household listings from residents in your property community.">
       <SectionHeader title="Create listing" action="Moderated" />
       <AppCard>
         <View style={styles.form}>
@@ -89,7 +89,10 @@ export function ExchangeScreen() {
       {loaded.loading ? <LoadingState label="Loading exchange listings..." /> : null}
       {loaded.error ? <EmptyState title="Unable to load exchange" text={loaded.error} actionLabel="Retry" onAction={() => void loaded.reload()} /> : null}
       {!loaded.loading && !loaded.error && listings.length === 0 ? (
-        <EmptyState title="No exchange listings yet" text="Approved household listings will appear here." />
+        <EmptyState
+          title="No exchange listings for this property yet"
+          text="Approved listings are shared between occupants assigned to the same property community. Listings from other properties are kept separate."
+        />
       ) : !loaded.loading && !loaded.error ? (
         <View style={styles.stack}>
           {listings.map((listing) => (
