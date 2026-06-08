@@ -1,6 +1,6 @@
 import { exchangeListings } from "../../mocks/exchange";
 import type { ExchangeListing } from "../../types";
-import { apiRequest, isMockMode, mockDelay } from "./client";
+import { apiRequest, isEndpointUnavailableError, isMockMode, mockDelay } from "./client";
 
 type ExchangeListingResponse = Partial<ExchangeListing> & {
   photoUrl?: unknown;
@@ -14,13 +14,15 @@ type ExchangeListingResponse = Partial<ExchangeListing> & {
 type ExchangeListResponse = {
   items?: ExchangeListingResponse[];
   listings?: ExchangeListingResponse[];
+  data?: ExchangeListingResponse[] | { items?: ExchangeListingResponse[]; listings?: ExchangeListingResponse[] };
+  results?: ExchangeListingResponse[];
 };
 
 export async function getExchangeListings(): Promise<ExchangeListing[]> {
   if (!isMockMode()) {
     const [marketplaceResult, tenantResult] = await Promise.allSettled([
-      apiRequest<ExchangeListResponse>("/api/mobile/exchange/listings"),
-      apiRequest<ExchangeListResponse>("/api/mobile/tenant/exchange")
+      apiRequest<ExchangeListResponse | ExchangeListingResponse[]>("/api/mobile/exchange/listings"),
+      apiRequest<ExchangeListResponse | ExchangeListingResponse[]>("/api/mobile/tenant/exchange")
     ]);
 
     const marketplaceItems = marketplaceResult.status === "fulfilled" ? readExchangeItems(marketplaceResult.value) : [];
@@ -47,10 +49,7 @@ export async function createExchangeListing(input: {
   imageUrl?: string;
 }): Promise<ExchangeListing> {
   if (!isMockMode()) {
-    const response = await apiRequest<ExchangeListingResponse>("/api/mobile/tenant/exchange", {
-      method: "POST",
-      body: input
-    });
+    const response = await postExchangeListing(input);
     return mapExchangeListing(response, Date.now());
   }
 
@@ -68,6 +67,31 @@ export async function createExchangeListing(input: {
   };
 }
 
+async function postExchangeListing(input: {
+  title: string;
+  category: ExchangeListing["category"];
+  price: number;
+  description: string;
+  contactMethod: string;
+  imageUrl?: string;
+}) {
+  try {
+    return await apiRequest<ExchangeListingResponse>("/api/mobile/exchange/listings", {
+      method: "POST",
+      body: input
+    });
+  } catch (error) {
+    if (!isEndpointUnavailableError(error)) {
+      throw error;
+    }
+
+    return apiRequest<ExchangeListingResponse>("/api/mobile/tenant/exchange", {
+      method: "POST",
+      body: input
+    });
+  }
+}
+
 const exchangeCategories: ExchangeListing["category"][] = [
   "Furniture",
   "Electronics",
@@ -79,13 +103,39 @@ const exchangeCategories: ExchangeListing["category"][] = [
 
 const exchangeStatuses: ExchangeListing["status"][] = ["Pending review", "Approved", "Sold/Closed"];
 
-function readExchangeItems(response: ExchangeListResponse) {
+function readExchangeItems(response: ExchangeListResponse | ExchangeListingResponse[] | undefined) {
+  if (Array.isArray(response)) {
+    return response;
+  }
+
+  if (!response) {
+    return [];
+  }
+
   if (Array.isArray(response.items)) {
     return response.items;
   }
 
   if (Array.isArray(response.listings)) {
     return response.listings;
+  }
+
+  if (Array.isArray(response.results)) {
+    return response.results;
+  }
+
+  if (Array.isArray(response.data)) {
+    return response.data;
+  }
+
+  if (response.data && typeof response.data === "object") {
+    if (Array.isArray(response.data.items)) {
+      return response.data.items;
+    }
+
+    if (Array.isArray(response.data.listings)) {
+      return response.data.listings;
+    }
   }
 
   return [];
