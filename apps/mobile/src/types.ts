@@ -193,6 +193,7 @@ export type ExchangeListing = {
   description: string;
   contactMethod: string;
   date?: string;
+  imageUrl?: string;
   status: "Pending review" | "Approved" | "Sold/Closed";
 };
 

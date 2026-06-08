@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { AppButton } from "../components/AppButton";
 import { AppCard } from "../components/AppCard";
 import { AppInput } from "../components/AppInput";
@@ -33,6 +33,7 @@ export function ExchangeScreen() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [contactMethod, setContactMethod] = useState("WhatsApp seller");
+  const [imageUrl, setImageUrl] = useState("");
   const [feedback, setFeedback] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -47,11 +48,19 @@ export function ExchangeScreen() {
 
     setSubmitting(true);
     try {
-      const listing = await createExchangeListing({ title, category, price: parsedPrice, description, contactMethod });
+      const listing = await createExchangeListing({
+        title,
+        category,
+        price: parsedPrice,
+        description,
+        contactMethod,
+        imageUrl: imageUrl.trim() || undefined
+      });
       setItems((current) => [listing, ...current]);
       setTitle("");
       setPrice("");
       setDescription("");
+      setImageUrl("");
       setFeedback("Listing submitted for management review.");
     } catch (error) {
       setFeedback(error instanceof Error ? error.message : "We could not submit this listing right now.");
@@ -70,6 +79,7 @@ export function ExchangeScreen() {
           <AppInput label="Price" value={price} onChangeText={setPrice} placeholder="12500" keyboardType="phone-pad" />
           <AppInput label="Description" value={description} onChangeText={setDescription} placeholder="Describe the item..." multiline />
           <AppInput label="Contact method" value={contactMethod} onChangeText={setContactMethod} placeholder="Call or WhatsApp seller" />
+          <AppInput label="Image URL" value={imageUrl} onChangeText={setImageUrl} placeholder="Optional listing photo URL" />
           {feedback ? <Text style={styles.feedback}>{feedback}</Text> : null}
           <AppButton label={submitting ? "Submitting..." : "Submit listing"} onPress={() => void submit()} disabled={submitting} />
         </View>
@@ -84,6 +94,7 @@ export function ExchangeScreen() {
         <View style={styles.stack}>
           {listings.map((listing) => (
             <AppCard key={listing.id}>
+              <ListingVisual listing={listing} />
               <View style={styles.row}>
                 <View style={styles.copy}>
                   <Text style={styles.title}>{listing.title}</Text>
@@ -105,6 +116,28 @@ function formatListingMeta(listing: ExchangeListing) {
   return [listing.category, listing.price > 0 ? formatKes(listing.price) : "Price on request"].join(" · ");
 }
 
+function ListingVisual({ listing }: { listing: ExchangeListing }) {
+  return (
+    <View style={styles.visual}>
+      {listing.imageUrl ? (
+        <Image source={{ uri: listing.imageUrl }} style={styles.image} resizeMode="cover" />
+      ) : (
+        <View style={styles.imageFallback}>
+          <Text style={styles.imageInitial}>{getCategoryInitial(listing.category)}</Text>
+          <Text style={styles.imageCategory}>{listing.category}</Text>
+        </View>
+      )}
+      <View style={styles.visualOverlay}>
+        <Text style={styles.visualPrice}>{listing.price > 0 ? formatKes(listing.price) : "Price on request"}</Text>
+      </View>
+    </View>
+  );
+}
+
+function getCategoryInitial(category: ExchangeListing["category"]) {
+  return category === "Household items" ? "H" : category.slice(0, 1);
+}
+
 const styles = StyleSheet.create({
   form: {
     gap: 14
@@ -116,6 +149,56 @@ const styles = StyleSheet.create({
   },
   stack: {
     gap: 10
+  },
+  visual: {
+    backgroundColor: colors.navy,
+    borderRadius: 18,
+    marginBottom: 14,
+    minHeight: 168,
+    overflow: "hidden",
+    position: "relative"
+  },
+  image: {
+    height: 188,
+    width: "100%"
+  },
+  imageFallback: {
+    alignItems: "center",
+    backgroundColor: colors.navy,
+    height: 188,
+    justifyContent: "center",
+    padding: 18
+  },
+  imageInitial: {
+    backgroundColor: colors.infoSoft,
+    borderRadius: 26,
+    color: colors.blue,
+    fontSize: 28,
+    fontWeight: "900",
+    height: 58,
+    lineHeight: 58,
+    textAlign: "center",
+    width: 58
+  },
+  imageCategory: {
+    color: colors.white,
+    fontSize: 14,
+    fontWeight: "900",
+    marginTop: 12
+  },
+  visualOverlay: {
+    backgroundColor: "rgba(10, 27, 46, 0.82)",
+    borderRadius: 999,
+    bottom: 12,
+    left: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    position: "absolute"
+  },
+  visualPrice: {
+    color: colors.white,
+    fontSize: 12,
+    fontWeight: "900"
   },
   row: {
     flexDirection: "row",

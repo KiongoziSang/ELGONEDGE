@@ -2,10 +2,36 @@ import { exchangeListings } from "../../mocks/exchange";
 import type { ExchangeListing } from "../../types";
 import { apiRequest, isMockMode, mockDelay } from "./client";
 
-export async function getExchangeListings() {
+type ExchangeListingResponse = Partial<ExchangeListing> & {
+  photoUrl?: unknown;
+  thumbnailUrl?: unknown;
+  image?: {
+    url?: unknown;
+  };
+  images?: unknown[];
+};
+
+type ExchangeListResponse = {
+  items?: ExchangeListingResponse[];
+  listings?: ExchangeListingResponse[];
+};
+
+export async function getExchangeListings(): Promise<ExchangeListing[]> {
   if (!isMockMode()) {
-    const response = await apiRequest<{ items?: Partial<ExchangeListing>[] }>("/api/mobile/tenant/exchange");
-    return Array.isArray(response.items) ? response.items.map(mapExchangeListing).filter(isExchangeListing) : [];
+    const [marketplaceResult, tenantResult] = await Promise.allSettled([
+      apiRequest<ExchangeListResponse>("/api/mobile/exchange/listings"),
+      apiRequest<ExchangeListResponse>("/api/mobile/tenant/exchange")
+    ]);
+
+    const marketplaceItems = marketplaceResult.status === "fulfilled" ? readExchangeItems(marketplaceResult.value) : [];
+    const tenantItems = tenantResult.status === "fulfilled" ? readExchangeItems(tenantResult.value) : [];
+    const listings = dedupeListings([...marketplaceItems, ...tenantItems].map(mapExchangeListing));
+
+    if (!listings.length && marketplaceResult.status === "rejected" && tenantResult.status === "rejected") {
+      throw marketplaceResult.reason instanceof Error ? marketplaceResult.reason : new Error("Unable to load exchange listings.");
+    }
+
+    return listings;
   }
 
   await mockDelay();
@@ -18,9 +44,10 @@ export async function createExchangeListing(input: {
   price: number;
   description: string;
   contactMethod: string;
+  imageUrl?: string;
 }): Promise<ExchangeListing> {
   if (!isMockMode()) {
-    const response = await apiRequest<Partial<ExchangeListing>>("/api/mobile/tenant/exchange", {
+    const response = await apiRequest<ExchangeListingResponse>("/api/mobile/tenant/exchange", {
       method: "POST",
       body: input
     });
@@ -36,6 +63,7 @@ export async function createExchangeListing(input: {
     price: input.price,
     description: input.description,
     contactMethod: input.contactMethod,
+    imageUrl: input.imageUrl,
     status: "Pending review"
   };
 }
@@ -51,7 +79,31 @@ const exchangeCategories: ExchangeListing["category"][] = [
 
 const exchangeStatuses: ExchangeListing["status"][] = ["Pending review", "Approved", "Sold/Closed"];
 
-function mapExchangeListing(item: Partial<ExchangeListing>, index: number): ExchangeListing {
+function readExchangeItems(response: ExchangeListResponse) {
+  if (Array.isArray(response.items)) {
+    return response.items;
+  }
+
+  if (Array.isArray(response.listings)) {
+    return response.listings;
+  }
+
+  return [];
+}
+
+function dedupeListings(listings: ExchangeListing[]) {
+  const seen = new Set<string>();
+  return listings.filter((listing) => {
+    if (seen.has(listing.id)) {
+      return false;
+    }
+
+    seen.add(listing.id);
+    return true;
+  });
+}
+
+function mapExchangeListing(item: ExchangeListingResponse, index: number): ExchangeListing {
   return {
     id: readString(item.id) ?? `exchange-${index}`,
     title: readString(item.title) ?? "Resident listing",
@@ -62,6 +114,7 @@ function mapExchangeListing(item: Partial<ExchangeListing>, index: number): Exch
     description: readString(item.description) ?? "Details will be shared by the resident or property team.",
     contactMethod: readString(item.contactMethod) ?? "Contact through management",
     date: readString(item.date),
+    imageUrl: readImageUrl(item),
     status: exchangeStatuses.includes(item.status as ExchangeListing["status"])
       ? (item.status as ExchangeListing["status"])
       : "Pending review"
@@ -78,4 +131,27 @@ function readString(value: unknown) {
 
 function readNumber(value: unknown, fallback: number) {
   return typeof value === "number" && Number.isFinite(value) ? value : fallback;
+}
+
+function readImageUrl(item: ExchangeListingResponse) {
+  const directUrl = readString(item.imageUrl) ?? readString(item.photoUrl) ?? readString(item.thumbnailUrl);
+
+  if (directUrl) {
+    return directUrl;
+  }
+
+  if (item.image && typeof item.image === "object") {
+    return readString(item.image.url);
+  }
+
+  const firstImage = Array.isArray(item.images) ? item.images[0] : undefined;
+  if (typeof firstImage === "string") {
+    return readString(firstImage);
+  }
+
+  if (firstImage && typeof firstImage === "object" && "url" in firstImage) {
+    return readString((firstImage as { url?: unknown }).url);
+  }
+
+  return undefined;
 }
