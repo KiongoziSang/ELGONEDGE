@@ -10,8 +10,8 @@ import { colors, spacing } from "../theme";
 
 export function LoginScreen({ onForgotPassword }: { onForgotPassword: () => void }) {
   const { login, loading, error } = useAuth();
-  const [identifier, setIdentifier] = useState("grace.wanjiku@example.com");
-  const [password, setPassword] = useState("password");
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
   const authMode = getAuthMode();
 
   return (
@@ -46,7 +46,7 @@ export function LoginScreen({ onForgotPassword }: { onForgotPassword: () => void
       </AppCard>
       <Text style={styles.helper}>
         {authMode === "demo"
-          ? "Demo mode is enabled. Use grace.wanjiku@example.com / password for demo access."
+          ? "Demo mode is enabled. Use the demo tenant credentials provided by your property team."
           : "Tenant login uses the configured backend API. Contact support if your tenant credentials are not accepted."}
       </Text>
     </View>
