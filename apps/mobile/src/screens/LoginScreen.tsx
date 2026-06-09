@@ -30,7 +30,7 @@ export function LoginScreen({ onForgotPassword }: { onForgotPassword: () => void
             value={identifier}
             onChangeText={setIdentifier}
             keyboardType="email-address"
-            placeholder="grace.wanjiku@example.com"
+            placeholder="grace.wanjiku@elgonedge.com"
           />
           <AppInput
             label="Password"
