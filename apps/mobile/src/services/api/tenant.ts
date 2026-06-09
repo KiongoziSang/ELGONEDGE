@@ -32,6 +32,28 @@ export async function getLeaseDetails(): Promise<LeaseDetails> {
   return mapLeaseDetails(response);
 }
 
+export async function updateEmergencyContact(input: { name: string; phone: string }) {
+  if (isMockMode()) {
+    await mockDelay();
+    tenantProfile.emergencyContact = `${input.name} - ${input.phone}`;
+    return {
+      success: true,
+      message: "Emergency contact updated.",
+      emergencyContact: {
+        name: input.name,
+        phone: input.phone
+      }
+    };
+  }
+
+  return apiRequest<{ success?: boolean; message?: string }>("/api/mobile/profile", {
+    method: "PATCH",
+    body: {
+      emergencyContact: input
+    }
+  });
+}
+
 type TenantProfileResponse = Partial<TenantProfile> & {
   tenant?: Partial<TenantProfile>;
   property?: {
@@ -101,6 +123,7 @@ type LeaseDetailsResponse = Partial<LeaseDetails> & {
 function mapTenantProfile(response: TenantProfileResponse): TenantProfile {
   const tenant = response.tenant ?? response;
   const lease = response.lease;
+  const emergencyContact = formatEmergencyContact(response.emergencyContact ?? tenant.emergencyContact);
 
   return {
     id: readString(tenant.id ?? response.id, ""),
@@ -115,7 +138,7 @@ function mapTenantProfile(response: TenantProfileResponse): TenantProfile {
     leaseStartDate: readString(response.leaseStartDate ?? lease?.startDate, ""),
     leaseEndDate: readString(response.leaseEndDate ?? lease?.endDate, ""),
     leaseStatus: mapLeaseStatus(response.leaseStatus ?? lease?.status),
-    emergencyContact: readString(response.emergencyContact, "Not provided")
+    emergencyContact
   };
 }
 
@@ -256,4 +279,18 @@ function readNumber(value: unknown, fallback: number) {
 
 function readOptionalNumber(value: unknown) {
   return typeof value === "number" && Number.isFinite(value) ? value : undefined;
+}
+
+function formatEmergencyContact(value: unknown) {
+  if (typeof value === "string" && value.trim()) {
+    return value;
+  }
+
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    const contact = value as { name?: unknown; phone?: unknown };
+    const parts = [readOptionalString(contact.name), readOptionalString(contact.phone)].filter(Boolean);
+    return parts.length ? parts.join(" - ") : "Not provided";
+  }
+
+  return "Not provided";
 }
