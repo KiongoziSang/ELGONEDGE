@@ -13,8 +13,8 @@ export function AppHeader({ title, subtitle }: { title: string; subtitle?: strin
       <View style={styles.topRow}>
         <BrandMark size="medium" light />
         <View style={styles.actions}>
-          <ProfileAvatar />
           <NotificationBell />
+          <ProfileAvatar />
         </View>
       </View>
       <Text style={styles.title}>{title}</Text>

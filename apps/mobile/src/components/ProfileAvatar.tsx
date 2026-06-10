@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { useAuth } from "../context/AuthContext";
-import { useAppNavigation } from "../context/NavigationContext";
 import { useApiData } from "../hooks/useApiData";
 import { getTenantProfile } from "../services/api/tenant";
 import { colors } from "../theme";
@@ -9,7 +8,6 @@ import type { TenantProfile } from "../types";
 
 export function ProfileAvatar() {
   const { session } = useAuth();
-  const { navigate } = useAppNavigation();
   const profile = useApiData<TenantProfile>(getTenantProfile, {} as TenantProfile);
   const name = profile.data.fullName || session?.tenant?.fullName || session?.tenant?.email || "Tenant";
   const imageUrl = profile.data.imageUrl || session?.tenant?.imageUrl;
@@ -20,11 +18,7 @@ export function ProfileAvatar() {
   }, [imageUrl]);
 
   return (
-    <Pressable
-      accessibilityLabel="Open profile"
-      onPress={() => navigate("profile")}
-      style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-    >
+    <View accessibilityLabel="Signed-in resident profile photo" style={styles.avatar}>
       {imageUrl && !imageFailed ? (
         <Image source={{ uri: imageUrl }} style={styles.image} resizeMode="cover" onError={() => setImageFailed(true)} />
       ) : (
@@ -32,7 +26,7 @@ export function ProfileAvatar() {
           <Text style={styles.initials}>{initials(name)}</Text>
         </View>
       )}
-    </Pressable>
+    </View>
   );
 }
 
@@ -44,7 +38,7 @@ function initials(value: string) {
 }
 
 const styles = StyleSheet.create({
-  button: {
+  avatar: {
     alignItems: "center",
     backgroundColor: "rgba(255,255,255,0.1)",
     borderColor: "rgba(255,255,255,0.2)",
@@ -70,9 +64,5 @@ const styles = StyleSheet.create({
     color: colors.blue,
     fontSize: 14,
     fontWeight: "900"
-  },
-  pressed: {
-    opacity: 0.78,
-    transform: [{ scale: 0.98 }]
   }
 });
