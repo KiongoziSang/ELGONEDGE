@@ -156,6 +156,41 @@ export type CommunityPost = {
   read?: boolean;
 };
 
+export type ResidentConnectTargetUnit = {
+  id: string;
+  label: string;
+};
+
+export type ResidentConnectNotice = {
+  id: string;
+  direction: "sent" | "received";
+  category: string;
+  categoryLabel: string;
+  message: string;
+  status: string;
+  statusLabel: string;
+  urgent: boolean;
+  senderUnitLabel: string;
+  recipientUnitLabel: string;
+  createdAt: string;
+  readAt?: string;
+  reported: boolean;
+  replies: {
+    id: string;
+    mine: boolean;
+    message: string;
+    status: string;
+    createdAt: string;
+  }[];
+};
+
+export type ResidentConnectData = {
+  items: ResidentConnectNotice[];
+  targetUnits: ResidentConnectTargetUnit[];
+  categories: { value: string; label: string; safety?: boolean }[];
+  templates: string[];
+};
+
 export type AppNotification = {
   id: string;
   source?: "notification" | "community";
@@ -260,6 +295,7 @@ export type ScreenName =
   | "receipts"
   | "announcements"
   | "notifications"
+  | "residentConnect"
   | "services"
   | "exchange"
   | "access";

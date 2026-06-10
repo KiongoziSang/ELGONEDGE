@@ -19,6 +19,7 @@ import { NotificationsScreen } from "./src/screens/NotificationsScreen";
 import { PaymentsScreen } from "./src/screens/PaymentsScreen";
 import { ProfileScreen } from "./src/screens/ProfileScreen";
 import { ReceiptsScreen } from "./src/screens/ReceiptsScreen";
+import { ResidentConnectScreen } from "./src/screens/ResidentConnectScreen";
 import { ServicesScreen } from "./src/screens/ServicesScreen";
 import { colors } from "./src/theme";
 import type { AppTab, ScreenName } from "./src/types";
@@ -113,6 +114,8 @@ function renderScreen(screen: ScreenName, navigate: (screen: ScreenName) => void
       return <AnnouncementsScreen />;
     case "notifications":
       return <NotificationsScreen />;
+    case "residentConnect":
+      return <ResidentConnectScreen />;
     case "services":
       return <ServicesScreen />;
     case "exchange":

@@ -22,6 +22,7 @@ const quickActions: { title: string; subtitle: string; screen: ScreenName; badge
   { title: "Announcements", subtitle: "Official notices", screen: "announcements", badgeKey: "announcement" },
   { title: "Notifications", subtitle: "Unread updates", screen: "notifications", badgeKey: "announcement" },
   { title: "Community", subtitle: "Resident updates", screen: "community", badgeKey: "announcement" },
+  { title: "Resident Connect", subtitle: "Private unit notices", screen: "residentConnect", badgeKey: "announcement" },
   { title: "Services", subtitle: "Approved providers", screen: "services" },
   { title: "Exchange", subtitle: "Moderated listings", screen: "exchange" },
   { title: "Access", subtitle: "Gate passes and cards", screen: "access" },
