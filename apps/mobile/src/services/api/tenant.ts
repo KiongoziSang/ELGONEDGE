@@ -56,6 +56,11 @@ export async function updateEmergencyContact(input: { name: string; phone: strin
 
 type TenantProfileResponse = Partial<TenantProfile> & {
   tenant?: Partial<TenantProfile>;
+  user?: {
+    imageUrl?: string;
+  };
+  avatarUrl?: string;
+  profilePhotoUrl?: string;
   property?: {
     id?: string;
     name?: string;
@@ -130,6 +135,13 @@ function mapTenantProfile(response: TenantProfileResponse): TenantProfile {
     fullName: readString(tenant.fullName ?? response.fullName, "Tenant"),
     phone: readString(tenant.phone ?? response.phone, ""),
     email: readString(tenant.email ?? response.email, ""),
+    imageUrl: readOptionalString(
+      tenant.imageUrl ??
+        response.imageUrl ??
+        response.user?.imageUrl ??
+        response.profilePhotoUrl ??
+        response.avatarUrl
+    ),
     propertyId: readOptionalString(response.propertyId ?? response.property?.id),
     propertyName: readString(response.propertyName ?? response.property?.name, "Property"),
     unitId: readOptionalString(response.unitId ?? response.unit?.id),

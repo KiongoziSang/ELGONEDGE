@@ -19,6 +19,7 @@ export type Session = {
     fullName: string;
     phone?: string;
     email?: string;
+    imageUrl?: string;
   };
 };
 
@@ -49,6 +50,7 @@ export type AuthLoginResponse = {
     fullName: string;
     phone?: string;
     email?: string;
+    imageUrl?: string;
   };
 };
 
@@ -57,6 +59,7 @@ export type TenantProfile = {
   fullName: string;
   phone: string;
   email: string;
+  imageUrl?: string;
   propertyId?: string;
   propertyName: string;
   unitId?: string;

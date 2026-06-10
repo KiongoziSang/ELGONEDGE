@@ -12,6 +12,8 @@ export const tenantProfile: TenantProfile = {
   fullName: "Grace Wanjiku",
   phone: "+254 712 345 678",
   email: "grace.wanjiku@example.com",
+  imageUrl:
+    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=320&q=80",
   propertyId: "property-elgon-heights",
   propertyName: "Demo Apartments",
   unitId: "unit-b-204",

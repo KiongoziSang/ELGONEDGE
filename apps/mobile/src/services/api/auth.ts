@@ -20,6 +20,8 @@ const configurationErrorMessage =
   "Tenant login is not configured. Set EXPO_PUBLIC_API_BASE_URL before using real tenant login.";
 const invalidRealCredentialsMessage = "Invalid email or password. Please check your credentials and try again.";
 const invalidDemoCredentialsMessage = "Invalid demo credentials. Use grace.wanjiku@example.com / password for demo access.";
+const demoProfileImageUrl =
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=320&q=80";
 
 export async function loginTenant(identifier: string, password: string): Promise<AuthSession> {
   const request: AuthLoginRequest = { identifier, password };
@@ -173,7 +175,8 @@ async function loginMockTenant(request: AuthLoginRequest, authMode: LoginAuthMod
       id: "tenant-grace-wanjiku",
       fullName: "Grace Wanjiku",
       phone: "+254712345678",
-      email: "grace.wanjiku@example.com"
+      email: "grace.wanjiku@example.com",
+      imageUrl: demoProfileImageUrl
     }
   };
 
@@ -259,7 +262,8 @@ function mergeSessionProfile(session: AuthSession, profile: Partial<TenantProfil
       id: profile.id ?? session.tenant?.id ?? session.userId,
       fullName: profile.fullName ?? session.tenant?.fullName ?? "Tenant",
       phone: profile.phone ?? session.tenant?.phone,
-      email: profile.email ?? session.tenant?.email
+      email: profile.email ?? session.tenant?.email,
+      imageUrl: profile.imageUrl ?? session.tenant?.imageUrl
     }
   };
 }
@@ -290,7 +294,8 @@ function readTenantProfile(value: unknown): AuthLoginResponse["tenant"] | null {
     id,
     fullName,
     phone: readOptionalString(value.phone),
-    email: readOptionalString(value.email)
+    email: readOptionalString(value.email),
+    imageUrl: readOptionalString(value.imageUrl)
   };
 }
 
@@ -309,7 +314,8 @@ function readTenantProfileFromUser(value: unknown): AuthLoginResponse["tenant"] 
   return {
     id,
     fullName,
-    email: readOptionalString(value.email)
+    email: readOptionalString(value.email),
+    imageUrl: readOptionalString(value.imageUrl)
   };
 }
 
