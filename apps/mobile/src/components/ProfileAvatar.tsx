@@ -6,7 +6,7 @@ import { getTenantProfile } from "../services/api/tenant";
 import { colors } from "../theme";
 import type { TenantProfile } from "../types";
 
-export function ProfileAvatar() {
+export function ProfileAvatar({ active = false, size = 30 }: { active?: boolean; size?: number }) {
   const { session } = useAuth();
   const profile = useApiData<TenantProfile>(getTenantProfile, {} as TenantProfile);
   const name = profile.data.fullName || session?.tenant?.fullName || session?.tenant?.email || "Tenant";
@@ -18,12 +18,23 @@ export function ProfileAvatar() {
   }, [imageUrl]);
 
   return (
-    <View accessibilityLabel="Signed-in resident profile photo" style={styles.avatar}>
+    <View
+      accessibilityLabel="Signed-in resident profile photo"
+      style={[
+        styles.avatar,
+        {
+          borderRadius: size / 2,
+          height: size,
+          width: size
+        },
+        active && styles.avatarActive
+      ]}
+    >
       {imageUrl && !imageFailed ? (
         <Image source={{ uri: imageUrl }} style={styles.image} resizeMode="cover" onError={() => setImageFailed(true)} />
       ) : (
         <View style={styles.fallback}>
-          <Text style={styles.initials}>{initials(name)}</Text>
+          <Text style={[styles.initials, { fontSize: size <= 28 ? 11 : 12 }]}>{initials(name)}</Text>
         </View>
       )}
     </View>
@@ -40,14 +51,19 @@ function initials(value: string) {
 const styles = StyleSheet.create({
   avatar: {
     alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.1)",
-    borderColor: "rgba(255,255,255,0.2)",
-    borderRadius: 18,
-    borderWidth: 1,
-    height: 44,
+    backgroundColor: colors.white,
+    borderColor: colors.line,
+    borderWidth: 2,
     justifyContent: "center",
     overflow: "hidden",
-    width: 44
+    shadowColor: colors.navy,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.12,
+    shadowRadius: 7,
+    elevation: 2
+  },
+  avatarActive: {
+    borderColor: colors.blue
   },
   fallback: {
     alignItems: "center",
@@ -62,7 +78,6 @@ const styles = StyleSheet.create({
   },
   initials: {
     color: colors.blue,
-    fontSize: 14,
     fontWeight: "900"
   }
 });

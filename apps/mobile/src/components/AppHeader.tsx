@@ -3,7 +3,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { colors, spacing } from "../theme";
 import { BrandMark } from "./BrandMark";
 import { NotificationBell } from "./NotificationBell";
-import { ProfileAvatar } from "./ProfileAvatar";
 
 export function AppHeader({ title, subtitle }: { title: string; subtitle?: string }) {
   const insets = useSafeAreaInsets();
@@ -14,7 +13,6 @@ export function AppHeader({ title, subtitle }: { title: string; subtitle?: strin
         <BrandMark size="medium" light />
         <View style={styles.actions}>
           <NotificationBell />
-          <ProfileAvatar />
         </View>
       </View>
       <Text style={styles.title}>{title}</Text>

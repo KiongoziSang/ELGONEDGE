@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { BrandMark } from "./src/components/BrandMark";
+import { ProfileAvatar } from "./src/components/ProfileAvatar";
 import { AuthProvider, useAuth } from "./src/context/AuthContext";
 import { NavigationProvider } from "./src/context/NavigationContext";
 import { AccessScreen } from "./src/screens/AccessScreen";
@@ -76,7 +77,11 @@ function RootNavigator() {
               const active = tab.id === activeTab;
               return (
                 <Pressable key={tab.id} onPress={() => setScreen(tab.id)} style={styles.tab}>
-                  <Text style={[styles.tabIcon, active && styles.tabIconActive]}>{tab.label.slice(0, 1)}</Text>
+                  {tab.id === "profile" ? (
+                    <ProfileAvatar active={active} size={active ? 32 : 28} />
+                  ) : (
+                    <Text style={[styles.tabIcon, active && styles.tabIconActive]}>{tab.label.slice(0, 1)}</Text>
+                  )}
                   <Text style={[styles.tabLabel, active && styles.tabLabelActive]}>{tab.label}</Text>
                 </Pressable>
               );
@@ -131,9 +136,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderTopColor: colors.line,
     borderTopWidth: 1,
+    elevation: 10,
     flexDirection: "row",
     paddingBottom: 8,
-    paddingTop: 8
+    paddingTop: 8,
+    shadowColor: colors.navy,
+    shadowOffset: { width: 0, height: -6 },
+    shadowOpacity: 0.06,
+    shadowRadius: 16
   },
   tabSafe: {
     backgroundColor: colors.white
@@ -141,7 +151,8 @@ const styles = StyleSheet.create({
   tab: {
     alignItems: "center",
     flex: 1,
-    gap: 4
+    gap: 4,
+    minHeight: 48
   },
   tabIcon: {
     backgroundColor: colors.softGrey,
