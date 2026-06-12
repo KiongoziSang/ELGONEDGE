@@ -282,7 +282,7 @@ export const elgonOsSoftwareJsonLd = {
   operatingSystem: "Web",
   url: "https://elgonos.elgonedge.com",
   description:
-    "ElgonOS is AI-powered property management software for Kenya built by Elgon Edge for landlords, property managers, and real estate teams to run rent collection, M-PESA workflows, tenant management, leases, units, billing, receipts, documents, construction tracking, maintenance, access control, Resident Community, Resident Services Marketplace, Resident Exchange, AI-assisted reporting, tenant predictability, Ask AI, executive dashboards, operational automation, approvals, reminders, audit trails, communication, and operational insights from one operating layer.",
+    "ElgonOS is AI-powered property management software for Kenya built by Elgon Edge for landlords, property managers, and real estate teams to run rent collection, M-PESA workflows, tenant management, leases, units, billing, receipts, documents, construction tracking, maintenance, access control, Resident Community, Resident Connect in supported deployments, Resident Services Marketplace, Resident Exchange, AI-assisted reporting, tenant predictability, Ask AI, executive dashboards, operational automation, approvals, reminders, audit trails, communication, and operational insights from one operating layer.",
   creator: {
     "@id": `${siteUrl}/#organization`
   },
@@ -295,6 +295,7 @@ export const elgonOsSoftwareJsonLd = {
     "Maintenance request, assignment, status, update, and history workflows",
     "Access control, gate pass, visitor, and guard workflows",
     "Resident Community for official notices, private grievances, approved resident posts, pinned updates, closed threads, official replies, and notifications",
+    "Resident Connect privacy-first unit-to-unit notices in supported deployments",
     "Resident Services Marketplace with approved provider directory",
     "Direct tenant call and WhatsApp contact for approved providers",
     "Moderated Resident Exchange listings for household items",

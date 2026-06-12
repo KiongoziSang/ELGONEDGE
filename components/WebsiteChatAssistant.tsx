@@ -41,7 +41,7 @@ const quickActions = [
   {
     label: "ElgonOS",
     response:
-      "ElgonOS is our flagship AI-powered property operations platform for landlords, property managers, gated communities, apartments, and real estate teams in Kenya.",
+      "ElgonOS is our flagship AI-powered property operations platform for landlords, property managers, gated communities, apartments, and real estate teams in Kenya, including resident experience capabilities such as Resident Connect in supported deployments.",
     links: [
       { label: "ElgonOS overview", href: "/elgonos" },
       { label: "Visit platform site", href: "https://elgonos.elgonedge.com/" },
@@ -98,9 +98,21 @@ const faqResponses = [
     links: [{ label: "Technology talent support", href: "/services/technology-talent-staff-augmentation" }],
   },
   {
+    keys: ["resident connect", "neighbor", "neighbour", "resident experience", "unit-to-unit", "parking"],
+    text:
+      "Resident Connect is a practical ElgonOS product innovation for privacy-first unit-to-unit resident notices. On Elgon Edge, we discuss it as an example of resident experience design, platform engineering, and digital transformation for real estate.",
+    links: [
+      {
+        label: "Read the insight",
+        href: "/insights/why-resident-experience-is-the-next-frontier-in-property-operations",
+      },
+      { label: "Visit ElgonOS", href: "https://elgonos.elgonedge.com/" },
+    ],
+  },
+  {
     keys: ["elgonos", "property", "rent", "tenant"],
     text:
-      "ElgonOS supports property operations with rent workflows, tenant and lease visibility, maintenance, access workflows, resident services, dashboards, and AI-assisted reporting.",
+      "ElgonOS supports property operations with rent workflows, tenant and lease visibility, maintenance, access workflows, resident services, Resident Connect in supported deployments, dashboards, and AI-assisted reporting.",
     links: [{ label: "Visit ElgonOS", href: "https://elgonos.elgonedge.com/" }],
   },
 ];

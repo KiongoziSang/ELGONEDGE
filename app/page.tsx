@@ -91,6 +91,7 @@ const homepageMarqueeFeatures = [
   "Audit trails",
   "Workflow modernization",
   "ElgonOS",
+  "Resident Connect",
   "Implementation support"
 ];
 
@@ -110,6 +111,7 @@ export default function HomePage() {
     { title: "Maintenance", icon: Wrench },
     { title: "Access and gate passes", icon: KeyRound },
     { title: "Resident Community", icon: MessageSquareText },
+    { title: "Resident Connect", icon: MessageSquareText },
     { title: "Resident marketplace", icon: Store },
     { title: "Resident exchange", icon: Tags },
     { title: "Bookings", icon: CalendarCheck2 },
@@ -333,7 +335,8 @@ export default function HomePage() {
               Elgon Edge helps organizations move beyond isolated dashboards by strengthening the foundations behind
               analytics and AI: enterprise data models, semantic layers, KPI definitions, governance operating models,
               data quality controls, and reusable delivery frameworks. ElgonOS is one flagship product in this wider
-              delivery portfolio.
+              delivery portfolio, including resident communication and community operations patterns such as Resident
+              Connect.
             </p>
           </div>
           <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -379,9 +382,11 @@ export default function HomePage() {
             <p className="mt-7 max-w-3xl text-[1.2rem] leading-9 text-slate-200">
               ElgonOS is our AI-powered property operations platform for landlords, property managers, gated
               communities, apartments, and real estate teams in Kenya. It summarizes how Elgon Edge applies product
-              engineering, governed data, workflow automation, responsible AI, dashboards, and operating controls in a
-              real domain. For ElgonOS product features, pricing, and access, visit the standalone ElgonOS platform
-              site.
+              engineering, governed data, workflow automation, responsible AI, dashboards, resident experience design,
+              and operating controls in a real domain. ElgonOS also includes resident experience capabilities such as
+              Resident Connect, enabling privacy-first unit-to-unit notices for everyday community issues without
+              exposing personal phone numbers. For ElgonOS product features, pricing, and access, visit the standalone
+              ElgonOS platform site.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href="/elgonos" variant="glass">

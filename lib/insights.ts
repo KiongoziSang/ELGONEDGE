@@ -127,6 +127,82 @@ export const insights: Insight[] = [
     ]
   },
   {
+    slug: "why-resident-experience-is-the-next-frontier-in-property-operations",
+    title: "Why Resident Experience Is the Next Frontier in Property Operations",
+    description:
+      "Why modern property platforms are moving beyond rent collection into resident experience design, privacy-first communication, and community operations.",
+    image: "/insights/automation-platform-insight.png",
+    imageAlt: "Resident experience platform concept with private notices, community workflows, dashboards, and governance controls",
+    keywords: [
+      "resident experience design",
+      "tenant experience platforms",
+      "property technology innovation",
+      "digital transformation for real estate",
+      "digital platform development Kenya",
+      "product engineering Kenya",
+      "AI and workflow automation for property operations",
+      "community operations software"
+    ],
+    relatedServiceSlugs: [
+      "custom-software-saas-digital-platforms",
+      "digital-transformation-advisory",
+      "intelligent-automation-agentic-ai",
+      "ai-readiness-responsible-ai-governance"
+    ],
+    relatedLinks: [
+      {
+        label: "ElgonOS property operations platform",
+        href: "https://elgonos.elgonedge.com/"
+      },
+      {
+        label: "Resident experience in ElgonOS",
+        href: "https://elgonos.elgonedge.com/resident-services-marketplace"
+      },
+      {
+        label: "AI-powered property operations",
+        href: "https://elgonos.elgonedge.com/ai-property-management-software-kenya"
+      },
+      {
+        label: "Request access or demo on ElgonOS",
+        href: "https://elgonos.elgonedge.com/request-access"
+      }
+    ],
+    intro:
+      "Property platforms are moving beyond rent collection. The next frontier is resident experience: practical communication, safer community workflows, privacy-first notices, and operating visibility that helps managers support daily apartment life without turning every issue into a manual phone call.",
+    sections: [
+      {
+        heading: "Property operations are no longer only about rent",
+        body:
+          "Rent collection, billing, receipts, and tenant records remain important, but they do not cover the full lived experience inside apartments and gated communities. Residents also deal with parking coordination, visitor and gate notices, water or leakage concerns, noise issues, lost and found items, child safety alerts, and quick neighbour notices. A modern platform should acknowledge these everyday workflows without overwhelming managers."
+      },
+      {
+        heading: "Caretaker calls and informal groups do not always scale",
+        body:
+          "Many communities rely on caretakers, guards, or informal WhatsApp groups for resident coordination. These channels can work for simple updates, but they create gaps when the caretaker is unavailable, a matter is urgent, or residents do not want to expose personal phone numbers. They can also blur accountability because private issues, official notices, and casual discussions often sit in the same unmanaged space."
+      },
+      {
+        heading: "Privacy-first resident communication is a product design problem",
+        body:
+          "The better pattern is not an open social network inside a property app. Resident communication should be purposeful, verified, and property-controlled. Privacy-first unit-to-unit notices let a resident send a short, practical message to another unit without revealing phone numbers, while reporting, category controls, and admin visibility can be configured where safety or misuse requires oversight."
+      },
+      {
+        heading: "Resident Connect is a practical example",
+        body:
+          "Resident Connect in ElgonOS reflects this approach. It is designed for verified residents to send safe, private notices for practical community issues such as parking coordination, child safety alerts, visitor or gate coordination, leakage concerns, noise concerns, lost and found items, and quick neighbour notices. The goal is not to replace property management, but to reduce avoidable friction while preserving privacy and control."
+      },
+      {
+        heading: "Product innovation should connect to operating governance",
+        body:
+          "Resident experience features work best when they sit inside a broader operating platform. That means roles, audit trails, reporting, notifications, workflow automation, mobile experience design, and responsible AI governance should all be considered together. This is how digital transformation for real estate becomes more than a collection of screens."
+      },
+      {
+        heading: "What this says about Elgon Edge's engineering approach",
+        body:
+          "ElgonOS is one example of how Elgon Edge applies product engineering Kenya teams can use in real domains: understand a practical operating problem, design a safer workflow, connect it to data and governance, and build it into a platform that can support adoption. Resident Connect is therefore less about adding another feature and more about showing how thoughtful digital platform development can improve daily community operations."
+      }
+    ]
+  },
+  {
     slug: "mpesa-property-management-workflows",
     title: "Why M-PESA-Aware Workflows Matter in Property Management",
     description:

@@ -242,6 +242,7 @@ export const services: Service[] = [
       "Customer and staff portals",
       "Marketplace and directory workflows",
       "Moderated resident community workflows",
+      "Privacy-first resident notice workflows",
       "Resident exchange and display board workflows",
       "Property, construction, maintenance, and access workflows",
       "Platform architecture and delivery"
@@ -250,12 +251,13 @@ export const services: Service[] = [
     seoDescription:
       "Custom SaaS development, cloud consulting, platform engineering, portals, marketplaces, workflow platforms, dashboards, and digital operating systems.",
     overview:
-      "Elgon Edge Consulting Limited designs and builds custom software, SaaS products, portals, marketplace workflows, governed workflow platforms, and digital operating systems that support modern business operations. ElgonOS is our flagship AI-powered property operations platform for Kenya and demonstrates our product engineering, automation, data, AI, dashboard, and governance capability in a real operating domain.",
+      "Elgon Edge Consulting Limited designs and builds custom software, SaaS products, portals, marketplace workflows, governed workflow platforms, resident experience layers, and digital operating systems that support modern business operations. ElgonOS is our flagship AI-powered property operations platform for Kenya and demonstrates our product engineering, automation, data, AI, dashboard, resident communication, and governance capability in a real operating domain.",
     outcomes: [
       "Digital platforms aligned to real operating workflows",
       "Scalable applications with role-based access and data foundations",
       "Service directories and approval flows that reduce manual coordination",
       "Moderated communication layers for notices, grievances, approvals, and official responses",
+      "Privacy-first resident communication patterns for verified unit-to-unit notices",
       "Moderated community listing workflows for resident-to-resident exchange",
       "Property operations workflows for construction progress, maintenance, access, approvals, reminders, and audit trails",
       "Better user experience, reporting, and operational control"
@@ -355,7 +357,7 @@ export const industries = [
   },
   {
     title: "Real estate and property management",
-    description: "Property operations platforms, rent workflows, tenant visibility, maintenance, access, and resident services.",
+    description: "Property operations platforms, rent workflows, tenant visibility, maintenance, access, resident services, and community communication.",
     icon: Building2
   },
   {
@@ -388,7 +390,7 @@ export const industries = [
 export const solutionAccelerators = [
   {
     title: "ElgonOS property operations platform",
-    description: "A flagship AI-powered property operations product for landlords, property managers, gated communities, apartments, and real estate teams in Kenya.",
+    description: "A flagship AI-powered property operations product for landlords, property managers, gated communities, apartments, and real estate teams in Kenya, including resident experience patterns such as Resident Connect.",
     icon: Building2,
     href: "/elgonos"
   },

@@ -7,6 +7,7 @@ import {
   Building2,
   CheckCircle2,
   DatabaseZap,
+  MessageSquareText,
   ShieldCheck,
   Workflow
 } from "lucide-react";
@@ -26,6 +27,9 @@ export const metadata: Metadata = createPageMetadata({
     "property operations platform",
     "product engineering Kenya",
     "digital platform development Kenya",
+    "tenant experience platforms",
+    "resident experience design",
+    "property technology innovation",
     "AI consulting Kenya",
     "responsible AI governance",
     "workflow automation",
@@ -39,6 +43,12 @@ const capabilities = [
     description:
       "Rent, tenant, lease, unit, billing, maintenance, access, resident service, construction, and document workflows are connected into one operating layer.",
     icon: Building2
+  },
+  {
+    title: "Resident and community experience",
+    description:
+      "Resident Community, Resident Exchange, services, gated community workflows, and Resident Connect show how privacy-first digital communication can support daily apartment life.",
+    icon: MessageSquareText
   },
   {
     title: "Dashboards and decision support",
@@ -62,6 +72,7 @@ const capabilities = [
 
 const engineeringSignals = [
   "Product and platform engineering for a real operating domain",
+  "Resident experience design for private, property-controlled community communication",
   "Workflow automation patterns for approvals, reminders, and exceptions",
   "Data quality and reporting foundations for portfolio visibility",
   "Responsible AI governance patterns for practical decision support",
@@ -80,6 +91,10 @@ const relatedInsights = [
   {
     title: "Why M-PESA-Aware Workflows Matter in Property Management",
     href: "/insights/mpesa-property-management-workflows"
+  },
+  {
+    title: "Why Resident Experience Is the Next Frontier in Property Operations",
+    href: "/insights/why-resident-experience-is-the-next-frontier-in-property-operations"
   },
   {
     title: "Building Digital Platforms for Real Estate and Property Managers",
@@ -126,7 +141,7 @@ export default function ElgonOsPage() {
               ElgonOS is built for landlords, property managers, gated communities, apartments, and real estate
               teams in Kenya. On the Elgon Edge website, ElgonOS is presented as a flagship solution that demonstrates
               our broader consulting capability in product engineering, data, AI, automation, dashboards, governance,
-              and delivery.
+              resident experience design, and delivery.
             </p>
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <ButtonLink href={elgonOsUrl} className="gap-2">
@@ -150,7 +165,8 @@ export default function ElgonOsPage() {
                   "AI-powered property management software",
                   "M-PESA-aware property management workflows",
                   "Property management dashboards and AI reporting",
-                  "Gated community management software"
+                  "Gated community management software",
+                  "Resident experience and privacy-first notices"
                 ].map((item, index) => (
                   <div key={item} className="flex items-center justify-between rounded-2xl border border-white/10 bg-white/[0.07] px-5 py-4">
                     <div className="flex items-center gap-3">
@@ -182,7 +198,9 @@ export default function ElgonOsPage() {
             <p className="max-w-3xl text-[1.16rem] leading-9 text-slate-600 lg:justify-self-end">
               ElgonOS shows how Elgon Edge turns strategy into measurable execution through modern data platforms,
               workflow automation, responsible AI governance, business intelligence, cloud-ready engineering, and
-              structured adoption support.
+              structured adoption support. Resident Connect is one example of practical product innovation: verified
+              residents can send safe, private unit-to-unit notices for parking, visitor or gate coordination, leakage,
+              noise, lost/found, and other everyday community issues without exposing personal phone numbers.
             </p>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -245,8 +263,8 @@ export default function ElgonOsPage() {
             </div>
             <p className="max-w-3xl text-[1.16rem] leading-9 text-slate-600 lg:justify-self-end">
               These Elgon Edge insights explore AI, payments, platform engineering, dashboards, workflow automation,
-              and governance behind modern property operations. For ElgonOS features, pricing, and access, visit the
-              standalone ElgonOS platform site.
+              resident experience, and governance behind modern property operations. For ElgonOS features, pricing, and
+              access, visit the standalone ElgonOS platform site.
             </p>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
