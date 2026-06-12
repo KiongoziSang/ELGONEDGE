@@ -74,7 +74,7 @@ export const dashboardSummary: DashboardSummary = {
     {
       title: "Resident operations",
       value: "7 items",
-      detail: "Community, services, exchange, and maintenance activity",
+      detail: "Resident Community, Resident Services, Resident Exchange, and maintenance activity",
       status: "Active"
     }
   ],

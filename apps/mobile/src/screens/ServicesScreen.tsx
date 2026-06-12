@@ -17,7 +17,7 @@ export function ServicesScreen() {
   return (
     <Screen title="Resident Services" subtitle="Approved providers connected to your property.">
       {providers.loading ? <LoadingState label="Loading approved services..." /> : null}
-      {providers.error ? <EmptyState title="Unable to load services" text={providers.error} actionLabel="Retry" onAction={() => void providers.reload()} /> : null}
+      {providers.error ? <EmptyState title="Unable to load Resident Services" text={providers.error} actionLabel="Retry" onAction={() => void providers.reload()} /> : null}
       {!providers.loading && !providers.error && providers.data.length === 0 ? (
         <EmptyState title="No resident services available yet" text="Approved providers will appear here when enabled for your property." />
       ) : !providers.loading && !providers.error ? (

@@ -77,7 +77,7 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
 
   return (
     <Screen
-      title="Community"
+      title="Resident Community"
       subtitle="A controlled communication layer for approved posts, notices, and private grievances."
     >
       <SectionHeader title="Resident hub" />
@@ -101,7 +101,7 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
           onPress={() => navigate("exchange")}
         />
         <QuickActionCard
-          title="Services"
+          title="Resident Services"
           subtitle="Approved providers"
           badge={services.data.some((item) => isRecentlyAdded(item.date)) ? "NEW" : undefined}
           onPress={() => navigate("services")}
@@ -120,18 +120,18 @@ export function CommunityScreen({ navigate }: { navigate: (screen: ScreenName) =
         </View>
       </AppCard>
 
-      <SectionHeader title="Community feed" />
-      {loaded.loading ? <LoadingState label="Loading community posts..." /> : null}
+      <SectionHeader title="Resident Community feed" />
+      {loaded.loading ? <LoadingState label="Loading Resident Community posts..." /> : null}
       {loaded.error ? (
         <EmptyState
-          title="Unable to load community"
+          title="Unable to load Resident Community"
           text={loaded.error}
           actionLabel="Retry"
           onAction={() => void loaded.reload()}
         />
       ) : null}
       {!loaded.loading && !loaded.error && visiblePosts.length === 0 ? (
-        <EmptyState title="No approved community posts" text="Approved posts and official notices will appear here." />
+        <EmptyState title="No approved Resident Community posts" text="Approved posts and official notices will appear here." />
       ) : !loaded.loading && !loaded.error ? (
         <View style={styles.stack}>
           {visiblePosts.map((post) => (

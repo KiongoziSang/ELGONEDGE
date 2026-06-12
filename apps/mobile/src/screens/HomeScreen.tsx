@@ -21,10 +21,10 @@ const quickActions: { title: string; subtitle: string; screen: ScreenName; badge
   { title: "Maintenance", subtitle: "Requests and status", screen: "maintenance", badgeKey: "maintenance" },
   { title: "Announcements", subtitle: "Official notices", screen: "announcements", badgeKey: "announcement" },
   { title: "Notifications", subtitle: "Unread updates", screen: "notifications", badgeKey: "announcement" },
-  { title: "Community", subtitle: "Resident updates", screen: "community", badgeKey: "announcement" },
+  { title: "Resident Community", subtitle: "Resident updates", screen: "community", badgeKey: "announcement" },
   { title: "Resident Connect", subtitle: "Private unit notices", screen: "residentConnect", badgeKey: "announcement" },
-  { title: "Services", subtitle: "Approved providers", screen: "services" },
-  { title: "Exchange", subtitle: "Moderated listings", screen: "exchange" },
+  { title: "Resident Services", subtitle: "Approved providers", screen: "services" },
+  { title: "Resident Exchange", subtitle: "Moderated listings", screen: "exchange" },
   { title: "Access", subtitle: "Gate passes and cards", screen: "access" },
   { title: "Profile", subtitle: "Lease and contacts", screen: "profile" }
 ];
@@ -99,7 +99,7 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
               onPress={() => navigate("announcements")}
             />
             <FeatureCard
-              title="Community"
+              title="Resident Community"
               description="Resident updates and approved posts"
               count={summary.data.communityCount}
               badge={summary.data.communityCount ? "View" : undefined}
@@ -107,7 +107,7 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
               onPress={() => navigate("community")}
             />
             <FeatureCard
-              title="Exchange"
+              title="Resident Exchange"
               description="Moderated resident listings"
               count={summary.data.exchangeCount}
               badge={summary.data.exchangeCount ? "View" : undefined}
@@ -115,7 +115,7 @@ export function HomeScreen({ navigate }: { navigate: (screen: ScreenName) => voi
               onPress={() => navigate("exchange")}
             />
             <FeatureCard
-              title="Services"
+              title="Resident Services"
               description="Approved providers for your property"
               count={summary.data.servicesCount}
               badge={summary.data.servicesCount ? "View" : undefined}
@@ -682,12 +682,12 @@ function getOperationCards(summary: DashboardSummary): OperationCardData[] {
     typeof summary.serviceBacklogCount === "number"
   ) {
     const residentDetails = [
-      typeof summary.openCommunityThreadCount === "number" ? `${summary.openCommunityThreadCount} community thread${summary.openCommunityThreadCount === 1 ? "" : "s"}` : null,
+      typeof summary.openCommunityThreadCount === "number" ? `${summary.openCommunityThreadCount} Resident Community thread${summary.openCommunityThreadCount === 1 ? "" : "s"}` : null,
       typeof summary.serviceBacklogCount === "number" ? `${summary.serviceBacklogCount} service follow-up${summary.serviceBacklogCount === 1 ? "" : "s"}` : null
     ].filter(Boolean);
 
     cards.push({
-      label: "Resident services",
+      label: "Resident Services",
       value: `${summary.residentServiceRequestCount ?? 0} active`,
       detail: residentDetails.length ? residentDetails.join(" · ") : "Resident service activity is available.",
       accent: "orange"
